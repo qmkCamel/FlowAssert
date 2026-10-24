@@ -55,3 +55,5 @@ Zod 的迁移依据见[官方迁移文档](https://zod.dev/v4/changelog)；安�
 仅对 `src/viewer-workbench-runs-http.ts` 的显式 record key 迁移增加冻结合同哈希覆盖；未整体重建旧协议或证据 fixture。
 
 新远端首次安全修复 CI 另外检出了 Dependabot 的 6 个提交者地址：GitHub 的公共 `noreply@github.com`。已核对 GitHub API 的 web-flow 身份及有效签名，补充精确服务邮箱识别，并测试拒绝其他 github.com 邮箱和伪造后缀。没有豁免分支、提交或整个域名；本地重新 fetch 全部分支后执行完整历史检查。
+
+Linux 后续回归有 1,206 项通过、1 项导入预览测试超时：异步解析仍处于 parsing，默认短轮询窗口已结束。该 fixture 顺序运行一个解析 worker 与两个附件校验 worker，各自有 10 秒执行上限；测试现在在 35 秒内等待终态并立即暴露失败，仍严格要求 preview，相关集成用例总预算为 45 秒。定向 8 项测试与类型检查通过；没有更改生产解析超时或放宽内容、权限、完整性断言。
