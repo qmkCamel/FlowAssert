@@ -1,0 +1,12 @@
+name: Demo · deliberate assertion failure
+platform: ios
+appId: com.example.mobilemirror.mock
+---
+- launchApp
+- assertVisible:
+    text: Hello, harness.
+- tap:
+    accessibilityId: action-card
+- assertVisible:
+    text: 2 actions received
+- done

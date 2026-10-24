@@ -1,0 +1,58 @@
+# Precondition: unlocked Android, logged-in Sample App home/featured tab.
+# Sends one public test message to the AI; leaves it in conversation history.
+name: 第三方 App Android · AI 文字与历史验收
+platform: android
+appId: com.example.sampleapp
+---
+- launchApp
+- tap: {id: 'com.example.sampleapp:id/sample_chat_entry'}
+- tap: {id: sample-input-mode-button}
+- type:
+    into: {id: sample-text-input}
+    text: '待清空测试'
+- type:
+    into: {id: sample-text-input}
+    text: ''
+- assertNotVisible:
+    id: sample-text-input
+    text: '待清空测试'
+- type:
+    into: {id: sample-text-input}
+    text: '请用一句话解释自动化测试的价值'
+- type:
+    into: {id: sample-text-input}
+    text: ' MM0915A。'
+    mode: append
+- assertVisible:
+    id: sample-text-input
+    text: '请用一句话解释自动化测试的价值 MM0915A。'
+- tap: {id: sample-send-button, accessibilityId: 发送}
+- waitUntil:
+    target: {id: sample-copy-button}
+    timeout: 60
+- assertVisible:
+    text: {value: '请用一句话解释自动化测试的价值', match: contains}
+    descendantOf: {id: sample-message-bubble}
+- assertVisible:
+    type: TextView
+    text: {value: '\S+', match: regex}
+    descendantOf: {id: sample-answer-body}
+    index: 0
+- assertVisible: {id: sample-copy-button}
+- tap: {id: sample-open-history}
+- assertVisible: {id: sample-history-item-list-title}
+- tap:
+    text: '请用一句话解释自动化测试的价值 MM0915A。'
+    index: 0
+- waitUntil:
+    target: {id: sample-copy-button}
+    timeout: 30
+- assertVisible:
+    text: {value: 'MM0915A', match: contains}
+    descendantOf: {id: sample-message-bubble}
+- assertVisible:
+    type: TextView
+    text: {value: '\S+', match: regex}
+    descendantOf: {id: sample-answer-body}
+    index: 0
+- done

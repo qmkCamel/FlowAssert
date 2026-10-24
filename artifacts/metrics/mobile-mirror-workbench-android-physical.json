@@ -1,0 +1,132 @@
+{
+  "date": "2026-09-14",
+  "device": {
+    "model": "OnePlus KB2000",
+    "android": "14",
+    "appVersion": "REDACTED_APP_VERSION"
+  },
+  "stack": {
+    "appium": "3.2.0",
+    "uiautomator2": "6.8.0",
+    "scrcpy": "4.1",
+    "appclaw": "2.7.0"
+  },
+  "acceptance": "passed-after-user-enabled-background-execution",
+  "attempts": [
+    {
+      "runId": "f723f546-16fe-4204-b05f-83581aad389b",
+      "verdict": "inconclusive",
+      "completedActions": [
+        "launchApp",
+        "tap 精选"
+      ],
+      "blocker": "UIA screenshot took 66922 ms; source failed in UiElementSnapshot.addToastMsg with mSealed reflection error"
+    },
+    {
+      "runId": "64ae4795-bf72-47cb-aef3-757ec8feaf45",
+      "verdict": "inconclusive",
+      "sessionSettings": {
+        "waitForIdleTimeout": 0,
+        "enableNotificationListener": false
+      },
+      "blocker": "source command timed out after 30 seconds",
+      "sameSession": true,
+      "relayFramesDuringRun": 894,
+      "browser": {
+        "transport": "scrcpy-h264",
+        "firstPaintMs": 902,
+        "paintedFrames": 906,
+        "paintedFps": 27.490886998784934,
+        "receiveToPaintP95Ms": 5,
+        "fallbackMs": null,
+        "fallbackReason": null,
+        "packetCounts": {
+          "metadata": 2,
+          "session": 2,
+          "key": 2,
+          "delta": 904
+        },
+        "lastPacketType": "delta",
+        "mediaVisible": true,
+        "pollingVisible": false
+      },
+      "historyRestored": true,
+      "verifiedArtifacts": 2
+    },
+    {
+      "runId": "f119b3b7-d98c-4470-ae63-d54c287e2e77",
+      "verdict": "pass",
+      "sameSession": true,
+      "framesDuringRun": 1132,
+      "browserMetrics": {
+        "transport": "scrcpy-h264",
+        "firstPaintMs": 943,
+        "paintedFrames": 1138,
+        "paintedFps": 20.43530617013246,
+        "receiveToPaintP95Ms": 6,
+        "fallbackMs": null,
+        "fallbackReason": null,
+        "packetCounts": {
+          "metadata": 2,
+          "session": 2,
+          "key": 2,
+          "delta": 1136
+        },
+        "lastPacketType": "delta",
+        "mediaVisible": true,
+        "pollingVisible": false
+      },
+      "independentControlResponsive": true,
+      "steps": 12,
+      "durationMs": 54496,
+      "historyRestored": true,
+      "verifiedArtifacts": 26,
+      "deviceStopped": true,
+      "screenshots": 12,
+      "hierarchies": 12
+    },
+    {
+      "runId": "b95488c1-f0e0-42d7-88c1-ae1b13e64864",
+      "verdict": "fail",
+      "expectedVerdict": "fail",
+      "sameSession": true,
+      "framesDuringRun": 916,
+      "browserMetrics": {
+        "transport": "scrcpy-h264",
+        "firstPaintMs": 872,
+        "paintedFrames": 930,
+        "paintedFps": 24.3780833420804,
+        "receiveToPaintP95Ms": 6,
+        "fallbackMs": null,
+        "fallbackReason": null,
+        "packetCounts": {
+          "metadata": 2,
+          "session": 2,
+          "key": 2,
+          "delta": 928
+        },
+        "lastPacketType": "delta",
+        "mediaVisible": true,
+        "pollingVisible": false
+      },
+      "independentControlResponsive": true,
+      "steps": 3,
+      "durationMs": 37290,
+      "historyRestored": true,
+      "verifiedArtifacts": 8,
+      "deviceStopped": true,
+      "screenshots": 3,
+      "hierarchies": 3,
+      "purpose": "negative-control: expected failure on a visible Featured page"
+    }
+  ],
+  "cleanup": {
+    "ownedUiautomator2ForceStopped": true,
+    "appiumListener": "stopped",
+    "latestRunsRequiredForceStop": false,
+    "ownedAdbForwardsRemaining": 0,
+    "unrelatedAdbForwardsObserved": 1,
+    "ownershipNote": "UiAutomator2 tcp:8200 and scrcpy localabstract forwards cleaned. A tcp:7890 forward observed afterward is not owned by this probe and was preserved."
+  },
+  "proofBoundary": "Android declared UI flow, live media, evidence integrity and history restart passed. No visual-appearance or business-backend verifier. No iPhone verification in this run."
+}

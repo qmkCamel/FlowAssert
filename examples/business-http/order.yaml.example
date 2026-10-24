@@ -1,0 +1,16 @@
+name: Scoped HTTP business smoke
+platform: ios
+appId: com.example.testapp
+params:
+  expectedAmount: {type: number, default: 1200}
+prepare:
+  - ref: seed
+    as: seed
+    args: {base: 'http://127.0.0.1:47831', namespace: 'team-test'}
+verify:
+  - ref: verify
+    args: {base: 'http://127.0.0.1:47831', id: '{{ outputs.seed.id }}', expectedAmount: '{{ params.expectedAmount }}'}
+---
+- launchApp
+- assertVisible: {accessibilityId: test.ready}
+- done

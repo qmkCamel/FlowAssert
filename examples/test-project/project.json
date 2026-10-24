@@ -1,0 +1,10 @@
+{
+  "flows": { "common": "common.yaml", "demo": "demo.yaml" },
+  "datasets": { "labels": "labels.json" },
+  "suites": {
+    "smoke": {
+      "name": "Demo · data-driven suite",
+      "cases": [{ "id": "greeting", "flow": "demo", "dataset": "labels", "tags": ["smoke"] }]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "platform": "ios",
+  "durationMs": 10000,
+  "browser": {
+    "transport": "wda-mjpeg",
+    "firstPaintMs": 149,
+    "paintedFrames": 1,
+    "paintedFps": null,
+    "receiveToPaintP95Ms": null,
+    "fallbackMs": null,
+    "mediaVisible": true,
+    "pollingVisible": false
+  },
+  "relay": {
+    "transport": "wda-mjpeg",
+    "streamStartedAt": 1787207113982,
+    "firstFrameAt": 1787207114063,
+    "lastFrameAt": 1787207129302,
+    "frameCount": 217,
+    "relayFps": 14.174158409344445
+  },
+  "fallbackMs": 183,
+  "firstRevision": 1,
+  "finalRevision": 2,
+  "firstEpoch": 1,
+  "finalEpoch": 2,
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "width": 430,
+    "height": 932
+  },
+  "orientation": "portrait",
+  "structureNodes": 244,
+  "ownedSessionCleaned": true,
+  "screenshot": "artifacts/screenshots/mobile-mirror-ios-physical-media-final.png"
+}

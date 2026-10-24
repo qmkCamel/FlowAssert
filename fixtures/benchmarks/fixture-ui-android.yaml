@@ -1,0 +1,10 @@
+name: Fixture UI performance v1
+platform: android
+appId: dev.mobilemirror.fixture
+---
+- launchApp
+- assertVisible: {text: "Mirror Fixture · Test Order"}
+- tap: {accessibilityId: "fixture.help"}
+- wait: 2
+- tap: {accessibilityId: "fixture.help"}
+- assertVisible: {text: "Mirror Fixture · Test Order"}

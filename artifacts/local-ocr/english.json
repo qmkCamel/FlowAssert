@@ -1,0 +1,109 @@
+{
+  "synthetic": true,
+  "contractVersion": 1,
+  "candidate": true,
+  "productionEnabled": false,
+  "decision": {
+    "status": "pass",
+    "reason": "ocr-exact-match"
+  },
+  "output": {
+    "contractVersion": 1,
+    "helperVersion": "1",
+    "osVersion": "Version 26.3.1 (Build 25D2128)",
+    "arch": "arm64",
+    "requestRevision": 3,
+    "languages": [
+      "en-US"
+    ],
+    "boxes": [
+      {
+        "text": "Hello harness",
+        "confidence": 1,
+        "box": {
+          "x": 0.2687499974305556,
+          "y": 0.4100000004444444,
+          "width": 0.4625,
+          "height": 0.20000000000000007
+        }
+      }
+    ]
+  },
+  "identity": {
+    "sourceSha256": "955aa3a4c496f5ca997b5177457aca3fa2a6309e57b3b2523f532906b1066770",
+    "binarySha256": "8df882e820d1dbc365390a62eb1f5e9ac21e76473d7bb97974b876d19ebaca9c",
+    "capabilities": {
+      "contractVersion": 1,
+      "helperVersion": "1",
+      "osVersion": "Version 26.3.1 (Build 25D2128)",
+      "arch": "arm64",
+      "revisions": [
+        {
+          "revision": 1,
+          "languages": [
+            "en-US"
+          ]
+        },
+        {
+          "revision": 2,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant"
+          ]
+        },
+        {
+          "revision": 3,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant",
+            "yue-Hans",
+            "yue-Hant",
+            "ko-KR",
+            "ja-JP",
+            "ru-RU",
+            "uk-UA",
+            "th-TH",
+            "vi-VT",
+            "ar-SA",
+            "ars-SA",
+            "tr-TR",
+            "id-ID",
+            "cs-CZ",
+            "da-DK",
+            "nl-NL",
+            "no-NO",
+            "nn-NO",
+            "nb-NO",
+            "ms-MY",
+            "pl-PL",
+            "ro-RO",
+            "sv-SE"
+          ]
+        }
+      ]
+    }
+  },
+  "profileDigest": "8596bf8a9544d320a5078cdd539baee9214374aa1ccfd22b7d7a6ee340d4fcc2",
+  "imageSha256": "70ac512afb7cc802e1dfa3e4391d091218afaf3be6bd0864b1c096390a6b342a",
+  "cropSha256": "70ac512afb7cc802e1dfa3e4391d091218afaf3be6bd0864b1c096390a6b342a",
+  "region": {
+    "x": 0,
+    "y": 0,
+    "width": 640,
+    "height": 200
+  },
+  "durationMs": 274.501291,
+  "completedAt": "2026-10-01T07:25:55.275Z"
+}

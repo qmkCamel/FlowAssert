@@ -1,0 +1,4 @@
+[
+  { "id": "branch-true", "params": { "enabled": true, "label": "Hello, harness." } },
+  { "id": "branch-false", "params": { "enabled": false, "label": "Hello, harness." } }
+]

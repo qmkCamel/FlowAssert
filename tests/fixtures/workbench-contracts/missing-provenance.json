@@ -1,0 +1,6 @@
+{
+  "required": ["appVersion", "driver"],
+  "observed": {
+    "driver": "mobile-mirror-mock"
+  }
+}

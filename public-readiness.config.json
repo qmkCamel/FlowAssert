@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "expectedRemote": "git@github.com:qmkCamel/flowassert.git",
+  "distribution": {
+    "sourceLicense": "MIT",
+    "packageChannel": "github-release",
+    "packagePrivate": true,
+    "npmPublished": false
+  },
+  "screenshots": {
+    "publicMockViewer": {
+      "path": "artifacts/screenshots/mobile-mirror-streaming.png",
+      "sha256": "c7b37922ec7e4f27efa1b7c3989491241ed995b4b29623dba9f770fe7f126578"
+    },
+    "preservedIosPhysical": {
+      "path": "artifacts/screenshots/mobile-mirror-ios-physical-final.png",
+      "sha256": "11983afa17f29d8939832574f6f4fd50fe0dc579e483e812fc81aaf9775e59a4"
+    },
+    "flowassertWorkbench": {
+      "path": "artifacts/screenshots/flowassert-workbench.png",
+      "sha256": "ff9ad6c074d0e52aed3f7d7e44e10e26932436630852ccef5bca54c72bbad929"
+    }
+  }
+}

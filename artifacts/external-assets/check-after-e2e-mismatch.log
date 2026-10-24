@@ -1,0 +1,46 @@
+$ pnpm check
+$ pnpm run typecheck && pnpm run lint:contracts && pnpm run test
+$ tsc --noEmit
+$ tsx scripts/check-contracts.ts
+DeepSeek Harness bundle contract: OK
+$ vitest run
+
+ RUN  v4.1.10 <repository>
+
+ ❯ tests/public-readiness.test.mjs (5 tests | 1 failed) 30974ms
+     × passes against the current repository surfaces and reachable history 30954ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/public-readiness.test.mjs > public readiness checks > passes against the current repository surfaces and reachable history
+AssertionError: expected [ { …(2) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "checkId": "screenshot-hash-mismatch",
++     "path": "artifacts/screenshots/mobile-mirror-streaming.png",
++   },
++ ]
+
+ ❯ tests/public-readiness.test.mjs:74:29
+     72|   it('passes against the current repository surfaces and reachable his…
+     73|     const result = await checkRepository(fileURLToPath(new URL('../', …
+     74|     expect(result.findings).toEqual([])
+       |                             ^
+     75|     expect(result.fileCount).toBeGreaterThan(0)
+     76|     expect(result.commitCount).toBeGreaterThan(0)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 80 passed (81)
+      Tests  1 failed | 708 passed (709)
+   Start at  15:03:10
+   Duration  36.27s (transform 3.30s, setup 0ms, import 11.88s, tests 245.30s, environment 4ms)
+
+[ELIFECYCLE] Test failed. See above for more details.
+[ELIFECYCLE] Command failed with exit code 1.

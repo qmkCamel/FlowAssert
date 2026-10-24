@@ -1,0 +1,6 @@
+{
+  "agentBrowser": "0.33.2",
+  "browser": "Google Chrome 154.0.8037.98",
+  "browserExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "scope": "optional local macOS development tool; never auto-install or upgrade"
+}

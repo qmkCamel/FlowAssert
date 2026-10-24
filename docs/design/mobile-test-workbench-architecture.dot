@@ -1,0 +1,52 @@
+digraph MobileTestWorkbench {
+  graph [rankdir=TB, bgcolor="#f7f9fc", pad="0.45", nodesep="0.35", ranksep="0.58", splines=polyline, fontname="PingFang SC", fontsize=25, labelloc=t, label="FlowAssert · 移动测试工作台\nMaestro fork 暂定默认 · AppClaw 首期对照 · 双端真机\n "];
+  node [shape=box, style="rounded,filled", fontname="PingFang SC", fontsize=15, margin="0.20,0.14", color="#7357aa", fillcolor="#eee8fa", fontcolor="#2f2542", penwidth=1.4];
+  edge [fontname="PingFang SC", fontsize=11, color="#768297", fontcolor="#516075", arrowsize=0.7, penwidth=1.2];
+
+  ui [label="FlowAssert 工作台\n画面 · 用例 · 运行 · 历史", fillcolor="#ddf2eb", color="#388574"];
+  cases [label="版本化用例库 · Git\n按引擎维护 YAML / JS / TS\n用例登记 + 独立业务校验"];
+  agent [label="可选 Agent\n编写用例 · 启动 · 分析失败", style="rounded,filled,dashed", fillcolor="#edf0f4", color="#939daa"];
+  { rank=same; ui; cases; agent; }
+
+  coord [label="RunCoordinator + SessionBroker\n唯一工作台 owner · 设备租约 · runId · 取消\n一台设备只交给一个控制 engine", penwidth=2.1, fontsize=17];
+  adapter [label="MaestroEngineAdapter · 薄适配层\n能力检查 · 整份 flow · warm session\n事件、原图与产物归档"];
+  flow [label="固定版本 Maestro fork\n原生 YAML → Orchestra\n定位 · 等待 · 动作 · UI 断言", fillcolor="#e1edfc", color="#3b73b9", penwidth=2.0, fontsize=17];
+  hook [label="复用 lifecycle / artifact 接口\n新增必需证据确认钩子\n落盘失败不能继续报通过"];
+  driver [label="Maestro 双端驱动\nAndroid Driver / iOS XCTest\n真机补丁：资源 / 签名 / USB 转发", fillcolor="#e1edfc", color="#3b73b9"];
+  phone [label="Android / iPhone 真机\n实际 UI 操作 · 自有 App", fillcolor="#ddf2eb", color="#388574", penwidth=2];
+
+  verify [label="Fixture + 独立业务验证\n准备并确认初始状态\n完成 flow 后读取业务结果"];
+  api [label="测试环境业务 API\n比较 expected / actual\n确认状态确实保存", style="rounded,filled,dashed", fillcolor="#edf0f4", color="#939daa"];
+  media [label="MediaHub · 手机画面到 Viewer\nAndroid：复用 scrcpy\niPhone：Maestro 媒体适配待补", fillcolor="#ddf2eb", color="#388574"];
+  record [label="可选 Recorder\n有界队列 · 分段视频\n时间对应与缺口记录"];
+  compat [label="Appium 路线 · 择一接管\n首期候选：AppClaw → appium-mcp\n兼容：MirrorService → Appium\n各自独占 session，按用例交接", style="rounded,filled,dashed", fillcolor="#edf0f4", color="#939daa"];
+  store [label="EvidenceStore · 持久事实库\n原生事件 / 原图 / 结构 / 断言 / 版本\nrun → case → attempt → step → evidence", penwidth=2, fontsize=16];
+  report [label="最终判定 → Allure / JUnit / 历史\n执行完成 + 必需断言通过 + 必需证据完整\n失败可定位 · 重试不覆盖 · 回放与重跑分开", fontsize=16];
+
+  { rank=same; coord; compat; }
+  { rank=same; media; adapter; verify; }
+  { rank=same; record; flow; api; }
+  { rank=same; driver; hook; }
+  { rank=same; phone; store; }
+
+  ui -> coord [label="运行 / 停止"];
+  agent -> coord [label="注册 caseId"];
+  cases -> adapter [label="冻结版本"];
+  coord -> adapter;
+  coord -> verify [label="准备 / 完成后验证"];
+  coord -> compat [style=dashed, constraint=false];
+  adapter -> flow [label="复用会话，整份执行"];
+  flow -> driver;
+  driver -> phone;
+  flow -> hook [label="执行事件与产物"];
+  hook -> store [label="持久提交 / 必需确认", dir=both];
+  verify -> api [dir=both];
+  api -> store [label="验证记录"];
+  phone -> media [label="只读媒体路径", constraint=false];
+  media -> record;
+  record -> store [label="独立录制队列"];
+  store -> report;
+
+  legend [shape=plain, label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="7"><TR><TD BGCOLOR="#ddf2eb">  现有能力复用 / 扩展  </TD><TD BGCOLOR="#e1edfc">  Maestro 引擎复用  </TD><TD BGCOLOR="#eee8fa">  工作台新增  </TD><TD BGCOLOR="#edf0f4">  可选 / 兼容  </TD></TR><TR><TD COLSPAN="4">目标设计 · 尚未实现  |  用户已验证 PR 路线；最终集成制品另行固定与验收</TD></TR><TR><TD COLSPAN="4">iPhone 真机控制 ≠ 已有真机投屏 / 录屏；不为观看同时启动第二个控制 session</TD></TR><TR><TD COLSPAN="4">2026-09-09  ·  两候选对照：速度 / 误判 / 停止 / 证据完整性 / 维护成本</TD></TR></TABLE>>, fontsize=13];
+  report -> legend [style=invis];
+}

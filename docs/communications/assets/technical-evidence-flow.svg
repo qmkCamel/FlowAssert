@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="590" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+<title id="title">从一次运行到证据与复验</title><desc id="desc">冻结用例，预检并获取租约，执行与逐步取证，保存判定和材料。历史经确定性比较输出诊断上下文，供人工与 Agent 阅读，新复验产生新 run。</desc>
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M1 0 L8 4 L1 8" fill="none" stroke="#587083" stroke-width="1.5"/></marker></defs>
+<style>text{font-family:system-ui,-apple-system,'PingFang SC',sans-serif;fill:#18364b}.h{font-size:23px;font-weight:700}.t{font-size:19px}.s{font-size:16px;fill:#4c6477}.line{fill:none;stroke:#587083;stroke-width:2;marker-end:url(#a)}</style>
+<rect width="1200" height="590" rx="22" fill="#f1f6fa"/>
+<text x="38" y="48" class="h">执行留下事实，比较缩小排查范围</text><text x="38" y="80" class="s">工作流示意 · 不代表新增真机验收</text>
+<g fill="#fff" stroke="#b4c8d8"><rect x="38" y="119" width="245" height="133" rx="12"/><rect x="330" y="119" width="245" height="133" rx="12"/><rect x="622" y="119" width="245" height="133" rx="12"/><rect x="914" y="119" width="245" height="133" rx="12"/></g>
+<text x="60" y="156" class="s">01 / INPUT</text><text x="60" y="188" class="h">冻结输入</text><text x="60" y="221" class="t">YAML · 修订 · 参数</text>
+<text x="352" y="156" class="s">02 / ADMISSION</text><text x="352" y="188" class="h">预检与租约</text><text x="352" y="221" class="t">断言 · 预算 · owner</text>
+<text x="644" y="156" class="s">03 / EXECUTION</text><text x="644" y="188" class="h">执行与取证</text><text x="644" y="221" class="t">动作 → PNG / XML</text>
+<text x="936" y="156" class="s">04 / ARCHIVE</text><text x="936" y="188" class="h">判定与归档</text><text x="936" y="221" class="t">runId · hash · 结果</text>
+<path d="M283 186 H325" class="line"/><path d="M575 186 H617" class="line"/><path d="M867 186 H909" class="line"/>
+<path d="M1037 252 V306 H162 V344" class="line"/><text x="395" y="295" class="s">历史材料只读；保留原判定和缺失状态</text>
+<rect x="38" y="348" width="342" height="136" rx="12" fill="#e4f3ed" stroke="#84af9b"/>
+<text x="60" y="386" class="h">确定性比较</text><text x="60" y="420" class="t">身份 / 步骤对齐 · 分维度差异</text><text x="60" y="453" class="s">前序缺证时，不声称“首次差异”</text>
+<rect x="430" y="348" width="342" height="136" rx="12" fill="#e4f3ed" stroke="#84af9b"/>
+<text x="452" y="386" class="h">Diagnostic Context</text><text x="452" y="420" class="t">关键事实 · 限制 · evidenceRef</text><text x="452" y="453" class="s">紧凑摘要，可回钻具体步骤证据</text>
+<rect x="822" y="348" width="337" height="136" rx="12" fill="#e5edf9" stroke="#849fc7"/>
+<text x="844" y="386" class="h">人 / Agent 阅读与解释</text><text x="844" y="420" class="t">Viewer · MCP · 离线报告</text><text x="844" y="453" class="s">解释不改写 verdict 或基线</text>
+<path d="M380 418 H425" class="line"/><path d="M772 418 H817" class="line"/>
+<text x="38" y="541" class="h">修订后复验 → 新 run</text><text x="358" y="541" class="t">旧失败、原始材料与关联关系继续保留。</text>
+</svg>

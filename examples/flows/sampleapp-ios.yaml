@@ -1,0 +1,31 @@
+platform: ios
+blockers:
+  - text:
+      value: 跳过
+      match: contains
+appId: com.example.sampleapp
+name: 第三方 App一级 Tab 切换、遮罩排除与页面特征验证
+---
+- launchApp
+- wait: 5
+- tap:
+    text: 精选
+- wait: 3
+- assertNotVisible:
+    text:
+      value: 跳过
+      match: contains
+- assertVisible:
+    text: 拍摄
+- tap:
+    text: 首页
+- wait: 3
+- assertNotVisible:
+    text:
+      value: 跳过
+      match: contains
+- assertVisible:
+    text: 关注
+- assertVisible:
+    text: 首页
+- done

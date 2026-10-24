@@ -1,0 +1,102 @@
+// Regenerate the portable technical introduction from its authored Markdown.
+// Only the explicitly listed public screenshots and authored SVGs are embedded.
+import { readFile, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
+import { marked } from 'marked'
+
+const root = new URL('../', import.meta.url)
+const directory = new URL('docs/communications/', root)
+const source = new URL('technical-introduction.zh-CN.md', directory)
+const markdown = await readFile(source, 'utf8')
+const check = process.argv.includes('--check')
+const refreshRevision = process.argv.includes('--refresh-revision')
+if (process.argv.slice(2).some((arg) => !['--check', '--refresh-revision'].includes(arg)) || (check && refreshRevision)) throw new Error('Use --check or --refresh-revision')
+const manifestUrl = new URL('technical-introduction-assets.json', directory)
+const previous = JSON.parse(await readFile(manifestUrl, 'utf8'))
+// Keep historical source links stable across unrelated commits; refresh explicitly.
+const revision = refreshRevision ? execFileSync('git', ['rev-parse', 'HEAD'], { cwd: fileURLToPath(root), encoding: 'utf8' }).trim() : previous.sourceRevision
+if (!/^(?:main|[a-f0-9]{40})$/.test(revision)) throw new Error('Invalid technical introduction source revision')
+const repositoryUrl = 'https://github.com/qmkCamel/flowassert'
+const captions = new Map([
+  ['mobile-mirror-workbench-evidence.png', ['browser-mock', '2026-10-08', 'docs/screenshot-refresh-2026-10-08.md']],
+  ['mobile-mirror-inspector-final.png', ['browser-mock', '2026-10-08', 'docs/screenshot-refresh-2026-10-08.md']],
+  ['mobile-mirror-fixture-android-positive.png', ['physical-android-synthetic-fixture', '2026-09-17', 'docs/business-test-fixture.md']],
+  ['mobile-mirror-fixture-android-business-negative.png', ['physical-android-synthetic-fixture', '2026-09-17', 'docs/business-test-fixture.md']],
+  ['beta-workbench-failure.png', ['browser-mock', '2026-10-08', 'docs/communications/beta-demo-validation.md']],
+  ['mobile-mirror-run-comparison.png', ['browser-mock', '2026-10-08', 'docs/screenshot-refresh-2026-10-08.md']],
+  ['beta-workbench-share.png', ['browser-mock', '2026-10-08', 'docs/communications/beta-demo-validation.md']],
+  ['technical-architecture.svg', ['authored-architecture-diagram', '2026-10-09', 'docs/design/mobile-test-workbench-current.md']],
+  ['technical-evidence-flow.svg', ['authored-workflow-diagram', '2026-10-09', 'docs/run-comparison-analysis.md']],
+])
+const escape = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+const headings = []
+let headingIndex = 0
+const renderer = new marked.Renderer()
+renderer.heading = function ({ tokens, depth, text }) {
+  const id = `section-${headingIndex++}`
+  if (depth === 2) headings.push({ id, text })
+  return `<h${depth} id="${id}">${this.parser.parseInline(tokens)}</h${depth}>\n`
+}
+let body = marked.parse(markdown, { renderer })
+const assets = []
+const embedded = new Map()
+for (const match of body.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) {
+  const reference = match[1]
+  const imageUrl = new URL(reference, directory)
+  const name = imageUrl.pathname.split('/').at(-1)
+  const metadata = captions.get(name)
+  if (!metadata || imageUrl.protocol !== 'file:' || !imageUrl.href.startsWith(root.href)) throw new Error(`Unexpected image: ${reference}`)
+  const bytes = await readFile(imageUrl)
+  const mime = name.endsWith('.svg') ? 'image/svg+xml' : 'image/png'
+  embedded.set(reference, `data:${mime};base64,${bytes.toString('base64')}`)
+  assets.push({ path: fileURLToPath(imageUrl).slice(fileURLToPath(root).length), kind: metadata[0], sourceDate: metadata[1], sourceRecord: metadata[2], bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), transformed: false })
+}
+body = body.replace(/(<img\b[^>]*\bsrc=")([^"]+)(")/g, (_, before, reference, after) => before + embedded.get(reference) + after)
+// Full local-copy reading needs no server. Current guides follow the source
+// branch; sourceRevision records the base commit, not publication of new files.
+body = body.replace(/href="([^"#][^"]*)"/g, (attribute, reference) => {
+  if (/^https?:/.test(reference)) return attribute
+  const target = new URL(reference, directory)
+  if (!target.href.startsWith(root.href)) throw new Error(`Link outside repository: ${reference}`)
+  const path = fileURLToPath(target).slice(fileURLToPath(root).length)
+  return `href="${repositoryUrl}/blob/dev/${path}${target.search}${target.hash}"`
+})
+body = body.replace(/<table>/g, '<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的对比表"><table>').replace(/<\/table>/g, '</table></div>')
+const toc = headings.map(({ id, text }) => `<a href="#${id}">${escape(text)}</a>`).join('\n')
+const html = `<!doctype html>
+<!-- Generated by scripts/render-technical-introduction.mjs; edit the Markdown source. -->
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="FlowAssert 技术介绍：真实截图、当前架构、证据流、方案对比和试用路径。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>FlowAssert · 技术介绍</title>
+<style>
+:root{color-scheme:light;--ink:#162b3c;--muted:#506879;--accent:#146b72;--line:#d7e0e5;--paper:#fff;--back:#f2f5f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--back);font:16px/1.9 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.masthead{background:#122b40;color:#e9f1f6;padding:19px 4vw;display:flex;justify-content:space-between;gap:20px;font-size:13px;letter-spacing:.08em}.masthead strong{color:#a5e5d5}
+.layout{max-width:1450px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1060px);gap:36px;padding:36px 32px 80px}
+nav{position:sticky;top:26px;align-self:start;font-size:13px}nav .label{text-transform:uppercase;letter-spacing:.13em;font-size:11px;color:var(--muted);margin:0 0 14px}nav a{display:block;padding:10px 8px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);line-height:1.6}nav a:hover{color:var(--accent);background:#e3efed}
+main{min-width:0;background:var(--paper);padding:48px 56px 64px;border:1px solid var(--line);border-radius:5px;overflow-wrap:anywhere}
+h1{font-size:clamp(29px,3.5vw,48px);line-height:1.2;letter-spacing:-.04em;margin:0 0 20px}h1+p{font-size:23px;line-height:1.6;color:var(--accent);max-width:760px}h1+p+p{font-size:13px;letter-spacing:.025em;color:var(--muted);padding-bottom:22px;border-bottom:2px solid var(--ink)}h1+p+p+p{font-size:14px;color:var(--muted)}
+h2{font-size:27px;line-height:1.5;letter-spacing:-.02em;margin:62px 0 22px;padding-top:26px;border-top:1px solid var(--line);scroll-margin-top:20px}p{margin:16px 0}strong{font-weight:680}a{color:#126374;text-underline-offset:3px}a:focus-visible,.table-scroll:focus-visible{outline:3px solid #2c8b8a;outline-offset:4px}
+img{display:block;max-width:100%;height:auto;margin:26px auto 12px;border:1px solid #c7d5df;border-radius:8px}p:has(img){margin-bottom:6px}p>em:only-child{display:block;font-size:13px;line-height:1.8;color:var(--muted);font-style:normal;border-left:3px solid #a2c5c2;padding-left:14px;margin:0 0 28px}
+.phone-pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:24px auto;max-width:720px}.phone-pair figure{margin:0;min-width:0}.phone-pair img{max-height:620px;width:auto;margin:0 auto 12px;border-radius:12px}.phone-pair figcaption{font-size:13px;line-height:1.7;color:var(--muted)}
+.table-scroll{overflow-x:auto;max-width:100%;margin:24px 0;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.85}th,td{text-align:left;vertical-align:top;padding:14px 15px;border-bottom:1px solid var(--line);min-width:125px}th{background:#e9f0f3;font-weight:650;color:#26475b}tr:last-child td{border-bottom:0}tr:nth-child(even) td{background:#fafcfc}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:#edf2f5;padding:.15em .3em;border-radius:4px}pre{background:#142d41;color:#e4eef5;padding:24px;border-radius:8px;overflow-x:auto;line-height:1.75}pre code{padding:0;background:none;white-space:pre}li{margin:10px 0}ul,ol{padding-left:24px}.footer{font-size:12px;color:var(--muted);padding-top:26px;margin-top:36px;border-top:1px solid var(--line)}
+@media(max-width:1100px){.layout{grid-template-columns:185px minmax(0,1fr);gap:22px;padding:25px 20px}main{padding:34px 30px}nav{font-size:12px}}
+@media(max-width:760px){.masthead{font-size:11px;padding:16px 18px}.layout{display:block;padding:16px 12px 36px}nav{position:static;display:flex;gap:8px;overflow-x:auto;margin-bottom:16px}nav .label{display:none}nav a{flex:0 0 175px;border:1px solid var(--line);border-radius:6px;background:#fff;padding:10px}main{padding:28px 20px}h1+p{font-size:19px}h2{font-size:23px;margin-top:44px}.phone-pair{gap:12px}.phone-pair figcaption{font-size:12px}th,td{min-width:160px;padding:12px}pre{font-size:13px;padding:18px}}
+@media(max-width:480px){.phone-pair{grid-template-columns:1fr;max-width:320px;gap:24px}}
+@media print{body{background:white;font-size:10pt;line-height:1.7}.masthead,nav{display:none}.layout{display:block;padding:0}main{padding:0;border:0}h1{font-size:30pt}h1+p{font-size:16pt}h2{font-size:18pt;margin-top:28px;break-after:avoid}img{max-height:205mm;object-fit:contain;break-inside:avoid}figure,.phone-pair{break-inside:avoid}.phone-pair img{max-height:125mm}table{font-size:8.2pt}th,td{min-width:0;padding:7px}tr{break-inside:avoid}.table-scroll{overflow:visible}pre{white-space:pre-wrap;overflow:visible}pre code{white-space:pre-wrap}a{color:inherit}p>em:only-child{font-size:9pt}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><header class="masthead"><span><strong>FLOWASSERT</strong> / ENGINEERING BRIEF</span><span>2026.10.12 · DEVELOPER PREVIEW</span></header><div class="layout"><nav aria-label="文章目录"><p class="label">In this document</p>${toc}</nav><main>${body}<p class="footer">源码基线 ${revision} · 图像原始字节内嵌 · 本文件不执行设备操作，也不产生新的测试判定。</p></main></div></body></html>
+`
+const manifest = JSON.stringify({ documentDate: '2026-10-12', sourceRevision: revision, source: 'docs/communications/technical-introduction.zh-CN.md', sourceSha256: createHash('sha256').update(markdown).digest('hex'), note: 'Source dates describe historical captures. This document build performs no device validation. PNG pixels are unmodified; SVGs are explanatory diagrams.', assets }, null, 2) + '\n'
+const htmlUrl = new URL('technical-introduction.html', directory)
+if (check) {
+  if (await readFile(htmlUrl, 'utf8') !== html || await readFile(manifestUrl, 'utf8') !== manifest) throw new Error('Technical introduction is out of sync; run pnpm docs:render')
+  console.log('Technical introduction: source, HTML and asset hashes match')
+} else {
+  await writeFile(htmlUrl, html)
+  await writeFile(manifestUrl, manifest)
+  console.log(`Generated technical-introduction.html (${Buffer.byteLength(html)} bytes), ${assets.length} embedded assets and ${headings.length} sections.`)
+}

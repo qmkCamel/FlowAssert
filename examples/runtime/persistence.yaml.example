@@ -1,0 +1,17 @@
+name: Fixed restart persistence
+platform: android
+appId: dev.mobilemirror.runtimefixture
+---
+- launchApp
+- tap: {accessibilityId: runtime.save}
+- assertStable:
+    predicate: {assertVisible: {text: Saved 1200}}
+    durationMs: 1000
+    pollMs: 1000
+    maxSampleGapMs: 5000
+- restartApp: {timeoutMs: 10000}
+- assertStable:
+    predicate: {assertVisible: {text: Saved 1200}}
+    durationMs: 1000
+    pollMs: 1000
+    maxSampleGapMs: 5000

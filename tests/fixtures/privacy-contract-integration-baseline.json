@@ -1,0 +1,7 @@
+{
+  "reason": "Privacy cleanup changes only the archived example path, placeholder selectors and their integrity metadata; runtime contracts remain frozen.",
+  "updatedFiles": {
+    "tests/workbench.test.ts": "5e241d7d40279d2aa74524d37dadcb64d2eecfbaf7c9081e41104ad1419ce06e",
+    "tests/fixtures/workbench-runs/sampleapp-ios-history-title-missing.mobile-mirror-run.json": "fca8f23970b1e77f48ab097bd0ba2b1c981a4288e62a39a0e816d121ad1b9e39"
+  }
+}

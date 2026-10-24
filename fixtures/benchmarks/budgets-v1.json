@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "sourceCandidate": "REDACTED_REVISION",
+  "scope": "Fixture UI run duration, including PNG/XML per step; excludes session startup and shutdown",
+  "policy": "Freeze ceil(measured P95 * 1.2) after 30 unchanged-input repetitions; new inputs or device profiles require a new revision",
+  "android": {
+    "flow": "fixture-ui-android.yaml",
+    "flowSha256": "8dd2884bd92d0022075539f98e20efe0844dd1b68a53aef357e64ff53ef769cd",
+    "deviceProfile": "OnePlus 8T KB2000 / Android 14",
+    "app": "dev.mobilemirror.fixture 1.0",
+    "appium": "3.2.0",
+    "driver": "UiAutomator2 6.8.0",
+    "media": "scrcpy 4.1",
+    "samples": 30,
+    "failures": 0,
+    "excluded": 0,
+    "medianMs": 8383,
+    "p95Ms": 9762,
+    "maxMs": 9806,
+    "regressionBudgetMs": 11715,
+    "frozenOn": "2026-10-05"
+  },
+  "ios": {
+    "flow": "fixture-ui-ios.yaml",
+    "flowSha256": "3251e82d686ba36b53e4d1df0d89f93cd82222698ff04858933f5efb8e61bbe6",
+    "deviceProfile": "iPhone 16 Plus / iOS 26.2.1",
+    "app": "dev.mobilemirror.fixture 1.0",
+    "appium": "3.2.0",
+    "driver": "XCUITest 10.19.1",
+    "media": "WDA MJPEG",
+    "sourceOverlay": "Provider-attested readiness focus fix; benchmark uses legacy steps, not readiness input",
+    "initialState": "Fixture with keyboard and Help visible; prior synthetic Network error retained, no backend required",
+    "samples": 30,
+    "failures": 0,
+    "excluded": 0,
+    "medianMs": 8927,
+    "p95Ms": 9017,
+    "maxMs": 9033,
+    "regressionBudgetMs": 10821,
+    "frozenOn": "2026-10-05"
+  }
+}

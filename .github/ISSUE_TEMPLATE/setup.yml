@@ -1,0 +1,60 @@
+name: Setup and configuration
+description: Ask for help with installation, Doctor, DSH, MCP or Appium setup.
+title: "[Setup]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read SUPPORT.md and the Beta/platform guide first. A passing Doctor proves host prerequisites only, not device authorization. Share stable statuses and counts, never the raw host report.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Setup area
+      options:
+        - main branch source installation
+        - GitHub Release installation
+        - Doctor
+        - DSH 0.2.0-rc.2 profile
+        - MCP or Codex registration
+        - Managed Appium
+        - Android authorization
+        - iOS trust, Developer Mode or WDA signing
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Sanitized versions
+      placeholder: |
+        Branch / commit SHA (git rev-parse HEAD):
+        Local modifications (yes/no):
+        Host OS:
+        FlowAssert:
+        Node/pnpm:
+        DSH:
+        Appium/driver (if applicable):
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Doctor summary
+      description: List check IDs, statuses and stable codes only. Do not paste raw JSON/command output.
+  - type: textarea
+    id: attempted
+    attributes:
+      label: Steps already attempted / 内测卡在哪一步
+      description: Include task number, installation time, task time, and whether help was needed. 未完成也请记录；不要贴私人材料。
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission checks
+      options:
+        - label: I removed device IDs, account/signing values, capabilities, host reports, credentials, private paths and raw logs.
+          required: true
+        - label: I understand that physical-device authorization cannot be completed by Doctor alone.
+          required: true
+        - label: I agree to follow the Code of Conduct.
+          required: true

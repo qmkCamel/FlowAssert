@@ -1,0 +1,54 @@
+name: FlowAssert self-hosted suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Locally registered suite id
+        required: true
+        default: smoke
+      platform:
+        description: Connected platform
+        required: true
+        type: choice
+        options: [android, ios]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-mirror-${{ inputs.platform }}
+  cancel-in-progress: false
+
+jobs:
+  suite:
+    runs-on: [self-hosted, mobile-mirror, "${{ inputs.platform }}"]
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.7.0 --activate
+      - name: Install the reviewed source tree
+        run: pnpm install --frozen-lockfile
+      - name: Run the registered suite with the owned local runtime
+        env:
+          MM_SUITE: ${{ inputs.suite }}
+          MM_PLATFORM: ${{ inputs.platform }}
+          MM_CONFIG: ${{ vars.MOBILE_MIRROR_RUNNER_CONFIG }}
+          MM_CONNECTION: ${{ vars.MOBILE_MIRROR_CONNECTION_CONFIG }}
+          MM_REPORT_ROOT: ${{ vars.MOBILE_MIRROR_REPORT_ROOT }}
+        run: |
+          test -n "$MM_CONFIG" && test -f "$MM_CONFIG"
+          test -n "$MM_CONNECTION" && test -f "$MM_CONNECTION"
+          test -n "$MM_REPORT_ROOT"
+          node scripts/mobile-mirror-cli.mjs test job "$MM_SUITE" \
+            --config "$MM_CONFIG" \
+            --connection "$MM_CONNECTION" \
+            --report-dir "$MM_REPORT_ROOT/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" \
+            --platform "$MM_PLATFORM" \
+            --timeout-ms 3600000

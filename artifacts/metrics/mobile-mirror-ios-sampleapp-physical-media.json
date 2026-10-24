@@ -1,0 +1,41 @@
+{
+  "platform": "ios",
+  "durationMs": 10000,
+  "browser": {
+    "transport": "wda-mjpeg",
+    "firstPaintMs": 166,
+    "paintedFrames": 1,
+    "paintedFps": null,
+    "receiveToPaintP95Ms": null,
+    "fallbackMs": null,
+    "fallbackReason": null,
+    "packetCounts": {},
+    "lastPacketType": null,
+    "mediaVisible": true,
+    "pollingVisible": false
+  },
+  "relay": {
+    "transport": "wda-mjpeg",
+    "streamStartedAt": 1789012133624,
+    "firstFrameAt": 1789012133736,
+    "lastFrameAt": 1789012143785,
+    "frameCount": 145,
+    "relayFps": 14.329784058115235
+  },
+  "mediaVisibleAfterControl": true,
+  "fallbackMs": 498,
+  "firstRevision": 1,
+  "finalRevision": 2,
+  "firstEpoch": 1,
+  "finalEpoch": 2,
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "width": 430,
+    "height": 932
+  },
+  "orientation": "portrait",
+  "structureNodes": 103,
+  "ownedSessionCleaned": true,
+  "evidenceScope": "Raw device screenshot retained locally; not included in repository."
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-16",
+  "unitTests": 331,
+  "e2eTests": 42,
+  "newOrchestrationTests": 22,
+  "check": "pass",
+  "build": "pass",
+  "packCheck": "pass",
+  "packageSuiteId": "b63741fa-63f7-46a9-aa8c-736ac2d5f6c0",
+  "packageExitCode": 0,
+  "packageVerifiedArtifacts": 11,
+  "packageSha256": "76920efe0068c8337e6f9846dad43951dec3ef1ede830389237600f05eac45b9",
+  "android": "not-passed-device-locked",
+  "ios": "unavailable",
+  "realAppBusiness": "pending-test-app-and-api",
+  "screenshot": "artifacts/screenshots/mobile-mirror-orchestration-suite.png"
+}

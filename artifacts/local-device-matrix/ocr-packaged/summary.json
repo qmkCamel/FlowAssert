@@ -1,0 +1,96 @@
+{
+  "syntheticOnly": true,
+  "productionEnabled": false,
+  "identity": {
+    "sourceSha256": "955aa3a4c496f5ca997b5177457aca3fa2a6309e57b3b2523f532906b1066770",
+    "binarySha256": "8df882e820d1dbc365390a62eb1f5e9ac21e76473d7bb97974b876d19ebaca9c",
+    "capabilities": {
+      "contractVersion": 1,
+      "helperVersion": "1",
+      "osVersion": "Version 26.3.1 (Build 25D2128)",
+      "arch": "arm64",
+      "revisions": [
+        {
+          "revision": 1,
+          "languages": [
+            "en-US"
+          ]
+        },
+        {
+          "revision": 2,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant"
+          ]
+        },
+        {
+          "revision": 3,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant",
+            "yue-Hans",
+            "yue-Hant",
+            "ko-KR",
+            "ja-JP",
+            "ru-RU",
+            "uk-UA",
+            "th-TH",
+            "vi-VT",
+            "ar-SA",
+            "ars-SA",
+            "tr-TR",
+            "id-ID",
+            "cs-CZ",
+            "da-DK",
+            "nl-NL",
+            "no-NO",
+            "nn-NO",
+            "nb-NO",
+            "ms-MY",
+            "pl-PL",
+            "ro-RO",
+            "sv-SE"
+          ]
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "id": "english",
+      "decision": {
+        "status": "pass",
+        "reason": "ocr-exact-match"
+      },
+      "imageSha256": "70ac512afb7cc802e1dfa3e4391d091218afaf3be6bd0864b1c096390a6b342a",
+      "cropSha256": "70ac512afb7cc802e1dfa3e4391d091218afaf3be6bd0864b1c096390a6b342a",
+      "durationMs": 258.80941699999994
+    },
+    {
+      "id": "chinese",
+      "decision": {
+        "status": "pass",
+        "reason": "ocr-exact-match"
+      },
+      "imageSha256": "17a6d2e9c2f2c24fa3b2e2fefdfeac9128a9d3aa5e50ecbc851ebd2c9cef7c44",
+      "cropSha256": "17a6d2e9c2f2c24fa3b2e2fefdfeac9128a9d3aa5e50ecbc851ebd2c9cef7c44",
+      "durationMs": 258.811333
+    }
+  ],
+  "capacity": {
+    "active": 0,
+    "queued": 0
+  }
+}

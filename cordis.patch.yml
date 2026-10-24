@@ -1,0 +1,36 @@
+- insert:
+    - id: mobile-mirror
+      name: flowassert
+      config:
+        defaultProvider: mock
+        agentScreenContentPolicy: mock-only
+        agentTextInputPolicy: mock-only
+        agentAppControlPolicy: disabled
+        agentAllowedAppIds: []
+        appiumUrl: http://127.0.0.1:4723
+        appiumRuntimeMode: external
+        appiumExecutablePath: ''
+        viewerHost: 127.0.0.1
+        viewerPort: 3210
+        frameIntervalMs: 750
+        viewerMediaMode: auto
+        androidScrcpyPath: ''
+        androidScrcpyServerPath: ''
+        androidScrcpyMaxSize: 1280
+        androidScrcpyMaxFps: 30
+        androidScrcpyVideoBitRate: 4000000
+        iosMjpegPort: 0
+        iosMjpegFramerate: 15
+        iosMjpegScalingFactor: 50
+        iosMjpegScreenshotQuality: 40
+        startupTimeoutMs: 30000
+        appiumSessionStartupTimeoutMs: 120000
+        mockStartupDelayMs: 700
+        allowHostDeviceDiscovery: false
+        androidIgnoreHiddenApiPolicyError: true
+        iosWdaXcodeOrgId: ''
+        iosWdaXcodeSigningId: Apple Development
+        iosWdaUpdatedBundleId: ''
+        iosWdaXcodeConfigFile: ''
+        iosWdaAllowProvisioningDeviceRegistration: false
+        allowHostSigningDiagnostics: false

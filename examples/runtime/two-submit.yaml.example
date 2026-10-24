@@ -1,0 +1,25 @@
+# Template only: supply an isolated businessKey, authorized App/backend and cleanup hooks.
+name: Two explicit submits, one order
+platform: android
+appId: com.example.authorizedtestapp
+params:
+  businessKey: {type: string}
+  base: {type: string}
+  owner: {type: string}
+---
+- launchApp
+- assertVisible: {accessibilityId: test.ready}
+- fillReady: {target: {testId: test.business-key}, text: '{{ params.businessKey }}', mode: replace}
+- tap: {accessibilityId: test.submit}
+- tap: {accessibilityId: test.submit}
+- assertVisible: {accessibilityId: test.submitted}
+- assertBusiness:
+    ref: onlyOnce
+    mode: once
+    withinMs: 10000
+    args:
+      base: '{{ params.base }}'
+      id: '{{ params.businessKey }}'
+      owner: '{{ params.owner }}'
+      expectedAmount: 1200
+      windowMs: 2000

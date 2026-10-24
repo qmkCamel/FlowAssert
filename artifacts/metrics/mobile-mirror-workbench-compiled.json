@@ -1,0 +1,21 @@
+{
+  "testedAt": "2026-09-14T05:06:20.710Z",
+  "runtime": "built lib / standalone CLI",
+  "environment": {
+    "node": "v24.19.0",
+    "os": "darwin",
+    "arch": "arm64",
+    "workbenchVersion": "0.1.0-alpha.2",
+    "workerSha256": "55928ba7a43e80639ccc3eee71670c218fa4f4dab619ef3e966d3372c2a12d1f"
+  },
+  "engine": "AppClaw 2.7.0 · MirrorService",
+  "runId": "9e3dedfa-fc4e-415f-8d15-2fefd6d09c8f",
+  "verdict": "pass",
+  "steps": 5,
+  "screenshotFiles": 5,
+  "sessionId": "mock-iphone-15",
+  "cleanup": "session-retained",
+  "provider": "mock",
+  "visualVerification": "not-performed",
+  "businessVerification": "not-performed"
+}

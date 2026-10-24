@@ -1,0 +1,8 @@
+{
+  "base": "REDACTED_REVISION",
+  "harness": "0.2.0-rc.2",
+  "reason": "Host patch lifecycle and clean-profile assertions; legacy core/tool inputs and results are unchanged.",
+  "updatedFiles": {
+    "scripts/dsh-clean-profile-probe.mjs": "1700276275e38ed13b214462db0186dc334fe0d8eed7d136dcdec12271079ea9"
+  }
+}

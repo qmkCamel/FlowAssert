@@ -1,0 +1,7 @@
+{
+  "reason": "FlowAssert branding only: MCP CLI help and installed package lookup. Runtime tools, schemas and legacy evidence fixtures are unchanged.",
+  "updatedFiles": {
+    "tests/mcp-stdio.test.ts": "33cce2ea946dbcd2867c8451e957936624639349ab2cd8c1a86f736c29139925",
+    "scripts/dsh-clean-profile-probe.mjs": "a306452e70ab93cc8b907638b52a0858858638ff5e6839274012700db20a1649"
+  }
+}

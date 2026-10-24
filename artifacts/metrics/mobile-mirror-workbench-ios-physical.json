@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-14",
+  "device": {
+    "model": "iPhone 16 Plus",
+    "ios": "26.2.1",
+    "appVersion": "REDACTED_APP_VERSION",
+    "appBuild": "1079"
+  },
+  "stack": {
+    "appium": "3.2.0",
+    "xcuitestDriver": "10.19.1",
+    "appclaw": "2.7.0",
+    "wda": "existing signed prebuilt"
+  },
+  "acceptance": "passed-positive-and-negative-ui-flow-evidence-history",
+  "attempts": [
+    {
+      "runId": "c03bd07e-a1a1-4695-afd5-07edc9d1e798",
+      "verdict": "pass",
+      "sameSession": true,
+      "framesDuringRun": 509,
+      "after": {
+        "transport": "wda-mjpeg",
+        "streamStartedAt": 1789373148792,
+        "firstFrameAt": 1789373148937,
+        "lastFrameAt": 1789373195839,
+        "frameCount": 511,
+        "relayFps": 10.873736727644877
+      },
+      "browserMetrics": {
+        "transport": "wda-mjpeg",
+        "firstPaintMs": 198,
+        "paintedFrames": 1,
+        "paintedFps": null,
+        "receiveToPaintP95Ms": null,
+        "fallbackMs": null,
+        "fallbackReason": null,
+        "packetCounts": {},
+        "lastPacketType": null,
+        "mediaVisible": true,
+        "pollingVisible": false
+      },
+      "independentControlResponsive": true,
+      "steps": 12,
+      "durationMs": 45948,
+      "historyRestored": true,
+      "verifiedArtifacts": 26,
+      "deviceStopped": true,
+      "screenshots": 12,
+      "hierarchies": 12
+    },
+    {
+      "runId": "1cab087a-9738-4f44-a967-0e65f0e994c7",
+      "verdict": "fail",
+      "expectedVerdict": "fail",
+      "sameSession": true,
+      "framesDuringRun": 466,
+      "after": {
+        "transport": "wda-mjpeg",
+        "streamStartedAt": 1789373218688,
+        "firstFrameAt": 1789373218785,
+        "lastFrameAt": 1789373251055,
+        "frameCount": 468,
+        "relayFps": 14.471645491168267
+      },
+      "browserMetrics": {
+        "transport": "wda-mjpeg",
+        "firstPaintMs": 158,
+        "paintedFrames": 1,
+        "paintedFps": null,
+        "receiveToPaintP95Ms": null,
+        "fallbackMs": null,
+        "fallbackReason": null,
+        "packetCounts": {},
+        "lastPacketType": null,
+        "mediaVisible": true,
+        "pollingVisible": false
+      },
+      "independentControlResponsive": true,
+      "steps": 3,
+      "durationMs": 31468,
+      "historyRestored": true,
+      "verifiedArtifacts": 8,
+      "deviceStopped": true,
+      "screenshots": 3,
+      "hierarchies": 3,
+      "purpose": "negative-control: expected failure on visible Home tab"
+    }
+  ],
+  "proofBoundary": "Declared UI assertions and blocker selectors only. MJPEG rate is host relay rate, not browser paint fps. No automated visual-appearance or business-backend verification. WDA process cleanup separately audited.",
+  "cleanup": {
+    "appiumSessionDeleted": true,
+    "forwardingReleased": true,
+    "wdaXcodebuildSurvivedAppiumShutdown": true,
+    "ownedXcodebuildStoppedByExactPid": true,
+    "deviceWdaProcessStoppedAfterXcodebuildInterrupt": true,
+    "remainingOwnedProcesses": 0,
+    "listeners4723_8100_9100": 0,
+    "wdaRunnerRemainsInstalled": true
+  }
+}

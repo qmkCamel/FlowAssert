@@ -1,0 +1,18 @@
+{
+  "dev": "REDACTED_REVISION",
+  "addedTools": [
+    "mobile_acceptance_get",
+    "mobile_external_result_get",
+    "mobile_matrix_status"
+  ],
+  "updatedFiles": {
+    "src/workbench-cli.ts": "d113694d22c569246fa429ee5a41c39289975b0eddd7ab5408b3b0b476f19f95",
+    "src/mobile-mirror-commands.ts": "34cd59f41d35c3a7dd21adcd980ad9ded67c64dd9856fbb6342fb6b304d3660a",
+    "tests/mcp-server.test.ts": "e7c9bceabfcb7a6bfdef4240ea00bfec51fda167a4a8fc481c8abd3f8229f9c1",
+    "src/tool-contracts.ts": "db918a75ca11f4a614d3d4517b031e6d8c43c698770164bc9a85f43f95e53e79",
+    "src/viewer-workbench-runs-http.ts": "8f3d7af9053e33f25b2c13e0d07d846ce4073f4cdd26c26a1e27facebf1f1cb0",
+    "tests/test-run-control.test.ts": "d3c2788ce7d18fca25dc641bf3c70a89939838980d3d0fb46f006094cc7c191f",
+    "scripts/mcp-runtime-probe.ts": "c1909233a825dc5b47b65b38e0186d7f7f33f72653940b04bf3aee0bbdb68b58",
+    "scripts/dsh-clean-profile-probe.mjs": "238cd466adc6dfe4a58ad45291d3b7efb1124b08007b965ccd2f29dca283b9e7"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "platform": "android",
+  "durationMs": 10000,
+  "browser": {
+    "transport": "scrcpy-h264",
+    "firstPaintMs": 738,
+    "paintedFrames": 308,
+    "paintedFps": 30.270163675803587,
+    "receiveToPaintP95Ms": 5,
+    "fallbackMs": null,
+    "fallbackReason": null,
+    "packetCounts": {
+      "metadata": 1,
+      "session": 1,
+      "key": 1,
+      "delta": 307
+    },
+    "lastPacketType": "delta",
+    "mediaVisible": true,
+    "pollingVisible": false
+  },
+  "relay": {
+    "transport": "scrcpy-h264",
+    "streamStartedAt": 1787210545519,
+    "firstFrameAt": 1787210546134,
+    "lastFrameAt": 1787210556393,
+    "frameCount": 308,
+    "relayFps": 29.924943951652207
+  },
+  "mediaVisibleAfterControl": true,
+  "fallbackMs": 466,
+  "firstRevision": 3,
+  "finalRevision": 4,
+  "firstEpoch": 3,
+  "finalEpoch": 4,
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "width": 1080,
+    "height": 2400
+  },
+  "orientation": "portrait",
+  "structureNodes": 73,
+  "ownedSessionCleaned": true,
+  "screenshot": "artifacts/screenshots/mobile-mirror-android-physical-media-final.png"
+}

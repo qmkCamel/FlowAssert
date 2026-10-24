@@ -1,0 +1,19 @@
+{
+  "date": "2026-08-21",
+  "platform": "android",
+  "appiumVersion": "3.2.0",
+  "driver": "uiautomator2@6.8.0",
+  "status": "failed",
+  "cleanAttempts": 2,
+  "repeatConfirmed": true,
+  "failedStage": "append-result-verification",
+  "inputTargetNormalized": true,
+  "tapNodeVerified": true,
+  "focusedReinspectVerified": true,
+  "replaceVerified": true,
+  "appendPreservedExistingValue": false,
+  "fallbackUsed": false,
+  "inputCleared": true,
+  "screenshotRetained": false,
+  "ownedSessionCleaned": true
+}

@@ -1,0 +1,10 @@
+# Run on the completed AI conversation. Sends no message.
+name: 第三方 App Android · AI 文字故意失败反例
+platform: android
+appId: com.example.sampleapp
+---
+- assertVisible: {id: sample-copy-button}
+- assertVisible:
+    text: '此文本故意不存在 MM0915-NEGATIVE'
+    descendantOf: {id: sample-answer-body}
+- done

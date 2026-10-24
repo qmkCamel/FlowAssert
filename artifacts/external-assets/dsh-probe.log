@@ -1,0 +1,1 @@
+{"harness":"0.1.5-rc.2","profile":"clean","patchReload":"startup","tools":19,"modes":["native","ptc"],"agentTests":"native-ptc-pass","modelImageBoundary":"CATALOG_IMAGE_AND_TEXT_ONLY_PROJECTION","lifecycle":"complete"}

@@ -1,0 +1,90 @@
+{
+  "documentDate": "2026-10-12",
+  "sourceRevision": "main",
+  "source": "docs/communications/technical-introduction.zh-CN.md",
+  "sourceSha256": "f66a40997eebadd0c6ea1f6cb14f58b98095fb08e7ab213bc5d19a2adca9f3a6",
+  "note": "Source dates describe historical captures. This document build performs no device validation. PNG pixels are unmodified; SVGs are explanatory diagrams.",
+  "assets": [
+    {
+      "path": "artifacts/screenshots/mobile-mirror-workbench-evidence.png",
+      "kind": "browser-mock",
+      "sourceDate": "2026-10-08",
+      "sourceRecord": "docs/screenshot-refresh-2026-10-08.md",
+      "bytes": 321791,
+      "sha256": "162bb1714971e0f8329e44ebd6386bd15576f49154cbc0da09aea9d300569062",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/mobile-mirror-inspector-final.png",
+      "kind": "browser-mock",
+      "sourceDate": "2026-10-08",
+      "sourceRecord": "docs/screenshot-refresh-2026-10-08.md",
+      "bytes": 394058,
+      "sha256": "6a3f1edb3343bca5719cd4defd26bdb2b664cc1f66c7cc1a4b8cf99a47faa1bf",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/mobile-mirror-fixture-android-positive.png",
+      "kind": "physical-android-synthetic-fixture",
+      "sourceDate": "2026-09-17",
+      "sourceRecord": "docs/business-test-fixture.md",
+      "bytes": 192134,
+      "sha256": "4a980b4fdf7bf35488122432ed2bf233b0c820363a79669bf4f8829cdd645668",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/mobile-mirror-fixture-android-business-negative.png",
+      "kind": "physical-android-synthetic-fixture",
+      "sourceDate": "2026-09-17",
+      "sourceRecord": "docs/business-test-fixture.md",
+      "bytes": 194592,
+      "sha256": "365fa3ab533ed5e24c68b9e44ae71623b66bf0caaa67ad49c3104e1a868ebe3e",
+      "transformed": false
+    },
+    {
+      "path": "docs/communications/assets/technical-architecture.svg",
+      "kind": "authored-architecture-diagram",
+      "sourceDate": "2026-10-09",
+      "sourceRecord": "docs/design/mobile-test-workbench-current.md",
+      "bytes": 4400,
+      "sha256": "d9f9257e3dc1af4227b66cade8a3adc508bf26bb9145c35cc99ed3e4f8894c43",
+      "transformed": false
+    },
+    {
+      "path": "docs/communications/assets/technical-evidence-flow.svg",
+      "kind": "authored-workflow-diagram",
+      "sourceDate": "2026-10-09",
+      "sourceRecord": "docs/run-comparison-analysis.md",
+      "bytes": 3373,
+      "sha256": "5896a60c119c5d246559e6c8e7bdf87602488ec606a2d375a04bf30edfb4089b",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/beta-workbench-failure.png",
+      "kind": "browser-mock",
+      "sourceDate": "2026-10-08",
+      "sourceRecord": "docs/communications/beta-demo-validation.md",
+      "bytes": 261179,
+      "sha256": "36a722ce31c4fae2809b5ece9a6976af1cca45c9b8d486af3b09ec713a8efdee",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/mobile-mirror-run-comparison.png",
+      "kind": "browser-mock",
+      "sourceDate": "2026-10-08",
+      "sourceRecord": "docs/screenshot-refresh-2026-10-08.md",
+      "bytes": 316400,
+      "sha256": "7625cfb7d35cf3a1fe2664bc7543be30032375e31db98a2c9741b047fb6e8f7d",
+      "transformed": false
+    },
+    {
+      "path": "artifacts/screenshots/beta-workbench-share.png",
+      "kind": "browser-mock",
+      "sourceDate": "2026-10-08",
+      "sourceRecord": "docs/communications/beta-demo-validation.md",
+      "bytes": 128884,
+      "sha256": "3ff3fa258e45ce86b73e4b33a62b571b4f8b88387d8fa01126f72089fd592bf3",
+      "transformed": false
+    }
+  ]
+}

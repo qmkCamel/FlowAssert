@@ -1,0 +1,30 @@
+%% 历史目标方案 2026-09-09/10；当前实现见 mobile-test-workbench-current.md
+sequenceDiagram
+  participant U as 用户
+  participant R as Runtime Owner
+  participant W as Maestro fork worker
+  participant D as Maestro Driver / 真机
+  participant V as 业务验证器
+  participant E as EvidenceStore
+  U->>R: 选择原生 flow / 设备，运行
+  R->>R: 检查能力/配额，取得独占租约
+  R->>V: 准备并确认 fixture
+  R->>E: manifest + run_started
+  R->>W: 冻结 flow、参数、策略；复用 session
+  loop Maestro 原生命令
+    W->>E: 执行身份 + intent
+    E-->>W: 持久确认（控制钩子）
+    W->>D: 原生定位 / 动作 / 等待 / UI 断言
+    D-->>W: 结果或 uncertain
+    W->>E: 命令结果与检查点证据
+    E-->>W: 必需证据已提交
+  end
+  W-->>R: 原生结果 + artifact 清单
+  R->>V: 独立业务读取，比较 expected / actual
+  V->>E: 业务检查记录
+  R->>W: 采集验证完成现场的 final 图
+  W->>E: final 图与结构（清理前）
+  R->>R: cleanup，确认停止/未决动作
+  R->>E: 最终三字段结论，封存 manifest
+  E-->>U: Allure / JUnit / 时间线 / 历史
+  R->>R: 释放 run 租约，保留或关闭 owned worker

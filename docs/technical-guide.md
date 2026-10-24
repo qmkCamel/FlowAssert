@@ -1,0 +1,151 @@
+# FlowAssert technical and development guide
+
+The repair loop is **Preview, off by default**: M1/M2 software verification and the M3 Mock maintenance protocol are not real-device repair acceptance. Separate host/project gates and manual approvals apply; a unified master switch and Viewer toggle are still pending. See [repair operations](https://github.com/qmkCamel/flowassert/blob/main/docs/evidence-guided-repair-operations.md). Owned WDA/MJPEG host forwarding currently requires fingerprint-audited XCUITest `10.19.1`; external Appium remains its owner's responsibility.
+
+English | [简体中文](technical-guide.zh-CN.md)
+
+This guide is for contributors who need to read, develop, build, verify, or extend FlowAssert. Start with the [product README](../README.md) for positioning, target users, and the quickest product experience. Use the topic guides below when deploying to a specific host or physical device.
+
+The six current iterations have completed their engineering scope, not all acceptance gates. Consult the [task-level status map](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md) before claiming completion: 90/103 tasks as of October 5 (the original roadmap retains its October 3 snapshot), with real-device, authorized-material and independent-review requirements kept separate. Implementation guides cover [change acceptance](change-acceptance-records.md), [external assets](external-test-assets.md), [local OCR](local-region-ocr.md) and the [two-slot matrix](local-device-matrix.md); DSH/MCP share 20 default tools plus 5 opt-in Preview repair tools, with the three new summary readers carrying no matrix/external-runner execution authority.
+
+For current report reading/offline HTML, see the [report guide](report-reading-and-sharing.md). The [Product TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md) records the October 7 active task counts. Treat source candidates, verified tarballs and public Releases separately; see the [installation guide](beta-installation.md).
+
+## Toolchain baseline
+
+| Area | Version or constraint |
+| --- | --- |
+| Repository Node | 24.19.0, pinned through mise |
+| Package Node | `^22.19.0 || >=24.0.0` |
+| pnpm | 11.7.0, pinned through Corepack |
+| DeepSeek Harness | `0.2.0-rc.2` |
+| Appium | 2 or 3 |
+| Android driver | UiAutomator2 |
+| iOS driver | XCUITest/WebDriverAgent |
+
+A later DeepSeek Harness preview, Appium driver, or scrcpy release cannot be adopted by editing a version string alone. Rerun its clean-profile, provider, and physical-device acceptance layers first.
+
+## Local development
+
+```bash
+mise install
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+The development entry starts a loopback Viewer at `http://127.0.0.1:3210` and uses the safe Mock provider when no local setup has been saved. Mock requires no phone, Appium, model credential, or host-device discovery and is the deterministic path for UI, lifecycle, and agent-contract development.
+
+`pnpm dev` and `pnpm start` now use the formal Viewer launcher; installed packages expose `flowassert-viewer`. The launcher may load repository-external private defaults, but startup and page load never enumerate devices or start Appium. See the [local Viewer guide](local-viewer.md) for first-time persistence and later quick connect.
+
+Repository boundaries:
+
+- the DSH plugin and MCP server are thin adapters over one `LocalDeviceRuntime` and `MirrorService`;
+- the Appium provider is the Android/iOS semantic-control layer;
+- agents receive discrete PNG/structure observations, while continuous media remains in the local Viewer;
+- every user operation that can exceed 300 ms must show local progress and preserve the last usable result on failure;
+- the Viewer and managed Appium remain loopback by default, with explicit session and server ownership.
+
+See [architecture](architecture.md) for components, lifecycle, and data boundaries.
+
+## Build and package
+
+```bash
+pnpm build
+pnpm pack:check
+```
+
+`pnpm build` emits ESM, declarations, and source maps. `pnpm pack:check` rebuilds and inspects the release tarball. The package remains `private: true` and no workflow runs `npm publish`. Installation and rollback use only verified GitHub prereleases; see the [Beta guide](beta-installation.md).
+
+The package includes:
+
+- the DSH Cordis bundle;
+- the generic stdio MCP launcher;
+- the read-only `doctor/config` onboarding CLI;
+- Viewer static assets;
+- runtime-facing architecture, host, platform, security, validation, and release documentation.
+
+## Required gates
+
+Run before delivery:
+
+```bash
+pnpm check
+pnpm test:e2e
+pnpm build
+pnpm pack:check
+pnpm public:check
+git diff --check
+```
+
+- `pnpm check` covers TypeScript, contract lint, and Vitest;
+- `pnpm test:e2e` covers Viewer Playwright scenarios;
+- `pnpm public:check` checks public files, Markdown links, secret/path exposure, author identity, and distribution boundaries;
+- Viewer changes also require a retained final screenshot and human inspection;
+- each OpenSpec change requires `openspec validate <change> --strict`.
+
+See [validation](validation.md) for the exact matrix, physical evidence, and open boundaries.
+
+## Runtime probes
+
+### MCP Mock
+
+```bash
+pnpm build
+pnpm run test:mcp:probe --launcher ./scripts/mobile-mirror-mcp.mjs
+```
+
+This probe launches the real built stdio child and checks tool schemas, the Mock observation/action loop, mutation and stale protection, signal cleanup, and Viewer-port release. See the [MCP host guide](mcp-hosts.md) for MCP/Codex installation, approval, and configuration contracts.
+
+### DeepSeek Harness
+
+```bash
+DSH_TOOLS_MODE=native dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
+DSH_TOOLS_MODE=ptc dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
+```
+
+These paths call the real DSH registry through Native tools and the host-provided PTC `run_code` transport. The default registry contains ten device tools, five registered-test tools and five bounded summary readers. Registered-test execution needs an enabled local project and allowlists. Five additional Preview repair tools require host opt-in and valid project repair registration; visibility is not execution approval. A model must genuinely accept image input to prove it saw a delivered PNG. In `0.2.0-rc.2` `deepseek-flash` advertises `text,image`, while `deepseek-v4-pro` remains text-only and projects image blocks to a stable omission placeholder. See the [Agent test-run guide](agent-test-run-control.md) for the new tools and evidence policy.
+
+### Physical devices
+
+```bash
+pnpm run test:mcp:physical
+pnpm run test:media:physical
+```
+
+These commands require explicit platform, device, Appium, and media environments. They do not discover authorization values or bypass a device lock. Read the [Android guide](android-real-device.md) or [iOS/WDA guide](ios-real-device.md) first, and treat each result as single-device evidence rather than broad compatibility.
+
+## Configuration and security principles
+
+- Mock is the default provider. Host discovery, signing diagnostics, physical screen sharing, text input, and application control are independently opt-in.
+- External Appium is the default. Managed mode requires an absolute executable and loopback URL and stops only its saved child.
+- A newly created session is owned; a supplied `sessionId` is attached. Stop deletes only owned sessions.
+- Appium capabilities can contain credentials and must not enter logs, tool results, or shared state.
+- `image-and-structure` sends a discrete PNG to the selected host/model. Core-memory TTL does not delete a host-managed attachment.
+- Automatic provisioning/device registration is disabled because it can mutate Apple Developer account state.
+
+See the [security model](security.md) for the full threat model, retention, and policy contract.
+
+## Technical documentation map
+
+| Task | Source of truth |
+| --- | --- |
+| Understand product boundaries and target shape | [Product shape and capability boundaries](product-shape.md) |
+| Understand components, lifecycle, and media channels | [Architecture](architecture.md) |
+| Install the DSH Beta, run doctor/config, upgrade, or roll back | [Beta installation guide](beta-installation.md) |
+| Register Codex or another MCP client | [MCP host guide](mcp-hosts.md) |
+| Configure Android, UiAutomator2, and scrcpy | [Android real-device guide](android-real-device.md) |
+| Configure iPhone, Xcode, WDA, and MJPEG | [iOS/WDA guide](ios-real-device.md) |
+| Start the Viewer, save local setup, and reconnect quickly | [Local Viewer guide](local-viewer.md) |
+| Evaluate permissions, privacy, and external-state changes | [Security model](security.md) |
+| Inspect tests, performance, and physical evidence | [Validation](validation.md) |
+| Inspect delivery phases and open compatibility work | [Milestones](milestones.md) |
+| Review architecture decisions | [ADR index](decisions/0001-appium-core-local-viewer.md) |
+| Review product and competitor evidence | [Product landscape research](https://github.com/qmkCamel/flowassert/blob/main/docs/research/product-landscape.md) |
+
+## Contribution and release
+
+Read [CONTRIBUTING](https://github.com/qmkCamel/flowassert/blob/main/CONTRIBUTING.md) and the [Code of Conduct](https://github.com/qmkCamel/flowassert/blob/main/CODE_OF_CONDUCT.md) before contributing. Report vulnerabilities through the [security channel](https://github.com/qmkCamel/flowassert/blob/main/.github/SECURITY.md), not a public issue. Releases must come from an exact tag on a clean runner, create a new GitHub prerelease, never overwrite existing assets, and never publish to public npm. See [open-source readiness](https://github.com/qmkCamel/flowassert/blob/main/docs/open-source-readiness.md) and the versioned release notes for the complete rules.
+
+## Observation query and Viewer Inspector
+
+The current runtime adds `mobile_mirror_query_screen` as the tenth tool. Use summary inspect followed by find/get/subtree to query a retained observation without new captures or images. Readable historical nodes remain subject to strict action freshness. The local Viewer Inspector freezes its own screenshot and tree without publishing an Agent observation. See [usage and validation boundaries](inspector-validation.md).

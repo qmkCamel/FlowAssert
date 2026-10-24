@@ -1,0 +1,7 @@
+* @qmkCamel
+/.github/ @qmkCamel
+/openspec/ @qmkCamel
+/docs/security.md @qmkCamel
+/src/host-command-runner.ts @qmkCamel
+/src/managed-appium-runtime.ts @qmkCamel
+/src/mirror-service.ts @qmkCamel

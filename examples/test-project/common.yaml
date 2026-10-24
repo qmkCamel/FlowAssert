@@ -1,0 +1,6 @@
+name: Common greeting
+platform: ios
+appId: com.example.mobilemirror.mock
+---
+- assertVisible:
+    text: Hello, harness.

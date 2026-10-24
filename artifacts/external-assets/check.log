@@ -1,0 +1,14 @@
+$ pnpm check
+$ pnpm run typecheck && pnpm run lint:contracts && pnpm run test
+$ tsc --noEmit
+$ tsx scripts/check-contracts.ts
+DeepSeek Harness bundle contract: OK
+$ vitest run
+
+ RUN  v4.1.10 <repository>
+
+
+ Test Files  81 passed (81)
+      Tests  709 passed (709)
+   Start at  15:04:44
+   Duration  35.32s (transform 3.07s, setup 0ms, import 12.31s, tests 242.37s, environment 6ms)

@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-17",
+  "platform": "android",
+  "appId": "dev.mobilemirror.fixture",
+  "appVersion": "1.0",
+  "evidenceRoot": "artifacts/physical-validation/business-fixture-android-2026-09-17T06-24-15-525Z",
+  "positive": {
+    "suiteId": "c2052db7-b788-4973-b251-d9bff4487589",
+    "runId": "949b7264-c071-4a12-8197-e3baa53344ff",
+    "verdict": "pass",
+    "businessVerification": "pass",
+    "cleanup": "pass",
+    "expectedAmountCents": 1200,
+    "actualAmountCents": 1200,
+    "exitCode": 0
+  },
+  "negative": {
+    "suiteId": "06e42cfe-651f-45e9-a4cf-4ee6177ec3ca",
+    "runId": "b4249e29-0e2e-4574-b47b-722b06cfbe30",
+    "verdict": "fail",
+    "businessVerification": "fail",
+    "cleanup": "pass",
+    "expectedAmountCents": 999,
+    "actualAmountCents": 1200,
+    "exitCode": 1
+  },
+  "artifactsVerifiedAfterRestart": 36,
+  "remainingFixtures": 0,
+  "remainingOrders": 0,
+  "latestRerun": {
+    "evidenceRoot": "artifacts/physical-validation/business-fixture-android-2026-09-17T06-45-25-140Z",
+    "positiveSuiteId": "c651406e-8885-4bc9-b93e-a40813edc817",
+    "positiveRunId": "06787b24-a837-4a29-aa87-99df17d6f39f",
+    "negativeSuiteId": "3be44926-6ea6-423c-b4c9-5f1a3d758dbf",
+    "negativeRunId": "b80391c1-176f-4bbc-8701-bfc4627922bf",
+    "positiveVerdict": "pass",
+    "negativeVerdict": "fail",
+    "cleanup": "pass",
+    "artifactsVerifiedAfterRestart": 36,
+    "nativeProgress": true,
+    "helpInteractiveDuringSlowRequest": true,
+    "lastSuccessPreservedOnTimeout": true,
+    "remainingFixtures": 0,
+    "remainingOrders": 0
+  },
+  "limitations": ["Prior ADB/Appium timeouts retained; this successful rerun does not establish a stability fix", "iOS evidence is recorded separately in mobile-mirror-business-fixture-ios.json"]
+}

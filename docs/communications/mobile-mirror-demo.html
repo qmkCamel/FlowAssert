@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowAssert · 让手机验证有迹可循</title>
+<meta name="description" content="在同一交互演示中切换基础 Demo 与本机历史记录用例，逐步查看示意画面、断言、节点和日志；另附完整 YAML 与历史真机记录。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23151d32'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' stroke='%23b5f477' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#101624;--panel:#192236;--line:#344058;--text:#edf2fa;--muted:#aab8ce;--accent:#b5f477;--red:#ffb5aa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"PingFang SC",sans-serif}a{color:inherit;text-underline-offset:5px}button{font:inherit;cursor:pointer}button:disabled{cursor:default;opacity:.5}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.wrap{max-width:1240px;margin:auto;padding:0 32px}header{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:25px 0;border-bottom:1px solid var(--line)}.brand{font-weight:750;letter-spacing:-.5px;font-size:21px}.brand span{color:var(--accent)}nav{display:flex;gap:24px;font-size:14px}.eyebrow{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}.intro{padding:48px 0 32px;display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:end}h1{font-size:clamp(30px,4vw,49px);line-height:1.3;letter-spacing:-1.5px;margin:12px 0 16px}h1 em{font-style:normal;color:var(--accent)}p{margin:0}.muted{color:var(--muted)}.intro aside{border-left:2px solid var(--accent);padding-left:22px}.intro aside strong{display:block;margin-bottom:8px}main{padding-bottom:40px}.demo{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}.toolbar{padding:20px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-bottom:1px solid var(--line)}.badge{font-size:12px;border:1px solid #62724e;color:var(--accent);border-radius:5px;padding:3px 8px}.switch{display:flex;gap:4px;background:#101624;padding:4px;border-radius:8px}.switch button,.ghost{background:transparent;border:0;color:var(--muted);padding:8px 13px;border-radius:5px;font-size:14px}.switch button[aria-pressed=true]{background:#35445e;color:#fff}.run{margin-left:auto;background:var(--accent);color:#182316;border:0;border-radius:7px;padding:10px 20px;font-weight:700;min-width:148px}.workspace{display:grid;grid-template-columns:1fr 260px 1.1fr;min-height:495px}.column{padding:24px;min-width:0}.column+.column{border-left:1px solid var(--line)}.label{font-size:12px;letter-spacing:1px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:18px}ol{list-style:none;padding:0;margin:0}.step{width:100%;display:grid;grid-template-columns:27px 1fr auto;text-align:left;gap:8px;padding:14px 10px;margin-bottom:8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--text)}.step[aria-current=step]{border-color:#607c56;background:#26362e}.step small{display:block;color:var(--muted);font-size:12px}.state{font-size:12px;align-self:center}.pass{color:var(--accent)}.fail{color:var(--red)}.phone{background:#f1f4f9;color:#152036;border:7px solid #090d15;border-radius:30px;min-height:346px;box-shadow:0 20px 40px #070c1740;padding:18px 15px;display:flex;flex-direction:column}.phone-top{font-size:12px;display:flex;justify-content:space-between;padding-bottom:30px}.phone h3{font-size:22px;line-height:1.3;margin:18px 0 8px}.mock-card{border:1px solid #b6c6da;background:#fff;border-radius:12px;padding:17px 12px;margin:20px 0;font-size:14px}.counter{font-size:14px;color:#354660}.phone-bottom{margin-top:auto;text-align:center;color:#536077;font-size:12px;padding-top:28px}.caption{color:var(--muted);font-size:12px;margin-top:12px;text-align:center}.tabs{display:flex;gap:5px;border-bottom:1px solid var(--line);margin-bottom:18px}.tabs button{background:none;color:var(--muted);border:0;border-bottom:2px solid transparent;padding:7px 10px;font-size:14px}.tabs button[aria-pressed=true]{color:var(--accent);border-bottom-color:var(--accent)}.evidence{font-size:14px;overflow-wrap:anywhere}.evidence h3{font-size:19px;margin:0 0 12px}.verdict{padding:14px;border-left:3px solid var(--accent);background:#111a2b;margin:16px 0}.verdict.failed{border-color:var(--red)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#111a2b;padding:16px;border-radius:8px;color:#dce6f6;font:13px/1.75 ui-monospace,SFMono-Regular,monospace;margin:12px 0}.status{padding:15px 24px;border-top:1px solid var(--line);display:flex;gap:15px;align-items:center;font-size:14px}.status progress{width:90px;accent-color:var(--accent)}.bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding:35px 0}.bottom h2{font-size:18px;margin:8px 0}.bottom p{color:var(--muted);font-size:14px}.num{color:var(--accent);font:13px monospace}details{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:14px}summary{cursor:pointer;color:var(--text);font-size:16px}details ul{padding-left:22px}.footer{display:flex;justify-content:space-between;gap:20px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}@media(max-width:950px){.workspace{grid-template-columns:1fr 240px}.column:last-child{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}.intro{grid-template-columns:1fr;gap:20px}}@media(max-width:580px){.wrap{padding:0 18px}header{align-items:start}nav{gap:12px;flex-wrap:wrap;justify-content:end}.brand{font-size:18px;white-space:nowrap}.intro{padding-top:30px}h1{letter-spacing:-.7px}.workspace{grid-template-columns:1fr}.column+.column{border-left:0;border-top:1px solid var(--line)}.phone{max-width:245px;margin:auto}.toolbar{padding:16px;gap:10px}.run{margin-left:0;flex:1}.bottom{grid-template-columns:1fr;gap:20px}.footer{flex-direction:column}.status{flex-wrap:wrap}.column{padding:20px}}
+
+/* Step viewer uses the actual MockScreenModel renderer, with separate inspection overlays. */
+.workspace{grid-template-columns:1fr 330px 1.1fr}.screen-shell{background:#0b101b;border:1px solid #465571;border-radius:18px;padding:12px}.screen-meta{display:flex;justify-content:space-between;gap:8px;color:#aab8ce;font:12px/1.6 ui-monospace,monospace;padding:0 2px 10px}.screen-stage{position:relative;aspect-ratio:390/844;max-width:260px;margin:auto;border-radius:28px;overflow:hidden;background:#0d1325}.screen-stage img{display:block;width:100%;height:100%}.screen-stage.is-preview img{opacity:.45}.target{position:absolute;border:2px solid #b5f477;background:#b5f47710;box-shadow:0 0 0 1px #0008;border-radius:5px;pointer-events:none}.target.failed{border-color:#ff9e91;background:#ff9e9118}.target-label{position:absolute;left:0;bottom:calc(100% + 6px);padding:2px 6px;background:#b5f477;color:#152216;border-radius:3px;font-size:12px;white-space:nowrap}.target.failed .target-label{background:#ffb5aa;color:#471b12}.tap-marker{position:absolute;width:34px;height:34px;border:2px solid white;border-radius:50%;left:50%;top:33.77%;transform:translate(-50%,-50%);background:#ffffff38;box-shadow:0 0 0 9px #ffffff12;animation:tap-in .8s ease-out}.screen-banner{position:absolute;bottom:9%;left:7%;right:7%;padding:10px;background:#18253af2;border:1px solid #52637e;border-radius:8px;font-size:13px;color:#e4ecfb}.screen-banner strong{display:block;color:#b5f477}.screen-banner.failed strong{color:#ffb5aa}.frame-note{min-height:74px;padding:14px 0 4px;font-size:14px;color:#d1dcf0}.frame-note strong{display:block;color:#fff;margin-bottom:3px}.frame-nav{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:12px;color:var(--muted)}.frame-nav button{background:#27354c;color:#eaf0fa;border:1px solid #455775;border-radius:5px;padding:5px 10px;font-size:14px}.frame-empty{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:20px;color:#eef4ff;font-size:14px;background:#0b102944}.frame-empty strong{font-size:19px}.frame-empty span{margin-top:10px;color:#bac7db}#counter{display:none}[hidden]{display:none!important}@keyframes tap-in{from{box-shadow:0 0 0 22px #ffffff00}to{box-shadow:0 0 0 9px #ffffff12}}@media(prefers-reduced-motion:reduce){.tap-marker{animation:none}}@media(max-width:950px){.workspace{grid-template-columns:1fr 320px}}@media(max-width:580px){.workspace{grid-template-columns:1fr}.screen-stage{max-width:260px}}
+
+.real-layout{display:grid;grid-template-columns:270px minmax(260px,370px) 1fr}.real-steps{max-height:700px;overflow:auto;scrollbar-width:thin}.real-steps .step{font-size:14px;padding:9px 6px;margin-bottom:3px}.real-image{display:block;width:100%;max-height:680px;object-fit:contain;background:#080d17;border-radius:12px}.real-shot-link{display:block}.real-header{padding:22px 24px 0}.real-header h2{margin:8px 0;font-size:25px}.real-header p{color:var(--muted);font-size:14px}.real-detail{max-height:620px;overflow:auto}.real-detail pre{max-height:360px;overflow:auto}.real-links{display:flex;gap:15px;flex-wrap:wrap;font-size:14px;margin:18px 0}.real-error{padding:16px;border:1px solid var(--red);color:var(--red)}.real-timing{font-size:13px;color:var(--muted);margin:12px 0;overflow-wrap:anywhere}.real-controls{display:flex;gap:8px;align-items:center;margin-top:12px}.real-controls button{background:#28364f;border:1px solid #465775;color:#fff;border-radius:6px;padding:8px 12px}.real-controls span{margin:auto;font-size:13px}.real-layout .column+.column{border-left:1px solid var(--line)}@media(max-width:1050px){.real-layout{grid-template-columns:1fr 1fr}.real-layout .column:last-child{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}}@media(max-width:580px){.real-layout{grid-template-columns:1fr}.real-layout .column+.column{border-left:0;border-top:1px solid var(--line)}.real-steps{max-height:250px}.real-header{padding:16px}.real-image{max-height:650px}}
+</style>
+<style>
+.review{margin-top:24px;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.review h2{font-size:24px;margin:8px 0}.review p{color:var(--muted);margin:8px 0 16px}.review-actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.review-actions button,.local-load{background:#27354c;color:var(--text);border:1px solid #52637e;border-radius:7px;padding:10px 16px}.review-actions button:first-child{background:var(--accent);color:#182316}.history{display:grid;gap:10px;margin:16px 0}.history li{padding:14px;border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere}.history button{margin-left:14px;background:none;color:var(--accent);border:0;text-decoration:underline}.report-frame{width:100%;height:330px;border:1px solid var(--line);background:white;border-radius:8px}.review label{display:block;margin:14px 0;color:var(--muted)}.review input{margin-right:8px}.beta-link{color:var(--accent)}@media(max-width:580px){.review{padding:18px}.review-actions{flex-direction:column}.history button{display:block;margin:8px 0 0}.report-frame{height:430px}}
+</style>
+<style>.case-resources{display:flex;align-items:flex-start;gap:24px;padding:16px 24px;border-top:1px solid var(--line);font-size:14px}.case-resources>details{flex:1;min-width:0;margin:0;border:0;padding:0}.case-resources>a{white-space:nowrap}.case-resources pre{max-height:480px;overflow:auto}.case-resources summary{cursor:pointer}.case-resources>details>details{margin-top:16px}.long-flow{position:relative;max-height:520px;overflow:auto;scrollbar-width:thin}.long-flow .step{font-size:14px;padding:10px 6px}#case-note{font-size:13px}.toolbar .switch{flex-wrap:wrap}@media(max-width:580px){.long-flow{max-height:260px}}</style>
+</head>
+<body><div class="wrap">
+<header><div class="brand"><span>▥</span> FlowAssert</div><nav aria-label="导航"><a href="#mock-demo">交互演示</a><a href="#beta-entry">开始内测</a><a href="https://github.com/qmkCamel/flowassert">GitHub ↗</a></nav></header>
+<section class="intro"><div><div class="eyebrow">Local mobile testing · Developer Preview</div><h1>手机上的一次验证，<br>变成<em>能重跑、能回看</em>的记录。</h1><p class="muted">运行用例 → 找到失败 → 新运行复验 → 分享结果。</p></div><aside><strong>“测过了”，然后呢？</strong><p class="muted">选择基础 Mock Demo，或回放本机历史记录的历史截图。<br>页面中的回放不会重新操作手机。</p></aside></section>
+<main><section class="demo" id="mock-demo" aria-label="交互演示">
+<div class="toolbar"><span class="badge">MOCK · 交互示意</span><div class="switch" aria-label="演示用例"><button id="case-basic" aria-pressed="true">基础 Demo</button><button id="case-recorded" aria-pressed="false">本机历史记录</button></div><span class="muted" id="case-note">点击卡片，核对操作计数。</span></div>
+<div class="toolbar"><div class="switch" aria-label="演示案例"><button id="success" aria-pressed="true">成功流程</button><button id="failure" aria-pressed="false">失败流程</button></div><button class="run" id="run">运行演示 →</button><button class="ghost" id="reset">重置</button></div>
+<div class="workspace"><section class="column"><div class="label"><span>01 / 固定流程</span><span>5 STEPS</span></div><ol id="steps"></ol><details id="step-yaml"><summary>查看演示 YAML</summary><pre id="yaml"></pre></details></section>
+<section class="column"><div class="label"><span>02 / 步骤画面</span><span id="frame-label">预览</span></div><div class="screen-shell"><div class="screen-meta"><span>MOCK / 390 × 844</span><span id="frame-revision">预览</span></div><div class="screen-stage" id="screen-stage"><img id="screen-image" alt="Mock 应用初始画面"><div class="target" id="target" hidden><span class="target-label" id="target-label"></span></div><div class="tap-marker" id="tap-marker" hidden></div><div class="screen-banner" id="screen-banner" hidden></div><div class="frame-empty" id="frame-empty"><strong>等待运行</strong><span>开始演示，观察点击前后变化</span></div></div><div class="frame-note" id="frame-note"></div><div class="frame-nav"><button id="frame-prev" aria-label="查看上一步画面">←</button><span id="frame-position">01 / 05</span><button id="frame-next" aria-label="查看下一步画面">→</button></div></div><span id="counter"></span><p class="caption">复用产品 Mock 渲染器 · 标注为演示叠层<br>非历史截图，未执行真实取证</p></section>
+<section class="column"><div class="label"><span>03 / 查看证据</span><span>PRESET DATA</span></div><div class="tabs" aria-label="证据类型"><button data-tab="result" aria-pressed="true">断言</button><button data-tab="tree" aria-pressed="false">节点</button><button data-tab="log" aria-pressed="false">日志</button></div><div class="evidence" id="evidence"></div></section></div>
+<div class="status" role="status" aria-live="polite"><progress id="progress" value="0" max="5" aria-label="演示进度"></progress><span id="status">准备就绪。运行一次，再点步骤查看证据。</span></div>
+<div class="case-resources" id="case-resources" hidden><p>本页只读取你显式导出的本机历史材料；下面提供独立 Mock 示例，不能当作所载入归档的原始用例。</p><details id="case-yaml"><summary>查看示例 YAML</summary><details id="recorded-positive"><summary>查看 Mock positive YAML</summary><button class="local-load" data-case-yaml="recorded-positive-yaml" data-filename="demo.yaml">下载 YAML</button><pre id="recorded-positive-yaml">name: Demo · tap and verify
+platform: ios
+appId: com.example.mobilemirror.mock
+---
+- launchApp
+- assertVisible:
+    text: Hello, harness.
+- tap:
+    accessibilityId: action-card
+- assertVisible:
+    text: 1 actions received
+- done
+</pre></details><details id="recorded-negative"><summary>查看 Mock negative YAML</summary><button class="local-load" data-case-yaml="recorded-negative-yaml" data-filename="demo-negative.yaml">下载 YAML</button><pre id="recorded-negative-yaml">name: Demo · deliberate assertion failure
+platform: ios
+appId: com.example.mobilemirror.mock
+---
+- launchApp
+- assertVisible:
+    text: Hello, harness.
+- tap:
+    accessibilityId: action-card
+- assertVisible:
+    text: 2 actions received
+- done
+</pre></details></details><a href="local-recorded-demo.md" target="_blank" rel="noopener">查看使用与验证边界 ↗</a></div>
+</section>
+<section class="review" id="review" aria-labelledby="review-title"><span class="badge">MOCK · 复验与分享示意</span><h2 id="review-title">旧失败留下来，新结果单独看。</h2><p>先运行「失败流程」：实际点击一次，却期待两次。确认这个演示的期望设置错误后，修正为一次并复验。真实失败须先核查原因，不能直接把期望改成实际。</p><div class="review-actions"><button id="rerun" disabled>修正期望并新建复验 →</button><button id="preview-report" disabled>预览模拟报告</button></div><ol class="history" id="history" aria-label="模拟运行历史"></ol><p id="history-empty">尚无已完成记录。运行后在这里保留结果，刷新本页会清空模拟历史。</p><div id="report-preview" hidden><iframe id="report-frame" class="report-frame" sandbox title="模拟报告完整预览"></iframe><label><input id="report-confirm" type="checkbox">我已阅读预览，理解这是模拟数据，未执行真实测试。</label><div class="review-actions"><button id="download-report" disabled>下载同一份模拟 HTML</button></div></div><p id="review-status" role="status" aria-live="polite">运行与复验都仅在本页模拟，不保存产品运行记录。</p></section>
+<div class="bottom"><section><span class="num">01 — START</span><h2>只检查本次需要的环境</h2><p>真实产品的 Mock 不要求手机或模型。真机先选择平台，检查连接前提，再显式连接。</p></section><section><span class="num">02 — REPEAT</span><h2>把一次操作保存为用例</h2><p>用 YAML 描述点击、输入、等待和断言。失败后查看历史材料，修改后产生新记录。</p></section><section><span class="num">03 — SHARE</span><h2>让同事也能读懂结果</h2><p>真实报告可审查图片、画框遮蔽后导出离线 HTML；是派生阅读材料，不是重新验收。</p></section></div>
+<details><summary>这个演示与真实产品，有什么边界？</summary><ul><li>默认 Mock 使用预设状态与人为延时，不连接设备、执行 AppClaw 或调用模型。历史仅在本页内存中，刷新清空；运行速度不是性能数据。</li><li>成功案例参考 examples/flows/demo.yaml；失败案例把期望改为 2。模拟导出与产品报告的格式、真实性及持久化不同，不能导入工作台或当作真机证据。</li><li>真实产品的通过要求声明的 UI 条件、必需证据及已配置的必选校验满足；未配置业务/视觉校验不代表这些维度通过。</li><li>截至 2026-10-08，双端基础流程与部分故障恢复已有真机样本；广泛设备矩阵、真实外部业务、当前双宿主真实模型图片及独立用户验收仍待补齐。</li><li>代码扩展与有限 AI 导航恢复已实现并有限定样本；证据驱动修复仍为 Preview，默认关闭。尚无公共 npm 安装。</li></ul><a href="https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md">查看完整能力与验收依据 ↗</a></details>
+<section id="beta-entry" class="review"><span class="badge">下一步 · 真实工作台</span><h2>带一个重复验证的场景来。</h2><p>首轮邀请 3–5 位开发者或测试维护者。直接克隆GitHub 项目的dev 分支，按 docs/beta-start.md 的任务卡启动，再完成 Mock 成功、失败、复验和离线分享。不需要单独下载安装包，反馈时附上 git rev-parse HEAD 的提交 SHA。</p><p>本轮参考环境为 macOS、Node 24.19.0、pnpm 11.7.0。固定 Mock 流程不需要手机、DSH 或模型；真机另需对应平台准备。记录安装耗时、卡住的任务和求助情况，未完成也有价值。</p><p>当前为 Developer Preview，分支内测不代表正式发布；本页演示不等于完成产品内测。</p><a href="https://github.com/qmkCamel/flowassert/blob/main/README.zh-CN.md">从GitHub 开始 ↗</a></section>
+<div class="footer"><span>FlowAssert · MIT · 内容基线 2026-10-08</span><span><a class="beta-link" href="#beta-entry">参加小范围内测 ↑</a> · <a href="../faq.html">常见问题 FAQ ↗</a></span></div>
+</main></div>
+<script>
+const mockFrames={"before": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOTAiIGhlaWdodD0iODQ0IiB2aWV3Qm94PSIwIDAgMzkwIDg0NCI+CiAgICAgIDxyZWN0IHdpZHRoPSIzOTAiIGhlaWdodD0iODQ0IiByeD0iNDgiIGZpbGw9IiMwZDEzMjUiLz4KICAgICAgPHJlY3QgeD0iMTM5IiB5PSIxMyIgd2lkdGg9IjExMiIgaGVpZ2h0PSIzMiIgcng9IjE2IiBmaWxsPSIjMDIwNTBiIi8+CiAgICAgIDx0ZXh0IHg9IjI4IiB5PSIxMDUiIGZpbGw9IiM4ZmEyYmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5NT0JJTEUgTUlSUk9SPC90ZXh0PgogICAgICA8dGV4dCB4PSIyOCIgeT0iMTQ1IiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9IjcwMCI+SGVsbG8sIGhhcm5lc3MuPC90ZXh0PgogICAgICA8cmVjdCB4PSIyNCIgeT0iMTc4IiB3aWR0aD0iMzQyIiBoZWlnaHQ9IjIxNCIgcng9IjI4IiBmaWxsPSIjMzE1OWZmIi8+CiAgICAgIDx0ZXh0IHg9IjUwIiB5PSIyMjUiIGZpbGw9IiNkZmU2ZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5MSVZFIFNFU1NJT048L3RleHQ+CiAgICAgIDx0ZXh0IHg9IjUwIiB5PSIyNzMiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjM4IiBmb250LXdlaWdodD0iNzUwIj4wPC90ZXh0PgogICAgICA8dGV4dCB4PSI1MCIgeT0iMzAwIiBmaWxsPSIjZGZlNmZmIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+YWN0aW9ucyByZWNlaXZlZDwvdGV4dD4KICAgICAgPHRleHQgeD0iMjgiIHk9IjQ0MyIgZmlsbD0iIzhmYTJiZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPkxBU1QgREVWSUNFIEVWRU5UPC90ZXh0PgogICAgICA8cmVjdCB4PSIyNCIgeT0iNDYyIiB3aWR0aD0iMzQyIiBoZWlnaHQ9Ijk0IiByeD0iMjIiIGZpbGw9IiMyMDJlNDYiLz4KICAgICAgPGNpcmNsZSBjeD0iNTgiIGN5PSI1MDkiIHI9IjYiIGZpbGw9IiM3NmU2YTQiLz4KICAgICAgPHRleHQgeD0iODciIHk9IjUwNSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI2NTAiPldhaXRpbmcgZm9yIGFuIGFjdGlvbjwvdGV4dD4KICAgICAgPHRleHQgeD0iODciIHk9IjUyOCIgZmlsbD0iIzhmYTJiZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPnJldmlzaW9uIDA8L3RleHQ+CiAgICAgIDxyZWN0IHg9IjE1NCIgeT0iODE0IiB3aWR0aD0iODIiIGhlaWdodD0iNSIgcng9IjMiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC43NSIvPgogICAgPC9zdmc+", "after": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOTAiIGhlaWdodD0iODQ0IiB2aWV3Qm94PSIwIDAgMzkwIDg0NCI+CiAgICAgIDxyZWN0IHdpZHRoPSIzOTAiIGhlaWdodD0iODQ0IiByeD0iNDgiIGZpbGw9IiMwZDEzMjUiLz4KICAgICAgPHJlY3QgeD0iMTM5IiB5PSIxMyIgd2lkdGg9IjExMiIgaGVpZ2h0PSIzMiIgcng9IjE2IiBmaWxsPSIjMDIwNTBiIi8+CiAgICAgIDx0ZXh0IHg9IjI4IiB5PSIxMDUiIGZpbGw9IiM4ZmEyYmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5NT0JJTEUgTUlSUk9SPC90ZXh0PgogICAgICA8dGV4dCB4PSIyOCIgeT0iMTQ1IiBmaWxsPSIjZmZmZmZmIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9IjcwMCI+SGVsbG8sIGhhcm5lc3MuPC90ZXh0PgogICAgICA8cmVjdCB4PSIyNCIgeT0iMTc4IiB3aWR0aD0iMzQyIiBoZWlnaHQ9IjIxNCIgcng9IjI4IiBmaWxsPSIjNGU2YWYyIi8+CiAgICAgIDx0ZXh0IHg9IjUwIiB5PSIyMjUiIGZpbGw9IiNkZmU2ZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5MSVZFIFNFU1NJT048L3RleHQ+CiAgICAgIDx0ZXh0IHg9IjUwIiB5PSIyNzMiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjM4IiBmb250LXdlaWdodD0iNzUwIj4xPC90ZXh0PgogICAgICA8dGV4dCB4PSI1MCIgeT0iMzAwIiBmaWxsPSIjZGZlNmZmIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+YWN0aW9ucyByZWNlaXZlZDwvdGV4dD4KICAgICAgPHRleHQgeD0iMjgiIHk9IjQ0MyIgZmlsbD0iIzhmYTJiZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPkxBU1QgREVWSUNFIEVWRU5UPC90ZXh0PgogICAgICA8cmVjdCB4PSIyNCIgeT0iNDYyIiB3aWR0aD0iMzQyIiBoZWlnaHQ9Ijk0IiByeD0iMjIiIGZpbGw9IiMyMDJlNDYiLz4KICAgICAgPGNpcmNsZSBjeD0iNTgiIGN5PSI1MDkiIHI9IjYiIGZpbGw9IiM3NmU2YTQiLz4KICAgICAgPHRleHQgeD0iODciIHk9IjUwNSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI2NTAiPlRhcCBhdCAxOTUsIDI4NTwvdGV4dD4KICAgICAgPHRleHQgeD0iODciIHk9IjUyOCIgZmlsbD0iIzhmYTJiZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPnJldmlzaW9uIDE8L3RleHQ+CiAgICAgIDxyZWN0IHg9IjE1NCIgeT0iODE0IiB3aWR0aD0iODIiIGhlaWdodD0iNSIgcng9IjMiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC43NSIvPgogICAgPC9zdmc+"};
+const $=id=>document.getElementById(id);
+const basicNames=['启动应用','确认初始页面','点击 Action card','核对操作结果','结束流程'];
+const basicCommands=['launchApp','assertVisible','tap','assertVisible','done'];
+const recordedMissing='示例中不存在的预期';
+const recordedSteps=[['等待本机材料','done','archive','','未载入归档']];
+let caseKey='basic',scenario='success',selected=0,completed=0,running=false,tab='result',timer=null;
+let records=[],parentRun=null,reportHtml='';
+let physicalLoading=false,physicalError='';
+const physicalRun=()=>window.physicalCases?.[scenario];
+function loadCaseAssets(){
+ if(window.physicalCases||physicalLoading)return;
+ physicalLoading=true;physicalError='';render();
+ const script=document.createElement('script');script.src='local-case-assets/cases.js';
+ const timeout=setTimeout(()=>fail('读取超时，点击“本机历史记录”重试。'),15000);
+ function fail(message){clearTimeout(timeout);physicalLoading=false;physicalError=message;script.remove();if(isRecorded())render()}
+ script.onerror=()=>fail('本机历史截图尚未导入，点击“本机历史记录”重试。');
+ script.onload=()=>{clearTimeout(timeout);physicalLoading=false;if(!window.physicalCases?.success?.steps?.length){fail('归档材料格式不完整。');return}if(isRecorded()){reset();$('status').textContent='历史截图已载入。点选步骤查看，或自动回放。'}};
+ document.body.append(script);
+}
+const isRecorded=()=>caseKey==='recorded';
+const escapeText=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+function currentSteps(){
+ if(!isRecorded())return basicNames.map((name,i)=>[name,basicCommands[i],'basic','action-card',i===3?expected():'声明的步骤条件']);
+ if(physicalRun())return physicalRun().steps.map((step,i)=>[step.label||recordedSteps[i]?.[0]||step.kind,step.kind,'physical',step.target,step.message||step.error||'']);
+ return recordedSteps;
+}
+const failureIndex=()=>isRecorded()?1:3;
+function expected(){return isRecorded()?(scenario==='failure'?recordedMissing:'归档中声明的条件'):(scenario==='failure'?'2 actions received':'1 actions received')}
+function observed(){return isRecorded()?(scenario==='failure'?'示意回复中不存在该文本':'预设消息、回复与历史条件满足'):'1 actions received'}
+function state(i){if(isRecorded()){const s=physicalRun()?.steps[i];return s?.status==='passed'?'pass':s?.status==='failed'?'fail':'pending'}if(i<completed)return scenario==='failure'&&i===failureIndex()?'fail':'pass';return running&&i===completed?'running':'pending'}
+function invalidateReport(){reportHtml='';$('report-preview').hidden=true;$('report-confirm').checked=false;$('download-report').disabled=true;$('report-frame').removeAttribute('srcdoc')}
+function renderHistory(){
+ $('review').hidden=isRecorded();$('case-resources').hidden=!isRecorded();$('step-yaml').hidden=isRecorded();
+ $('rerun').disabled=running||!records.some(r=>r.caseKey===caseKey&&r.result==='失败');
+ $('preview-report').disabled=running||!records.length;$('history-empty').hidden=records.length>0;
+ $('rerun').textContent=isRecorded()?'运行关联正例 →':'修正期望并新建复验 →';
+ $('review').querySelector(':scope > p').textContent=isRecorded()?'归档反例从已有回复开始，故意查找不存在的文本。可以运行关联的完整正例，保留两份模拟记录；完整正例通过不表示反例断言被修复。':'先运行「失败流程」：实际点击一次，却期待两次。确认这个演示的期望设置错误后，修正为一次并复验。真实失败须先核查原因，不能直接把期望改成实际。';
+ $('history').replaceChildren(...records.map(r=>{
+  const li=document.createElement('li'),label=document.createElement('span'),button=document.createElement('button');
+  label.textContent=`${r.id} · ${r.result} · ${r.steps}/${r.total} 步${r.parent?' · '+r.relation+' '+r.parent:''} · ${r.caseKey==='recorded'?'本机历史记录 · 模拟':'基础 Demo · 模拟'} · 期望 ${r.expected} / 实际 ${r.observed}`;
+  label.className=r.result==='失败'?'fail':'pass';button.textContent='查看这次记录';button.disabled=running;
+  button.onclick=()=>{invalidateReport();caseKey=r.caseKey;scenario=r.scenario;completed=r.steps;selected=r.steps-1;tab='result';$('status').textContent='查看 '+r.id+' 的已完成模拟记录；原结果不变。';render()};
+  li.append(label,button);return li;
+ }));
+}
+function finishRecord(){
+ records.push(Object.freeze({id:(isRecorded()?'RECORDED-SIM-':'MOCK-')+String(records.length+1).padStart(3,'0'),caseKey,scenario,result:scenario==='failure'?'失败':'通过',steps:completed,total:currentSteps().length,expected:expected(),observed:observed(),parent:parentRun,relation:isRecorded()?'关联正例自':'复验自'}));
+ parentRun=null;invalidateReport();$('review-status').textContent='已保留 '+records.length+' 条模拟记录；旧失败不会被新运行覆盖。';
+}
+function renderFrame(steps,available,s){
+ if(isRecorded()){renderPhysicalFrame();return}
+ $('screen-image').hidden=false;$('screen-image').onerror=null;$('screen-stage').style.aspectRatio='390/844';
+ const frame=$('screen-image'),target=$('target'),banner=$('screen-banner'),step=steps[selected],count=available&&selected>=2?1:0;
+ frame.src='data:image/svg+xml;base64,'+mockFrames[count?'after':'before'];
+ frame.alt=isRecorded()?`归档流程示意，非历史截图：${step[0]}`:available?`步骤 ${selected+1} 的产品 Mock 渲染画面，${count} 次操作`:'Mock 应用预览，尚无本步骤记录';
+ $('screen-stage').classList.toggle('is-preview',!available);$('frame-empty').hidden=available;
+ const skipped=scenario==='failure'&&completed===failureIndex()+1&&selected>=completed;
+ $('frame-empty').firstElementChild.textContent=running&&selected===completed?'正在执行…':skipped?'未执行':'尚无步骤记录';
+ $('frame-empty').lastElementChild.textContent=skipped?'前一步断言失败，流程在此停止':'运行演示后，显示此步骤的模拟状态';
+ $('frame-revision').textContent=available?(isRecorded()?'示意状态 '+(selected+1):`revision ${count}`):'未取证';
+ $('frame-position').textContent=`${String(selected+1).padStart(2,'0')} / ${String(steps.length).padStart(2,'0')}`;
+ $('frame-prev').disabled=selected===0;$('frame-next').disabled=selected===steps.length-1;
+ let note,bounds,label;
+ if(isRecorded()){
+  note=available?(s==='fail'?'故意查找不存在的文本，反例停止；这不是归档 App 缺陷。':'预设状态：'+step[4]):'运行后可查看对应的示意状态；没有读取真实手机画面。';
+  bounds=['input','dirty','clear','text','append','voice'].includes(step[2])?[6,71,88,14]:step[2]==='home'?[6,70,88,8]:step[2]==='history'?[6,20,88,15]:step[3]==='sample-message-bubble'?[16,21,78,15]:[6,38,88,25];
+  label=s==='fail'?'故意失败 · 文本不存在':step[1]+' · 示意';
+ }else{
+  const notes=['初始计数为 0，等待固定流程执行。','绿色框对应 Hello, harness. 文本节点。','触点落在 action-card；计数从 0 变为 1。',s==='fail'?'实际计数仍为 1，期望为 2。':'计数为 1，符合用例声明的 UI 条件。','结束步骤不改变 App，仍可回看点击与断言。'];
+  note=available?notes[selected]:'选择已完成的步骤可回看画面；待执行步骤不会生成证据。';
+  bounds=selected===1?[6,13.5,88,5.5]:selected===2?[6.15,21.09,87.7,25.36]:[11,27.5,77,10];
+  label=selected===1?'文本匹配':selected===2?'tap · action-card':s==='fail'?'不匹配 · 期望 2':'匹配 · 实际 1';
+ }
+ $('frame-note').replaceChildren();const title=document.createElement('strong');title.textContent=step[0];$('frame-note').append(title,document.createTextNode(note));
+ target.hidden=!available||step[1]==='launchApp'||step[1]==='done';
+ ['left','top','width','height'].forEach((key,i)=>target.style[key]=bounds[i]+'%');target.classList.toggle('failed',s==='fail');$('target-label').textContent=label;
+ $('tap-marker').hidden=isRecorded()||!available||selected!==2;
+ banner.hidden=isRecorded()||!available||selected<3;banner.classList.toggle('failed',s==='fail');banner.replaceChildren();
+ const bt=document.createElement('strong');bt.textContent=s==='fail'?'ASSERTION FAILED':selected===steps.length-1?'FLOW COMPLETED':'ASSERTION PASSED';banner.append(bt,document.createTextNode(s==='fail'?'期望 2 次 · 实际 1 次':selected===4?'5 步完成 · 可逐步回看':'1 actions received'));
+ $('frame-label').textContent=available?`步骤 ${selected+1}`:'预览 · 未执行';
+}
+function renderEvidence(steps,available,s){
+ if(isRecorded()){renderPhysicalEvidence();return}
+ const step=steps[selected],box=$('evidence');box.replaceChildren();
+ const heading=document.createElement('h3');heading.textContent=`${String(selected+1).padStart(2,'0')} / ${step[0]}`;box.append(heading);
+ const p=document.createElement('p');p.className='muted';p.textContent=available?'以下为预设演示数据，不是真机验收证据。':'此步骤尚无结果。运行后可查看对应的模拟断言、节点与日志。';box.append(p);if(!available)return;
+ const count=selected>=2?1:0;
+ if(tab==='result'){
+  const v=document.createElement('div');v.className='verdict'+(s==='fail'?' failed':'');
+  v.textContent=isRecorded()?(s==='fail'?`断言失败（模拟）：期望「${recordedMissing}」，示意回复中没有此文本。第 3 步未执行。`:step[1].startsWith('assert')?'断言通过（模拟）：'+step[4]:'步骤完成（模拟）：'+step[4]):s==='fail'?`断言失败：期望「${expected()}」，页面实际为「1 actions received」。后续步骤未执行。`:selected===1?'断言通过：页面包含「Hello, harness.」。':selected===3?'断言通过：页面包含「1 actions received」。':'此步骤已完成（模拟）。';
+  box.append(v);const note=document.createElement('p');note.textContent=isRecorded()?'此处展示用例的检查逻辑。原始用例和历史验收结果见下方资料，模拟通过不会改写历史结果。':s==='fail'?'定位线索：点击后的计数为 1，流程却要求 2。检查用例期望值或遗漏的点击，而不是把失败改判为通过。':'可以切换到「节点」与「日志」，把结论与这一步的页面状态对应起来。';box.append(note);
+ }else{
+  const pre=document.createElement('pre');
+  pre.textContent=isRecorded()?(tab==='tree'?`<!-- 归档用例结构示意，非原始 XML -->\n<screen state="${step[2]}">\n  <node id="${step[3]}"/>\n  <note>${s==='fail'?'预期文本不存在':step[4]}</note>\n</screen>`:`[RECORDED-SIM] step ${selected+1}: ${step[1]}\n[RECORDED-SIM] target: ${step[3]}\n[RECORDED-SIM] status: ${s}\n[RECORDED-SIM] expected: ${step[4]}\n[RECORDED-SIM] 预设示意；未读取手机、模型或历史原始日志`):tab==='tree'?`<!-- 模拟 XML，仅供说明 -->\n<screen>\n  <text>Hello, harness.</text>\n  <button id="action-card" />\n  <text>${count} actions received</text>\n</screen>`:`[MOCK] step ${selected+1}: ${step[1]}\n[MOCK] status: ${s}\n[MOCK] observed: ${count} actions received\n${selected===3?'[MOCK] expected: '+expected():'[MOCK] preset step completed'}\n[MOCK] no device or files accessed`;
+  box.append(pre);
+ }
+}
+function render(){
+ const steps=currentSteps(),available=isRecorded()?Boolean(physicalRun()?.steps[selected]):selected<completed,s=state(selected);
+ renderHistory();
+ $('case-basic').setAttribute('aria-pressed',String(!isRecorded()));$('case-recorded').setAttribute('aria-pressed',String(isRecorded()));
+ $('case-note').textContent=isRecorded()?(physicalLoading?'正在读取本机历史截图…':physicalError||'历史截图回放 · 点击步骤查看原图与实际记录'):'点击卡片，核对操作计数。';
+ $('mock-demo').querySelector('.badge').textContent=isRecorded()?'LOCAL · 历史截图回放':'MOCK · 交互示意';
+ $('success').setAttribute('aria-pressed',String(scenario==='success'));$('failure').setAttribute('aria-pressed',String(scenario==='failure'));
+ $('run').textContent=running?'停止演示':completed?'重新运行 →':'运行演示 →';
+ if(isRecorded())$('run').textContent=running?'暂停回放':'自动回放 →';
+ $('run').disabled=isRecorded()&&!physicalRun();
+ $('failure').disabled=isRecorded()&&!window.physicalCases?.failure;
+ $('success').textContent=isRecorded()?'实际操作流程':'成功流程';$('failure').textContent=isRecorded()?'故意失败反例':'失败流程';
+ $('mock-demo').querySelector('.column .label span:last-child').textContent=steps.length+' STEPS';
+ $('screen-image').closest('.column').querySelector('.caption').textContent=isRecorded()?'本机原始 PNG · 回放已采集画面，按钮不会再次操作手机或发送消息':'复用产品 Mock 渲染器 · 标注为演示叠层；非历史截图，未执行真实取证';
+ document.querySelector('.screen-meta span').textContent=isRecorded()?'归档 / 历史截图':'MOCK / 390 × 844';
+ $('evidence').closest('.column').querySelector('.label span:last-child').textContent=isRecorded()?'DEVICE EVIDENCE':'PRESET DATA';
+ $('steps').classList.toggle('long-flow',steps.length>5);
+ $('steps').replaceChildren(...steps.map((step,i)=>{const li=document.createElement('li'),b=document.createElement('button');b.className='step';b.setAttribute('aria-current',i===selected?'step':'false');const status=isRecorded()&&physicalRun()?.steps[i]?.checkpointError?'incomplete':state(i);b.innerHTML=`<span>${String(i+1).padStart(2,'0')}</span><span>${escapeText(step[0])}<small>${escapeText(step[1])}</small></span><span class="state ${status}">${({incomplete:'取证不全',pass:'通过',fail:'失败',running:'执行中',pending:completed===failureIndex()+1&&scenario==='failure'?'未执行':'待执行'})[status]}</span>`;b.onclick=()=>{if(isRecorded()){clearTimeout(timer);running=false}selected=i;render()};li.append(b);return li}));
+ $('yaml').textContent=isRecorded()?$(scenario==='success'?'recorded-positive-yaml':'recorded-negative-yaml').textContent:`name: Demo · tap and verify\nplatform: ios\nappId: com.example.mobilemirror.mock\n---\n- launchApp\n- assertVisible:\n    text: Hello, harness.\n- tap:\n    accessibilityId: action-card\n- assertVisible:\n    text: ${expected()}\n- done`;
+ $('progress').max=steps.length;$('progress').value=completed;
+ if(isRecorded()&&physicalRun())$('yaml').textContent=physicalRun().yaml;
+ document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tab===tab)));
+ renderFrame(steps,available,s);renderEvidence(steps,available,s);
+ if(running){const active=$('steps').children[selected];if(active&&$('steps').classList.contains('long-flow'))$('steps').scrollTop=Math.max(0,active.offsetTop-100)}
+}
+function reset(){clearTimeout(timer);timer=null;running=false;completed=0;selected=0;tab='result';parentRun=null;invalidateReport();$('status').textContent=isRecorded()?'点选步骤查看原始截图，或自动回放已采集画面。':'准备就绪。运行一次，再点步骤查看证据。';render()}
+function tick(){
+ if(isRecorded()){selected=Math.min(completed,currentSteps().length-1);completed++;if(completed>=currentSteps().length){running=false;$('status').textContent='历史截图回放结束 · 未重新运行测试。'}else{timer=setTimeout(tick,1500);$('status').textContent=`正在回放 ${completed} / ${currentSteps().length}，可随时点选步骤。`}render();return}
+ completed++;selected=completed-1;const total=currentSteps().length;
+ if(scenario==='failure'&&completed===failureIndex()+1){running=false;finishRecord();$('status').textContent=`失败 · 第 ${completed} 步断言不匹配；第 ${completed+1} 步未执行。点选步骤可回看。`}
+ else if(completed===total){running=false;finishRecord();$('status').textContent=`通过 · ${total} 个模拟步骤完成。点选任一步骤，查看对应证据。`}
+ else{$('status').textContent=`正在演示第 ${completed+1} / ${total} 步，可同时查看已完成步骤。`;timer=setTimeout(tick,850)}
+ render();
+}
+function begin(parent=null){reset();parentRun=parent;running=true;$('status').textContent=`正在演示第 1 / ${currentSteps().length} 步…`;render();timer=setTimeout(tick,850)}
+function chooseCase(key){caseKey=key;scenario='success';reset();if(isRecorded())loadCaseAssets()}
+$('run').onclick=()=>{if(running){clearTimeout(timer);running=false;parentRun=null;$('status').textContent='演示已停止，已完成的步骤仍可查看；未生成完成记录。';render();return}begin()};
+$('rerun').onclick=()=>{const failed=records.findLast(r=>r.caseKey===caseKey&&r.result==='失败');if(!failed||running)return;scenario='success';begin(failed.id);$('mock-demo').scrollIntoView({behavior:'instant'})};
+$('preview-report').onclick=()=>{
+ if(running||!records.length)return;
+ reportHtml='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src '+ "'none'; style-src 'unsafe-inline'" +'"><title>FlowAssert 模拟报告</title><style>body{font:16px/1.7 system-ui;margin:24px;max-width:760px;color:#182316;overflow-wrap:anywhere}li{margin:16px 0}strong{color:#704000}</style><h1>FlowAssert · MOCK 模拟报告</h1><p><strong>仅供演示，未执行真实测试，不是真机证据，不可导入复跑。</strong></p><p>本文件是预设模拟记录的阅读副本；未重新验证。归档用例演示同样使用预设画面与数据，不含历史真机结果。刷新演示页会清空模拟历史。</p><ol>'+records.map(r=>'<li>'+escapeText(`${r.id} · ${r.caseKey==='recorded'?'本机历史记录':'基础 Demo'} · ${r.result} · ${r.steps}/${r.total} 步 · 期望 ${r.expected} / 实际 ${r.observed}${r.parent?' · '+r.relation+' '+r.parent:''}`)+'</li>').join('')+'</ol><p>业务验证：未执行。视觉验证：未执行。旧失败保留，新通过不改写旧结果；关联正例不是对故意失败断言的修复证明。</p></html>';
+ $('report-frame').srcdoc=reportHtml;$('report-preview').hidden=false;$('report-confirm').checked=false;$('download-report').disabled=true;$('review-status').textContent='预览已冻结。审阅后下载同一份模拟 HTML；不会上传。';
+};
+$('report-confirm').onchange=()=>{$('download-report').disabled=!reportHtml||!$('report-confirm').checked};
+$('download-report').onclick=()=>{if(!reportHtml||!$('report-confirm').checked)return;const url=URL.createObjectURL(new Blob([reportHtml],{type:'text/html;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='mobile-mirror-MOCK-report.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('review-status').textContent='已下载模拟报告。真实产品的离线报告需在工作台中审查并导出。'};
+$('frame-prev').onclick=()=>{selected=Math.max(0,selected-1);render()};$('frame-next').onclick=()=>{selected=Math.min(currentSteps().length-1,selected+1);render()};
+$('reset').onclick=reset;['success','failure'].forEach(id=>$(id).onclick=()=>{scenario=id;reset()});
+$('case-basic').onclick=()=>chooseCase('basic');$('case-recorded').onclick=()=>chooseCase('recorded');
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
+if(new URLSearchParams(location.search).get('case')==='recorded')caseKey='recorded';
+render();
+if(isRecorded())loadCaseAssets();
+
+function renderPhysicalFrame(){
+ const run=physicalRun(),step=run?.steps[selected],frame=$('screen-image'),png=step?.evidence.find(e=>e.name.endsWith('.png'));
+ ['target','tap-marker','screen-banner'].forEach(id=>$(id).hidden=true);
+ $('screen-stage').style.aspectRatio='1080/2400';
+ $('screen-stage').classList.remove('is-preview');$('frame-empty').hidden=Boolean(png);frame.hidden=!png;
+ $('frame-empty').firstElementChild.textContent=physicalLoading?'正在读取历史截图…':'暂无历史截图';
+ $('frame-empty').lastElementChild.textContent=physicalError||'导入本机采集记录后可回放。基础 Demo 仍可使用。';
+ if(png){const src='local-case-assets/'+scenario+'/'+png.name;if(frame.getAttribute('src')!==src)frame.src=src;frame.alt='归档历史截图：'+currentSteps()[selected][0]}
+ else frame.removeAttribute('src');
+ frame.onerror=()=>{if(!isRecorded())return;clearTimeout(timer);running=false;frame.hidden=true;$('frame-empty').hidden=false;$('frame-empty').firstElementChild.textContent='截图读取失败';$('frame-empty').lastElementChild.textContent='可选择其他步骤，或点选当前步骤重试。';frame.removeAttribute('src');$('run').textContent='自动回放 →';$('status').textContent='回放已暂停，原始执行结果保留。'};
+ $('frame-label').textContent=step?'已采集 · 步骤 '+(selected+1):'未取证';
+ $('frame-revision').textContent=png?.name||'无截图';
+ $('frame-position').textContent=`${selected+1} / ${currentSteps().length}`;
+ $('frame-prev').disabled=selected===0;$('frame-next').disabled=selected===currentSteps().length-1;
+ $('frame-note').textContent=step?`${currentSteps()[selected][0]} · 拍摄于 ${step.captures?.find(c=>c.kind==='png')?.startedAt||step.captureStartedAt} · 原图未修改`:'选择归档 case，载入本机真实截图。';
+}
+function renderPhysicalEvidence(){
+ const box=$('evidence'),run=physicalRun(),step=run?.steps[selected];box.replaceChildren();if(!step){box.textContent=physicalLoading?'正在读取…':physicalError||'尚无本机取证记录。';return}
+ const title=document.createElement('h3');title.textContent=currentSteps()[selected][0];box.append(title);
+ const note=document.createElement('p');note.className='muted';note.textContent=`${run.captureLabel||'真机执行记录'} · ${run.startedAt} · 回放不产生新测试结果。`;box.append(note);
+ const pre=document.createElement('pre');
+ if(tab==='tree')pre.textContent=step.xml||'此步未获得 XML；没有用示意节点补齐。';
+ else if(tab==='log')pre.textContent=JSON.stringify({runId:step.runId||run.id,step:step.index,status:step.status,message:step.message,error:step.error,checkpointError:step.checkpointError,captures:step.captures,evidence:step.evidence},null,2);
+ else {const verdict=document.createElement('div');verdict.className='verdict'+(step.status!=='passed'||step.checkpointError?' failed':'');verdict.textContent=step.checkpointError?'操作完成，但取证不完整':step.status==='passed'?'此步骤实际通过':'此步骤实际失败';box.append(verdict);pre.textContent=step.checkpointError||step.verification?.message||step.error||step.message||step.target}
+ box.append(pre);
+ for(const evidence of step.evidence.filter(e=>/\.(png|xml)$/.test(e.name))){const a=document.createElement('a');a.href='local-case-assets/'+scenario+'/'+evidence.name;a.target='_blank';a.rel='noopener';a.textContent=evidence.name.endsWith('.png')?'查看原始 PNG ↗':' 查看原始 XML ↗';box.append(a)}
+ const limits=document.createElement('p');limits.className='muted';limits.textContent='PNG 与 XML 分别采集。UI 通过不代表答案质量或后端持久化通过。';box.append(limits);
+}
+</script>
+<script>
+document.querySelectorAll('[data-case-yaml]').forEach(button=>button.onclick=()=>{
+const yaml=document.getElementById(button.dataset.caseYaml).textContent;
+const url=URL.createObjectURL(new Blob([yaml],{type:'text/yaml;charset=utf-8'})),link=document.createElement('a');
+link.href=url;link.download=button.dataset.filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+</script></body></html>

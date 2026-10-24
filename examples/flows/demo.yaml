@@ -1,0 +1,12 @@
+name: Demo · tap and verify
+platform: ios
+appId: com.example.mobilemirror.mock
+---
+- launchApp
+- assertVisible:
+    text: Hello, harness.
+- tap:
+    accessibilityId: action-card
+- assertVisible:
+    text: 1 actions received
+- done

@@ -1,0 +1,37 @@
+{
+  "platform": "android",
+  "browser": {
+    "transport": "scrcpy-h264",
+    "firstPaintMs": 711,
+    "paintedFrames": 271,
+    "paintedFps": 23.047375160051217,
+    "receiveToPaintP95Ms": 4,
+    "fallbackMs": 12470,
+    "fallbackReason": "stream-or-decoder-failed",
+    "mediaVisible": false,
+    "pollingVisible": false
+  },
+  "relay": {
+    "transport": "scrcpy-h264",
+    "streamStartedAt": 1787209641383,
+    "firstFrameAt": 1787209642002,
+    "lastFrameAt": 1787209653804,
+    "frameCount": 271,
+    "relayFps": 22.877478393492627
+  },
+  "lifecycle": "streaming",
+  "media": {
+    "mode": "auto",
+    "phase": "fallback",
+    "transport": "scrcpy-h264",
+    "startedAt": "2026-08-20T07:07:21.383Z",
+    "firstFrameAt": "2026-08-20T07:07:22.002Z",
+    "lastFrameAt": "2026-08-20T07:07:33.804Z",
+    "width": 576,
+    "height": 1280,
+    "targetFps": 30,
+    "lastErrorCode": "viewer_media_stream_ended"
+  },
+  "ownedSessionCleaned": false,
+  "screenshot": "artifacts/screenshots/mobile-mirror-streaming.png"
+}

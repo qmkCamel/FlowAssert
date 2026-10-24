@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1030" viewBox="0 0 1200 1030" role="img" aria-labelledby="title desc">
+<title id="title">FlowAssert 当前架构</title><desc id="desc">可选 Viewer、MCP、DSH 入口复用 runtime 与 MirrorService 核心。工作台通过受限 facade 执行，Appium 控制设备，媒体回到 Viewer，证据保存到 Store。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#526981" stroke-width="1.5"/></marker></defs>
+<style>text{font-family:system-ui,-apple-system,'PingFang SC',sans-serif;fill:#172c42}.h{font-size:23px;font-weight:700}.t{font-size:18px}.s{font-size:15px;fill:#4b637b}.box{fill:#fff;stroke:#bccddc;stroke-width:1.5}.line{fill:none;stroke:#526981;stroke-width:2;marker-end:url(#arrow)}</style>
+<rect width="1200" height="1030" rx="22" fill="#f1f6fa"/>
+<text x="40" y="49" class="h">共享设备核心 · 三条独立链路</text><text x="40" y="78" class="s">概念架构 / 当前实现 / 2026-10-09</text>
+<rect x="40" y="110" width="340" height="88" rx="12" class="box"/><text x="64" y="146" class="h">本机 Viewer</text><text x="64" y="176" class="t">连接 · 用例 · 进度 · 历史</text>
+<rect x="430" y="110" width="340" height="88" rx="12" class="box"/><text x="454" y="146" class="h">通用 MCP 宿主</text><text x="454" y="176" class="t">stdio adapter · 可选</text>
+<rect x="820" y="110" width="340" height="88" rx="12" class="box"/><text x="844" y="146" class="h">DeepSeek Harness</text><text x="844" y="176" class="t">Cordis adapter · 可选</text>
+<path d="M210 198 V246" class="line"/><path d="M600 198 V246" class="line"/><path d="M990 198 V246" class="line"/>
+<rect x="40" y="248" width="1120" height="84" rx="12" fill="#e5edf9" stroke="#849fc7"/><text x="65" y="283" class="h">LocalDeviceRuntime / 共享应用服务</text><text x="65" y="312" class="t">组装与生命周期 · ViewerServer · WorkbenchApplication</text>
+<path d="M345 332 V378" class="line"/><path d="M1000 332 V758" class="line"/>
+<text x="1016" y="556" class="s">连接与</text><text x="1016" y="582" class="s">人工控制</text>
+<rect x="40" y="380" width="675" height="95" rx="12" class="box"/><text x="65" y="419" class="h">WorkbenchService</text><text x="65" y="451" class="t">YAML 预检 · 调度 · 运行租约 · 取证与最终判定</text>
+<path d="M345 475 V517" class="line"/>
+<rect x="40" y="520" width="675" height="92" rx="12" class="box"/><text x="65" y="556" class="h">AppClaw 2.7.0 独立 worker</text><text x="65" y="587" class="t">原生 parser / runner → 受限 WorkbenchDevice facade</text>
+<path d="M345 612 V758" class="line"/><text x="366" y="693" class="s">复用已有会话，禁止绕过核心直接控制设备</text>
+<rect x="775" y="380" width="185" height="116" rx="12" fill="#e4f3ed" stroke="#77aa94"/><text x="795" y="416" class="t">WorkbenchStore</text><text x="795" y="448" class="s">PNG / XML / 哈希</text><text x="795" y="476" class="s">manifest / 历史</text>
+<path d="M715 430 H771" class="line"/>
+<path d="M867 496 V536" class="line"/>
+<rect x="775" y="540" width="185" height="94" rx="12" fill="#e4f3ed" stroke="#77aa94"/><text x="795" y="576" class="t">派生消费</text><text x="795" y="607" class="s">比较 / 报告 / 诊断</text>
+<rect x="40" y="760" width="1120" height="83" rx="12" fill="#173b58"/><text x="65" y="794" style="fill:#fff" class="h">MirrorService · 设备与维护操作的唯一 owner</text><text x="65" y="825" style="fill:#d4e4ee" class="t">状态机 · 独占队列 · observation 新鲜度 · 不确定写入隔离</text>
+<path d="M263 843 V885" class="line"/><path d="M852 843 V885" class="line"/>
+<rect x="40" y="888" width="540" height="101" rx="12" class="box"/><text x="65" y="924" class="h">控制：Mock / Appium provider</text><text x="65" y="956" class="t">Android UiAutomator2 / iOS XCUITest-WDA</text>
+<rect x="620" y="888" width="540" height="101" rx="12" class="box"/><text x="645" y="924" class="h">连续画面 → 本机 Viewer</text><text x="645" y="956" class="t">scrcpy / WDA MJPEG · 截图降级</text>
+<text x="775" y="691" class="s">证据消费者不控制设备</text><text x="40" y="1016" class="s">短期 Agent observation 按需返回离散图片与有界结构；连续视频不进入 MCP / DSH 工具结果。</text>
+</svg>

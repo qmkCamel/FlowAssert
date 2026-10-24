@@ -1,0 +1,172 @@
+<!doctype html>
+<!-- Generated from docs/faq.md by scripts/render-faq.mjs. Do not edit manually. -->
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FlowAssert · 常见问题 FAQ</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101624;color:#edf2fa;font:16px/1.85 system-ui,-apple-system,"PingFang SC",sans-serif}main{max-width:900px;margin:auto;padding:32px 24px 64px;overflow-wrap:anywhere}nav{display:flex;gap:24px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid #344058}a{color:#b5f477;text-underline-offset:4px}a:focus-visible{outline:2px solid #b5f477;outline-offset:4px}h1{font-size:32px}h2{margin-top:40px;border-bottom:1px solid #344058;padding-bottom:12px}h3{font-size:19px;margin-top:28px}pre{overflow:auto;padding:18px;background:#192236;border-radius:8px;font-size:13px}code{font-family:ui-monospace,monospace}p,li{color:#d3ddec}table{display:block;overflow:auto;border-collapse:collapse}td,th{padding:8px;border:1px solid #344058}[id]{scroll-margin-top:24px}
+</style></head><body><main><nav aria-label="FAQ 导航"><a href="communications/mobile-mirror-demo.html#mock-demo">← 返回交互演示</a><a href="#q11">首次试用</a></nav>
+<h1>FlowAssert 试用 FAQ</h1>
+<p>面向首次试用的开发者和测试维护者。内容核对于 2026-10-12，适用于个人版当前源码内测；产品仍为 Developer Preview。完整操作顺序见<a href="beta-start.md">内测任务卡</a>，能力与验收边界见<a href="capabilities.md">能力总表</a>。</p>
+<h2>高频问题</h2>
+<ul>
+<li><a href="#q2">网页演示和实际产品有什么区别？</a></li>
+<li><a href="#q3">没有手机或 Appium，能试用吗？</a></li>
+<li><a href="#q7">Node.js 和 pnpm 需要什么版本？</a></li>
+<li><a href="#q8">一定要用 mise 吗？</a></li>
+<li><a href="#q11">第一次试用做到哪一步算完成？</a></li>
+<li><a href="#q14">为什么示例第一次通过，重新运行却失败了？</a></li>
+<li><a href="#q21">怎样把报告发给同事？</a></li>
+<li><a href="#q24">遇到问题去哪里反馈？</a></li>
+</ul>
+<h2>试用前</h2>
+<p><a id="q1"></a></p>
+<h3>1. FlowAssert 能帮我做什么，适合哪些人？</h3>
+<p>它提供本机移动设备工作台：查看和控制设备、用 YAML 重复执行固定测试流程，并通过步骤截图、断言和历史记录回看结果。适合需要维护移动端回归流程、定位失败或核对测试证据的开发者和测试人员。</p>
+<p>先用 Mock 体验保存用例、运行、排查失败和分享报告，再判断是否接入自己的真机流程。更多选择依据见<a href="adoption-guide.md">采用指南</a>。</p>
+<p><a id="q2"></a></p>
+<h3>2. 网页交互演示和实际产品有什么区别？</h3>
+<p><a href="communications/mobile-mirror-demo.html">离线交互演示</a>用于了解流程：基础 Demo 使用预设模拟；打开页面不等于启动工作台、连接设备或重新执行测试。</p>
+<p>实际试用需要启动源码中的本机服务，在工作台连接 Mock、真机或模拟器并生成自己的运行记录。网页演示不算产品验收，已有证据回放也不代表你的设备已通过验证。</p>
+<p><a id="q3"></a></p>
+<h3>3. 没有手机或 Appium，能试用吗？</h3>
+<p>可以。首轮 Mock 试用只需源码、Node.js、pnpm 和浏览器，不需要手机、Appium 或 DSH 宿主。</p>
+<p>启动后在「设备 / Devices」选择 <code>Mock device · demo</code>，点击 <code>Start demo</code>。真机和 Agent 接入都可以之后再做。</p>
+<p>也可以连接已经启动的 Android Emulator 或 iOS Simulator：选择 Appium、对应平台、设备类型“模拟器”，再检查并连接。模拟器仍需 Appium 和平台工具链；iOS Simulator 无需真机签名。见<a href="simulators.md">模拟器指南</a>。</p>
+<p><a id="q5"></a></p>
+<h3>4. 当前有哪些能力可用，哪些仍处于预览阶段？</h3>
+<p>首轮可以体验 Mock、YAML 固定流程、步骤证据、运行历史和离线报告分享。Android/iPhone 已有特定场景的真机验证，但不承诺任意设备和 App 开箱即用。</p>
+<p>AI 恢复、OCR、矩阵和证据驱动修复等能力有各自的配置与验收边界，不是首轮必做项；修复 Preview 默认关闭。以<a href="capabilities.md">能力总表</a>中的逐项状态为准，不能用 Mock 或软件测试结果代替真机业务验收。</p>
+<h2>安装与启动</h2>
+<p><a id="q6"></a></p>
+<h3>5. 从哪里获取代码？GitHub 没有访问权限怎么办？</h3>
+<p>从<a href="https://github.com/qmkCamel/flowassert">GitHub 仓库</a>获取源码，本轮入口为试用分支 <code>dev</code>。首次试用先向邀请人确认访问权限、Git 认证以及可试用的提交；如果克隆后只有初始说明而没有 <code>package.json</code>，请让邀请人确认完整源码是否已推送。</p>
+<p>本轮使用上述仓库的 <code>dev</code> 分支。版本说明文件存在也不代表对应安装包已发布；包的获取方式见<a href="beta-installation.md">安装说明</a>。</p>
+<p><a id="q7"></a></p>
+<h3>6. Node.js 和 pnpm 需要什么版本？</h3>
+<p>建议与本轮维护者验证环境一致：<strong>Node.js 24.19.0、pnpm 11.7.0</strong>。其中 pnpm 版本由 <code>packageManager</code> 固定；<code>package.json</code> 声明的 Node 兼容范围为 <code>^22.19.0 || &gt;=24.0.0</code>，兼容范围不等于每个版本都完成了本轮验证。</p>
+<p>在准备启动的同一个终端检查：</p>
+<pre><code class="language-bash">node -v
+pnpm -v
+</code></pre>
+<p><a id="q8"></a></p>
+<h3>7. 一定要用 mise 吗？已有 nvm、fnm 或其他环境能不能直接用？</h3>
+<p><strong>不强制使用 mise。</strong> 它只是帮助安装和选择仓库声明的 Node 版本。已有 nvm、fnm、Volta，或直接安装 Node.js，都可以继续使用；确保当前终端中的 Node.js 和 pnpm 版本符合上一题即可。</p>
+<p>已经准备好工具链时，直接运行下一题中的命令，不必添加 <code>mise exec --</code>。如果选择 mise，可执行 <code>mise install</code>，再用 <code>mise exec --</code> 为命令选择仓库环境。切换版本管理工具并不是试用前提。</p>
+<p><a id="q9"></a></p>
+<h3>8. 第一次启动要执行哪些命令？成功后应该看到什么？</h3>
+<p>先准备上一题的工具链和 GitHub 访问权限，再逐条执行：</p>
+<pre><code class="language-bash">git clone --branch main https://github.com/qmkCamel/flowassert.git
+cd deepseek-harness-mobile-mirror
+git rev-parse HEAD
+pnpm install --frozen-lockfile
+pnpm peers check
+pnpm build
+node scripts/mobile-mirror-cli.mjs doctor --operation mock
+pnpm start
+</code></pre>
+<p>已有源码目录时，从该目录的 <code>git rev-parse HEAD</code> 开始，无需再次克隆。安装、peer 检查、构建或 Doctor 出错时先停止并处理该错误。</p>
+<p>启动后打开终端打印的本机地址，通常为 <code>http://127.0.0.1:3210</code>，应能进入工作台；随后手动连接 Mock。Doctor 只检查前提，不能证明已经连接设备或完成测试。详细步骤见<a href="beta-start.md">任务卡</a>。</p>
+<p><a id="q10"></a></p>
+<h3>9. 安装失败、页面打不开或端口被占用怎么办？</h3>
+<p>先找到最早失败的一条命令，保留其脱敏错误信息：</p>
+<ul>
+<li>克隆失败：请邀请人确认仓库权限和 Git 认证。</li>
+<li>安装或构建失败：检查当前终端的 Node/pnpm 版本，记录失败命令；不要通过删除锁文件或忽略错误绕过检查。</li>
+<li>页面打不开：确认 <code>pnpm start</code> 仍在运行，并使用本次终端打印的地址。</li>
+<li>端口占用：使用 <code>pnpm start --port 0</code> 选择空闲端口，再打开新地址，无需停止其他人的进程。</li>
+</ul>
+<p>首次安装需要下载依赖，不能把离线 HTML 演示可用理解成首次源码安装也可离线。仍无法解决时按<a href="#q24">反馈要求</a>提交信息。</p>
+<h2>第一次体验</h2>
+<p><a id="q11"></a></p>
+<h3>10. 第一次试用建议做什么？做到哪一步算完成？</h3>
+<p>按<a href="beta-start.md#%E9%A6%96%E8%BD%AE%E4%BB%BB%E5%8A%A1%E7%9B%AE%E6%A0%87-15-%E5%88%86%E9%92%9F%E5%B0%9A%E5%BE%85%E7%8B%AC%E7%AB%8B%E6%B5%8B%E9%87%8F">任务卡</a>完成五件事：连接 Mock、保存并跑通正例、故意制造失败、修正后生成一次新运行、下载并离线打开报告。</p>
+<p>完成后应能分别找到失败和通过的历史记录，并说清失败在哪一步、报告证明了什么。操作目标为依赖就绪后约 15 分钟，尚待独立测量；安装时间另记。卡住时可以记录为未完成，不需要为了交差反复改期望。</p>
+<p><a id="q12"></a></p>
+<h3>11. Mock 设备是什么？Mock 通过能说明什么？</h3>
+<p>Mock 是内置的模拟设备，用固定内容和动作计数帮助你体验工作台，无需真实手机。示例中的 <code>platform: ios</code> 也不要求连接 iPhone。</p>
+<p>Mock 通过说明这次模拟流程及相应断言通过；不能证明真机连接、真实 App 业务、模型理解图片或生产环境已经通过。</p>
+<p><a id="q13"></a></p>
+<h3>12. 不熟悉 YAML，能不能直接加载示例？</h3>
+<p>可以。在「用例」新建页点击「载入 Mock 演示」，展开 YAML 后按任务卡替换为五步任务，再保存、静态校验并确认运行。</p>
+<p>内置新建页示例只有两步，任务卡的故意失败练习使用五步版本，二者不能直接混用。首轮无需从空白开始编写；之后再参考<a href="test-workbench.md">工作台指南</a>修改动作和断言。</p>
+<p><a id="q14"></a></p>
+<h3>13. 为什么示例第一次通过，重新运行却失败了？怎么重置 Mock？</h3>
+<p>常见原因是 Mock 动作计数没有归零。示例期望一次点击后出现 <code>1 actions received</code>；手动点击画面或上一轮执行会累积计数，启动 App 和重跑不会自动清空它。</p>
+<p>每轮示例开始前，在设备页<strong>停止并重新启动 Mock</strong>，连接后先不要手动点击或滑动，再运行用例。如果重置后仍失败，检查报告中的实际结果并保留记录；不要把所有失败都归因于计数，也不要随意放宽断言。</p>
+<p><a id="q15"></a></p>
+<h3>14. 如何故意制造一次失败，再修正并验证？</h3>
+<p>使用任务卡的五步 YAML，将 <code>1 actions received</code> 改成 <code>2 actions received</code>。重置 Mock 后保存、校验并运行，预计第 4 步失败，第 5 步未执行。</p>
+<p>再次重置 Mock，把期望改回 <code>1 actions received</code>，保存新修订并运行，预计通过。保留两次记录；这只是修正练习中故意写错的期望，不是处理真实业务失败的通用办法。</p>
+<p><a id="q16"></a></p>
+<h3>15. “通过”“失败”“未执行”“未重新验证”分别是什么意思？</h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>应如何理解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通过</td>
+<td>对应运行或检查满足了它声明并执行的条件；仍需查看完整验证范围</td>
+</tr>
+<tr>
+<td>失败</td>
+<td>对应步骤或运行级检查未满足要求；查看失败原因、期望与实际和证据</td>
+</tr>
+<tr>
+<td>未执行</td>
+<td>没有完成该项检查，例如前一步失败导致后续步骤未运行；不能当作通过</td>
+</tr>
+<tr>
+<td>未重新验证</td>
+<td>当前材料来自已有记录或派生报告，本次阅读或导出没有重新执行测试</td>
+</tr>
+</tbody></table>
+<p>业务、视觉或健康等维度未配置、未支持或未执行时，都不能因其他步骤通过而视为该维度已验证。报告校验通过也不等于重新跑过测试。</p>
+<h2>真机与 Agent</h2>
+<p><a id="q17"></a></p>
+<h3>16. 从 Mock 切换到 Android 或 iPhone，需要额外准备什么？</h3>
+<p>Android 需要 Appium、UiAutomator2、ADB，以及已解锁、开启 USB 调试并授权当前电脑的手机。iPhone 需要 Mac、Xcode、Appium/XCUITest、可运行的 WDA 签名配置，并在设备上完成人工信任和开发者相关授权。</p>
+<p>在工作台选择真实设备和对应平台，先检查环境，再明确确认连接。详细步骤分别见 <a href="android-real-device.md">Android 指南</a>和 <a href="ios-real-device.md">iPhone 指南</a>。预检就绪不等于 WDA 或设备会话已经运行成功。</p>
+<p><a id="q18"></a></p>
+<h3>17. 使用工作台一定要接入 Codex 或 DeepSeek Harness 吗？</h3>
+<p>不需要。独立工作台可以直接执行固定 YAML 流程，无需每步调用模型，也无需 DSH 宿主或模型凭据。</p>
+<p>希望 Agent 参与观察、控制或已登记测试编排时，再按 <a href="mcp-hosts.md">MCP 宿主指南</a>或 <a href="agent-test-run-control.md">Agent 指南</a>配置。当前已验证的 DSH 适配版本为 <code>0.2.0-rc.2</code>，不能默认其他版本同样兼容。</p>
+<p><a id="q19"></a></p>
+<h3>18. 连接真机后会执行哪些操作？如何停止运行和断开设备？</h3>
+<p>向导默认查看当前画面；建立自动化会话可能安装或启动自动化辅助组件，首次初始化也可能短暂切换画面。之后的点击、滑动、输入或启动 App 由你确认的操作和测试流程决定。首轮请选择可重置的自有测试 App 场景。</p>
+<p>退出时先取消测试并等待结束，再停止自己的设备会话，最后在服务终端按 <code>Ctrl+C</code>。停止会话不会撤销手机上已经发生的操作，也不会替你关闭外部维护的 Appium 服务。</p>
+<h2>报告与反馈</h2>
+<p><a id="q20"></a></p>
+<h3>19. 失败后应该先看哪里？截图、步骤和断言分别怎么看？</h3>
+<p>从「运行记录」打开本次报告，先看首个失败步骤的动作、断言期望与实际，再看该步骤的历史截图。若属于运行级检查失败，则查看「完整验证范围」，不一定会有一个失败步骤。</p>
+<p>缺少截图时应记录证据缺失，不能用当前手机画面替代历史证据。比较两次运行时明确选择基线；后来一次通过也不能单独证明前一次失败的根因。更多方法见<a href="report-reading-and-sharing.md">报告阅读指南</a>。</p>
+<p><a id="q21"></a></p>
+<h3>20. 怎样把报告发给同事？为什么不能直接分享本机页面地址？</h3>
+<p>在报告分享区域选择 HTML，建议先用无附件版本，预览完整文件和省略范围，确认后下载，再将文件通过团队允许的渠道发给同事。接收者可以离线打开，无需安装工作台。</p>
+<p><code>127.0.0.1</code> 指向打开链接者自己的电脑，你的本机工作台地址不能作为别人的报告入口。导出不会自动上传或生成公开链接。</p>
+<p><a id="q22"></a></p>
+<h3>21. HTML 报告能不能重新运行？它和 JSON 有什么区别？</h3>
+<p>HTML 是离线阅读文件，不能导入或复跑。它保留可分享的摘要和选定材料，并明确标记省略内容及“派生，未重新验证”。</p>
+<p>JSON 用于受支持的归档交换和导入，具体版本与材料要求见<a href="report-reading-and-sharing.md">报告指南</a>。导入历史结果也不等于重新执行测试；实际复跑仍需有效用例、设备和相应环境。</p>
+<p><a id="q23"></a></p>
+<h3>22. 分享报告前需要检查哪些截图、日志和敏感信息？</h3>
+<p>先确认选中的材料确实需要分享，检查截图中的账号、聊天内容、设备标识等信息，并对需要隐藏的区域画框遮蔽。遮罩只覆盖选定区域，未遮蔽像素仍然可见。</p>
+<p>检查最终预览而不只是原图；变更材料或遮罩后重新预览和确认。不要把原始手机材料、Token、私有路径或完整配置直接附到反馈中。具体导出保留和省略范围见<a href="report-reading-and-sharing.md#%E9%81%AE%E8%94%BD%E4%B8%8E%E5%AF%BC%E5%87%BA">报告阅读与离线分享</a>。</p>
+<p><a id="q24"></a></p>
+<h3>23. 遇到问题去哪里反馈？需要附哪些信息？</h3>
+<p>向<a href="https://github.com/qmkCamel/flowassert/issues/new">GitHub Issues</a>提交安装问题或产品缺陷；没有权限时先联系邀请人。建议附上：</p>
+<ul>
+<li>分支、<code>git rev-parse HEAD</code> 输出的提交 SHA，以及是否有本地修改。</li>
+<li>操作系统、Node.js 和 pnpm 版本；涉及真机时再补相应工具版本。</li>
+<li>任务编号、复现步骤、预期结果、实际结果和脱敏错误码。</li>
+<li>安装与操作分别耗时多久、卡在哪一步、是否求助。</li>
+</ul>
+<p>可以直接填写<a href="beta-feedback.md">体验记录模板</a>。失败和未完成同样有价值，请保留首次失败证据；分享材料前按上一题检查。</p>
+<p><a id="q25"></a></p>
+<h3>24. 如何更新或退出试用？已有用例和运行记录会不会丢失？</h3>
+<p>一次体验期间先保持同一提交。需要更新时，取消运行、停止自有会话并退出服务，按<a href="beta-start.md">任务卡</a>在干净工作区执行 <code>git pull --ff-only</code>，重新安装依赖、检查、构建和启动。有本地修改时先保留并处理，不要强制重置。</p>
+<p>正常停止服务不会主动删除已有记录，但跨版本数据兼容应查看相应版本说明，不能承诺任意降级都可读取。退出试用时保留本机运行记录和配置；需要卸除源码时先确认没有自己的修改，不要为“清理环境”删除整个数据目录。旧 alpha.1 不能作为当前 Workbench 数据回退基线。</p>
+
+</main></body></html>

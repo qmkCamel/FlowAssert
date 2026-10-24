@@ -1,0 +1,37 @@
+# 根据 50 秒 iPhone 录屏提取：问 AI 半屏 -> 文字提问 -> 回复 -> 全屏 -> 历史回看。
+# 前置条件：已脱敏的 iPhone 已登录、打开一个新的问 AI 半屏，当前没有本轮测试消息。
+# 视频中的输入是键盘文字，不是录音；首页蓝色入口的 iOS accessibility ID 尚未从视频确认。
+# 历史标题断言是严格验收点：若当前 iOS 包未暴露可访问文本，应如实失败并留证。
+name: 第三方 App iOS · 录像还原的 AI 文字与历史流程
+platform: ios
+appId: com.example.sampleapp
+---
+- assertVisible: {id: sample-panel-panel}
+- tap: {id: sample-panel-asr-input}
+- type:
+    into: {id: sample-panel-text-input}
+    text: '移动镜像录像用例 0924A：请用一句话介绍你自己'
+- assertVisible:
+    id: sample-panel-text-input
+    value: '移动镜像录像用例 0924A：请用一句话介绍你自己'
+- tap: {id: sample-panel-submit}
+- waitUntilGone:
+    target:
+      id: sample-panel-text-input
+      value: '移动镜像录像用例 0924A：请用一句话介绍你自己'
+    timeout: 15
+- waitUntil:
+    target: {id: sample-copy-button}
+    timeout: 60
+- tap: {accessibilityId: 展开全屏}
+- waitUntil:
+    target: {id: sample-panel-nav-history}
+    timeout: 15
+- tap: {id: sample-panel-nav-history}
+- assertVisible: {id: sample-history-item-list-title}
+- assertVisible:
+    text: '移动镜像录像用例 0924A：请用一句话介绍你自己'
+- tap:
+    text: '移动镜像录像用例 0924A：请用一句话介绍你自己'
+- assertVisible: {id: sample-copy-button}
+- done

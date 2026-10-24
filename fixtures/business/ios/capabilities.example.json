@@ -1,0 +1,11 @@
+{
+  "platformName": "iOS",
+  "appium:automationName": "XCUITest",
+  "appium:udid": "REPLACE_WITH_SELECTED_DEVICE",
+  "appium:bundleId": "dev.mobilemirror.fixture",
+  "appium:noReset": true,
+  "appium:xcodeOrgId": "REPLACE_WITH_DEVELOPMENT_TEAM",
+  "appium:xcodeSigningId": "Apple Development",
+  "appium:allowProvisioningDeviceRegistration": false,
+  "appium:newCommandTimeout": 180
+}

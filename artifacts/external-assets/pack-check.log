@@ -1,0 +1,341 @@
+$ pnpm pack --dry-run
+$ pnpm run build
+$ node -e "require('node:fs').rmSync('lib',{recursive:true,force:true})" && tsdown
+ℹ tsdown v0.22.2 powered by rolldown v1.1.5
+ℹ config file: <repository>/tsdown.config.ts
+ℹ entry: src/application.ts, src/index.ts, src/mcp.ts, src/onboarding-cli.ts, src/host-runtime.ts, src/local-viewer-cli.ts, src/workbench-triage-rules.ts, src/workbench-external-parser.ts, src/workbench-external-files.ts, scripts/workbench-worker.mjs, scripts/workbench-extension.mjs, scripts/workbench-visual-worker.mjs, scripts/workbench-share-image-worker.mjs
+ℹ target: es2024
+ℹ tsconfig: tsconfig.json
+ℹ entry: src/screen-query.ts, src/workbench-selector-adapter.ts
+ℹ target: es2022
+ℹ tsconfig: tsconfig.json
+ℹ Build start
+ℹ lib/viewer/inspection-query.js  9.92 kB │ gzip: 3.25 kB
+ℹ lib/viewer/selector-adapter.js  3.71 kB │ gzip: 1.34 kB
+ℹ 2 files, total: 13.63 kB
+✔ Build complete in 911ms
+ℹ Hint: consider adding deps.onlyBundle option to avoid unintended bundling of dependencies, or set deps.onlyBundle: false to disable this hint.
+See more at https://tsdown.dev/options/dependencies#deps-onlybundle
+Detected dependencies in bundle:
+- @appclaw/core
+ℹ lib/onboarding-cli.js                                37.04 kB │ gzip:   9.71 kB
+ℹ lib/index.js                                         13.96 kB │ gzip:   3.04 kB
+ℹ lib/mcp.js                                            9.67 kB │ gzip:   3.13 kB
+ℹ lib/external-parser.js                                6.26 kB │ gzip:   2.11 kB
+ℹ lib/workbench-visual-worker.js                        3.54 kB │ gzip:   1.33 kB
+ℹ lib/workbench-worker.js                               2.78 kB │ gzip:   1.16 kB
+ℹ lib/workbench-extension.js                            1.64 kB │ gzip:   0.78 kB
+ℹ lib/workbench-share-image-worker.js                   1.58 kB │ gzip:   0.73 kB
+ℹ lib/application.js                                    0.44 kB │ gzip:   0.24 kB
+ℹ lib/host-runtime.js                                   0.32 kB │ gzip:   0.17 kB
+ℹ lib/external-files.js                                 0.17 kB │ gzip:   0.13 kB
+ℹ lib/local-viewer-cli.js                               0.15 kB │ gzip:   0.12 kB
+ℹ lib/triage-rules.js                                   0.10 kB │ gzip:   0.10 kB
+ℹ lib/local-device-runtime-BA9uKHiw.js.map              1.23 MB
+ℹ lib/local-device-runtime-BA9uKHiw.js                655.62 kB │ gzip: 153.92 kB
+ℹ lib/run-yaml-flow-BQPrxg19.js.map                   199.37 kB │ gzip:  48.38 kB
+ℹ lib/parse-yaml-flow-BxnIk-5x.js.map                 122.82 kB │ gzip:  29.54 kB
+ℹ lib/workbench-store-Cs6uP-nI.js.map                 101.27 kB │ gzip:  24.15 kB
+ℹ lib/run-yaml-flow-BQPrxg19.js                        95.15 kB │ gzip:  25.12 kB
+ℹ lib/workbench-external-contracts-fNqFt4f-.js.map     70.80 kB │ gzip:  19.21 kB
+ℹ lib/onboarding-cli.js.map                            67.16 kB │ gzip:  17.25 kB
+ℹ lib/vision-execute-CHEk1WMW.js.map                   65.47 kB │ gzip:  16.29 kB
+ℹ lib/managed-appium-runtime-Do1oB2RD.js.map           58.44 kB │ gzip:  15.06 kB
+ℹ lib/workbench-store-Cs6uP-nI.js                      54.68 kB │ gzip:  13.30 kB
+ℹ lib/terminal-CM2d39HG.js.map                         46.23 kB │ gzip:  11.19 kB
+ℹ lib/parse-yaml-flow-BxnIk-5x.js                      45.26 kB │ gzip:  11.31 kB
+ℹ lib/window-size-Btgzi914.js.map                      42.49 kB │ gzip:   8.30 kB
+ℹ lib/workbench-external-contracts-fNqFt4f-.js         39.49 kB │ gzip:  10.97 kB
+ℹ lib/tool-contracts-C_xrZsJb.js.map                   37.09 kB │ gzip:   8.45 kB
+ℹ lib/vision-execute-CHEk1WMW.js                       31.78 kB │ gzip:   8.61 kB
+ℹ lib/selector-WbylpiLG.js.map                         31.59 kB │ gzip:   7.54 kB
+ℹ lib/local-device-runtime-qjFZe_YM.d.ts.map           30.14 kB │ gzip:   7.99 kB
+ℹ lib/managed-appium-runtime-Do1oB2RD.js               29.24 kB │ gzip:   8.16 kB
+ℹ lib/index.js.map                                     26.95 kB │ gzip:   5.79 kB
+ℹ lib/tool-contracts-C_xrZsJb.js                       24.54 kB │ gzip:   5.60 kB
+ℹ lib/workbench-triage-rules-DB55uW4E.js.map           24.43 kB │ gzip:   6.48 kB
+ℹ lib/config-BPFeLpic.js.map                           22.25 kB │ gzip:   7.82 kB
+ℹ lib/window-size-Btgzi914.js                          21.65 kB │ gzip:   4.65 kB
+ℹ lib/doctor-DWasixC8.js.map                           21.49 kB │ gzip:   6.43 kB
+ℹ lib/mcp.js.map                                       18.54 kB │ gzip:   5.51 kB
+ℹ lib/selector-WbylpiLG.js                             16.75 kB │ gzip:   4.45 kB
+ℹ lib/local-viewer-cli-BBTq1uzf.js.map                 16.61 kB │ gzip:   5.09 kB
+ℹ lib/workbench-triage-rules-DB55uW4E.js               14.18 kB │ gzip:   3.95 kB
+ℹ lib/variable-resolver-_PDwHNWH.js.map                13.54 kB │ gzip:   4.07 kB
+ℹ lib/workbench-triage-rules-9DS2zVja.d.ts.map         13.18 kB │ gzip:   2.50 kB
+ℹ lib/config-BPFeLpic.js                               13.02 kB │ gzip:   5.28 kB
+ℹ lib/doctor-DWasixC8.js                               11.53 kB │ gzip:   3.78 kB
+ℹ lib/external-parser.js.map                           10.97 kB │ gzip:   3.44 kB
+ℹ lib/element-finder-DyGs190Q.js.map                    9.90 kB │ gzip:   3.13 kB
+ℹ lib/android-parser-DD89HG9o.js.map                    9.54 kB │ gzip:   2.88 kB
+ℹ lib/stark-locate-C0qu0sND.js.map                      9.42 kB │ gzip:   3.30 kB
+ℹ lib/ios-parser-BIkXOcOO.js.map                        9.29 kB │ gzip:   3.00 kB
+ℹ lib/local-viewer-cli-BBTq1uzf.js                      8.51 kB │ gzip:   2.92 kB
+ℹ lib/tools-D9OYkMDp.js.map                             6.38 kB │ gzip:   2.38 kB
+ℹ lib/mcp-config-Cx2aul0k.js.map                        6.26 kB │ gzip:   2.17 kB
+ℹ lib/workbench-external-files-Bjkqk4Q8.js.map          6.21 kB │ gzip:   2.14 kB
+ℹ lib/terminal-CM2d39HG.js                              6.20 kB │ gzip:   2.38 kB
+ℹ lib/variable-resolver-_PDwHNWH.js                     5.84 kB │ gzip:   1.98 kB
+ℹ lib/workbench-visual-worker.js.map                    5.63 kB │ gzip:   1.98 kB
+ℹ lib/stark-locate-C0qu0sND.js                          5.45 kB │ gzip:   2.19 kB
+ℹ lib/workbench-worker.js.map                           4.88 kB │ gzip:   1.94 kB
+ℹ lib/ios-parser-BIkXOcOO.js                            4.84 kB │ gzip:   1.84 kB
+ℹ lib/android-parser-DD89HG9o.js                        4.45 kB │ gzip:   1.63 kB
+ℹ lib/types-Qd77OQNS.d.ts.map                           4.42 kB │ gzip:   1.07 kB
+ℹ lib/element-finder-DyGs190Q.js                        4.40 kB │ gzip:   1.60 kB
+ℹ lib/tools-D9OYkMDp.js                                 3.92 kB │ gzip:   1.63 kB
+ℹ lib/workbench-external-files-Bjkqk4Q8.js              3.73 kB │ gzip:   1.40 kB
+ℹ lib/mcp-config-Cx2aul0k.js                            3.59 kB │ gzip:   1.41 kB
+ℹ lib/locate-enabled-J8pIwI_D.js.map                    3.19 kB │ gzip:   1.23 kB
+ℹ lib/workbench-extension.js.map                        2.74 kB │ gzip:   1.24 kB
+ℹ lib/screen-DCf9Ccct.js.map                            2.65 kB │ gzip:   1.08 kB
+ℹ lib/workbench-share-image-worker.js.map               2.62 kB │ gzip:   1.09 kB
+ℹ lib/locate-enabled-J8pIwI_D.js                        2.20 kB │ gzip:   0.91 kB
+ℹ lib/managed-appium-runtime-DUQmEDLk.d.ts.map          1.64 kB │ gzip:   0.58 kB
+ℹ lib/vision-token-tracker-GSMmctoS.js.map              1.46 kB │ gzip:   0.64 kB
+ℹ lib/ios-wda-preflight-ZMXBG9gb.d.ts.map               1.13 kB │ gzip:   0.45 kB
+ℹ lib/vision-token-tracker-GSMmctoS.js                  1.03 kB │ gzip:   0.46 kB
+ℹ lib/local-viewer-cli-BTf703hg.d.ts.map                0.99 kB │ gzip:   0.47 kB
+ℹ lib/config-CB5NNXg5.d.ts.map                          0.90 kB │ gzip:   0.35 kB
+ℹ lib/index.d.ts.map                                    0.80 kB │ gzip:   0.36 kB
+ℹ lib/workbench-external-contracts-D91bf7e_.d.ts.map    0.78 kB │ gzip:   0.26 kB
+ℹ lib/doctor-BLcZmHX2.d.ts.map                          0.72 kB │ gzip:   0.34 kB
+ℹ lib/mcp.d.ts.map                                      0.64 kB │ gzip:   0.32 kB
+ℹ lib/screen-DCf9Ccct.js                                0.49 kB │ gzip:   0.33 kB
+ℹ lib/onboarding-cli.d.ts.map                           0.36 kB │ gzip:   0.23 kB
+ℹ lib/mcp-config-Bvj9PfjM.d.ts.map                      0.29 kB │ gzip:   0.21 kB
+ℹ lib/external-files.d.ts.map                           0.23 kB │ gzip:   0.18 kB
+ℹ lib/external-parser.d.ts.map                          0.17 kB │ gzip:   0.16 kB
+ℹ lib/window-size-CBubj7OJ.js                           0.14 kB │ gzip:   0.12 kB
+ℹ lib/android-parser-D1rK4Ijy.js                        0.11 kB │ gzip:   0.10 kB
+ℹ lib/element-finder-BLtu6vt8.js                        0.10 kB │ gzip:   0.10 kB
+ℹ lib/ios-parser-QWYpneXc.js                            0.10 kB │ gzip:   0.09 kB
+ℹ lib/terminal-BHjOJF2O.js                              0.10 kB │ gzip:   0.09 kB
+ℹ lib/vision-execute-DHq8mBMS.js                        0.09 kB │ gzip:   0.09 kB
+ℹ lib/screen-CJR8P5ny.js                                0.09 kB │ gzip:   0.09 kB
+ℹ lib/index.d.ts                                        6.79 kB │ gzip:   1.94 kB
+ℹ lib/mcp.d.ts                                          1.64 kB │ gzip:   0.63 kB
+ℹ lib/application.d.ts                                  0.86 kB │ gzip:   0.36 kB
+ℹ lib/host-runtime.d.ts                                 0.77 kB │ gzip:   0.29 kB
+ℹ lib/onboarding-cli.d.ts                               0.73 kB │ gzip:   0.39 kB
+ℹ lib/external-files.d.ts                               0.33 kB │ gzip:   0.21 kB
+ℹ lib/external-parser.d.ts                              0.31 kB │ gzip:   0.21 kB
+ℹ lib/local-viewer-cli.d.ts                             0.30 kB │ gzip:   0.16 kB
+ℹ lib/triage-rules.d.ts                                 0.20 kB │ gzip:   0.14 kB
+ℹ lib/workbench-triage-rules-9DS2zVja.d.ts            153.01 kB │ gzip:  10.40 kB
+ℹ lib/local-device-runtime-qjFZe_YM.d.ts               99.77 kB │ gzip:  18.57 kB
+ℹ lib/workbench-external-contracts-D91bf7e_.d.ts       10.44 kB │ gzip:   1.34 kB
+ℹ lib/types-Qd77OQNS.d.ts                              10.44 kB │ gzip:   2.77 kB
+ℹ lib/managed-appium-runtime-DUQmEDLk.d.ts              3.09 kB │ gzip:   0.91 kB
+ℹ lib/ios-wda-preflight-ZMXBG9gb.d.ts                   2.68 kB │ gzip:   1.01 kB
+ℹ lib/config-CB5NNXg5.d.ts                              2.28 kB │ gzip:   0.87 kB
+ℹ lib/local-viewer-cli-BTf703hg.d.ts                    2.04 kB │ gzip:   0.76 kB
+ℹ lib/doctor-BLcZmHX2.d.ts                              1.45 kB │ gzip:   0.68 kB
+ℹ lib/mcp-config-Bvj9PfjM.d.ts                          0.57 kB │ gzip:   0.30 kB
+ℹ 114 files, total: 3.84 MB
+✔ Build complete in 1991ms
+package: dsh-mobile-mirror-plugin@0.1.0-alpha.2
+Tarball Contents
+cordis.patch.yml
+docs/agent-test-run-control-validation.md
+docs/agent-test-run-control.md
+docs/ai-recovery.md
+docs/android-real-device.md
+docs/architecture.md
+docs/beta-installation.md
+docs/change-acceptance-records.md
+docs/decisions/0001-appium-core-local-viewer.md
+docs/decisions/0003-low-latency-viewer-media.md
+docs/decisions/0004-guided-beta-and-managed-appium.md
+docs/decisions/0005-semantic-agent-actions.md
+docs/decisions/0006-native-yaml-workbench.md
+docs/decisions/0007-observation-query-viewer-inspector.md
+docs/decisions/0010-workbench-product-contract-boundary.md
+docs/evidence-guided-triage.md
+docs/external-test-assets.md
+docs/guided-mobile-acceptance.md
+docs/inspector-validation.md
+docs/ios-acceptance-2026-09-15.md
+docs/ios-real-device.md
+docs/sampleapp-ai-text-validation.md
+docs/local-viewer.md
+docs/managed-job.md
+docs/mcp-hosts.md
+docs/milestones.md
+docs/packaged-runtime-validation.md
+docs/product-shape.md
+docs/README.md
+docs/releases/0.1.0-alpha.1.md
+docs/releases/0.1.0-alpha.2.md
+docs/run-comparison-analysis.md
+docs/run-comparison-validation.md
+docs/security.md
+docs/technical-guide.md
+docs/technical-guide.zh-CN.md
+docs/test-orchestration.md
+docs/test-workbench.md
+docs/validation.md
+docs/viewer-capture-validation.md
+docs/workbench-adoption-validation.md
+docs/workbench-business-template.md
+docs/workbench-p0-validation.md
+docs/workbench-reliability-matrix.md
+docs/workbench-validation.md
+docs/workbench-video-validation.md
+docs/workbench-visual-evaluation.md
+examples/business-http/cleanup.mjs
+examples/business-http/order.yaml.example
+examples/business-http/prepare.mjs
+examples/business-http/project.json.example
+examples/business-http/verify.mjs
+lib/android-parser-D1rK4Ijy.js
+lib/android-parser-DD89HG9o.js
+lib/android-parser-DD89HG9o.js.map
+lib/application.d.ts
+lib/application.js
+lib/config-BPFeLpic.js
+lib/config-BPFeLpic.js.map
+lib/config-CB5NNXg5.d.ts
+lib/config-CB5NNXg5.d.ts.map
+lib/doctor-BLcZmHX2.d.ts
+lib/doctor-BLcZmHX2.d.ts.map
+lib/doctor-DWasixC8.js
+lib/doctor-DWasixC8.js.map
+lib/element-finder-BLtu6vt8.js
+lib/element-finder-DyGs190Q.js
+lib/element-finder-DyGs190Q.js.map
+lib/external-files.d.ts
+lib/external-files.d.ts.map
+lib/external-files.js
+lib/external-parser.d.ts
+lib/external-parser.d.ts.map
+lib/external-parser.js
+lib/external-parser.js.map
+lib/host-runtime.d.ts
+lib/host-runtime.js
+lib/index.d.ts
+lib/index.d.ts.map
+lib/index.js
+lib/index.js.map
+lib/ios-parser-BIkXOcOO.js
+lib/ios-parser-BIkXOcOO.js.map
+lib/ios-parser-QWYpneXc.js
+lib/ios-wda-preflight-ZMXBG9gb.d.ts
+lib/ios-wda-preflight-ZMXBG9gb.d.ts.map
+lib/local-device-runtime-BA9uKHiw.js
+lib/local-device-runtime-BA9uKHiw.js.map
+lib/local-device-runtime-qjFZe_YM.d.ts
+lib/local-device-runtime-qjFZe_YM.d.ts.map
+lib/local-viewer-cli-BBTq1uzf.js
+lib/local-viewer-cli-BBTq1uzf.js.map
+lib/local-viewer-cli-BTf703hg.d.ts
+lib/local-viewer-cli-BTf703hg.d.ts.map
+lib/local-viewer-cli.d.ts
+lib/local-viewer-cli.js
+lib/locate-enabled-J8pIwI_D.js
+lib/locate-enabled-J8pIwI_D.js.map
+lib/managed-appium-runtime-Do1oB2RD.js
+lib/managed-appium-runtime-Do1oB2RD.js.map
+lib/managed-appium-runtime-DUQmEDLk.d.ts
+lib/managed-appium-runtime-DUQmEDLk.d.ts.map
+lib/mcp-config-Bvj9PfjM.d.ts
+lib/mcp-config-Bvj9PfjM.d.ts.map
+lib/mcp-config-Cx2aul0k.js
+lib/mcp-config-Cx2aul0k.js.map
+lib/mcp.d.ts
+lib/mcp.d.ts.map
+lib/mcp.js
+lib/mcp.js.map
+lib/onboarding-cli.d.ts
+lib/onboarding-cli.d.ts.map
+lib/onboarding-cli.js
+lib/onboarding-cli.js.map
+lib/parse-yaml-flow-BxnIk-5x.js
+lib/parse-yaml-flow-BxnIk-5x.js.map
+lib/run-yaml-flow-BQPrxg19.js
+lib/run-yaml-flow-BQPrxg19.js.map
+lib/screen-CJR8P5ny.js
+lib/screen-DCf9Ccct.js
+lib/screen-DCf9Ccct.js.map
+lib/selector-WbylpiLG.js
+lib/selector-WbylpiLG.js.map
+lib/stark-locate-C0qu0sND.js
+lib/stark-locate-C0qu0sND.js.map
+lib/terminal-BHjOJF2O.js
+lib/terminal-CM2d39HG.js
+lib/terminal-CM2d39HG.js.map
+lib/tool-contracts-C_xrZsJb.js
+lib/tool-contracts-C_xrZsJb.js.map
+lib/tools-D9OYkMDp.js
+lib/tools-D9OYkMDp.js.map
+lib/triage-rules.d.ts
+lib/triage-rules.js
+lib/types-Qd77OQNS.d.ts
+lib/types-Qd77OQNS.d.ts.map
+lib/variable-resolver-_PDwHNWH.js
+lib/variable-resolver-_PDwHNWH.js.map
+lib/viewer/inspection-query.js
+lib/viewer/selector-adapter.js
+lib/vision-execute-CHEk1WMW.js
+lib/vision-execute-CHEk1WMW.js.map
+lib/vision-execute-DHq8mBMS.js
+lib/vision-token-tracker-GSMmctoS.js
+lib/vision-token-tracker-GSMmctoS.js.map
+lib/window-size-Btgzi914.js
+lib/window-size-Btgzi914.js.map
+lib/window-size-CBubj7OJ.js
+lib/workbench-extension.js
+lib/workbench-extension.js.map
+lib/workbench-external-contracts-D91bf7e_.d.ts
+lib/workbench-external-contracts-D91bf7e_.d.ts.map
+lib/workbench-external-contracts-fNqFt4f-.js
+lib/workbench-external-contracts-fNqFt4f-.js.map
+lib/workbench-external-files-Bjkqk4Q8.js
+lib/workbench-external-files-Bjkqk4Q8.js.map
+lib/workbench-share-image-worker.js
+lib/workbench-share-image-worker.js.map
+lib/workbench-store-Cs6uP-nI.js
+lib/workbench-store-Cs6uP-nI.js.map
+lib/workbench-triage-rules-9DS2zVja.d.ts
+lib/workbench-triage-rules-9DS2zVja.d.ts.map
+lib/workbench-triage-rules-DB55uW4E.js
+lib/workbench-triage-rules-DB55uW4E.js.map
+lib/workbench-visual-worker.js
+lib/workbench-visual-worker.js.map
+lib/workbench-worker.js
+lib/workbench-worker.js.map
+LICENSE
+licenses/AppClaw-LICENSE.txt
+licenses/NOTICE.md
+package.json
+README.md
+README.zh-CN.md
+scripts/dsh-runtime-probe.mjs
+scripts/mobile-mirror-cli.mjs
+scripts/mobile-mirror-mcp.mjs
+scripts/mobile-mirror-viewer.mjs
+scripts/workbench-comparison-worker.mjs
+scripts/workbench-external-worker.mjs
+scripts/workbench-triage-worker.mjs
+viewer/app.js
+viewer/capture.js
+viewer/i18n.js
+viewer/index.html
+viewer/inspector.js
+viewer/styles.css
+viewer/workbench-acceptance.js
+viewer/workbench-baselines.js
+viewer/workbench-change-acceptance.js
+viewer/workbench-comparisons.js
+viewer/workbench-external.js
+viewer/workbench-history.js
+viewer/workbench-investigation.js
+viewer/workbench-repair.js
+viewer/workbench-results.js
+viewer/workbench-retention.js
+viewer/workbench-share.js
+viewer/workbench-trends.js
+viewer/workbench-triage.js
+viewer/workbench.js
+Tarball Details
+dsh-mobile-mirror-plugin-0.1.0-alpha.2.tgz

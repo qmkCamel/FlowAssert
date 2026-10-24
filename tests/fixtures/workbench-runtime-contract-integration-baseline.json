@@ -1,0 +1,8 @@
+{
+  "dev": "REDACTED_REVISION",
+  "changes": ["add-workbench-temporal-assertions", "add-workbench-health-performance-gates"],
+  "scope": "Opt-in product/summary v2 only; Worker v1, legacy flow and result golden fixtures remain frozen.",
+  "updatedFiles": {
+    "src/workbench-contracts.ts": "027c24c3b296e225f606af366d1f68020f007e5742bd17207fe3701c523e17db"
+  }
+}

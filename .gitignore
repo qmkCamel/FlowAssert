@@ -1,0 +1,62 @@
+node_modules/
+.pnpm-store/
+Maestro*/
+dist/
+lib/
+coverage/
+test-results/
+playwright-report/
+artifacts/runtime/
+.DS_Store
+*.log
+
+# Local environment and host/device configuration. Keep reviewable examples.
+.env
+.env.*
+!.env.example
+mobile-mirror.local.json
+mobile-mirror.viewer.json
+mobile-mirror.mcp.json
+mobile-mirror.dsh.patch.yml
+mobile-mirror.host-report.json
+mobile-mirror.capabilities.json
+mobile-mirror.device.json
+mobile-mirror.signing.json
+mobile-mirror.provisioning.json
+
+# Raw device evidence and host capabilities stay local, never in releases.
+artifacts/physical-validation/
+artifacts/simulator-validation/
+artifacts/fixture/
+# Uncurated physical-device screenshots stay on the capturing machine.
+artifacts/screenshots/*physical*
+
+# Original physical-case media for the local publicity demo.
+docs/communications/local-case-assets/
+
+artifacts/visual-acceptance/
+# Local recording scratch files; retain the curated MP4 and measurement JSON.
+artifacts/playback-layout/raw-video/
+artifacts/playback-layout/video-run/
+artifacts/playback-layout/recording.config.ts
+artifacts/playback-layout/recording-preview.png
+artifacts/playback-layout/demo-preview.png
+artifacts/playback-layout/playback-stability-2026-10-10.mp4
+artifacts/playback-layout/playback-stability-demo.webm
+artifacts/screenshots/playback-real-archive-*.png
+
+# Private environment/signing material, including future FlowAssert configs.
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+flowassert.local.json
+flowassert.viewer.json
+flowassert.mcp.json
+flowassert.dsh.patch.yml
+flowassert.host-report.json
+flowassert.capabilities.json
+flowassert.device.json
+flowassert.signing.json
+flowassert.provisioning.json

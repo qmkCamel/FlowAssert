@@ -1,0 +1,6 @@
+- insert:
+    - id: mobile-mirror-runtime-probe
+      name: flowassert/runtime-probe
+      inject:
+        - tools
+        - llm

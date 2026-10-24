@@ -1,0 +1,6 @@
+{
+  "decision": "ADR 0028: optional typed Web execution; native actions unchanged",
+  "updatedFiles": {
+    "src/viewer-workbench-runs-http.ts": "520882dc0b1fbfb896dea24e13f377be13b38b2d8165bfab12d28c083fa71d51"
+  }
+}

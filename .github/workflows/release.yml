@@ -1,0 +1,80 @@
+name: Release alpha prerelease
+
+on:
+  push:
+    tags:
+      - v0.1.0-alpha.2
+
+permissions:
+  contents: write
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.7.0 --activate
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check public repository readiness
+        run: pnpm public:check
+      - name: Check source and service contracts
+        run: pnpm check
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run Viewer E2E
+        run: pnpm test:e2e
+      - name: Build package
+        run: pnpm build
+      - name: Validate OpenSpec
+        run: pnpm dlx @fission-ai/openspec@1.9.0 validate --all --strict --no-interactive
+      - name: Pack the release candidate once
+        run: |
+          RELEASE_DIR="$RUNNER_TEMP/release"
+          mkdir -p "$RELEASE_DIR"
+          TARBALL="$(pnpm pack --pack-destination "$RELEASE_DIR" | tail -n 1)"
+          test "$(basename "$TARBALL")" = "flowassert-0.1.0-alpha.2.tgz"
+          echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
+          echo "TARBALL=$TARBALL" >> "$GITHUB_ENV"
+          echo "CHECKSUM=$RELEASE_DIR/flowassert-0.1.0-alpha.2.sha256" >> "$GITHUB_ENV"
+      - name: Validate version and generate checksum
+        run: |
+          node scripts/prepare-release.mjs --tarball "$TARBALL" --output "$CHECKSUM" --tag "$GITHUB_REF_NAME"
+          cd "$RELEASE_DIR"
+          sha256sum --check "$(basename "$CHECKSUM")"
+      - name: Probe clean package and MCP runtime
+        run: node scripts/release-candidate-probe.mjs --tarball "$TARBALL" --checksum "$CHECKSUM"
+      - name: Install and probe managed Appium
+        run: |
+          npm install --ignore-scripts --legacy-peer-deps --omit=dev --prefix "$RUNNER_TEMP/mobile-mirror-runtime" "$TARBALL"
+          npm install --ignore-scripts --legacy-peer-deps --omit=dev --prefix "$RUNNER_TEMP/appium" appium@3.2.0
+          node scripts/managed-appium-smoke.mjs \
+            --package-root "$RUNNER_TEMP/mobile-mirror-runtime/node_modules/flowassert" \
+            --appium "$RUNNER_TEMP/appium/node_modules/.bin/appium"
+      - name: Probe DeepSeek Harness 0.2.0-rc.2 clean profile
+        run: |
+          node scripts/install-dsh-probe-runtime.mjs --directory "$RUNNER_TEMP/dsh"
+          node scripts/dsh-clean-profile-probe.mjs \
+            --dsh "$RUNNER_TEMP/dsh/node_modules/.bin/dsh" \
+            --tarball "$TARBALL"
+      - name: Create verified GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --verify-tag \
+            --prerelease \
+            --title "FlowAssert 0.1.0-alpha.2" \
+            --notes-file docs/releases/0.1.0-alpha.2.md \
+            "$TARBALL" \
+            "$CHECKSUM" \
+            "docs/releases/0.1.0-alpha.2.md"

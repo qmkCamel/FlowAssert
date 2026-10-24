@@ -1,0 +1,27 @@
+name: 第三方 App Android · 精选与首页切换
+platform: android
+appId: com.example.sampleapp
+blockers:
+  - text:
+      value: 跳过
+      match: contains
+---
+- launchApp
+- tap:
+    accessibilityId: 精选
+- wait: 2
+- assertVisible:
+    accessibilityId: SAMPLE_FEATURED_PAGE
+- tap:
+    accessibilityId: 首页
+- wait: 2
+- assertNotVisible:
+    accessibilityId: SAMPLE_FEATURED_PAGE
+- assertVisible:
+    text: 首页
+- tap:
+    accessibilityId: 精选
+- wait: 2
+- assertVisible:
+    accessibilityId: SAMPLE_FEATURED_PAGE
+- done

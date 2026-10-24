@@ -1,0 +1,11 @@
+{
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:udid": "REPLACE_WITH_SELECTED_DEVICE",
+  "appium:appPackage": "dev.mobilemirror.fixture",
+  "appium:appActivity": "dev.mobilemirror.fixture.MainActivity",
+  "appium:noReset": true,
+  "appium:settings[waitForIdleTimeout]": 0,
+  "appium:settings[enableNotificationListener]": false,
+  "appium:newCommandTimeout": 120
+}

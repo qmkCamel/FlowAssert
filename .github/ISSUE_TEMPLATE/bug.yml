@@ -1,0 +1,75 @@
+name: Bug report
+description: Report a reproducible FlowAssert defect with sanitized evidence.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. For security vulnerabilities use private vulnerability reporting, not this form. Never attach device IDs, capabilities, signing/account data, host reports, raw logs or unredacted screenshots.
+  - type: dropdown
+    id: path
+    attributes:
+      label: Affected path
+      options:
+        - Mock Viewer
+        - DeepSeek Harness 0.2.0-rc.2
+        - MCP or Codex
+        - Managed Appium
+        - External Appium
+        - Android physical device
+        - iOS physical device
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Sanitized environment
+      description: Include relevant FlowAssert, Node, pnpm, DSH, Appium/driver and host OS versions. Do not include device identifiers.
+      placeholder: |
+        Branch / commit SHA (git rev-parse HEAD):
+        Local modifications (yes/no):
+        FlowAssert: 0.1.0-alpha.2
+        Node: 24.19.0
+        pnpm: 11.7.0
+        DSH: 0.2.0-rc.2 (only if used)
+        Host OS:
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Prefer Mock or a synthetic fixture. Include beta task number, elapsed time, and help needed if applicable. List exact steps without credentials or private paths.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and stable error codes
+      description: Use stable FlowAssert error codes and short sanitized summaries instead of raw logs.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification commands run
+      description: List only commands you actually ran and identify what remains unverified.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched existing issues and reproduced this on a documented baseline.
+          required: true
+        - label: I removed device/account/signing identifiers, capabilities, host reports, credentials, private paths and raw logs.
+          required: true
+        - label: This is not an undisclosed security vulnerability.
+          required: true
+        - label: I agree to follow the Code of Conduct.
+          required: true

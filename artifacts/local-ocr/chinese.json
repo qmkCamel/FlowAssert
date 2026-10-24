@@ -1,0 +1,109 @@
+{
+  "synthetic": true,
+  "contractVersion": 1,
+  "candidate": true,
+  "productionEnabled": false,
+  "decision": {
+    "status": "pass",
+    "reason": "ocr-exact-match"
+  },
+  "output": {
+    "contractVersion": 1,
+    "helperVersion": "1",
+    "osVersion": "Version 26.3.1 (Build 25D2128)",
+    "arch": "arm64",
+    "requestRevision": 3,
+    "languages": [
+      "zh-Hans"
+    ],
+    "boxes": [
+      {
+        "text": "订单",
+        "confidence": 1,
+        "box": {
+          "x": 0.4093750002283654,
+          "y": 0.3599999988846154,
+          "width": 0.184375,
+          "height": 0.2899999999999999
+        }
+      }
+    ]
+  },
+  "identity": {
+    "sourceSha256": "955aa3a4c496f5ca997b5177457aca3fa2a6309e57b3b2523f532906b1066770",
+    "binarySha256": "8df882e820d1dbc365390a62eb1f5e9ac21e76473d7bb97974b876d19ebaca9c",
+    "capabilities": {
+      "contractVersion": 1,
+      "helperVersion": "1",
+      "osVersion": "Version 26.3.1 (Build 25D2128)",
+      "arch": "arm64",
+      "revisions": [
+        {
+          "revision": 1,
+          "languages": [
+            "en-US"
+          ]
+        },
+        {
+          "revision": 2,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant"
+          ]
+        },
+        {
+          "revision": 3,
+          "languages": [
+            "en-US",
+            "fr-FR",
+            "it-IT",
+            "de-DE",
+            "es-ES",
+            "pt-BR",
+            "zh-Hans",
+            "zh-Hant",
+            "yue-Hans",
+            "yue-Hant",
+            "ko-KR",
+            "ja-JP",
+            "ru-RU",
+            "uk-UA",
+            "th-TH",
+            "vi-VT",
+            "ar-SA",
+            "ars-SA",
+            "tr-TR",
+            "id-ID",
+            "cs-CZ",
+            "da-DK",
+            "nl-NL",
+            "no-NO",
+            "nn-NO",
+            "nb-NO",
+            "ms-MY",
+            "pl-PL",
+            "ro-RO",
+            "sv-SE"
+          ]
+        }
+      ]
+    }
+  },
+  "profileDigest": "fb21780b23489d15ee9ff894582cf3814edab5a9032c5ffaeace642634e30503",
+  "imageSha256": "17a6d2e9c2f2c24fa3b2e2fefdfeac9128a9d3aa5e50ecbc851ebd2c9cef7c44",
+  "cropSha256": "17a6d2e9c2f2c24fa3b2e2fefdfeac9128a9d3aa5e50ecbc851ebd2c9cef7c44",
+  "region": {
+    "x": 0,
+    "y": 0,
+    "width": 640,
+    "height": 200
+  },
+  "durationMs": 309.11679100000003,
+  "completedAt": "2026-10-01T07:25:55.704Z"
+}

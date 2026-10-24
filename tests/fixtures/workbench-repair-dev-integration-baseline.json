@@ -1,0 +1,12 @@
+{
+  "dev": "REDACTED_REVISION",
+  "repair": "REDACTED_REVISION",
+  "scope": "Reviewed additive repair CLI dispatch, separately opt-in repair tool contracts, and matching tests only. Default 20 tool names, existing command branches, HTTP run routes and result golden fixtures remain unchanged.",
+  "updatedFiles": {
+    "src/workbench-cli.ts": "7933338dad507537b595331148960d7156f675e35d235524c8a0576125371be3",
+    "src/mobile-mirror-commands.ts": "3b40607d2473be4ec26876d0efeac5a5e1abf7405488eafa3025452a8260fe0a",
+    "tests/workbench-cli.test.ts": "9e3ebd2055d81f45697a49cd4ea1400465c1c86e16ff44944254e2ae740c53fe",
+    "tests/mcp-server.test.ts": "5136a447e747926385eacd2c49ffa6e42e2f0216ccd5ba4822604a0259f57aef",
+    "src/tool-contracts.ts": "4288b8cbf830209288f79f7b10a341ff95d0428165669ae997aa6947a0cb9d6e"
+  }
+}

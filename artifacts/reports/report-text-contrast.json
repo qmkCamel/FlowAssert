@@ -1,0 +1,80 @@
+[
+  {
+    "selector": "#analysis-summary h1",
+    "text": "Report 1",
+    "ratio": 15.980354872415944,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary > p",
+    "text": "Recorded verdict: Failed",
+    "ratio": 15.980354872415944,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary > p",
+    "text": "Current evidence: Material integrity checked",
+    "ratio": 15.980354872415944,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary > p",
+    "text": "ios · Synthetic phone · 10/6/2026, 8:00:00 AM · Unknown build",
+    "ratio": 15.980354872415944,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary > p",
+    "text": "Earliest recorded failure: 1. Check expectation · Expected visible control",
+    "ratio": 15.980354872415944,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary > p",
+    "text": "1 required checks did not pass; expand full verification scope.",
+    "ratio": 9.70897450493992,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-summary .wb-warning",
+    "text": "1 required checks did not pass; expand full verification scope.",
+    "ratio": 9.70897450493992,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-next-failure",
+    "text": "Next failure",
+    "ratio": 10.975176118686592,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#analysis-steps label",
+    "text": "Search steps",
+    "ratio": 12.052768241256118,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#journey-analysis > nav a",
+    "text": "Overview",
+    "ratio": 10.636406104449517,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#journey-analysis > nav a",
+    "text": "Steps & evidence",
+    "ratio": 10.636406104449517,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#journey-analysis > nav a",
+    "text": "History & comparison",
+    "ratio": 10.636406104449517,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  },
+  {
+    "selector": "#journey-analysis > nav a",
+    "text": "Share",
+    "ratio": 10.636406104449517,
+    "scope": "Text colors over computed solid backgrounds; gradients and screen readers require separate review"
+  }
+]

@@ -1,0 +1,15 @@
+packages:
+  - .
+
+autoInstallPeers: false
+
+# Only the native declarative executor is used; MirrorService owns Appium.
+# Never install/start AppClaw's independent device/session stack.
+overrides:
+  '@appclaw/core@2.7.0>appium-mcp': '-'
+
+allowBuilds:
+  '@google/genai': false
+  esbuild: true
+  protobufjs: false
+  sharp: false

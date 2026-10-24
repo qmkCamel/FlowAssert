@@ -1,0 +1,19 @@
+{
+  "flows": {"twoSubmit": "two-submit.yaml"},
+  "extensions": {
+    "onlyOnce": {
+      "module": "verify-only-once.mjs", "role": "verify", "timeoutMs": 12000,
+      "observation": {"readOnly": true, "repeatable": true, "allowedModes": ["once"]},
+      "credentials": {},
+      "input": {"type": "object", "properties": {
+        "base": {"type": "string"}, "id": {"type": "string"}, "owner": {"type": "string"},
+        "expectedAmount": {"type": "number"}, "windowMs": {"type": "number"}
+      }, "required": ["base", "id", "owner", "expectedAmount", "windowMs"]},
+      "output": {"type": "object", "properties": {
+        "verdict": {"type": "string"}, "expected": {"type": "string"}, "actual": {"type": "string"},
+        "source": {"type": "string"}, "readAt": {"type": "string"}, "artifactRefs": {"type": "array", "items": {"type": "string"}}
+      }, "required": ["verdict", "expected", "actual", "source", "readAt", "artifactRefs"]}
+    }
+  },
+  "suites": {"twoSubmit": {"name": "Two explicit submits", "cases": [{"id": "once", "flow": "twoSubmit", "retries": 0}]}}
+}

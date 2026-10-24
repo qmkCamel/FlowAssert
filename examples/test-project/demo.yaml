@@ -1,0 +1,19 @@
+name: Data-driven greeting
+platform: ios
+appId: com.example.mobilemirror.mock
+params:
+  enabled: {type: boolean}
+  label: {type: string}
+---
+- runFlow: {ref: common}
+- if:
+    condition: {equals: ['{{ params.enabled }}', true]}
+    then:
+      - repeat:
+          times: 2
+          steps:
+            - assertVisible:
+                text: '{{ params.label }}'
+    else:
+      - assertVisible:
+          text: '{{ params.label }}'

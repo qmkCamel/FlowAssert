@@ -1,0 +1,43 @@
+name: Optional Web visual evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      collect_evidence:
+        description: Collect synthetic Viewer evidence on the dedicated local runner
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-mirror-web-visual
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.event_name == 'workflow_dispatch' && inputs.collect_evidence && github.ref_protected
+    runs-on: [self-hosted, macOS, mobile-mirror, macos-visual]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check pinned local toolchain
+        run: |
+          test "$(node --version)" = "v24.19.0"
+          test "$(pnpm --version)" = "11.7.0"
+      - name: Install reviewed project dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Collect synthetic evidence
+        run: |
+          pnpm test:visual:pilot --extended
+          node -e 'console.log("Evidence collected; visual review and independent gate are still required. This job does not assert acceptance.")'
+      - name: Retain success and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-visual-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/visual-acceptance/
+          retention-days: 14
+          if-no-files-found: warn

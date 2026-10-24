@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.7.0 --activate
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check public repository readiness
+        run: pnpm public:check
+      - name: Check source and service contracts
+        run: pnpm check
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run Viewer E2E
+        run: pnpm test:e2e
+      - name: Build and inspect package
+        run: |
+          pnpm build
+          pnpm pack:check
+      - name: Validate OpenSpec
+        run: pnpm dlx @fission-ai/openspec@1.9.0 validate --all --strict --no-interactive

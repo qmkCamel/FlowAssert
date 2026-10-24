@@ -1,0 +1,12 @@
+schema: spec-driven
+context: |
+  DeepSeek Harness plugin for local mobile mirroring and control. The repository uses
+  Node 24, TypeScript ESM, pnpm, Vitest, and Playwright. Appium is the cross-platform
+  semantic control core; media stays on a local Viewer path rather than in agent results.
+rules:
+  proposal:
+    - Identify platform support and security boundaries.
+  design:
+    - Keep the DSH adapter thin and the core reusable by a future MCP adapter.
+  tasks:
+    - Include deterministic tests and real runtime UI verification.

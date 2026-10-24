@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowAssert</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="FlowAssert home" data-i18n-aria-label="brand.home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span>
+            <strong>FlowAssert</strong>
+            <small data-i18n="brand.subtitle">Local agent device bridge</small>
+          </span>
+        </a>
+        <div class="topbar-actions">
+          <div class="language-control">
+            <label class="visually-hidden" for="language-select" data-i18n="language.label">Language</label>
+            <select id="language-select" data-testid="language-select" aria-label="Language" title="Choose interface language" data-i18n-aria-label="language.label" data-i18n-title="language.title">
+              <option value="en">English</option>
+              <option value="zh-CN">简体中文</option>
+            </select>
+          </div>
+          <div class="connection-pill" data-testid="connection-pill">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="connection-label" data-i18n="lifecycle.idle">Idle</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Mobile mirror workspace" data-i18n-aria-label="workspace.label">
+        <aside class="control-panel">
+          <div class="eyebrow" data-i18n="control.eyebrow">SESSION CONTROL</div>
+          <h1><span class="hero-primary" data-i18n="hero.see">See the device.</span><br /><span data-i18n="hero.direct">Direct the agent.</span></h1>
+          <p class="lede" data-i18n="hero.lede">A local, inspectable bridge between your phone and your agent host. Screen sharing follows the explicit policy shown below.</p>
+
+          <div class="field-group">
+            <label for="provider" data-i18n="provider.label">Provider</label>
+            <div class="select-wrap">
+              <select id="provider" data-testid="provider-select">
+                <option value="mock" data-i18n="provider.mock">Mock device · demo</option>
+                <option value="appium" data-i18n="provider.appium">Appium · device</option>
+              </select>
+            </div>
+          </div>
+
+          <details class="assistant-panel" id="environment-preflight">
+            <summary data-i18n="preflight.title">Environment prerequisites</summary>
+            <p data-i18n="preflight.scope">Read-only, selected operation only. This does not verify a device session or model call.</p>
+            <label><span data-i18n="preflight.operation">Operation</span>
+              <select id="preflight-operation"><option value="runtime">Runtime</option><option value="report">Report</option><option value="mock">Mock</option><option value="test">Registered test</option></select>
+            </label>
+            <label id="preflight-test-row" hidden><span data-i18n="preflight.test">Registered test reference</span><input id="preflight-test-ref" placeholder="flow:smoke or suite:smoke" maxlength="70"></label>
+            <div id="preflight-features" hidden>
+              <label>OCR <select data-preflight-feature="ocr"><option value="off">off</option><option value="preferred">preferred</option><option value="required">required</option></select></label>
+              <label>AI recovery <select data-preflight-feature="ai-recovery"><option value="off">off</option><option value="preferred">preferred</option><option value="required">required</option></select></label>
+              <label data-i18n="preflight.recording">Browser recording</label><select aria-label="Browser recording" data-preflight-feature="recording"><option value="off">off</option><option value="preferred">preferred</option><option value="required">required</option></select>
+            </div>
+            <button id="preflight-check" type="button" data-i18n="preflight.check">Check selected scope</button>
+            <button id="preflight-cancel" type="button" hidden data-i18n="preflight.cancel">Cancel</button>
+            <p id="preflight-progress" role="status" hidden data-i18n="preflight.progress">Checking… Other controls remain available.</p>
+            <p id="preflight-error" role="alert" hidden></p>
+            <p id="preflight-stale" hidden data-i18n="preflight.stale">Previous scope — check again for the current selection.</p>
+            <div id="preflight-result" aria-live="polite"></div>
+          </details>
+
+          <section class="assistant-panel" id="assistant-panel" data-testid="assistant-panel" hidden>
+            <div class="assistant-heading">
+              <div>
+                <strong data-i18n="assistant.heading">Connect a phone or simulator</strong>
+                <span data-i18n="assistant.subheading">Read-only checks first. Nothing is installed automatically.</span>
+              </div>
+              <button class="text-button" id="assistant-cancel-button" type="button" data-i18n="assistant.clear" hidden>Clear</button>
+            </div>
+
+            <div class="platform-switch" role="group" aria-label="Device platform" data-i18n-aria-label="assistant.platform.label">
+              <button type="button" data-platform="android" class="selected" data-testid="platform-android">Android</button>
+              <button type="button" data-platform="ios" data-testid="platform-ios">iPhone</button>
+            </div>
+
+            <div class="saved-setup" id="assistant-saved-setup" data-testid="assistant-saved-setup" hidden>
+              <span><strong data-i18n="assistant.saved.title">Saved setup is ready</strong><small id="assistant-saved-detail" data-i18n="assistant.saved.detail.ios">One click will check this Mac and connect the only available iPhone.</small></span>
+              <button class="primary-button" id="assistant-quick-connect-button" type="button" data-testid="assistant-quick-connect-button" data-i18n="assistant.quickConnect">Check &amp; connect</button>
+            </div>
+
+            <label for="assistant-device-kind"><span data-i18n="assistant.kind.label">Device type</span></label>
+            <select id="assistant-device-kind" data-testid="assistant-device-kind">
+              <option value="physical" data-i18n="assistant.kind.physical">USB phone</option>
+              <option value="simulator" data-i18n="assistant.kind.simulator">Simulator / emulator</option>
+            </select>
+            <p id="assistant-simulator-hint" data-i18n="assistant.simulator.hint" hidden>Start a simulator in Xcode or Android Studio, then check again. Connecting may install the automation helper.</p>
+
+            <label><span data-i18n="preflight.media">Low-latency media</span><select id="assistant-media-policy"><option value="off">off · PNG</option><option value="preferred">preferred · PNG fallback</option><option value="required">required</option></select></label>
+
+            <button class="check-button" id="assistant-check-button" type="button" data-testid="assistant-check-button" data-i18n="assistant.check.initial">
+              Check this Mac &amp; USB device
+            </button>
+
+            <div class="assistant-progress" id="assistant-progress" role="status" aria-live="polite" hidden>
+              <span class="spinner" aria-hidden="true"></span>
+              <span><strong id="assistant-progress-title">Checking Android…</strong><small data-i18n="assistant.progress.controls">Viewer controls remain available.</small></span>
+            </div>
+
+            <div class="assistant-report" id="assistant-report" data-testid="assistant-report" hidden>
+              <div class="assistant-summary">
+                <strong id="assistant-summary-title">Action required</strong>
+                <span id="assistant-summary-expiry"></span>
+              </div>
+              <div class="readiness-list" id="assistant-checks"></div>
+
+              <label for="assistant-device" data-i18n="assistant.device.label">USB device</label>
+              <div class="select-wrap"><select id="assistant-device" data-testid="assistant-device"></select></div>
+              <label for="assistant-target" data-i18n="assistant.target.label">Connection mode</label>
+              <div class="select-wrap"><select id="assistant-target" data-testid="assistant-target" aria-describedby="assistant-target-hint">
+                <option value="current-screen" data-i18n="assistant.target.current">View current screen</option>
+                <option value="settings" data-i18n="assistant.target.settings">Open system Settings</option>
+              </select></div>
+              <p class="advanced-note" id="assistant-target-hint" data-i18n="assistant.target.currentHint">No app is launched or restarted by this preset. First-time automation setup may briefly change the screen.</p>
+              <label for="assistant-runtime" data-i18n="assistant.runtime.label">Appium runtime</label>
+              <div class="select-wrap"><select id="assistant-runtime" data-testid="assistant-runtime"></select></div>
+
+              <div id="android-assistant-fields">
+                <label class="confirmation-row" for="android-helper-confirmation">
+                  <input id="android-helper-confirmation" type="checkbox" />
+                  <span data-i18n="assistant.android.helper">I understand UiAutomator2 may install/update its helper APKs on this phone.</span>
+                </label>
+                <div class="manual-boundary" role="note">
+                  <strong data-i18n="assistant.android.manual.title">Confirm on the phone</strong>
+                  <span data-i18n="assistant.android.manual.detail">Keep it unlocked, enable USB debugging, and accept this Mac’s ADB authorization prompt.</span>
+                </div>
+              </div>
+
+              <div id="ios-assistant-fields" hidden>
+                <label for="ios-team-id"><span class="label-copy" data-i18n="assistant.ios.team">Apple Team ID</span><span class="label-note" data-i18n="assistant.ios.onlyWhenRequested">only when requested</span></label>
+                <input id="ios-team-id" autocomplete="off" maxlength="10" placeholder="10-character Team ID" data-i18n-placeholder="assistant.ios.teamPlaceholder" />
+                <label for="ios-wda-bundle-id"><span class="label-copy" data-i18n="assistant.ios.bundle">WDA bundle ID</span><span class="label-note" data-i18n="assistant.ios.onlyWhenRequested">only when requested</span></label>
+                <input id="ios-wda-bundle-id" autocomplete="off" maxlength="255" placeholder="com.example.WebDriverAgentRunner" />
+                <div class="manual-boundary" role="note">
+                  <strong data-i18n="assistant.ios.manual.title">Confirm on the iPhone</strong>
+                  <span data-i18n="assistant.ios.manual.detail">Trust this Mac, enable Developer Mode, and allow UI Automation. The assistant never logs into Apple or registers devices.</span>
+                </div>
+              </div>
+
+              <label class="confirmation-row" id="remember-setup-row" for="remember-setup" hidden>
+                <input id="remember-setup" type="checkbox" />
+                <span data-i18n="assistant.remember">Remember the validated Appium and signing defaults on this Mac. Device identifiers are never saved.</span>
+              </label>
+
+              <button class="primary-button assistant-connect" id="assistant-connect-button" type="button" data-testid="assistant-connect-button" data-i18n="assistant.connectDevice">Connect device</button>
+            </div>
+
+            <div class="policy-summary" data-testid="policy-summary">
+              <strong data-i18n="assistant.policy.title">Unchanged Agent policies</strong>
+              <span id="assistant-policy-summary" data-i18n="assistant.policy.initial">Screen, text, and app-control sharing remain profile-controlled.</span>
+            </div>
+          </section>
+
+          <details id="appium-options" data-testid="advanced-appium" hidden>
+            <summary data-i18n="advanced.summary">Advanced Appium connection</summary>
+            <p class="advanced-note" data-i18n="advanced.note">Attach an existing session or provide raw capabilities to launch a specific app or customize the connection.</p>
+            <label for="session-id"><span class="label-copy" data-i18n="advanced.session">Existing session ID</span><span class="label-note" data-i18n="advanced.optional">optional</span></label>
+            <input id="session-id" autocomplete="off" placeholder="Attach without taking ownership" data-i18n-placeholder="advanced.sessionPlaceholder" />
+            <label for="capabilities"><span class="label-copy" data-i18n="advanced.capabilities">Capabilities JSON</span><span class="label-note" data-i18n="advanced.requiredNew">required for new session</span></label>
+            <textarea id="capabilities" rows="6" spellcheck="false">{
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "Android"
+}</textarea>
+            <button class="primary-button advanced-start" id="advanced-start-button" type="button" data-testid="advanced-start-button" data-i18n="advanced.start">Start advanced connection</button>
+          </details>
+
+          <div class="provisioning-warning" id="android-policy-warning" data-testid="android-policy-warning" role="note" hidden>
+            <strong data-i18n="warning.android.title">Android hidden API compatibility is enabled</strong>
+            <span><span data-i18n="warning.android.beforeCode">UiAutomator2 may continue when the device rejects policy changes. Set</span> <code>appium:ignoreHiddenApiPolicyError</code> <span data-i18n="warning.android.afterCode">to false for strict failure.</span></span>
+          </div>
+
+          <div class="provisioning-warning" id="provisioning-warning" data-testid="provisioning-warning" role="note" hidden>
+            <strong data-i18n="warning.ios.title">Automatic device registration is enabled</strong>
+            <span data-i18n="warning.ios.detail">Starting a new iOS session may modify Apple Developer provisioning state.</span>
+          </div>
+
+          <div class="button-row">
+            <button class="primary-button" id="start-button" data-testid="start-button">
+              <span class="button-icon" aria-hidden="true">▶</span>
+              <span data-i18n="controls.startDemo">Start demo</span>
+            </button>
+            <button class="secondary-button" id="stop-button" data-testid="stop-button" data-i18n="controls.stop" disabled>Stop</button>
+          </div>
+
+          <div class="operation" id="operation" role="status" aria-live="polite" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span>
+              <strong id="operation-title" data-i18n="operation.connect.title">Connecting…</strong>
+              <small id="operation-detail" data-i18n="operation.connect.detail">Preparing the device session</small>
+            </span>
+          </div>
+
+          <div class="error-message" id="error-message" role="alert" hidden></div>
+
+          <div class="agent-observation" id="agent-observation" data-testid="agent-observation" role="status" aria-live="polite">
+            <strong id="agent-observation-title" data-i18n="observation.idle.title">Agent observation idle</strong>
+            <span id="agent-observation-detail" data-i18n="observation.idle.detail">No capture is running.</span>
+          </div>
+
+          <div class="agent-control" id="agent-control" data-testid="agent-control" role="status" aria-live="polite">
+            <strong id="agent-control-title" data-i18n="control.idle.title">Agent control idle</strong>
+            <span id="agent-control-detail" data-i18n="control.idle.detail">No control operation is running.</span>
+          </div>
+
+          <dl class="session-meta">
+            <div><dt data-i18n="meta.provider">Provider</dt><dd id="meta-provider">—</dd></div>
+            <div><dt data-i18n="meta.session">Session</dt><dd id="meta-session">—</dd></div>
+            <div><dt data-i18n="meta.lastFrame">Last frame</dt><dd id="meta-frame">—</dd></div>
+            <div><dt data-i18n="meta.viewerMedia">Viewer media</dt><dd id="meta-media" data-i18n="media.polling">polling</dd></div>
+            <div><dt data-i18n="meta.agentPolicy">Agent policy</dt><dd id="meta-agent-policy">—</dd></div>
+          </dl>
+        </aside>
+
+        <section class="stage" aria-label="Device preview" data-i18n-aria-label="stage.label">
+          <div class="stage-toolbar">
+            <div class="stage-toolbar-copy">
+              <span class="live-indicator"><i aria-hidden="true"></i><span data-i18n="stage.live">LIVE VIEW</span></span>
+              <strong id="device-name" data-i18n="stage.noDevice">No device connected</strong>
+            </div>
+            <div class="stage-toolbar-actions">
+              <button id="inspect-button" type="button" disabled>Inspect screen</button>
+              <div class="capture-controls" role="group" data-i18n-aria-label="capture.group" aria-label="Save phone screen">
+                <button id="capture-screenshot" type="button" disabled data-i18n="capture.screenshot">Screenshot</button>
+                <button id="capture-record" type="button" disabled aria-pressed="false" data-i18n="capture.start">Record</button>
+                <output id="capture-timer" aria-label="Recording duration" data-i18n-aria-label="capture.duration" hidden></output>
+              </div>
+              <div class="zoom-controls" role="group" aria-label="Device preview zoom" data-i18n-aria-label="zoom.group">
+                <button class="zoom-fit-button" id="zoom-fit-button" data-testid="zoom-fit-button" type="button" aria-label="Fit device to preview" title="Fit device to preview" data-i18n-aria-label="zoom.fit.title" data-i18n-title="zoom.fit.title"><span data-i18n="zoom.fit">Fit</span></button>
+                <button class="zoom-step-button" id="zoom-out-button" data-testid="zoom-out-button" type="button" aria-label="Zoom out device preview" title="Zoom out device preview" data-i18n-aria-label="zoom.out" data-i18n-title="zoom.out"><span aria-hidden="true">−</span></button>
+                <output class="zoom-value" id="zoom-value" data-testid="zoom-value" aria-live="polite">Fit</output>
+                <button class="zoom-step-button" id="zoom-in-button" data-testid="zoom-in-button" type="button" aria-label="Zoom in device preview" title="Zoom in device preview" data-i18n-aria-label="zoom.in" data-i18n-title="zoom.in"><span aria-hidden="true">+</span></button>
+              </div>
+              <button class="icon-button" id="theme-button" data-testid="theme-button" aria-label="Toggle display theme" title="Toggle display theme" data-i18n-aria-label="theme.label" data-i18n-title="theme.label">◐</button>
+            </div>
+          </div>
+
+          <div class="capture-results">
+            <span id="capture-message" role="status" aria-live="polite" data-i18n="capture.hint">Save the displayed phone screen. No audio.</span>
+            <a id="capture-png" download hidden data-i18n="capture.downloadPng">Download PNG</a>
+            <a id="capture-video" download hidden data-i18n="capture.downloadVideo">Download video</a>
+          </div>
+          <section id="inspector" hidden aria-label="Screen inspector">
+            <div class="inspection-toolbar">
+              <button id="inspection-refresh" type="button" data-inspection-key="refresh"></button>
+              <button id="inspection-cancel" type="button" data-inspection-key="cancel" hidden></button>
+              <button id="inspection-live" type="button" data-inspection-key="live"></button>
+              <span id="inspection-status" role="status" aria-live="polite"></span><time id="inspection-time"></time>
+            </div>
+            <p data-inspection-key="local"></p><p id="inspection-warning"></p><p id="inspection-geometry-warning"></p>
+            <div class="inspection-grid">
+              <div id="inspection-scroll"><div id="inspection-surface"><img id="inspection-image" alt="Frozen inspection" /><div id="inspection-overlay"></div></div></div>
+              <aside class="inspection-panel">
+                <div class="inspection-filters">
+                  <select id="inspection-search-mode" data-inspection-label="searchMode"><option value="text" data-key="text"></option><option value="identifier" data-key="identifier"></option></select>
+                  <input id="inspection-search" type="search" maxlength="128" data-inspection-label="search" />
+                  <select id="inspection-role" data-inspection-label="role"><option value="" data-key="allRoles"></option></select>
+                  <select id="inspection-region" data-inspection-label="region"><option value="" data-key="allRegions"></option></select>
+                  <label><input id="inspection-visible" type="checkbox" /><span data-inspection-key="visibleOnly"></span></label>
+                  <label><input id="inspection-actionable" type="checkbox" /><span data-inspection-key="actionableOnly"></span></label>
+                </div>
+                <div id="inspection-candidates" aria-label="Overlapping candidates"></div>
+                <div id="inspection-tree" role="tree" data-inspection-label="tree"></div><p id="inspection-empty"></p>
+                <button id="inspection-more" type="button" hidden data-inspection-key="more"></button>
+                <h3 data-inspection-key="details"></h3><dl id="inspection-details"></dl><span id="inspection-selection-status" role="status" aria-live="polite"></span>
+                <section class="inspection-authoring" aria-label="YAML draft">
+                  <h3 data-inspection-key="draftTitle"></h3><p data-inspection-key="draftNotice"></p>
+                  <div id="inspection-selector-options"></div>
+                  <div class="inspection-toolbar"><button id="inspection-add-tap" type="button" data-inspection-key="addTap"></button><button id="inspection-add-assert" type="button" data-inspection-key="addAssert"></button><button id="inspection-add-wait" type="button" data-inspection-key="addWait"></button></div>
+                  <p id="inspection-ready-target" class="wb-note"></p><div class="inspection-toolbar"><button id="inspection-add-ready-tap" type="button" data-inspection-key="addReadyTap"></button><button id="inspection-add-ready-assert" type="button" data-inspection-key="addReadyAssert"></button></div>
+                  <label for="inspection-draft" data-inspection-key="draftLabel"></label><textarea id="inspection-draft" spellcheck="false"></textarea>
+                  <div class="inspection-toolbar"><button id="inspection-validate" type="button" data-inspection-key="validateDraft"></button><button id="inspection-copy" type="button" data-inspection-key="copyDraft"></button><button id="inspection-download" type="button" data-inspection-key="downloadDraft"></button><button id="inspection-use-draft" type="button" data-inspection-key="useDraft"></button></div>
+                  <p id="inspection-draft-status" role="status" aria-live="polite"></p><div id="inspection-draft-issues"></div>
+                </section>
+              </aside>
+            </div>
+          </section>
+          <div class="device-area" id="device-area" data-testid="device-area">
+            <div class="device-area-inner" id="device-area-inner">
+              <div class="phone" id="phone" data-testid="phone-preview">
+                <div class="phone-frame">
+                  <div class="phone-island"></div>
+                  <div class="empty-state" id="empty-state">
+                    <div class="empty-glyph"><span></span></div>
+                    <strong data-i18n="empty.title">Ready when you are</strong>
+                    <p data-i18n="empty.detail">Start the demo or connect an Appium session.</p>
+                  </div>
+                  <img id="device-frame" alt="Live mobile device screen" data-i18n-alt="image.frameAlt" hidden />
+                  <img id="device-mjpeg" alt="Low-latency iOS device stream" data-i18n-alt="image.mjpegAlt" hidden />
+                  <canvas id="device-video" aria-label="Low-latency Android device stream" data-i18n-aria-label="image.videoLabel" hidden></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-dock" aria-label="Device controls" data-i18n-aria-label="actions.label">
+            <button id="back-button" data-action="back" disabled><span aria-hidden="true">←</span><span data-i18n="actions.back">Back</span></button>
+            <button id="tap-button" data-action="tap" disabled><span aria-hidden="true">◎</span><span data-i18n="actions.tap">Test tap</span></button>
+            <button id="swipe-button" data-action="swipe" disabled><span aria-hidden="true">↥</span><span data-i18n="actions.swipe">Test swipe</span></button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "contractVersion": 1,
+  "kind": "derived",
+  "sourceRef": "artifact:original",
+  "transformation": "redacted-png-v1",
+  "integrity": "verified",
+  "sharing": "content"
+}

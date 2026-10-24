@@ -1,0 +1,12 @@
+{
+  "defaultProvider": "mock",
+  "viewerHost": "127.0.0.1",
+  "viewerPort": 3210,
+  "agentScreenContentPolicy": "mock-only",
+  "allowHostDeviceDiscovery": false,
+  "allowHostSigningDiagnostics": false,
+  "iosWdaAllowProvisioningDeviceRegistration": false,
+  "mcp": {
+    "maxImageBytes": 8388608
+  }
+}

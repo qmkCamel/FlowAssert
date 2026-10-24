@@ -1,0 +1,7 @@
+{
+  "change": "improve-report-playback-workbench",
+  "reason": "Only update the workbench timing/evidence test: one before-image geometry check and additional registered action evidence. Existing CLI, HTTP, tool schemas and result goldens remain frozen.",
+  "updatedFiles": {
+    "tests/workbench.test.ts": "47c4e335c1ba457aee55b04399a2677412af8bec5e398a91a0e5283cd1ee680f"
+  }
+}

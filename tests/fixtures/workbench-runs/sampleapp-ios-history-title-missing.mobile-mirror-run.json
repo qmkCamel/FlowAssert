@@ -1,0 +1,140 @@
+{
+  "format": "mobile-mirror-run",
+  "version": 1,
+  "run": {
+    "schemaVersion": 1,
+    "id": "11111111-1111-4111-8111-111111111111",
+    "name": "iOS 历史标题可访问性缺口（脱敏样本）",
+    "yaml": "name: iOS 历史标题可访问性缺口（脱敏样本）\nplatform: ios\nappId: example.sanitized\n---\n- assertVisible: {id: sample-history-item-list-title}\n- assertVisible: {text: 本轮唯一标题}\n- done\n",
+    "engine": "AppClaw 2.7.0 · MirrorService",
+    "phase": "finished",
+    "verdict": "fail",
+    "startedAt": "2026-09-24T05:04:32.224Z",
+    "endedAt": "2026-09-24T05:06:47.287Z",
+    "sessionId": "sanitized",
+    "deviceName": "Sanitized iPhone",
+    "platform": "ios",
+    "provider": "appium",
+    "verificationScope": "declared-ui-assertions",
+    "visualVerification": "not-performed",
+    "businessVerification": "not-performed",
+    "cleanup": "session-retained",
+    "resourceCleanup": "pass",
+    "error": "Structured assertion failed: text=\"本轮唯一标题\" — target did not match any element",
+    "steps": [
+      {
+        "index": 11,
+        "kind": "assert",
+        "target": "selector(id=\"sample-history-item-list-title\")",
+        "status": "passed",
+        "startedAt": "2026-09-24T05:04:32.224Z",
+        "endedAt": "2026-09-24T05:04:39.000Z",
+        "message": "Structured assertion passed: history list is visible",
+        "verification": {
+          "status": "pass",
+          "message": "History list heading is exposed"
+        },
+        "evidence": [
+          {
+            "name": "step-11.png",
+            "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460",
+            "bytes": 68,
+            "contentType": "image/png"
+          },
+          {
+            "name": "step-11.xml",
+            "sha256": "209c5bdd8123afcf21e23fd7add2d558bd15649760dad4f71a21b05c593e3f64",
+            "bytes": 256,
+            "contentType": "application/xml; charset=utf-8"
+          }
+        ]
+      },
+      {
+        "index": 12,
+        "kind": "assert",
+        "target": "selector(text=\"本轮唯一标题\")",
+        "status": "failed",
+        "startedAt": "2026-09-24T05:04:39.000Z",
+        "endedAt": "2026-09-24T05:06:47.287Z",
+        "error": "Structured assertion failed: text=\"本轮唯一标题\" — target did not match any element",
+        "verification": {
+          "status": "fail",
+          "message": "Screenshot-visible session title is absent from the accessibility hierarchy"
+        },
+        "evidence": [
+          {
+            "name": "step-12.png",
+            "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460",
+            "bytes": 68,
+            "contentType": "image/png"
+          },
+          {
+            "name": "step-12.xml",
+            "sha256": "209c5bdd8123afcf21e23fd7add2d558bd15649760dad4f71a21b05c593e3f64",
+            "bytes": 256,
+            "contentType": "application/xml; charset=utf-8"
+          }
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "name": "flow.yaml",
+        "sha256": "68edfdcba748083153c04cbbff9001ad3e3d4a846d6428bfef24d580c5068084",
+        "bytes": 207,
+        "contentType": "text/yaml; charset=utf-8"
+      }
+    ],
+    "diagnostics": [
+      {
+        "domain": "ui-assertion",
+        "code": "fail",
+        "phase": "verify",
+        "retryable": false,
+        "evidenceRefs": [
+          "step-12.png",
+          "step-12.xml"
+        ],
+        "observedAt": "2026-09-24T05:06:47.287Z",
+        "message": "The session row exposes a stable container id but no title text, label or value."
+      }
+    ]
+  },
+  "files": [
+    {
+      "name": "flow.yaml",
+      "contentType": "text/yaml; charset=utf-8",
+      "bytes": 207,
+      "sha256": "68edfdcba748083153c04cbbff9001ad3e3d4a846d6428bfef24d580c5068084",
+      "base64": "bmFtZTogaU9TIOWOhuWPsuagh+mimOWPr+iuv+mXruaAp+e8uuWPo++8iOiEseaVj+agt+acrO+8iQpwbGF0Zm9ybTogaW9zCmFwcElkOiBleGFtcGxlLnNhbml0aXplZAotLS0KLSBhc3NlcnRWaXNpYmxlOiB7aWQ6IHNhbXBsZS1oaXN0b3J5LWl0ZW0tbGlzdC10aXRsZX0KLSBhc3NlcnRWaXNpYmxlOiB7dGV4dDog5pys6L2u5ZSv5LiA5qCH6aKYfQotIGRvbmUK"
+    },
+    {
+      "name": "step-11.png",
+      "contentType": "image/png",
+      "bytes": 68,
+      "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460",
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+    },
+    {
+      "name": "step-11.xml",
+      "contentType": "application/xml; charset=utf-8",
+      "bytes": 256,
+      "sha256": "209c5bdd8123afcf21e23fd7add2d558bd15649760dad4f71a21b05c593e3f64",
+      "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48QXBwaXVtQVVUPjxYQ1VJRWxlbWVudFR5cGVTdGF0aWNUZXh0IG5hbWU9InNhbXBsZS1oaXN0b3J5LWl0ZW0tbGlzdC10aXRsZSIgbGFiZWw9IuWOhuWPsuS8muivnSIgdmlzaWJsZT0idHJ1ZSIvPjxYQ1VJRWxlbWVudFR5cGVPdGhlciBuYW1lPSJzYW1wbGUtaGlzdG9yeS1pdGVtLXNhbml0aXplZCIgdmlzaWJsZT0idHJ1ZSIgYWNjZXNzaWJsZT0idHJ1ZSIvPjwvQXBwaXVtQVVUPg=="
+    },
+    {
+      "name": "step-12.png",
+      "contentType": "image/png",
+      "bytes": 68,
+      "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460",
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+    },
+    {
+      "name": "step-12.xml",
+      "contentType": "application/xml; charset=utf-8",
+      "bytes": 256,
+      "sha256": "209c5bdd8123afcf21e23fd7add2d558bd15649760dad4f71a21b05c593e3f64",
+      "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48QXBwaXVtQVVUPjxYQ1VJRWxlbWVudFR5cGVTdGF0aWNUZXh0IG5hbWU9InNhbXBsZS1oaXN0b3J5LWl0ZW0tbGlzdC10aXRsZSIgbGFiZWw9IuWOhuWPsuS8muivnSIgdmlzaWJsZT0idHJ1ZSIvPjxYQ1VJRWxlbWVudFR5cGVPdGhlciBuYW1lPSJzYW1wbGUtaGlzdG9yeS1pdGVtLXNhbml0aXplZCIgdmlzaWJsZT0idHJ1ZSIgYWNjZXNzaWJsZT0idHJ1ZSIvPjwvQXBwaXVtQVVUPg=="
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+release-candidate-probe: {"checksum":"verified","install":"clean-prefix","cli":"0.1.0-alpha.2","mcpTools":19,"viewerLocalization":"ok","signalCleanup":"ok","packagedYaml":"pass-with-evidence-hashes","agentTests":"catalog-flow-suite-cancel-evidence-triage","ocr":"actual-vision-synthetic-only"}
+dsh-clean-profile-probe: {"harness":"0.1.5-rc.2","profile":"clean","patchReload":"startup","tools":19,"modes":["native","ptc"],"agentTests":"native-ptc-pass","modelImageBoundary":"CATALOG_IMAGE_AND_TEXT_ONLY_PROJECTION","lifecycle":"complete"}

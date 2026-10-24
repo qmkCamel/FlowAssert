@@ -1,0 +1,53 @@
+%% 历史目标方案 2026-09-09/10；当前实现见 mobile-test-workbench-current.md
+flowchart TB
+  UI["FlowAssert 工作台：画面 / 用例 / 运行 / 历史"]
+  Cases["Git：按引擎版本化 YAML / JS或TS / 用例登记与业务校验"]
+  Agent["可选 Agent：编写、启动注册用例、分析失败"]
+  subgraph Host["本机 Runtime Owner"]
+    Coord["RunCoordinator + SessionBroker：独占租约 / runId / 取消"]
+    Adapter["MaestroEngineAdapter：整份 flow / 能力检查 / 事件与产物适配"]
+    Verify["业务验证器：fixture 准备与确认 / 独立 API 读取"]
+    Media["MediaHub：Android scrcpy；iPhone 新媒体适配"]
+    Store["EvidenceStore：事件 / 原图 / 结构 / 断言 / 可选录像"]
+    Verdict["最终判定与导出：执行 + 断言 + 证据完整性"]
+  end
+  subgraph Worker["固定版本 Maestro fork worker：唯一控制实例"]
+    Flow["原生 YAML → Orchestra：定位 / 等待 / 动作 / UI 断言"]
+    Hook["事件与 artifact 接口 + 必需证据确认钩子"]
+    Driver["Maestro Android Driver / iOS XCTest + 真机补丁"]
+  end
+  UI --> Coord
+  Agent --> Coord
+  Cases --> Adapter
+  Coord --> Adapter
+  Coord --> Verify
+  Adapter -->|"复用 warm session，整份 flow"| Flow
+  Flow --> Driver
+  Flow --> Hook
+  Driver --> Phone["Android / iPhone 真机"]
+  Hook -->|"执行事件与当次产物"| Store
+  Store -->|"必需证据落盘确认"| Hook
+  Verify -->|"只读验证"| API["被测 App 测试环境 API"]
+  Verify --> Store
+  Phone -->|"独立于 Agent 工具；iPhone 路径待补"| Media
+  Media --> UI
+  Media -->|"可选录制"| Store
+  Store --> Verdict
+  Verdict --> Report["Allure / JUnit / 历史比较"]
+  Report --> UI
+  Coord -.-> Compat["兼容模式：MirrorService / Appium；切换后独占"]
+  Compat -.-> Phone
+  Coord -.-> AppClaw["首期对照候选：AppClaw 结构化 YAML / SDK / Runner"]
+  Cases -.-> AppClaw
+  AppClaw -.-> ACMCP["appium-mcp / Appium：独占 session"]
+  ACMCP -.-> Phone
+  AppClaw -.->|"原生产物导入与完整性检查"| Store
+  Verify -.-> Vision["可选 Midscene 视觉验证"]
+  classDef existing fill:#dcf4ed,stroke:#267861,color:#153d32;
+  classDef engine fill:#e1edfc,stroke:#3b73b9,color:#183e6b;
+  classDef planned fill:#eee7ff,stroke:#7253aa,color:#332349;
+  classDef optional fill:#f2f3f5,stroke:#8c929e,color:#404650,stroke-dasharray:5 4;
+  class UI,Media,Phone existing;
+  class Flow,Driver engine;
+  class Cases,Coord,Adapter,Verify,Hook,Store,Verdict,Report planned;
+  class Agent,API,Compat,Vision,AppClaw,ACMCP optional;

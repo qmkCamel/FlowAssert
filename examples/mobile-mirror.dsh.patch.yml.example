@@ -1,0 +1,14 @@
+- insert:
+    - id: mobile-mirror
+      name: flowassert
+      config:
+        defaultProvider: mock
+        agentScreenContentPolicy: mock-only
+        appiumUrl: http://127.0.0.1:4723
+        appiumRuntimeMode: external
+        appiumExecutablePath: ''
+        viewerHost: 127.0.0.1
+        viewerPort: 3210
+        allowHostDeviceDiscovery: false
+        allowHostSigningDiagnostics: false
+        iosWdaAllowProvisioningDeviceRegistration: false

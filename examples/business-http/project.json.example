@@ -1,0 +1,24 @@
+{
+  "flows": { "order": "order.yaml" },
+  "extensions": {
+    "seed": {
+      "module": "prepare.mjs", "role": "prepare", "cleanup": "cleanup", "timeoutMs": 10000,
+      "credentials": { "MOBILE_MIRROR_HTTP_TOKEN": "MOBILE_MIRROR_HTTP_TOKEN" },
+      "input": { "type": "object", "properties": { "base": { "type": "string" }, "namespace": { "type": "string" } }, "required": ["base", "namespace"] },
+      "output": { "type": "object", "properties": { "id": { "type": "string" }, "correlationId": { "type": "string" } }, "required": ["id", "correlationId"] }
+    },
+    "verify": {
+      "module": "verify.mjs", "role": "verify", "timeoutMs": 15000,
+      "credentials": { "MOBILE_MIRROR_HTTP_TOKEN": "MOBILE_MIRROR_HTTP_TOKEN" },
+      "input": { "type": "object", "properties": { "base": { "type": "string" }, "id": { "type": "string" }, "expectedAmount": { "type": "number" } }, "required": ["base", "id", "expectedAmount"] },
+      "output": { "type": "object", "properties": { "verdict": { "type": "string" }, "expected": { "type": "string" }, "actual": { "type": "string" }, "source": { "type": "string" }, "readAt": { "type": "string" }, "artifactRefs": { "type": "array", "items": { "type": "string" } } }, "required": ["verdict", "expected", "actual", "source", "readAt", "artifactRefs"] }
+    },
+    "cleanup": {
+      "module": "cleanup.mjs", "role": "cleanup", "timeoutMs": 10000,
+      "credentials": { "MOBILE_MIRROR_HTTP_TOKEN": "MOBILE_MIRROR_HTTP_TOKEN" },
+      "input": { "type": "object", "properties": { "base": { "type": "string" }, "id": { "type": "string" } }, "required": ["base", "id"] },
+      "output": { "type": "object", "properties": { "deleted": { "type": "boolean" } }, "required": ["deleted"] }
+    }
+  },
+  "suites": { "smoke": { "name": "Scoped HTTP business smoke", "cases": [{ "id": "order", "flow": "order" }] } }
+}
