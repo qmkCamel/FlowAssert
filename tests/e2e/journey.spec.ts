@@ -109,7 +109,9 @@ test('authors an assertion without YAML, explains failure, and keeps case revisi
   await expect(page.locator('#journey-validation')).toContainText('Revision saved')
   await page.locator('#journey-validate').click(); await expect(page.locator('#journey-validation')).toContainText('Static validation passed')
   await page.locator('#journey-consent').check(); await page.locator('#journey-run').click()
-  await expect(page.locator('#analysis-summary')).toContainText('Failed', { timeout: 20000 })
+  // A transient unreadable report can say Cleanup: Failed while the run is
+  // still materializing. Wait for the recorded verdict, not any failure label.
+  await expect(page.locator('#analysis-summary').getByText('Recorded verdict: Failed', { exact: true })).toBeVisible({ timeout: 20000 })
   await expect(page.locator('#analysis-summary')).toContainText('Earliest recorded failure: 1')
   const runId = (await (await page.request.get(`${viewer.url}/api/runs`)).json()).runs[0].id
   const original = await (await page.request.get(`${viewer.url}/api/runs/${runId}`)).json()
