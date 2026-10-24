@@ -8,7 +8,7 @@ export const matrixKey = z.string().regex(/^[a-z][a-z0-9_-]{0,63}$/), matrixId =
 const port = z.number().int().min(1024).max(65535)
 export const matrixSlotSchema = z.object({ id: matrixKey, configId: matrixKey, platform: z.enum(['ios', 'android']),
   udid: z.string().trim().min(1).max(512), provider: z.enum(['mock', 'appium']),
-  config: z.record(z.unknown()), capabilities: z.record(z.unknown()),
+  config: z.record(z.string(), z.unknown()), capabilities: z.record(z.string(), z.unknown()),
   ports: z.object({ driver: port, mjpeg: port, webview: port.optional() }).strict(),
   derivedDataPath: z.string().refine(isAbsolute).optional(),
 }).strict().superRefine((s, ctx) => {
@@ -17,7 +17,7 @@ export const matrixSlotSchema = z.object({ id: matrixKey, configId: matrixKey, p
   if (Object.values(s.ports).some((p, i, a) => a.indexOf(p) !== i)) ctx.addIssue({ code: 'custom', message: 'matrix-port-conflict' })
 })
 export type MatrixSlot = z.infer<typeof matrixSlotSchema>
-export const matrixCellSchema = z.object({ id: matrixKey, slotId: matrixKey, flow: matrixKey, params: z.record(z.unknown()).default({}),
+export const matrixCellSchema = z.object({ id: matrixKey, slotId: matrixKey, flow: matrixKey, params: z.record(z.string(), z.unknown()).default({}),
   fixture: z.object({ parallelSafe: z.boolean(), namespace: matrixKey, resourceKeys: z.array(matrixKey).max(20), reset: matrixKey.optional() }).strict(),
 }).strict()
 export const matrixRegistrySchema = z.object({ contractVersion: z.literal(1), slots: z.array(matrixSlotSchema).min(1).max(2),

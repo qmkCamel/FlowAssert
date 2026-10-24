@@ -28,8 +28,8 @@ if (dsh?.bundle?.patch !== './cordis.patch.yml') {
 }
 
 const dependencies = manifest.dependencies as Record<string, string> | undefined
-if (dependencies?.['@modelcontextprotocol/sdk'] !== '1.30.0') {
-  throw new Error('package.json must pin @modelcontextprotocol/sdk to 1.30.0')
+if (dependencies?.['@modelcontextprotocol/sdk'] !== '1.32.0') {
+  throw new Error('package.json must pin @modelcontextprotocol/sdk to 1.32.0')
 }
 const exportsMap = manifest.exports as Record<string, unknown> | undefined
 if (!exportsMap?.['./mcp']) throw new Error('package.json must publish the ./mcp export')

@@ -279,7 +279,7 @@ export class ViewerServer {
         if(request.method==='POST') {
           assertMutationOrigin(request,this.url)
           if(parts.length===2) {
-            const body=z.object({id:z.string(),localEvidence:z.literal(true),tags:z.array(z.string()).optional(),platform:z.enum(['android','ios']).optional(),params:z.record(z.unknown()).optional(),parentSuiteId:z.string().optional()}).strict().parse(await readJson(request,80*1024))
+            const body=z.object({id:z.string(),localEvidence:z.literal(true),tags:z.array(z.string()).optional(),platform:z.enum(['android','ios']).optional(),params:z.record(z.string(), z.unknown()).optional(),parentSuiteId:z.string().optional()}).strict().parse(await readJson(request,80*1024))
             json(response,202,await this.suites.start(body.id,body));return
           }
           if(parts.length===4&&parts[3]==='cancel'){json(response,202,await this.suites.cancel(id));return}
@@ -429,14 +429,14 @@ export class ViewerServer {
       }
       if (request.method === 'POST' && url.pathname === '/api/workbench/acceptance/export') {
         assertSameOrigin(request, this.url); assertMutationOrigin(request, this.url)
-        const body = z.object({ yaml: z.string().min(1).max(64 * 1024), params: z.record(z.unknown()).default({}), reviewed: z.literal(true) }).strict().parse(await readJson(request, 80 * 1024))
+        const body = z.object({ yaml: z.string().min(1).max(64 * 1024), params: z.record(z.string(), z.unknown()).default({}), reviewed: z.literal(true) }).strict().parse(await readJson(request, 80 * 1024))
         const archive = await exportAcceptanceProject(body.yaml, body.params)
         response.writeHead(200, { 'content-type': 'application/x-tar', 'content-disposition': 'attachment; filename="mobile-acceptance.tar"', 'cache-control': 'no-store' })
         response.end(archive); return
       }
       if (request.method === 'POST' && url.pathname === '/api/workbench/drafts/validate') {
         assertSameOrigin(request, this.url); assertMutationOrigin(request, this.url)
-        const body = z.object({ yaml: z.string().min(1).max(64 * 1024), params: z.record(z.unknown()).default({}) }).strict().parse(await readJson(request, 80 * 1024))
+        const body = z.object({ yaml: z.string().min(1).max(64 * 1024), params: z.record(z.string(), z.unknown()).default({}) }).strict().parse(await readJson(request, 80 * 1024))
         const project = await loadTestProject(this.workbench.projectPath)
         const syntax = lintWorkbenchSyntax(body.yaml)
         if (syntax.length) { json(response, 200, { valid: false, blockers: syntax, advice: [] }); return }

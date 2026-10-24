@@ -1,11 +1,11 @@
 # FlowAssert 开源发布准备清单
 
-2026-10-24：选择新名字 **FlowAssert**，采用经审查源码快照创建独立新仓库的路径。旧仓库保持私有，不导入旧 Git 对象、分支、标签、Release、Actions 日志、Issue/PR 附件或本机忽略文件。当前是本地候选，尚未公开发布。
+2026-10-24：选择新名字 **FlowAssert**，采用经审查源码快照创建独立新仓库的路径。旧仓库保持私有，不导入旧 Git 对象、分支、标签、Release、Actions 日志、Issue/PR 附件或本机忽略文件。新私有仓库已建立，尚未公开发布。
 
 ## 已确定的发布策略
 
 - 名称、package 与 CLI 分别为 FlowAssert、`flowassert`、`flowassert` / `flowassert-mcp` / `flowassert-viewer`。
-- 新仓库计划为 `qmkCamel/flowassert`，先私有验收；默认分支 `main`。源码保留 MIT 与原贡献者版权、第三方 NOTICE。
+- 新私有仓库为 `qmkCamel/flowassert`，先私有验收；默认分支 `main`。源码保留 MIT 与原贡献者版权、第三方 NOTICE。
 - 首个提交没有 parent；作者和提交者使用维护者 GitHub noreply。不得导入旧 remote、标签、reflog 或原提交映射。
 - package 保持 `private: true`，不发布公共 npm。未来唯一预构建安装包渠道为新 GitHub Release；旧二进制包不直接复制。
 - 原配置文件名、数据目录、MCP tool 名称和序列化 schema 暂时保留兼容；产品品牌和命令入口改名不迁移或清空用户数据。
@@ -15,7 +15,7 @@
 
 完整基线、检查结果和剩余阻塞见[开源审计](open-source-audit-2026-10-24.md)。历史脱敏说明只描述旧仓库在当时的操作，不是新仓库公开授权。
 
-`public:check` 检查当前可提交文件、HEAD/远端/标签可达历史的已知秘密形状、本机路径、组织内容、作者/提交者/标签 noreply、已知私有图片指纹、公开文档与链接。它不能证明 GitHub 缓存、Release、附件或图片中所有像素都安全；也不扫描所有本地备用分支、reflog 或不可达对象。
+`public:check` 检查当前可提交文件、HEAD/远端/标签可达历史的已知秘密形状、本机路径、组织内容、作者/提交者/标签 noreply、已知私有图片指纹、公开文档与链接。它同时核对媒体审查清单与实际字节，拦截未经审查的新图、视频和内容替换；不能证明 GitHub 缓存、Release、附件或图片中所有像素都安全；也不扫描所有本地备用分支、reflog 或不可达对象。
 
 新仓库使用首个 root commit，从结构上避免带入原历史。原库缓存仍需独立处理。截图保留原采集日期与 Mock/真机性质；旧截图中的 Mobile Mirror 是历史产品名，不表示重新执行。
 
@@ -36,13 +36,13 @@ git diff --check
 
 ## 发布前未完成事项
 
-- [ ] 处理生产依赖审计的 critical/high，或逐项记录影响分析和明确的处置决定；不能只凭功能测试放行。
-- [ ] 将本地候选迁入全新的私有 `qmkCamel/flowassert`，核对单 root commit、noreply、无旧 refs/对象与远端 SHA。
+- [x] 修复生产与开发依赖审计的已知漏洞，本次完整审计为 0；版本与兼容迁移见[安全修复记录](security-remediation-2026-10-24.md)。
+- [x] 将本地候选迁入全新的私有 `qmkCamel/flowassert`，核对单 root commit、noreply、无旧 refs/对象与远端 SHA。
 - [x] 在本地候选生成实际安装包并独立扫描解包内容，0 项秘密命中；没有复用旧 Release。
-- [ ] 在新远端执行 CI、干净克隆安装；发布时重新构建、扫描与验收。
+- [ ] 完成安全修复提交的远端 CI；首次 CI 的时序测试失败已修复，本地完整回归与实际干净包安装通过。发布时重新构建、扫描与验收。
 - [ ] 审查新仓库 description、topics、主页、social preview 与 README 截图；独立核实隐私和访问状态。
 - [ ] 配置默认分支规则、tag 保护、secret scanning/push protection、Dependabot、漏洞私密报告等当前权限支持的安全设置。
-- [ ] 逐项确认历史截图的公开必要性；仍需保留的图片做原尺寸人工审查，不能将 OCR 未命中等同于完全没有隐私。
+- [x] 完成媒体风险审查：169 张 PNG 全量 OCR、历史图缩略图筛查、20 张重点图逐张打开及 3 份 SVG 源码审查；保留验证可追溯性和架构说明用途。逐文件哈希与方法见 `public-media-review.json`。这不是所有图片逐像素审查或隐私零风险保证。新增、替换媒体必须重新审查。
 - [ ] 原仓库保持私有；旧敏感对象/平台缓存单独联系 GitHub 处理，不通过新仓库发布暴露原引用。
 - [ ] 明确执行公开发布，并复查匿名访问、社区文件、Release 资产与安装入口。
 

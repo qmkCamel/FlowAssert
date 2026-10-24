@@ -1,0 +1,6 @@
+{
+  "reason": "Zod 4 requires explicit string record keys; request fields, protocol and evidence fixtures are unchanged.",
+  "updatedFiles": {
+    "src/viewer-workbench-runs-http.ts": "7c2a5e01db0ab6ac5e6e4285bdf6ce1cf11fe16d0ce5dc7e81318193ad8774f3"
+  }
+}

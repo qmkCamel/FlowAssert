@@ -2,7 +2,7 @@
 
 ## 结论
 
-当前源码与已清洗 Git 历史的规则扫描没有发现已确认的真实密钥；仍不能判定已满足公开发布条件。生产依赖审计、GitHub 外部资产/缓存、发布验收及图片完整人工复核分别保留为未完成项。
+当前源码与已清洗 Git 历史的规则扫描没有发现已确认的真实密钥。独立的新私有仓库已建立，后续依赖与图片审查见[安全修复记录](security-remediation-2026-10-24.md)。旧仓库服务器残留对象尚未清除，公开发布仍未执行。下列迁移前扫描数量保留为历史基线。
 
 用户选择 **FlowAssert** 作为新名称。新候选来自远端最新 dev 的独立网络克隆和跟踪文件快照；原仓库本地 checkout 与远端发生历史分叉，因此没有合并旧历史、reset 原工作区或从工作目录复制忽略文件。原 Git 引用和 SHA 对照只保留在本地审计材料中，不随新仓库迁移。
 
@@ -24,13 +24,14 @@
 
 ## GitHub 与迁移边界
 
-旧库资料记录其历史已重写，但敏感旧对象的缓存清理当时仍未完成，既有 Release 资产未清理。本轮 GitHub connector 对旧库返回 404，CLI 未登录，内置浏览器也是未登录状态；SSH 能克隆源码，但不能据此确认仓库当前管理设置、Release、安全规则或缓存状态。
+登录完成后已通过 GitHub API 核实：新旧仓库均为私有；旧仓库没有 fork，PR 列表为空。旧 Release 的 3 个附件已下载到仓库外的私有审计目录，独立秘密扫描及私有内容规则扫描没有发现确认的问题，没有将这些资产迁入新库。
 
+旧库曾移除的一张含私人网络信息的图片，仍能通过有权限的 Git blobs API 读取；这不是匿名访问证明。新库同一对象查询为 404，干净网络克隆也不含该对象。GitHub 支持工单草稿仅保存在本机私有材料中，尚未提交、尚未收到平台清理确认。
 迁移使用独立 `git init`，仅导入已审查的跟踪文件，保留 MIT 原版权和第三方 NOTICE；本地提交使用 noreply。不得 mirror push、复制 `.git`、导入旧 tags 或 fork 原仓库。原配置路径、工具协议、存储 schema 保留兼容，避免品牌修改破坏已存在的运行记录。
 
-计划远端为 `qmkCamel/flowassert`，先私有。新仓库不继承旧 CI、Release、Issue/PR 或附件；这些平台对象需要独立判断，不在 Git archive 内。当前未创建远端或公开发布。
+新远端为私有的 `qmkCamel/flowassert`，默认分支 `main`。首个 root commit 已推送，并通过干净网络克隆核对。新仓库不继承旧 CI、Release、Issue/PR 或附件；没有公开发布。
 
-## 依赖审计
+## 修复前依赖审计（历史基线）
 
 `pnpm audit --prod --audit-level=high` 本轮失败：**1 critical、14 high、19 moderate、2 low**。这是依赖库公告命中，不表示已经证明本产品存在可利用路径。
 
@@ -46,7 +47,7 @@
 
 公告来源：[proxy-addr](https://github.com/advisories/GHSA-jqcg-44mw-7w3h)、[fast-uri](https://github.com/advisories/GHSA-qw65-cvwx-89v3)、[sharp](https://github.com/advisories/GHSA-wq5f-xc86-pv6w)、[MCP SDK](https://github.com/advisories/GHSA-46jr-4wx8-v453)、[zod](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5)、[body-parser](https://github.com/advisories/GHSA-27r3-jxmh-p828)、[undici](https://github.com/advisories/GHSA-xjj6-f33q-929c)。
 
-本轮不盲目强制 override 跨主版本依赖；依赖更新是后续公开发布前的实质任务。
+后续已升级直接依赖，并对固定 AppClaw 执行器的依赖做有范围的兼容迁移；修复后的审计和回归见[安全修复记录](security-remediation-2026-10-24.md)。
 
 ## 名称与兼容
 
@@ -85,4 +86,4 @@
 
 候选分支为 `main`，只有一个无 parent 的根提交；作者与提交者为维护者 GitHub noreply。无旧 tags、分支或 remote；旧源提交和已知私有图片对象不在候选对象库。原许可证逐字节保留，全部历史 artifacts 与源快照比较无字节变化。
 
-本轮未创建远端、未 push、未设置仓库公开，也没有发布 Release/npm。缺少 GitHub 管理登录态，SSH 源码读取能力不足以创建新仓库或检查平台设置。完成登录后仍应先创建新的私有仓库，只推送 `main`，核对远端 SHA，并继续上面的公开前未完成项。
+新仓库已创建并推送，初始提交为 `37c3616f179f3740a8f23bfbd807690bc83c8df3`，当时本地与远端 SHA 一致；干净网络克隆核对为单 root commit、没有旧 tags/对象。后续安全修复使用正常追加提交，不重写这个已推送的根。仓库继续私有，没有发布 Release/npm。

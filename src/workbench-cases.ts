@@ -10,7 +10,7 @@ import type { WorkbenchStore } from './workbench-store.js'
 
 const id = z.string().uuid(), hash = z.string().regex(/^[a-f0-9]{64}$/), date = z.string().datetime()
 export const caseContentSchema = z.object({ name: z.string().trim().min(1).max(160), tags: z.array(z.string().trim().min(1).max(32)).max(10),
-  platform: z.enum(['ios', 'android']), appId: z.string().min(1).max(255), yaml: z.string().min(1).refine(value => Buffer.byteLength(value) <= 64 * 1024), publicParams: z.record(z.unknown()) }).strict()
+  platform: z.enum(['ios', 'android']), appId: z.string().min(1).max(255), yaml: z.string().min(1).refine(value => Buffer.byteLength(value) <= 64 * 1024), publicParams: z.record(z.string(), z.unknown()) }).strict()
 export const caseOriginSchema = z.object({ caseId: id, revisionId: id, inputDigest: hash }).strict()
 const revisionMeta = { schemaVersion: z.literal(1), caseId: id, revisionId: id, projectDigest: hash, contentDigest: hash, createdAt: date, requestHash: hash }
 const revisionSchema = z.union([caseContentSchema.extend(revisionMeta).strict(), webCaseSchema.extend(revisionMeta).strict()])
@@ -19,7 +19,7 @@ const mobileRecordSchema = z.object({ schemaVersion: z.literal(1), caseId: id, n
   revisions: z.array(z.object({ revisionId: id, contentDigest: hash, createdAt: date }).strict()).max(100) }).strict()
 const recordSchema = z.union([mobileRecordSchema, mobileRecordSchema.omit({ appId: true }).extend({ platform: z.literal('web'), executionKind: z.literal('web') }).strict()])
 const catalogSchema = z.object({ schemaVersion: z.literal(1), generation: id,
-  cases: z.record(recordSchema), requests: z.record(z.object({ digest: hash, caseId: id, revisionId: id, archivedAt: date.nullable() }).strict()) }).strict()
+  cases: z.record(z.string(), recordSchema), requests: z.record(z.string(), z.object({ digest: hash, caseId: id, revisionId: id, archivedAt: date.nullable() }).strict()) }).strict()
 const saveSchema = z.object({ requestId: id, expectedRevision: id.nullable(), content: z.union([caseContentSchema, webCaseSchema]), publicData: z.literal(true) }).strict()
 type Catalog = z.infer<typeof catalogSchema>
 export type CaseRevision = z.infer<typeof revisionSchema>

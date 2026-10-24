@@ -40,8 +40,11 @@ it('keeps frozen legacy authoring inputs, HTTP, tool schemas and result fixtures
   // Reviewed branding changes only; keep all protocol and evidence hashes frozen.
   const branding = JSON.parse(await readFile(new URL('./fixtures/flowassert-branding-contract-baseline.json', import.meta.url), 'utf8')) as { updatedFiles: Record<string, string> }
   expect(Object.keys(branding.updatedFiles)).toEqual(['tests/mcp-stdio.test.ts', 'scripts/dsh-clean-profile-probe.mjs'])
+  const security = JSON.parse(await readFile(new URL('./fixtures/flowassert-security-contract-baseline.json', import.meta.url), 'utf8')) as { updatedFiles: Record<string, string> }
+  // Explicit record keys for Zod 4 only; no API or evidence fixture rebaselining.
+  expect(Object.keys(security.updatedFiles)).toEqual(['src/viewer-workbench-runs-http.ts'])
   for (const [path, digest] of Object.entries(baseline.files)) {
-    const expected = branding.updatedFiles[path] ?? privacy.updatedFiles[path] ?? web.updatedFiles[path] ?? playback.updatedFiles[path] ?? harness.updatedFiles[path] ?? repair.updatedFiles[path] ?? runtime.updatedFiles[path] ?? integration.updatedFiles[path] ?? digest
+    const expected = security.updatedFiles[path] ?? branding.updatedFiles[path] ?? privacy.updatedFiles[path] ?? web.updatedFiles[path] ?? playback.updatedFiles[path] ?? harness.updatedFiles[path] ?? repair.updatedFiles[path] ?? runtime.updatedFiles[path] ?? integration.updatedFiles[path] ?? digest
     expect(sha256(await readFile(new URL(`../${path}`, import.meta.url))), path).toBe(expected)
   }
 })

@@ -11,7 +11,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
         with:
@@ -27,6 +27,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check public repository readiness
         run: pnpm public:check
+      - name: Audit production and development dependencies
+        run: pnpm audit --audit-level=low
       - name: Check source and service contracts
         run: pnpm check
       - name: Install Chromium

@@ -17,6 +17,10 @@ const screenshot = join(directory, 'mcp.png')
 try {
   await verifyChecksum(tarball, checksum)
   await run('npm', ['install', '--ignore-scripts', '--legacy-peer-deps', '--omit=dev', '--prefix', prefix, tarball], 120_000)
+  // Workspace overrides do not govern a consumer's npm install. Audit the actual
+  // clean-prefix dependency graph before accepting this release candidate.
+  const installedAudit = JSON.parse((await run('npm', ['audit', '--omit=dev', '--audit-level=low', '--json', '--prefix', prefix], 120_000)).stdout)
+  if (installedAudit.metadata?.vulnerabilities?.total !== 0) throw new Error('Installed package dependency audit is not clean')
   const packageRoot = join(prefix, 'node_modules', 'flowassert')
   const cli = join(packageRoot, 'scripts', 'mobile-mirror-cli.mjs')
   const mcp = join(packageRoot, 'scripts', 'mobile-mirror-mcp.mjs')
@@ -54,7 +58,7 @@ try {
     if (!recognized.syntheticOnly || recognized.productionEnabled !== false || recognized.results.length !== 2 || recognized.capacity.active !== 0 || recognized.capacity.queued !== 0) throw new Error('Packaged OCR engineering probe failed')
     ocr = 'actual-vision-synthetic-only'
   }
-  process.stdout.write(`${JSON.stringify({ checksum: 'verified', install: 'clean-prefix', cli: version, mcpTools: summary.toolCount, viewerLocalization: summary.viewerLocalization, signalCleanup: summary.signalCleanup, packagedYaml: summary.packagedYaml, agentTests: summary.agentTests, matrix: summary.matrix, ocr })}\n`)
+  process.stdout.write(`${JSON.stringify({ checksum: 'verified', install: 'clean-prefix', dependencyAudit: 'zero-known-vulnerabilities', cli: version, mcpTools: summary.toolCount, viewerLocalization: summary.viewerLocalization, signalCleanup: summary.signalCleanup, packagedYaml: summary.packagedYaml, agentTests: summary.agentTests, matrix: summary.matrix, ocr })}\n`)
 } finally {
   await rm(directory, { recursive: true, force: true })
 }

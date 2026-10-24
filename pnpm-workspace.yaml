@@ -7,6 +7,16 @@ autoInstallPeers: false
 # Never install/start AppClaw's independent device/session stack.
 overrides:
   '@appclaw/core@2.7.0>appium-mcp': '-'
+  # Keep the pinned executor; align its reviewed config/parser/image dependencies
+  # with the versions already used by the bundled runtime. Covered by native-flow,
+  # config-default, XML, image and clean-package regression checks.
+  '@appclaw/core@2.7.0>zod': '4.6.6'
+  '@appclaw/core@2.7.0>sharp': '0.35.5'
+  '@appclaw/core@2.7.0>fast-xml-parser': '5.7.0'
+  '@modelcontextprotocol/sdk@>=1.22.0 <1.32.0': '1.32.0'
+  'zod@>=4.0.0 <4.6.6': '4.6.6'
+  # GHSA-xjj6-f33q-929c / GHSA-4qv8-2p9j-2685: Keep the AI SDK HTTP client above the affected 6.x range.
+  'undici@>=6.23.0 <6.29.1': '6.29.1'
 
 allowBuilds:
   '@google/genai': false

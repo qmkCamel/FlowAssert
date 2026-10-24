@@ -30,6 +30,7 @@ const REQUIRED_FILES = [
   '.github/ISSUE_TEMPLATE/feature.yml',
   'docs/open-source-readiness.md',
   'public-readiness.config.json',
+  'public-media-review.json',
 ]
 
 const FORBIDDEN_LOCAL_FILES = new Set([
@@ -360,6 +361,40 @@ export async function checkPublicSurface(root, paths, config) {
   return findings
 }
 
+// A hash binds a review to the actual bytes; it cannot certify their content.
+export async function checkReviewedMedia(root, paths) {
+  const inventoryPath = 'public-media-review.json'
+  let inventory
+  try {
+    inventory = JSON.parse(await readFile(path.join(root, inventoryPath), 'utf8'))
+    if (!Array.isArray(inventory.files)) throw new Error('invalid inventory')
+  } catch {
+    return [finding('media-review-inventory-invalid', inventoryPath)]
+  }
+  const current = new Set(paths.filter(p => /\.(?:png|jpe?g|gif|webp|avif|heic|svg|mp4|mov|webm|m4v)$/i.test(p)))
+  const reviewed = new Map()
+  const findings = []
+  for (const entry of inventory.files) {
+    if (!entry || typeof entry.path !== 'string' || !/^[a-f0-9]{64}$/.test(entry.sha256)
+      || !Array.isArray(entry.review) || !entry.review.length || !entry.retention || reviewed.has(entry.path)) {
+      findings.push(finding('media-review-entry-invalid', inventoryPath))
+      continue
+    }
+    reviewed.set(entry.path, entry)
+    if (!current.has(entry.path)) findings.push(finding('media-review-stale-entry', entry.path))
+  }
+  for (const filePath of current) {
+    const entry = reviewed.get(filePath)
+    if (!entry) {
+      findings.push(finding('media-review-required', filePath))
+      continue
+    }
+    const digest = createHash('sha256').update(await readFile(path.join(root, filePath))).digest('hex')
+    if (digest !== entry.sha256) findings.push(finding('media-review-content-changed', filePath))
+  }
+  return findings
+}
+
 function uniqueFindings(findings) {
   const seen = new Set()
   return findings.filter((entry) => {
@@ -391,6 +426,7 @@ export async function checkRepository(root = DEFAULT_ROOT) {
     ...(await scanHistory(resolvedRoot, commits)),
     ...(await checkPublicSurface(resolvedRoot, paths, config)),
     ...(await checkMarkdownLinks(resolvedRoot, paths)),
+    ...(await checkReviewedMedia(resolvedRoot, paths)),
   ]
 
   return {

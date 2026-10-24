@@ -53,7 +53,7 @@ export async function handleWorkbenchRunsHttp({ pathname, method, request, respo
     const confirmedRepair = body.repairDigest !== undefined || body.repairBaselineRunId !== undefined
       ? await repair.confirm(z.string().uuid().parse(body.parentRunId), z.string().uuid().parse(body.repairBaselineRunId), z.string().regex(/^[a-f0-9]{64}$/).parse(body.repairDigest)) : undefined
     if (confirmedRepair && confirmedRepair.yaml !== body.yaml) throw new Error('Edited repair draft requires fresh review')
-    json(202, await workbench.start(body.yaml, body.parentRunId as string | undefined, body.video === undefined ? undefined : parseVideoRequest(body.video, sessionId()), { params: body.params === undefined ? {} : z.record(z.unknown()).parse(body.params), ...(confirmedRepair ? { repair: confirmedRepair } : {}) }))
+    json(202, await workbench.start(body.yaml, body.parentRunId as string | undefined, body.video === undefined ? undefined : parseVideoRequest(body.video, sessionId()), { params: body.params === undefined ? {} : z.record(z.string(), z.unknown()).parse(body.params), ...(confirmedRepair ? { repair: confirmedRepair } : {}) }))
     return
   }
   if (method === 'POST' && parts.length === 3 && parts[2] === 'import') {

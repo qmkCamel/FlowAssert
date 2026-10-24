@@ -81,7 +81,7 @@ export function appendAuthoringDocument(value: unknown) {
 }
 
 export async function exportAuthoringProject(value: unknown) {
-  const input = z.object({ yaml: yamlText, params: z.record(z.unknown()), publicData: z.literal(true) }).strict().parse(value)
+  const input = z.object({ yaml: yamlText, params: z.record(z.string(), z.unknown()), publicData: z.literal(true) }).strict().parse(value)
   if (Buffer.byteLength(JSON.stringify(input)) > 80 * 1024) throw new Error('authoring-input-budget')
   let plan
   try { plan = await compilePlan(input.yaml, emptyProject(), input.params) }

@@ -19,7 +19,7 @@ import { freezeMatrixArtifacts, bindMatrixArtifacts } from './device-matrix-arti
 
 type Artifacts = Awaited<ReturnType<typeof freezeMatrixArtifacts>>
 interface ActiveMatrix { state: MatrixState; registry: MatrixRegistry; project: ProjectSnapshot; cells: MatrixCell[]; artifacts: Artifacts; children: Map<string, MatrixProcess>; cancelled: Set<string>; done: Promise<void>; locked: Set<string>; poisoned: Set<string> }
-const snapshotSchema = z.object({ registry: matrixRegistrySchema, project: z.unknown(), cells: z.array(matrixCellSchema).max(100), artifacts: z.record(z.object({ sha256: z.string().regex(/^[a-f0-9]{64}$/), extension: z.enum(['.apk', '.ipa']) }).strict()), inputDigest: z.string() }).strict()
+const snapshotSchema = z.object({ registry: matrixRegistrySchema, project: z.unknown(), cells: z.array(matrixCellSchema).max(100), artifacts: z.record(z.string(), z.object({ sha256: z.string().regex(/^[a-f0-9]{64}$/), extension: z.enum(['.apk', '.ipa']) }).strict()), inputDigest: z.string() }).strict()
 export class LocalDeviceMatrix {
   readonly root: string
   #ready: Promise<void> | undefined; #active: ActiveMatrix | undefined; #closed = false; #starting = false

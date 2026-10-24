@@ -27,6 +27,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check public repository readiness
         run: pnpm public:check
+      - name: Audit production and development dependencies
+        run: pnpm audit --audit-level=low
       - name: Check source and service contracts
         run: pnpm check
       - name: Install Chromium

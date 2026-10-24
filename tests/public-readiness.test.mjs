@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -6,6 +7,7 @@ import { execFileSync } from 'node:child_process'
 import { afterEach, describe, expect, it } from 'vitest'
 import {
   checkPublicSurface,
+  checkReviewedMedia,
   checkMarkdownLinks,
   checkRepository,
   formatFinding,
@@ -109,6 +111,23 @@ describe('public readiness checks', () => {
     })
     expect(findings.some(({ checkId }) => checkId === 'missing-community-file')).toBe(true)
     expect(findings.some(({ checkId }) => checkId === 'missing-public-entry-marker')).toBe(true)
+  })
+
+  it('requires a new media review for added or changed bytes and rejects stale approvals', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'flowassert-media-review-'))
+    temporaryDirectories.push(directory)
+    await writeFile(path.join(directory, 'demo.png'), 'reviewed fixture bytes')
+    await writeFile(path.join(directory, 'public-media-review.json'), JSON.stringify({ files: [{
+      path: 'demo.png', sha256: createHash('sha256').update('reviewed fixture bytes').digest('hex'),
+      review: ['original-image-review'], retention: 'test fixture',
+    }] }))
+    expect(await checkReviewedMedia(directory, ['demo.png'])).toEqual([])
+    await writeFile(path.join(directory, 'demo.png'), 'replacement bytes')
+    expect(await checkReviewedMedia(directory, ['demo.png', 'new.MOV'])).toEqual(expect.arrayContaining([
+      { checkId: 'media-review-content-changed', path: 'demo.png' },
+      { checkId: 'media-review-required', path: 'new.MOV' },
+    ]))
+    expect(await checkReviewedMedia(directory, [])).toEqual([{ checkId: 'media-review-stale-entry', path: 'demo.png' }])
   })
 
   it('passes against the current repository surfaces and reachable history', async () => {

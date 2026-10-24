@@ -517,11 +517,15 @@ describe('local ordinary tap facts through the real workbench', () => {
     await seen
     let closed = false
     const closing = coordinator.close().then(() => { closed = true })
-    await new Promise(resolve => setTimeout(resolve, 50))
-    expect(closed).toBe(false)
-    expect((await coordinator.records.get(queued.id)).phase).toBe('cancelling')
-    release()
-    await closing
+    try {
+      // Wait for persisted cancellation, not a filesystem-dependent 50 ms sleep.
+      // The action remains gated, so shutdown must still be pending at this point.
+      await expect.poll(async () => (await coordinator.records.get(queued.id)).phase, { timeout: 10000 }).toBe('cancelling')
+      expect(closed).toBe(false)
+    } finally {
+      release()
+      await closing
+    }
     expect((await verifying).outcome).toBe('cancelled')
     expect(closed).toBe(true)
   }, 60000)

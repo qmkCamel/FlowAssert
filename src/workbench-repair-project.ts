@@ -23,7 +23,7 @@ export const repairProjectSchema = z.object({
   compatibleBuilds: z.array(z.object({ from: repairDigest, to: repairDigest }).strict()).max(100).default([]),
   source: repairSourceRegistrationSchema.optional(),
   regressionFlows: unique(repairName, 20).default([]),
-  budget: repairBudgetSchema.default({}),
+  budget: repairBudgetSchema.prefault({}),
 }).strict().superRefine((config, ctx) => {
   if (config.enabled && (!config.allowedFlows.length || !config.allowedPlatforms.length || !config.allowedAppIds.length))
     ctx.addIssue({ code: 'custom', message: 'Enabled repair needs explicit flow/platform/App scope' })

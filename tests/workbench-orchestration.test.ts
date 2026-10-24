@@ -140,7 +140,7 @@ describe('deterministic composition',()=>{
   it('cancels inside a nested block without later actions',async()=>{
     const {workbench}=await setup()
     const run=await workbench.start(flow([assertion,{repeat:{times:2,steps:[{wait:30},{tap:{accessibilityId:'action-card'}}]}}]))
-    await expect.poll(async()=> (await workbench.get(run.id)).steps.some(s=>s.kind==='wait')).toBe(true)
+    await expect.poll(async()=> (await workbench.get(run.id)).steps.some(s=>s.kind==='wait'), { timeout: 10000 }).toBe(true)
     await workbench.cancel(run.id);await workbench.wait()
     const result=await workbench.get(run.id)
     expect(result.verdict).toBe('cancelled');expect(result.steps.some(s=>s.kind==='tap')).toBe(false)

@@ -16,7 +16,7 @@ import { caseOriginSchema, type WorkbenchCaseLibrary } from './workbench-cases.j
 const hash = z.string().regex(/^[a-f0-9]{64}$/)
 const targetSchema = z.object({ platform: z.enum(['ios', 'android']), appId: z.string().min(1).max(255), sessionId: z.string().max(256).nullable() }).strict()
 export const authoringInputSchema = z.object({ yaml: z.string().min(1).refine(text => Buffer.byteLength(text) <= 64 * 1024),
-  params: z.record(z.unknown()).default({}), target: targetSchema }).strict()
+  params: z.record(z.string(), z.unknown()).default({}), target: targetSchema }).strict()
 export const authoringRunSchema = z.object({ receipt: z.string().uuid(), inputDigest: hash, requestId: z.string().regex(/^[\p{L}\p{N}._:-]{1,128}$/u),
   localEvidence: z.literal(true), caseRevision: caseOriginSchema.optional(), video: z.object({ captureId: z.string().uuid(), sessionId: z.string(), startedAt: z.string() }).strict().optional() }).strict()
 export const validationReceiptSchema = z.object({ token: z.string().uuid(), revisionDigest: hash, paramsDigest: hash, projectDigest: hash,
