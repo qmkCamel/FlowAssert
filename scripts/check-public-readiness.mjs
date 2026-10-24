@@ -113,7 +113,9 @@ export function scanText(text, filePath) {
 }
 
 export function isNoreplyEmail(email) {
-  return /@users\.noreply\.github\.com$/i.test(email.trim())
+  // GitHub-signed web-flow commits (including Dependabot) use this public
+  // service address; personal github.com mailboxes remain disallowed.
+  return /@users\.noreply\.github\.com$/i.test(email.trim()) || /^noreply@github\.com$/i.test(email.trim())
 }
 
 function safeIdentifier(value) {

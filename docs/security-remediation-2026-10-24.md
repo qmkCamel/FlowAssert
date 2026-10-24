@@ -53,3 +53,5 @@ Zod 的迁移依据见[官方迁移文档](https://zod.dev/v4/changelog)；安�
 远端 CI 会对正常追加的安全修复提交重新执行；以该提交的 Actions 结果为准。首次新仓库 CI 的两个失败是等待默认轮询窗口和固定 50 ms 后读取持久化取消状态；已改为有界状态等待，且无论断言结果均释放阻塞的 child action，保留“取消阻止后续动作、shutdown 必须等子操作退出”的断言。
 
 仅对 `src/viewer-workbench-runs-http.ts` 的显式 record key 迁移增加冻结合同哈希覆盖；未整体重建旧协议或证据 fixture。
+
+新远端首次安全修复 CI 另外检出了 Dependabot 的 6 个提交者地址：GitHub 的公共 `noreply@github.com`。已核对 GitHub API 的 web-flow 身份及有效签名，补充精确服务邮箱识别，并测试拒绝其他 github.com 邮箱和伪造后缀。没有豁免分支、提交或整个域名；本地重新 fetch 全部分支后执行完整历史检查。

@@ -69,6 +69,9 @@ describe('public readiness checks', () => {
 
   it('requires noreply identities', () => {
     expect(isNoreplyEmail('123+maintainer@users.noreply.github.com')).toBe(true)
+    expect(isNoreplyEmail('noreply@github.com')).toBe(true)
+    expect(isNoreplyEmail('support@github.com')).toBe(false)
+    expect(isNoreplyEmail('noreply@github.com.example.test')).toBe(false)
     expect(isNoreplyEmail('maintainer@example.com')).toBe(false)
   })
 
