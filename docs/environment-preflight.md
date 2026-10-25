@@ -41,7 +41,9 @@ flowassert doctor --target dsh --dsh-executable /ABSOLUTE/DSH --dsh-profile-root
 
 支持版本精确为 **0.2.0-rc.2**，不是“至少这个版本”。`--dsh-executable` 必须明确指向可信绝对路径，固定调用 `--version`；不回退 PATH 的另一份安装。`--dsh-profile-root` 指向选定 profile 的目录，其中应有 `package.json` 和安装依赖。
 
-仅有限读取 package 元数据：核对 `dsh.profile.bundles` 中的 FlowAssert、解析到的 attachment/llm/tools 精确版本及 Cordis `~4.0.4`。rc.2 内置 peer 以**选定 executable 对应的安装目录**为准，不拿 profile 中另一版本冒充有效依赖。标准 package-manager symlink 可以解析；仅向上至多 4 层定位宿主 package，每个文件最多 1 MiB、总计 4 MiB。不爬无关全局目录、不 import/eval 插件、不读取 patch 内的密钥或完整配置。非标准安装布局无法确认时保留 incomplete。
+仅有限读取 package 元数据：核对 `dsh.profile.bundles` 中的 `flowassert`、解析到的 attachment/llm/tools 精确版本及 Cordis peer 声明。rc.2 内置 peer 以**选定 executable 对应的安装目录**为准，不拿 profile 中另一版本冒充有效依赖。标准 package-manager symlink 可以解析；仅向上至多 4 层定位宿主 package，每个文件最多 1 MiB、总计 4 MiB。不爬无关全局目录、不 import/eval 插件、不读取 patch 内的密钥或完整配置。非标准安装布局无法确认时保留 incomplete。
+
+**当前已知限制（2026-10-25）：** `package.json` 已声明 Cordis `~4.0.5`，但 `preflight-dsh.ts` 仍要求插件 peer 字符串恰为 `~4.0.4`，可能将当前包误报为 `dsh_peer_mismatch`。这项检查需单独修复并回归；不要为通过 Doctor 修改已安装包或降级依赖。跟踪见 [PRODUCT_TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md)。
 
 **即使版本/依赖元数据通过，插件实际启用仍是 `dsh-profile-unverified`，整体保持 incomplete。** profile 补丁、启动参数和热更新可能改变启用状态；按用户确认的安全边界，这部分用独立授权的真实宿主实调验收，不通过读取完整配置来推断。现有 peer 装载拒绝仍有效；不要将本报告当作 Native/PTC、模型图片或真机验收证据。
 

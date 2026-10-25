@@ -10,7 +10,7 @@
 
 当前开发分支还提供[变更验收对象](change-acceptance-records.md)、[外部报告导入](external-test-assets.md)、[本机区域 OCR](local-region-ocr.md)和[双槽设备矩阵](local-device-matrix.md)。六项工程实现不等于真实验收完成；逐项设备／材料／人员依赖见[验收清单](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md)。OCR 默认生产关闭，矩阵仅本机显式登记与启动，旧单设备目标不随矩阵选槽变化。
 
-报告目录、失败定位、历史/趋势和画框脱敏/离线HTML的完整用法见[报告阅读与分享](report-reading-and-sharing.md)。本指南按 `dev@REDACTED_REVISION` 核对；旧入口仍可使用。
+报告目录、失败定位、历史/趋势和画框脱敏/离线HTML的完整用法见[报告阅读与分享](report-reading-and-sharing.md)。高级兼容入口仍可使用；历史验收基线以链接报告的日期和版本为准。
 
 本机闭环：创建用例 → 校验并确认执行 → 查看归档证据 → 修订与复验。高级 YAML 和旧工作台仍可使用。
 
@@ -30,21 +30,15 @@
 
 ### 分析、比较与复验
 
-“运行记录”提供全部运行、用例历史和趋势。目录按执行时间倒序，用名称/设备/App/运行或用例ID搜索；结果、平台、来源、日期、caseId/suiteCaseId和构建使用独立筛选。日期按本机时区，结束包含所选当天；50条分页、最多10000条摘要，超8MiB/不可读manifest明确计入coverage。分页固定查询与generation，数据变化时刷新；用例历史按明确身份关联，不按同名自动合并。目录计执行次数，趋势计计划套件/用例，分母不同。
+从“运行记录”或用例历史打开报告，先看首个失败、断言期望与当时材料，再检查业务/视觉等未验范围。截图缺失或损坏不会用当前手机画面补齐；派生副本不代表重新执行。目录筛选、截图回放、录像与分享的完整操作见[报告指南](report-reading-and-sharing.md)。
 
-打开运行进入独立分析：桌面为步骤/归档证据/上下文三栏；主阅读页签为概览、步骤与证据、历史与比较、分享；旧steps/details/triage深链保留，技术细节折叠。默认定位首失败，截图、页面结构、源码行和可用录像随步骤联动，录像时间仅近似定位。截图丢失/损坏不拿当前手机画面代替；显示原记录结果、当前证据可用性及业务/视觉未验范围。派生导入同时展示副本当前结果和来源原报告结果，不把派生材料当作重新通过。
+比较前明确选择并审查基线，同名或最近成功不保证可比。“载入快照为新草稿”与“按原快照复跑”是不同操作；复验产生关联的新运行，保留原失败，通过也不证明根因。受控定位器修复仍需审查候选并明确运行。
 
-“比较与修复”要求明确选择并审查基线；同名、最近成功或未知环境不是天然可比。读取检查计划不执行设备操作，兼容的 child run 可与原运行对照，复验通过不是根因证明。受控定位器修复沿用已有候选/digest 审查，并交接到高级编辑器；再次明确运行后才产生带 lineage 的子运行，不删断言、不覆盖原失败。“载入快照为新草稿”与“按原快照复跑”是不同操作。
-
-`#/runs/<runId>?step=2&tab=evidence` 只定位当前电脑的本机记录，不是公开分享链接。新分析页默认HTML、材料默认不选；可画框遮蔽、审查完整最终文件、明确确认后下载冻结的相同字节。高级入口仍默认JSON，JSON至少选1项材料，HTML允许无附件。预览10分钟/重启失效，输入或source变化要求重审，没有自动上传。项目导出仅含固定相对路径的 flow、配置、README 和 `.gitignore`，不复制凭据、主机命令或证据；依赖外部 hook/profile/dataset 时拒绝误导性的独立包。
+`#/runs/<runId>?step=2&tab=evidence` 只定位本机记录，分享需审查导出的报告。项目导出仅含固定相对路径的 flow、配置、README 和 `.gitignore`，不复制凭据、主机命令或证据；依赖外部 hook/profile/dataset 时拒绝误导性的独立包。
 
 ### 保存预算、迁移与回滚
 
-用例位于运行根目录的 `cases/`，Viewer 受理位于 `authoring-executions/`，两者不混入普通 run 清理。预算为 1000 个用例、每用例 100 个修订、每页 50 条、请求 80 KiB/YAML 64 KiB、catalog 32 MiB、10000 条保留的变更请求身份。目录中未发布到 head 的修订也占预算；达到预算明确拒绝，不静默截断、驱逐身份或自动删除。磁盘未知/不足沿用 256 MiB 安全余量 fail-closed；坏 catalog 不当成空库覆盖。
-
-旧入口在右上角“测试工作台”（`#/legacy`），旧 YAML、HTTP、CLI 和原有 MCP/DSH 17 工具仍兼容；当前 `dev` 另有 3 个只读工具（`mobile_acceptance_get`、`mobile_external_result_get`、`mobile_matrix_status`），共 20 个默认工具；修复闭环另有 5 个 opt-in Preview 工具。本次用例创作功能未增加宿主工具。回滚前停止运行并正常关闭应用；保留新用例/修订、journal、manifest 和引用账本，不通过删目录绕开旧版本校验。用例创作兼容探针对照 `REDACTED_REVISION`，报告/HTML另对照上一dev `REDACTED_REVISION`；[兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md)限定具体格式与版本，不代表任意旧版安全。DSH 验证版本固定 `0.2.0-rc.2`；合并候选已通过新前缀安装、peer 检查与同包宿主验证，见[记录](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/upgrade-dsh-020-rc2/merge-validation.md)，不外推任意环境。
-
-软件/Mock 与真实设备及用户成效独立验收。双平台历史Fixture创作/新修订复验已有[10月5日证据](physical-validation-2026-10-05.md)，不能外推到真实构建变更、外部项目或独立用户；5人研究未完成，不能宣称达到10分钟首测/30秒定位目标。
+用例保存与运行证据分别管理。预算不足时保留已有内容并明确拒绝；回滚前停止运行、正常关闭应用并保留用例、journal、manifest 与引用账本。完整限额及版本限制见[维护参考](workbench-maintenance.md#保存预算迁移与回滚)。
 
 ## 高级 YAML / 兼容入口
 
@@ -217,15 +211,7 @@ blockers:
 
 ## 开发验证
 
-- `pnpm check`
-- `pnpm test:e2e`
-- `pnpm build`
-- `pnpm pack:check`
-- `pnpm test:workbench:physical`：需要显式的设备、Appium 与 YAML 环境参数，见脚本头部；记录同 session 运行与媒体增量，绝不自动拉起另一套控制栈。
-
-实现采用 [ADR 0006](decisions/0006-native-yaml-workbench.md)。2026-09-10 的独立框架真机 PoC 不是本次集成版本的硬件验收。
-
-当前交付证据与硬件边界见 [2026-09-14 验证记录](workbench-validation.md)。
+仓库门禁与真机探针见[维护参考](workbench-maintenance.md#开发验证)。软件/Mock、特定 Fixture 真机样本与独立用户效果分别验收；历史记录不代表当前构建重新通过。
 
 ## P0 补强：取证进度、耗时与恢复
 
@@ -237,18 +223,7 @@ PNG 与 XML 独立采集并保存。一个失败时仍保留另一个，运行�
 
 ### 真机重复测量
 
-保持同一手机、App/驱动版本、YAML、capabilities 和每步 PNG/XML 策略，用以下环境参数执行 `pnpm test:workbench:benchmark`：
-
-- `MOBILE_MIRROR_FLOW_PATH`：用例绝对路径。
-- `MOBILE_MIRROR_CAPABILITIES_PATH`：本机私有 capabilities JSON 绝对路径，含明确设备标识，不重置 App 数据。
-- `MOBILE_MIRROR_APPIUM_URL`：指定本机 Appium 地址。
-- `MOBILE_MIRROR_APPIUM_EXECUTABLE`：可选的可信绝对路径；提供后明确启动 managed Appium，要求端口没有外部 listener。验证 WDA 自动清理时使用此模式。
-- `MOBILE_MIRROR_BENCHMARK_OUTPUT`：本机私有结果 JSON 绝对路径。
-- `MOBILE_MIRROR_REPEAT_COUNT`：3–10，默认 3；各轮重新建立 session，不把冷启动与暖 session 混成同一种基线。
-- `MOBILE_MIRROR_MAX_RUN_MS`：可选的预设耗时门禁；超预算返回非零，不自动扩大门禁。
-- Android 继续使用已有 `MOBILE_MIRROR_SCRCPY_PATH` / `MOBILE_MIRROR_SCRCPY_SERVER_PATH`。
-
-报告保留每轮 runId、阶段耗时、媒体、交互、历史、材料哈希复验与 runtime 清理状态；给出样本中位数/p95 和校准用建议预算。三次样本不是生产 SLO，未通过完整验收的轮次不能生成完整基线。2026-09-14 已完成双端各三轮：Android 中位数 45,061 ms / 样本预算 64,828 ms，iPhone 中位数 29,452 ms / 样本预算 42,968 ms；正反例、证据/历史、媒体/交互与资源清理均已复验，见 [P0 验证记录](workbench-p0-validation.md)。
+同设备、同输入与同取证策略的重复测量参数和样本边界见[维护参考](workbench-maintenance.md#真机重复测量)。历史样本预算不是生产 SLO。
 
 ## 公开文字输入
 

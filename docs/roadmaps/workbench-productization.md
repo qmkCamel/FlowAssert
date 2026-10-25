@@ -1,6 +1,6 @@
 # 移动测试工作台产品化：三阶段实施总览
 
-建立：2026-09-25；状态说明更新：2026-10-07。方案基线：`dev@REDACTED_REVISION`。性质：**历史三阶段方案，保留当时规划与验收快照**。当前 18 个 active change及逐项进度以[产品TODO](../../PRODUCT_TODO.md)为准，最新报告/运行时能力见[能力表](../capabilities.md)。本文件是三个 OpenSpec change 的导航与依赖说明，不替代各 change 的规范，不代表功能已发布。
+建立：2026-09-25；状态说明更新：2026-10-07。方案基线：`dev@REDACTED_REVISION`。性质：**历史三阶段方案，保留当时规划与验收快照**。当前活动 change 及逐项进度以[产品TODO](../../PRODUCT_TODO.md)为准，最新报告/运行时能力见[能力表](../capabilities.md)。本文件是三个 OpenSpec change 的导航与依赖说明，不替代各 change 的规范，不代表功能已发布。
 
 ## 定位与不变边界
 

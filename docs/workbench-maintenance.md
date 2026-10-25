@@ -6,7 +6,7 @@
 
 用例位于运行根目录的 `cases/`，Viewer 受理位于 `authoring-executions/`，两者不混入普通 run 清理。预算为 1000 个用例、每用例 100 个修订、每页 50 条、请求 80 KiB/YAML 64 KiB、catalog 32 MiB、10000 条保留的变更请求身份。目录中未发布到 head 的修订也占预算；达到预算明确拒绝，不静默截断、驱逐身份或自动删除。磁盘未知/不足沿用 256 MiB 安全余量 fail-closed；坏 catalog 不当成空库覆盖。
 
-旧入口在右上角“测试工作台”（`#/legacy`），旧 YAML、HTTP、CLI 和原有 MCP/DSH 17 工具仍兼容；当前 `dev` 另有 3 个只读工具（`mobile_acceptance_get`、`mobile_external_result_get`、`mobile_matrix_status`），共 20 个默认工具；修复闭环另有 5 个 opt-in Preview 工具。本次用例创作功能未增加宿主工具。回滚前停止运行并正常关闭应用；保留新用例/修订、journal、manifest 和引用账本，不通过删目录绕开旧版本校验。用例创作兼容探针对照 `REDACTED_REVISION`，报告/HTML另对照上一dev `REDACTED_REVISION`；[兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md)限定具体格式与版本，不代表任意旧版安全。DSH 验证版本固定 `0.2.0-rc.2`；合并候选已通过新前缀安装、peer 检查与同包宿主验证，见[记录](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/upgrade-dsh-020-rc2/merge-validation.md)，不外推任意环境。
+高级兼容入口为 `#/legacy`；用例创作没有新增宿主工具，当前工具职责见[产品形态](product-shape.md#agent-与控制面)。回滚前停止运行并正常关闭应用，保留用例/修订、journal、manifest 和引用账本，不通过删除目录绕开旧版本校验。用例创作和报告的兼容探针基于迁移前的特定 `dev` 修订，不能外推任意旧版；具体格式、版本与回滚条件见[兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md)。DSH 安装与验证基线见[安装指南](beta-installation.md)。
 
 软件/Mock 与真实设备及用户成效独立验收。双平台历史Fixture创作/新修订复验已有[10月5日证据](physical-validation-2026-10-05.md)，不能外推到真实构建变更、外部项目或独立用户；5人研究未完成，不能宣称达到10分钟首测/30秒定位目标。
 
@@ -20,15 +20,11 @@
 
 实现采用 [ADR 0006](decisions/0006-native-yaml-workbench.md)。2026-09-10 的独立框架真机 PoC 不是本次集成版本的硬件验收。
 
-当前交付证据与硬件边界见 [2026-09-14 验证记录](workbench-validation.md)。
+基础工作台历史证据见 [2026-09-14 验证记录](workbench-validation.md)，后续验收入口集中在[能力总表](https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md)。
 
 ## P0 补强：取证进度、耗时与恢复
 
-步骤详情现在显示执行、定位/读树、坐标校验、设备动作、截图、源树、保存和复核耗时。执行包含设备调用与等待，不能把所有显示值简单相加；“等待与执行器开销”是执行减去设备阶段的差额，包含轮询、IPC 与计算。下一步会等上一检查点落盘后开始，慢取证时仍可切换主题、查看历史和取消。
-
-PNG 与 XML 独立采集并保存。一个失败时仍保留另一个，运行不能通过；取消保留已完成材料，已派发设备操作会先收敛。主机意外退出后，重启会恢复已落盘未登记材料和可能不完整的临时文件，保留原始材料并标明“恢复材料”，结果为无法确认。恢复哈希描述现在找到的字节，不证明中断前材料完整。原有成功运行与重跑关系继续保留。
-
-使用 managed/managed-once Appium 时，断开会核验并清理本次拥有的 Appium/WDA 进程；失败保留可重试的 owner。external/attached 的进程仍由外部 owner 管理。运行结束继续保留会话，不会为了清理而打断实时观看。整个宿主被 SIGKILL 后，材料可在重启时恢复，但不会自动接管遗留设备进程。
+用户可见的阶段计时、独立 PNG/XML 取证与异常恢复语义统一见[工作台指南](test-workbench.md#p0-补强取证进度耗时与恢复)。维护者按下面的固定输入测量，不把运行结束当作设备进程已清理。
 
 ### 真机重复测量
 

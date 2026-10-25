@@ -1,13 +1,13 @@
 # Workbench 版本与问题报告
 
-修复闭环随 `REDACTED_REVISION` 合入，以 **Preview（默认关闭）** 交付，独立 case/journal 不改原 run/JUnit verdict。旧 application-only 页面登记可读取但不能继续授权导航；须显式改用 v2 页面锚点与容器。停用或回退前取消并排空活跃任务，保留原失败、审批、制品及未知安装状态，不能删 journal 清除围栏。工具隐藏不是全局停用；见[修复兼容与恢复](evidence-guided-repair-operations.md)。
+修复闭环以 **Preview（默认关闭）** 交付，独立 case/journal 不改原 run/JUnit verdict。旧 application-only 页面登记可读取但不能继续授权导航；须显式改用 v2 页面锚点与容器。停用或回退前取消并排空活跃任务，保留原失败、审批、制品及未知安装状态，不能删 journal 清除围栏。工具隐藏不是全局停用；见[修复兼容与恢复](evidence-guided-repair-operations.md)。
 
-更新：2026-10-07，当前核对 `dev@REDACTED_REVISION`。包版本相同不表示构建相同；源码、候选 tarball、公开 Release 和生产支持分别核对，见[安装指南](beta-installation.md)。当前 peer/同包验证固定 DSH `0.2.0-rc.2`。
+格式与回滚证据原始核对：2026-10-07（迁移前 `dev@REDACTED_REVISION`）；当前源码入口为 FlowAssert `main`。包版本相同不表示构建相同；源码、候选 tarball、公开 Release 和生产支持分别核对，见[安装指南](beta-installation.md)。当前 peer/同包验证固定 DSH `0.2.0-rc.2`。
 
 | 对象 | 当前能力和边界 | 兼容结论 |
 | --- | --- | --- |
-| 历史 `v0.1.0-alpha.1` 包 | 基础 Viewer/MCP/DSH/设备桥接；发布时无本轮 Workbench | 不充当前一支持 Workbench 基线；历史宿主 rc.8 不外推当前 rc.2 |
-| 当前 dev（包版本 `0.1.0-alpha.2`） | 用例、运行/套件、公共投影、视觉基线、趋势/清理、报告目录和 HTML 分享已有工程实现 | 不等于 alpha.2 tag/资产已发布；跨版本必须附源码/包 SHA，不能据同包样本宣称任意旧版本支持 |
+| 迁移前 `v0.1.0-alpha.1` 包 | 基础 Viewer/MCP/DSH/设备桥接；发布时无本轮 Workbench | 不充当前一支持 Workbench 基线；历史宿主 rc.8 不外推当前 rc.2 |
+| 当前源码（包版本 `0.1.0-alpha.2`） | 用例、运行/套件、公共投影、视觉基线、趋势/清理、报告目录和 HTML 分享已有工程实现 | 不等于 alpha.2 tag/资产已发布；跨版本必须附源码/包 SHA，不能据同包样本宣称任意旧版本支持 |
 | 原始归档 v1 / product v1 | 旧运行的输入与证据 | 保留原记录有限结果；不自动脱敏，不当作新必需维度已验 |
 | 派生归档 v2 / rules 1 | PNG 遮蔽、角色白名单、reportedVerdict/withheld/来源映射 | 派生当前结果不确定/未重验；来源结果单列，不自动批准为通过基线 |
 | 原始 runtime 归档 v3 / product v2 | 时间/健康/性能维度与 requiredFeatures | 声明功能必须可解释，未知版本/必需功能拒绝；不得删字段降级为 v1 |

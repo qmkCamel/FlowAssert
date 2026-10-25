@@ -1,6 +1,6 @@
 # 当前移动测试工作台架构
 
-新增 `WorkbenchRepairCoordinator` 由 `WorkbenchApplication` 组装和排空，维护 RepairCase、冻结计划及审批 journal；设备与维护操作仍由 MirrorService 唯一拥有。修复闭环为 **Preview（默认关闭，53/65）**；M1/M2 软件链、M3 Mock 协议不代表 Appium 真机闭环。当前 DSH 固定 `0.2.0-rc.2`；见[修复边界](../evidence-guided-repair-operations.md)及[宿主验证](../dsh-020-validation.md)。
+新增 `WorkbenchRepairCoordinator` 由 `WorkbenchApplication` 组装和排空，维护 RepairCase、冻结计划及审批 journal；设备与维护操作仍由 MirrorService 唯一拥有。修复闭环为 **Preview（默认关闭）**；M1/M2 软件链、M3 Mock 协议不代表 Appium 真机闭环。当前 DSH 固定 `0.2.0-rc.2`；见[修复边界](../evidence-guided-repair-operations.md)及[宿主验证](../dsh-020-validation.md)。
 
 更新：2026-10-07，核对 `dev@REDACTED_REVISION`；基础工作台始于 `REDACTED_REVISION`，下图展示共享设备执行主链路，AppClaw `2.7.0`。图外已增加产品契约、登记套件、CLI/Agent 控制、趋势、分享、清理、受控修复和显式视觉基线；它们的当前状态见[能力总表](../capabilities.md)与相关未归档 OpenSpec change。早期选型和扩展目标仍在[完整目标架构](mobile-test-workbench.md)，不代表这些目标已交付。DSH 的测试版本以各项验证报告和锁定配置为准，不把历史 rc.1 结论外推到新包。
 

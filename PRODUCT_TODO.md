@@ -1,5 +1,11 @@
 # FlowAssert 产品 TODO
 
+## 2026-10-25 文档对账
+
+当前源码入口为 FlowAssert `main`。索引、指南与任务计数的归属见[文档维护约定](docs/documentation-maintenance.md)；下方日期化条目保留迁移前历史，不代表新仓库已重做相应验收。
+
+- [ ] **修复 DSH Doctor 的 Cordis 版本漂移**：`package.json`/版本合同已使用 `~4.0.5`，`src/preflight-dsh.ts` 仍只接受插件 peer 字符串 `~4.0.4`，现有预检测试也沿用旧 fixture。统一受支持版本来源，并覆盖当前真实包元数据和不兼容 peer 的拒绝；不能用降级或放宽全部 peer 检查绕过。详见[预检限制](docs/environment-preflight.md#dsh静态前提与实际启用分开)。
+
 ## 2026-10-19 历史脱敏
 
 按维护者授权清洗全部远端分支和标签，移除历史个人身份与组织专属材料，并取消历史邮箱豁免。脱敏示例与原始验证的区别见[历史脱敏说明](docs/privacy-history-cleanup.md)。当前交付进度见下表。
@@ -117,7 +123,7 @@
 - [ ] **设备与恢复矩阵**：更多 Android OEM/版本/TCP、至少两个 iOS 大版本及免费开发者账号、锁屏/旋转/断线/信任变化/权限弹窗；Android 音频另验。
 - [ ] **发布与生产化**：SBOM、依赖升级矩阵、诊断包、稳定版支持策略；旧候选的新前缀 peer 冲突已由固定 DSH 0.2.0-rc.2 的新候选通过干净前缀安装及 peer 检查收口，见[合并验证](openspec/changes/upgrade-dsh-020-rc2/merge-validation.md)；这不等于公开发布或任意环境兼容。远程设备网格和公共 npm 仅在明确需求后推进。
 
-## OpenSpec 活动任务快照（2026-10-12）
+## OpenSpec 活动任务快照（2026-10-25 对账）
 
 原发布检查发现的历史绝对路径已纳入本轮全历史清洗。旧[文档审计](docs/dev-documentation-audit-2026-10-07.md)保留当时结论，本轮结果单独记录，不添加扫描豁免。
 

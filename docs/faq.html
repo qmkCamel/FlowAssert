@@ -6,7 +6,7 @@
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101624;color:#edf2fa;font:16px/1.85 system-ui,-apple-system,"PingFang SC",sans-serif}main{max-width:900px;margin:auto;padding:32px 24px 64px;overflow-wrap:anywhere}nav{display:flex;gap:24px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid #344058}a{color:#b5f477;text-underline-offset:4px}a:focus-visible{outline:2px solid #b5f477;outline-offset:4px}h1{font-size:32px}h2{margin-top:40px;border-bottom:1px solid #344058;padding-bottom:12px}h3{font-size:19px;margin-top:28px}pre{overflow:auto;padding:18px;background:#192236;border-radius:8px;font-size:13px}code{font-family:ui-monospace,monospace}p,li{color:#d3ddec}table{display:block;overflow:auto;border-collapse:collapse}td,th{padding:8px;border:1px solid #344058}[id]{scroll-margin-top:24px}
 </style></head><body><main><nav aria-label="FAQ 导航"><a href="communications/mobile-mirror-demo.html#mock-demo">← 返回交互演示</a><a href="#q11">首次试用</a></nav>
 <h1>FlowAssert 试用 FAQ</h1>
-<p>面向首次试用的开发者和测试维护者。内容核对于 2026-10-12，适用于个人版当前源码内测；产品仍为 Developer Preview。完整操作顺序见<a href="beta-start.md">内测任务卡</a>，能力与验收边界见<a href="capabilities.md">能力总表</a>。</p>
+<p>面向首次试用的开发者和测试维护者。启动说明核对于 2026-10-25，适用于 FlowAssert 的 <code>main</code> 源码内测；产品仍为 Developer Preview。完整操作顺序见<a href="beta-start.md">内测任务卡</a>，能力与验收边界见<a href="capabilities.md">能力总表</a>。</p>
 <h2>高频问题</h2>
 <ul>
 <li><a href="#q2">网页演示和实际产品有什么区别？</a></li>
@@ -39,8 +39,7 @@
 <h2>安装与启动</h2>
 <p><a id="q6"></a></p>
 <h3>5. 从哪里获取代码？GitHub 没有访问权限怎么办？</h3>
-<p>从<a href="https://github.com/qmkCamel/flowassert">GitHub 仓库</a>获取源码，本轮入口为试用分支 <code>dev</code>。首次试用先向邀请人确认访问权限、Git 认证以及可试用的提交；如果克隆后只有初始说明而没有 <code>package.json</code>，请让邀请人确认完整源码是否已推送。</p>
-<p>本轮使用上述仓库的 <code>dev</code> 分支。版本说明文件存在也不代表对应安装包已发布；包的获取方式见<a href="beta-installation.md">安装说明</a>。</p>
+<p>从 <a href="https://github.com/qmkCamel/flowassert">FlowAssert 仓库</a>的 <code>main</code> 分支获取源码；克隆需要相应仓库访问权限。无法访问时，先向邀请人确认权限与 Git 认证，不要改用旧仓库或旧安装包。反馈时记录当前提交 SHA；版本说明文件不代表安装包已经发布，详见<a href="beta-installation.md">安装说明</a>。</p>
 <p><a id="q7"></a></p>
 <h3>6. Node.js 和 pnpm 需要什么版本？</h3>
 <p>建议与本轮维护者验证环境一致：<strong>Node.js 24.19.0、pnpm 11.7.0</strong>。其中 pnpm 版本由 <code>packageManager</code> 固定；<code>package.json</code> 声明的 Node 兼容范围为 <code>^22.19.0 || &gt;=24.0.0</code>，兼容范围不等于每个版本都完成了本轮验证。</p>
@@ -56,7 +55,7 @@ pnpm -v
 <h3>8. 第一次启动要执行哪些命令？成功后应该看到什么？</h3>
 <p>先准备上一题的工具链和 GitHub 访问权限，再逐条执行：</p>
 <pre><code class="language-bash">git clone --branch main https://github.com/qmkCamel/flowassert.git
-cd deepseek-harness-mobile-mirror
+cd flowassert
 git rev-parse HEAD
 pnpm install --frozen-lockfile
 pnpm peers check

@@ -61,7 +61,7 @@ body = body.replace(/href="([^"#][^"]*)"/g, (attribute, reference) => {
   const target = new URL(reference, directory)
   if (!target.href.startsWith(root.href)) throw new Error(`Link outside repository: ${reference}`)
   const path = fileURLToPath(target).slice(fileURLToPath(root).length)
-  return `href="${repositoryUrl}/blob/dev/${path}${target.search}${target.hash}"`
+  return `href="${repositoryUrl}/blob/main/${path}${target.search}${target.hash}"`
 })
 body = body.replace(/<table>/g, '<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的对比表"><table>').replace(/<\/table>/g, '</table></div>')
 const toc = headings.map(({ id, text }) => `<a href="#${id}">${escape(text)}</a>`).join('\n')

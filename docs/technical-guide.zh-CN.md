@@ -1,14 +1,10 @@
 # FlowAssert 技术与开发指南
 
-修复闭环为 **Preview（预览能力，默认关闭）**，只适合受控项目试用。M1/M2 软件验证与 M3 Mock 安装协议不等于真实 App 修复验收；项目 `repair.enabled` 与宿主 `repairToolsEnabled` 分开控制，尚无统一总开关或 Viewer 一键开关。使用范围、审批与停用见[修复指南](https://github.com/qmkCamel/flowassert/blob/main/docs/evidence-guided-repair-operations.md)。
-
 [English](technical-guide.md) | 简体中文
 
-本指南面向需要阅读源码、开发、构建、验证或扩展 FlowAssert 的贡献者。产品定位、目标用户和快速体验请先阅读[中文 README](../README.zh-CN.md)；部署到具体宿主或真机时，应继续使用下方对应的专题文档。
+本指南面向阅读源码、开发、构建、验证或扩展 FlowAssert 的贡献者。首次体验见[中文 README](../README.zh-CN.md)，逐项能力与验收见[能力总表](https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md)，活动任务见 [PRODUCT_TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md)。本页集中维护工程命令，不重复维护任务计数。
 
-当前六项迭代完成的是工程范围，不是所有验收。交付前先核对[逐项状态](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md)：90/103（10月5日；原路线图保留10月3日快照），真机、授权材料、独立评审分别跟踪。新增专题为[变更验收](change-acceptance-records.md)、[外部资产](external-test-assets.md)、[本机 OCR](local-region-ocr.md)、[双槽矩阵](local-device-matrix.md)；DSH/MCP 共 20 项默认工具，另有 5 项 opt-in Preview 修复工具，新增三个摘要读取入口不具有矩阵或外部 runner 执行权限。
-
-报告目录、失败阅读和脱敏导出见[报告阅读与离线分享](report-reading-and-sharing.md)；全部活动任务的 10 月 7 日计数见[产品 TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md)。源码候选、同包验证与公开 Release 分别核对；安装入口见[指南](beta-installation.md)。
+修复闭环为 **Preview，默认关闭**；启用、审批与退出见[修复指南](https://github.com/qmkCamel/flowassert/blob/main/docs/evidence-guided-repair-operations.md)。软件/Mock、包与宿主、真机和真实模型分别验收。
 
 ## 工具链基线
 
@@ -20,18 +16,22 @@
 | DeepSeek Harness | `0.2.0-rc.2` |
 | Appium | 2 或 3 |
 | Android driver | UiAutomator2 |
-| iOS driver | XCUITest/WebDriverAgent；自有 WDA/MJPEG host forwarding 暂限经指纹审计的 XCUITest 10.19.1，external Appium 由其 owner 独立核验 |
+| iOS driver | XCUITest/WebDriverAgent |
 
-后续 DeepSeek Harness preview、Appium driver 或 scrcpy 版本不能只修改文档数字；必须重新通过对应的 clean-profile、provider 和真机验收。
+自有 WDA/MJPEG host forwarding 暂限经指纹审计的 XCUITest `10.19.1`，external Appium 由其 owner 核验。后续 Harness preview、driver 或 scrcpy 升级须补相应 clean-profile、provider 和真机证据，不能只修改版本数字。
 
 ## 本地开发
 
 ```bash
+git clone --branch main --single-branch https://github.com/qmkCamel/flowassert.git
+cd flowassert
 mise install
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
+mise exec -- corepack enable
+mise exec -- pnpm install --frozen-lockfile
+mise exec -- pnpm dev
 ```
+
+已有源码目录时从 `mise install` 开始；自行管理 Node 时可省略 `mise exec --`，确保当前终端版本符合上表。
 
 开发入口默认在 `http://127.0.0.1:3210` 启动 loopback Viewer；没有本机保存配置时使用安全的 Mock provider。Mock 不需要手机、Appium、模型凭据或宿主设备发现，适合 UI、生命周期和 Agent contract 的确定性开发。
 
@@ -54,9 +54,9 @@ pnpm build
 pnpm pack:check
 ```
 
-`pnpm build` 生成 ESM、类型声明和 source map；`pnpm pack:check` 会重新构建并检查发布 tarball 内容。package 保持 `private: true`，不会执行 `npm publish`。安装和回滚只使用经过校验的 GitHub prerelease，见 [Beta 指南](beta-installation.md)。
+`pnpm build` 生成 ESM、类型声明和 source map；`pnpm pack:check` 通过 `pnpm pack --dry-run` 的实际文件清单检查随包文档链接，同时触发构建，不代替真实 tarball 的隔离安装。生成本机候选使用 `pnpm pack --pack-destination /ABSOLUTE/CANDIDATE_DIR`。当前入口是源码，package 保持 `private: true`；未来 Release 下载与回滚模板见[安装指南](beta-installation.md)。
 
-发布包同时包含：
+候选包包含：
 
 - DSH Cordis bundle；
 - 通用 stdio MCP launcher；
@@ -77,7 +77,7 @@ pnpm public:check
 git diff --check
 ```
 
-- `pnpm check`：TypeScript、contract lint 与 Vitest；
+- `pnpm check`：TypeScript、contract lint、文档检查与 Vitest；
 - `pnpm test:e2e`：Viewer Playwright 场景；
 - `pnpm public:check`：公开文件、Markdown 链接、secret/path、作者身份和发布边界；
 - Viewer 改动还必须保留并人工检查最终截图；
@@ -103,7 +103,9 @@ DSH_TOOLS_MODE=native dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
 DSH_TOOLS_MODE=ptc dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
 ```
 
-这两条路径分别通过 Native tools 与宿主提供的 PTC `run_code` transport 调用真实 DSH registry。当前 registry 包含十项设备工具和五项默认关闭的已登记测试工具；后者必须配置本机项目及白名单后才能使用。必须使用支持图片输入的模型才能证明模型实际看到 PNG；文本模型仍只得到稳定的 omitted 占位。新工具与证据权限见 [Agent 运行指南](agent-test-run-control.md)。
+这两条路径分别通过 Native tools 与宿主提供的 PTC `run_code` 调用真实 DSH registry。默认工具集合为十项设备工具、五项已登记测试工具和五项只读摘要工具；测试执行须另行启用并配置项目白名单。五项 Preview 修复工具需宿主 opt-in 与有效项目登记，可见不代表获准执行。完整职责见[工具清单](product-shape.md#agent-与控制面)，授权见 [Agent 运行指南](agent-test-run-control.md)。
+
+DSH `0.2.0-rc.2` 的目录将 `deepseek-flash` 声明为 `text,image`，`deepseek-v4-pro` 为仅文本；后者收到稳定的图片省略占位。目录元数据或附件送达不能证明真实模型已读取图片，须独立验证。当前 DSH Doctor 的 Cordis 检查存在[已知版本漂移](environment-preflight.md#dsh静态前提与实际启用分开)。
 
 ### 物理设备
 
@@ -139,7 +141,7 @@ pnpm run test:media:physical
 | 评估权限、隐私和外部状态变更 | [安全模型](security.md) |
 | 查看测试、性能和物理证据 | [验证记录](validation.md) |
 | 查看开发阶段和未完成矩阵 | [里程碑](milestones.md) |
-| 查看架构决策 | [ADR 目录](decisions/0001-appium-core-local-viewer.md) |
+| 查看架构决策 | [ADR 目录](https://github.com/qmkCamel/flowassert/blob/main/docs/README.md#架构决策-adr) |
 | 查看研究依据 | [产品与竞品调研](https://github.com/qmkCamel/flowassert/blob/main/docs/research/product-landscape.md) |
 
 ## 贡献与发布
@@ -148,4 +150,4 @@ pnpm run test:media:physical
 
 ## Observation 查询与 Viewer Inspector
 
-当前追加第十工具 `mobile_mirror_query_screen`：先用 summary inspect，再对同一 observation 执行 find/get/subtree，无需重新采集或生成图片附件。历史节点仍受原严格动作时限约束。Viewer 可独立检查冻结截图、节点树与属性，不发布 Agent observation，也不修改分享策略。详见[使用与验收边界](inspector-validation.md)。
+`mobile_mirror_query_screen` 只查询已保留的 observation，不重新截图，也不延长动作有效期。Viewer Inspector 独立冻结本机截图与结构；使用与验收见 [Inspector 指南](inspector-validation.md)。

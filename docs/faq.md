@@ -1,6 +1,6 @@
 # FlowAssert 试用 FAQ
 
-面向首次试用的开发者和测试维护者。内容核对于 2026-10-12，适用于个人版当前源码内测；产品仍为 Developer Preview。完整操作顺序见[内测任务卡](beta-start.md)，能力与验收边界见[能力总表](capabilities.md)。
+面向首次试用的开发者和测试维护者。启动说明核对于 2026-10-25，适用于 FlowAssert 的 `main` 源码内测；产品仍为 Developer Preview。完整操作顺序见[内测任务卡](beta-start.md)，能力与验收边界见[能力总表](capabilities.md)。
 
 ## 高频问题
 
@@ -50,9 +50,7 @@ AI 恢复、OCR、矩阵和证据驱动修复等能力有各自的配置与验�
 <a id="q6"></a>
 ### 5. 从哪里获取代码？GitHub 没有访问权限怎么办？
 
-从[GitHub 仓库](https://github.com/qmkCamel/flowassert)获取源码，本轮入口为试用分支 `dev`。首次试用先向邀请人确认访问权限、Git 认证以及可试用的提交；如果克隆后只有初始说明而没有 `package.json`，请让邀请人确认完整源码是否已推送。
-
-本轮使用上述仓库的 `dev` 分支。版本说明文件存在也不代表对应安装包已发布；包的获取方式见[安装说明](beta-installation.md)。
+从 [FlowAssert 仓库](https://github.com/qmkCamel/flowassert)的 `main` 分支获取源码；克隆需要相应仓库访问权限。无法访问时，先向邀请人确认权限与 Git 认证，不要改用旧仓库或旧安装包。反馈时记录当前提交 SHA；版本说明文件不代表安装包已经发布，详见[安装说明](beta-installation.md)。
 
 <a id="q7"></a>
 ### 6. Node.js 和 pnpm 需要什么版本？
@@ -80,7 +78,7 @@ pnpm -v
 
 ```bash
 git clone --branch main https://github.com/qmkCamel/flowassert.git
-cd deepseek-harness-mobile-mirror
+cd flowassert
 git rev-parse HEAD
 pnpm install --frozen-lockfile
 pnpm peers check

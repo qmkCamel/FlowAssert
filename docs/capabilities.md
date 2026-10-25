@@ -1,24 +1,12 @@
 # FlowAssert 能力总表
 
-2026-10-12 增量：报告支持截图序列回放、步骤时间线、失败暂停、已记录动作前后与坐标对照；新增默认关闭的合成 Web 自检、独立视觉复核及文档/分发检查。旧报告缺少动作证据时明确降级，Web 自检不替代手机业务验收。[使用说明](report-reading-and-sharing.md) · [Web 自检](web-visual-acceptance.md) · [本轮验证](../openspec/changes/port-report-playback-and-web-selftest/implementation-validation.md)。
+文档对账：2026-10-25，FlowAssert `main@f508558`。本次核对源码、任务清单与已有报告，不是新一轮真机、模型或独立用户验收。源码为 `0.1.0-alpha.2` Developer Preview；当前使用 `main` 源码，历史包和迁移边界见[安装指南](beta-installation.md)与[兼容说明](workbench-compatibility.md)。
 
-修复闭环已合入 dev，但仅作为 **Preview（默认关闭）**：M1/M2 工程链和 M3 Mock 协议不代表真机修复通过；当前 53/65，操作、授权与退出预览门槛见[修复指南](evidence-guided-repair-operations.md)。DSH 已升级并锁定 `0.2.0-rc.2`，[合并候选同包验证](../openspec/changes/upgrade-dsh-020-rc2/merge-validation.md)与真实模型/真机验收分开。
-
-更新：2026-10-07，核对基线 `dev@REDACTED_REVISION`。依据当前开发分支实现与链接验收记录；源码版本 `0.1.0-alpha.2`，Developer Preview。工程实现、Mock 验证、真机验收与已发布资产分开表述。当前开发包与已发布 alpha.1 的[归档/API 兼容边界](workbench-compatibility.md)须分别核对。
-
-10 月 3 日工程增量（代码基线 `feat/change-acceptance-roadmap@REDACTED_REVISION`，后续已合入 dev）：变更验收对象与外部测试资产已有工程实现；本机区域 OCR 完成冻结评测与显式批准机制、检查点留证和 Viewer 候选预览，并非已完成真实集评测或批准生产；双槽矩阵完成独立进程、隔离调度、故障恢复与只读宿主摘要。详见 [OCR](local-region-ocr.md)、[矩阵](local-device-matrix.md) 和 [离线验证](../artifacts/local-device-matrix/validation.md)。该批新增工具后为 20 项默认工具；修复闭环另外提供 5 项显式启用的 Preview 工具。
-
-[六项原路线图](../openspec/changes/add-change-acceptance-records/roadmap.md)保留 10 月 3 日快照。10 月 5 日真机增量 `REDACTED_REVISION` 合入 dev，双端 Fixture readiness／助手／child 核查完成后，关联四个 change 为 **90/103**；剩余 13 项包括真实业务变更／矩阵、OCR／完整报告兼容、独立评审／迁移与最终归档。实际 Appium 客户端报告链的部分证据不关闭完整外部资产任务。详见[当前验收与合并边界](physical-validation-2026-10-05.md)。不能把所有缺口统称“等真机”，合入仍不等于发布。
+“已验”只指链接报告中明确的版本、设备和样本；迁移前 `dev` 的结果不自动归属于当前构建。未完成任务及计数统一见 [PRODUCT_TODO](../PRODUCT_TODO.md) 和各 change 的 tasks，避免在不同入口重复维护。
 
 ## 当前能力与验收入口
 
-10月7日报告阅读与离线分享已合入dev：报告摘要筛选分页、失败/图片阅读、历史趋势、画框遮蔽和离线HTML审查下载已有软件/同包验证，41/46；实际Safari、完整双平台材料/真实健康信号及五人研究仍待验。见[报告阅读与离线分享](report-reading-and-sharing.md)与[实施验证](../openspec/changes/improve-report-reading-and-sharing/implementation-validation.md)。
-
-10 月 6 日运行时门禁增量：时间／重启／只读业务断言和端到端时间门禁已有工程实现；Android/iPhone 独立 RuntimeFixture 的正反例、取消、USB 断线及自有宿主暂停已验证，观测中断不会变绿。新两项 OpenSpec 分别 27/28、28/32，不并入上述六项历史计数；健康来源与真实业务仍未放行。合并候选、工程门禁及证据边界见[运行时审计](runtime-gates-validation.md)。
-
-是否适合你的团队、应从哪一层开始以及用例何时可以进入稳定回归，见[采用指南与适用性评估](adoption-guide.md)。本节只保留当前能力摘要。
-
-真实业务验收对象已加入：[Test Fixture App + Server](business-test-fixture.md)。Android/iOS 原生 UI 提交、SQLite 独立真值校验及清理正反例均已实测通过，各 36 份材料重启复验，慢请求进度/Help 交互/超时保留成功结果均通过。历史 Android 超时保留，不算稳定性修复，也不代表外部业务已验证。
+先按[采用指南](adoption-guide.md)判断试点范围。下表概括用途，后面的矩阵区分工程实现与验收边界；报告操作见[报告阅读与离线分享](report-reading-and-sharing.md)，受控业务示例见 [Fixture App + Server](business-test-fixture.md)。
 
 | 你的诉求 | 当前提供什么 | 目前的边界 |
 | --- | --- | --- |
@@ -30,6 +18,12 @@
 ## 模拟器连接（2026-10-09）
 
 Viewer 已增加真机/模拟器选择；支持已启动的本机 Android Emulator 与 iOS Simulator，后者无需 Apple Team ID。复用现有 Appium 会话和工作台。使用与实测边界见[模拟器指南](simulators.md)及[验证记录](../openspec/changes/add-guided-simulator-support/tasks.md)，不改写真机验收等级。
+
+## 报告回放与可选 Web 自检
+
+报告已提供截图序列回放、步骤时间线和已记录动作的前后对照；回放不执行设备操作，缺失的旧动作位置不补造。具体操作与离线 HTML 的区别见[报告指南](report-reading-and-sharing.md)。
+
+Web 自检为默认关闭的可选入口，仅运行登记的合成 Viewer 场景。取证完成默认仍需复核与独立 gate，不代表手机用例或通用网站测试通过；配置、工具前提和历史验证见 [Web 视觉验收](web-visual-acceptance.md)。
 
 ## 能力与验收矩阵
 
@@ -53,12 +47,12 @@ Viewer 已增加真机/模拟器选择；支持已启动的本机 Android Emulat
 | 首次验收助手与语义就绪 | Fixture 真机联合验收已验 | Fixture 真机联合验收已验；焦点丢失已修正 | UI 与独立业务正反例、child 核查、原 manifest 不变、慢校验交互；外部首次使用和独立研究仍待验；[证据](physical-validation-2026-10-05.md) |
 | 受控故障与固定基准 | 进程故障恢复及 30 次基准已验 | 宿主／WDA／Appium／锁屏恢复及 30 次基准已验 | 采用故障矩阵中的双端USB项仍缺；10月6日RuntimeFixture时间门禁的协调USB中断已验，不代替前一矩阵；预算不是生产 SLO；[可靠性边界](workbench-reliability-matrix.md)与[原始范围摘要](physical-validation-2026-10-05.md) |
 | 人工定位器修复草稿（原有能力） | Mock/浏览器自动化通过；两次真实构建变更待验 | 同左 | 仅同计划成功基线与失败证据唯一锚定的 `tap` ID 替换；需人工确认新草稿与复跑，保留原失败；[用法](test-workbench.md#受控定位器修复工程实现真实构建变更待验) |
-| 双路径修复闭环（Preview，默认关闭） | M1/M2 软件链已验；Android 导航探针 10/10，不是完整修复验收 | 历史页面结构回放已验；新真机复验待补 | 项目准入与 Agent 工具分开开关；可信本地源码补丁须人工批准；实际双宿主修复交接、独立验收未完成；[操作与等级](evidence-guided-repair-operations.md) |
+| 双路径修复闭环（Preview，默认关闭） | M1/M2 软件链已验；Android 导航探针 10/10，不是完整修复验收 | 2026-10-07 实时导航/host forwarding 13/13 已验；完整修复待验 | 项目准入与 Agent 工具分开开关；可信本地源码补丁须人工批准；实际双宿主修复交接、独立验收未完成；普通导航样本见[10 月 7 日记录](physical-validation-2026-10-07.md)，[操作与等级](evidence-guided-repair-operations.md) |
 | 修复构建与安装（Preview） | 构建/摘要/审批与 Mock 维护协议 | 同左；fixture 不证明真实开发签名 | Appium 安装适配、可信 reset/cleanup、两次移动端复验和冻结回归未完成，不可作为自动真机修复使用 |
 | 显式确定性视觉断言 | Mock/Viewer 审批通过；真机反例待验 | Mock/Viewer 审批通过；真机反例待验 | 项目或干净成功运行图片的人工预览/不可变批准，独立有界 worker、同租约截图、区域/mask/阈值及 visual 分项；旧 YAML 不自动验证，模型实验关闭；[用法](test-workbench.md#显式确定性视觉断言工程实现双端真机待验) |
 | 每步证据、故障保真、重启历史 | 真机及自动化已验 | 真机及自动化已验 | PNG/XML 分别取证，非原子快照；证据缺失不能 pass；[P0](workbench-p0-validation.md) |
-| 运行归档导入与安全分享 | v1–v4 软件/包验证；双平台历史fixture图只读脱敏验证 | 同左 | JSON v1/v3 原始、v2/v4 派生；派生未重验，v1/v3不自动脱敏。HTML画框、完整预览/冻结下载已验；真实录像/健康信号/独立接收仍待验；[兼容](workbench-compatibility.md) · [报告阅读与离线分享](report-reading-and-sharing.md) |
-| 报告目录、失败定位与历史趋势 | 软件/浏览器及历史fixture材料验证 | 同左 | 50条分页/10000条上限；原结果与当前材料状态分开；简单1000条摘要p95约250ms，任务进度 41/46，独立验收待补；[实施验证](../openspec/changes/improve-report-reading-and-sharing/implementation-validation.md) |
+| 运行归档导入与安全分享 | v1–v4 软件/包验证；双平台历史fixture图只读脱敏验证 | 同左 | JSON v1/v3 原始、v2/v4 派生；派生未重验，v1/v3不自动脱敏。HTML画框、完整预览/冻结下载已验；完整双端材料/健康信号/独立接收仍待验；[兼容](workbench-compatibility.md) · [报告阅读与离线分享](report-reading-and-sharing.md) |
+| 报告目录、失败定位与历史趋势 | 软件/浏览器及历史fixture材料验证 | 同左 | 50条分页/10000条上限；原结果与当前材料状态分开；历史简单1000条摘要样本p95约250ms，完整材料与独立验收待补；[实施验证](../openspec/changes/improve-report-reading-and-sharing/implementation-validation.md) |
 | 随运行录像归档、重启回放、步骤定位 | 真机已验 | 真机已验 | 录像状态独立于 UI verdict；浏览器关闭前未上传的 Blob 可能丢失；[视频历史](workbench-video-validation.md) |
 | 清理、阶段计时与重复测量 | 样本已验，ADB 稳定性仍有缺口 | 正常断开 owned WDA 清理已验 | 只清理自己拥有的资源，不代表所有异常生命周期通过；[P0](workbench-p0-validation.md)、[ADB 限制](android-acceptance-2026-09-16.md) |
 | 参数/子流程/分支/循环、串行套件 | PLA110 两组数据、分支/嵌套/循环/反例/取消已验 | iPhone 16 Plus 同等矩阵已验 | 各 50 份材料重启复验；[编排验收](test-orchestration-validation.md)22/22；新增双槽并行仅完成工程验证，真实并行验收单列 |
@@ -88,7 +82,7 @@ Viewer 已增加真机/模拟器选择；支持已启动的本机 Android Emulat
 
 ## 下一步与发布状态
 
-双端多数据/分支/子流程/取消编排矩阵、PTC/Codex 运行级入口的打包 Native/PTC 与双端 Fixture 均已完成；真实图片模型消费仍单列。2026-09-18 已将 17 个完成 change 同步并归档，当前共有 18 个 active change：17 个仍有未完成任务，DSH 升级为 11/11、尚未归档；计数见 TODO。旧 OnePlus 的 ADB 间歇故障独立跟踪；替换 PLA110 的恢复矩阵及前后各 30 条命令均通过，不代表旧设备已修复。iOS 第三方 App完整文字断言仍受可访问文本缺失限制。通用视觉、未知遮挡、未登记的任意代码执行、Maestro adapter、共享 daemon 尚未交付；双槽多设备调度已有工程实现、真实验收待补，详见 [PRODUCT_TODO](../PRODUCT_TODO.md)。
+全部活动 change、逐项缺口和归档状态以 [PRODUCT_TODO](../PRODUCT_TODO.md) 为准。已有 Fixture、历史真机与同包宿主样本不关闭真实业务、OCR 批准、双槽业务矩阵、完整修复或独立研究任务；待验条件不能统称为“等真机”。Maestro 执行 adapter、共享 daemon 与更大设备规模也不能由现有报告导入或双槽工程实现推导为已交付。
 
 源码 MIT，package 为 private，未发布公共 npm。源码、通过验证的 tarball、GitHub Release 和生产就绪是不同状态；安装包能力以对应版本说明为准，不因本表更新自动宣告新版本发布。
 

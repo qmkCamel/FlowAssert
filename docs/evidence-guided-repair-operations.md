@@ -1,6 +1,6 @@
 # 证据驱动修复：Preview 使用指南
 
-状态：**Preview（预览能力，默认关闭）**；2026-10-07 核对 `dev@REDACTED_REVISION`，53/65。修复实现已合入 dev，但合并不等于稳定发布或真机验收；以 [OpenSpec 逐项任务](../openspec/changes/add-evidence-guided-repair-loop/tasks.md) 和 [实施记录](../openspec/changes/add-evidence-guided-repair-loop/implementation.md) 为准。以下命令需要本机已启动的 loopback Viewer、可信项目登记和对应权限；旧 `agentTestControl` 授权不自动授予修复权限。不要用生产账号或含危险副作用的业务流程试跑。
+状态：**Preview（预览能力，默认关闭）**。任务状态以 [OpenSpec 清单](../openspec/changes/add-evidence-guided-repair-loop/tasks.md)和[实施记录](../openspec/changes/add-evidence-guided-repair-loop/implementation.md)为准；[2026-10-07 iPhone 导航与转发复验](physical-validation-2026-10-07.md)不代表完整真机修复闭环。以下命令需要本机已启动的 loopback Viewer、可信项目登记和对应权限；旧 `agentTestControl` 授权不自动授予修复权限。不要用生产账号或含危险副作用的业务流程试跑。
 
 ## 等级和责任边界
 

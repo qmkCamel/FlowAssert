@@ -1,14 +1,10 @@
 # FlowAssert technical and development guide
 
-The repair loop is **Preview, off by default**: M1/M2 software verification and the M3 Mock maintenance protocol are not real-device repair acceptance. Separate host/project gates and manual approvals apply; a unified master switch and Viewer toggle are still pending. See [repair operations](https://github.com/qmkCamel/flowassert/blob/main/docs/evidence-guided-repair-operations.md). Owned WDA/MJPEG host forwarding currently requires fingerprint-audited XCUITest `10.19.1`; external Appium remains its owner's responsibility.
-
 English | [简体中文](technical-guide.zh-CN.md)
 
-This guide is for contributors who need to read, develop, build, verify, or extend FlowAssert. Start with the [product README](../README.md) for positioning, target users, and the quickest product experience. Use the topic guides below when deploying to a specific host or physical device.
+This guide covers source development, builds, verification, and extension of FlowAssert. Start with the [README](../README.md) for a first run, the [capability matrix](https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md) for acceptance boundaries, and [Product TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md) for active tasks. Engineering commands live here; task counts stay in the TODO.
 
-The six current iterations have completed their engineering scope, not all acceptance gates. Consult the [task-level status map](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md) before claiming completion: 90/103 tasks as of October 5 (the original roadmap retains its October 3 snapshot), with real-device, authorized-material and independent-review requirements kept separate. Implementation guides cover [change acceptance](change-acceptance-records.md), [external assets](external-test-assets.md), [local OCR](local-region-ocr.md) and the [two-slot matrix](local-device-matrix.md); DSH/MCP share 20 default tools plus 5 opt-in Preview repair tools, with the three new summary readers carrying no matrix/external-runner execution authority.
-
-For current report reading/offline HTML, see the [report guide](report-reading-and-sharing.md). The [Product TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md) records the October 7 active task counts. Treat source candidates, verified tarballs and public Releases separately; see the [installation guide](beta-installation.md).
+The repair loop is **Preview, off by default**; see [repair operations](https://github.com/qmkCamel/flowassert/blob/main/docs/evidence-guided-repair-operations.md) for admission, approval, and shutdown. Software/Mock, package/host, physical-device, and real-model validation are separate.
 
 ## Toolchain baseline
 
@@ -22,16 +18,20 @@ For current report reading/offline HTML, see the [report guide](report-reading-a
 | Android driver | UiAutomator2 |
 | iOS driver | XCUITest/WebDriverAgent |
 
-A later DeepSeek Harness preview, Appium driver, or scrcpy release cannot be adopted by editing a version string alone. Rerun its clean-profile, provider, and physical-device acceptance layers first.
+Owned WDA/MJPEG host forwarding requires fingerprint-audited XCUITest `10.19.1`; external Appium remains its owner’s responsibility. Harness preview, driver, and scrcpy upgrades require the corresponding clean-profile, provider, and physical-device evidence, not just a version edit.
 
 ## Local development
 
 ```bash
+git clone --branch main --single-branch https://github.com/qmkCamel/flowassert.git
+cd flowassert
 mise install
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
+mise exec -- corepack enable
+mise exec -- pnpm install --frozen-lockfile
+mise exec -- pnpm dev
 ```
+
+For an existing checkout, start at `mise install`. If you manage Node yourself, omit `mise exec --` after confirming the versions above in the current terminal.
 
 The development entry starts a loopback Viewer at `http://127.0.0.1:3210` and uses the safe Mock provider when no local setup has been saved. Mock requires no phone, Appium, model credential, or host-device discovery and is the deterministic path for UI, lifecycle, and agent-contract development.
 
@@ -54,9 +54,9 @@ pnpm build
 pnpm pack:check
 ```
 
-`pnpm build` emits ESM, declarations, and source maps. `pnpm pack:check` rebuilds and inspects the release tarball. The package remains `private: true` and no workflow runs `npm publish`. Installation and rollback use only verified GitHub prereleases; see the [Beta guide](beta-installation.md).
+`pnpm build` emits ESM, declarations, and source maps. `pnpm pack:check` triggers a build and checks packaged documentation links against the actual `pnpm pack --dry-run` file list; it does not install a real tarball in isolation. Create a local candidate with `pnpm pack --pack-destination /ABSOLUTE/CANDIDATE_DIR`. Source is the current entry point and the package remains `private: true`; future Release download and rollback templates are in the [installation guide](beta-installation.md).
 
-The package includes:
+The candidate package includes:
 
 - the DSH Cordis bundle;
 - the generic stdio MCP launcher;
@@ -77,7 +77,7 @@ pnpm public:check
 git diff --check
 ```
 
-- `pnpm check` covers TypeScript, contract lint, and Vitest;
+- `pnpm check` covers TypeScript, contract lint, documentation checks, and Vitest;
 - `pnpm test:e2e` covers Viewer Playwright scenarios;
 - `pnpm public:check` checks public files, Markdown links, secret/path exposure, author identity, and distribution boundaries;
 - Viewer changes also require a retained final screenshot and human inspection;
@@ -103,7 +103,9 @@ DSH_TOOLS_MODE=native dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
 DSH_TOOLS_MODE=ptc dsh web --patch ./scripts/dsh-runtime-probe.patch.yml
 ```
 
-These paths call the real DSH registry through Native tools and the host-provided PTC `run_code` transport. The default registry contains ten device tools, five registered-test tools and five bounded summary readers. Registered-test execution needs an enabled local project and allowlists. Five additional Preview repair tools require host opt-in and valid project repair registration; visibility is not execution approval. A model must genuinely accept image input to prove it saw a delivered PNG. In `0.2.0-rc.2` `deepseek-flash` advertises `text,image`, while `deepseek-v4-pro` remains text-only and projects image blocks to a stable omission placeholder. See the [Agent test-run guide](agent-test-run-control.md) for the new tools and evidence policy.
+These paths call the real DSH registry through Native tools and the host-provided PTC `run_code` transport. The default tool set contains ten device tools, five registered-test tools, and five read-only summary tools; test execution requires separate enablement and a project allowlist. Five Preview repair tools require host opt-in and valid project registration; visibility is not execution approval. See the [tool catalog](product-shape.md#agent-与控制面) and [Agent run guide](agent-test-run-control.md).
+
+In the DSH `0.2.0-rc.2` catalog, `deepseek-flash` declares `text,image`, while `deepseek-v4-pro` is text-only and receives a stable image-omission placeholder. Catalog metadata or attachment delivery does not prove a real model consumed an image; verify that separately. DSH Doctor currently has a [known Cordis version-check mismatch](environment-preflight.md#dsh静态前提与实际启用分开).
 
 ### Physical devices
 
@@ -139,7 +141,7 @@ See the [security model](security.md) for the full threat model, retention, and 
 | Evaluate permissions, privacy, and external-state changes | [Security model](security.md) |
 | Inspect tests, performance, and physical evidence | [Validation](validation.md) |
 | Inspect delivery phases and open compatibility work | [Milestones](milestones.md) |
-| Review architecture decisions | [ADR index](decisions/0001-appium-core-local-viewer.md) |
+| Review architecture decisions | [ADR index](https://github.com/qmkCamel/flowassert/blob/main/docs/README.md#架构决策-adr) |
 | Review product and competitor evidence | [Product landscape research](https://github.com/qmkCamel/flowassert/blob/main/docs/research/product-landscape.md) |
 
 ## Contribution and release
@@ -148,4 +150,4 @@ Read [CONTRIBUTING](https://github.com/qmkCamel/flowassert/blob/main/CONTRIBUTIN
 
 ## Observation query and Viewer Inspector
 
-The current runtime adds `mobile_mirror_query_screen` as the tenth tool. Use summary inspect followed by find/get/subtree to query a retained observation without new captures or images. Readable historical nodes remain subject to strict action freshness. The local Viewer Inspector freezes its own screenshot and tree without publishing an Agent observation. See [usage and validation boundaries](inspector-validation.md).
+`mobile_mirror_query_screen` queries a retained observation without another capture or an extension of action freshness. The Viewer Inspector independently freezes its local screenshot and tree; see the [Inspector guide and acceptance boundaries](inspector-validation.md).

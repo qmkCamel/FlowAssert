@@ -4,7 +4,7 @@
 
 面向移动端研发、测试开发与 Agent 工具开发者 · 2026-10-12 · Developer Preview
 
-本文按个人版 `dev` 的基础提交 `REDACTED_REVISION` 与本轮工作区增量、主规格和既有验收记录整理。**真实设备截图、实际工作台的 Mock 截图、架构示意图分别标注**；历史验收保留原日期，本次文档整理没有重新执行真机业务。HTML 阅读版内嵌全部配图，正文可离线阅读；延伸资料链接需要仓库访问权限或网络。
+本文保留 2026-10-12 迁移前 `dev` 的技术介绍与既有验收记录；2026-10-25 将启动命令核对为 FlowAssert `main`。**真实设备截图、实际工作台的 Mock 截图、架构示意图分别标注**；历史验收保留原日期，本次文档整理没有重新执行真机业务。HTML 阅读版内嵌全部配图，正文可离线阅读；延伸资料链接需要仓库访问权限或网络。
 
 术语速览：Viewer 是本机工作台界面，Inspector 是其中的界面检查器；Mock 指模拟设备，Fixture 指受控测试场景；Provider 是设备控制适配层，Observation 是带时间与有效性信息的界面观察快照。Baseline 是明确选择的比较参考，Verdict 是声明检查范围内的运行判定。完整定义与例子见[名词解释](https://github.com/qmkCamel/flowassert/blob/main/docs/glossary.md)。
 
@@ -137,8 +137,8 @@
 先准备 Node.js **24.19.0**、pnpm **11.7.0** 与 GitHub 仓库访问权限；这是已有内测环境基线。mise 可选，已有等价工具链可以直接执行以下命令：
 
 ```bash
-git clone --branch dev https://github.com/qmkCamel/flowassert.git
-cd deepseek-harness-mobile-mirror
+git clone --branch main https://github.com/qmkCamel/flowassert.git
+cd flowassert
 git rev-parse HEAD
 pnpm install --frozen-lockfile
 pnpm peers check

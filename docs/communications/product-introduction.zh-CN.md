@@ -1,6 +1,6 @@
 # FlowAssert 内测介绍稿
 
-更新：2026-10-08。适用：小范围开发者内测、社区介绍草稿和演示开场。当前为 Developer Preview；本文未对外发布，不是正式版本公告。能力基线见[能力表](../capabilities.md)，使用 dev 分支按[任务卡](../beta-start.md)启动。
+原稿：2026-10-08；源码入口核对：2026-10-25。适用：小范围开发者内测、社区介绍草稿和演示开场。当前为 Developer Preview；本文未对外发布，不是正式版本公告。能力基线见[能力表](../capabilities.md)，使用 main 分支按[任务卡](../beta-start.md)启动。
 
 ## 标题与角度
 
@@ -36,7 +36,7 @@ FlowAssert 目前仍是 **Developer Preview**。基础执行、步骤取证、�
 
 这次先邀请 **3–5 位开发者或测试维护者**来试一个小闭环：跑通 Mock、制造一次失败、找到证据、改完再跑、下载报告。再带一个自己经常手动验证的真机场景，看看哪些操作值得留下来。
 
-源码采用 MIT；本轮直接克隆 dev 分支体验，反馈时带上提交 SHA，不需要领取独立内测包。如果你卡住了，也请留下卡住的步骤和耗时——这正是这轮内测要找的问题。
+源码采用 MIT；本轮直接克隆 main 分支体验，反馈时带上提交 SHA，不需要领取独立内测包。如果你卡住了，也请留下卡住的步骤和耗时——这正是这轮内测要找的问题。
 
 [开始内测](../beta-start.md) · [无需安装的离线模拟演示](mobile-mirror-demo.html) · [项目源码](https://github.com/qmkCamel/flowassert)
 
@@ -67,4 +67,4 @@ FlowAssert 目前仍是 **Developer Preview**。基础执行、步骤取证、�
 - “新运行”“历史”“报告下载”在宣传页内使用预设模拟数据，刷新即清空；真实产品持久化能力以[工作台指南](../test-workbench.md)和[报告指南](../report-reading-and-sharing.md)为准。
 - 当前[工作台主图](../../artifacts/screenshots/mobile-mirror-workbench-evidence.png)等 20 张图片已于 10 月 8 日刷新，来源见[截图记录](../screenshot-refresh-2026-10-08.md)。均为 Mock/合成材料，不当作新真机证据。
 - 历史 Android 第三方 App原始回放仍可在本机显式加载。`local-case-assets/` 不随源码分发，原图未脱敏，不作为内测共享素材。原件导出方式仍为 `python3 scripts/export-promo-case.py`；历史素材与 9 月验证见 Git 历史，不改写原证据日期。
-- 内测使用 dev 分支，记录本次提交 SHA，不声称 alpha.2 已公开发布。DSH 当前验证基线为 `0.2.0-rc.2`；实际模型图片、独立体验、广泛设备与真实业务验收分别跟踪。
+- 内测使用 main 分支，记录本次提交 SHA，不声称 alpha.2 已公开发布。DSH 当前验证基线为 `0.2.0-rc.2`；实际模型图片、独立体验、广泛设备与真实业务验收分别跟踪。

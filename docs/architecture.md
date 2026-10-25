@@ -135,10 +135,10 @@ flowchart LR
 - MCP and DSH remain control/status planes. Continuous bytes never enter tool results, observations, attachments or persistence.
 
 The discrete perception contract, host-neutral stdio MCP adapter, and low-latency media implementation are present. DSH `0.2.0-rc.2` has passed packed clean-profile Native/PTC runtime compatibility and catalog-level image/text-only boundaries; a historical DSH rc.8 session with an image-capable provider and a real Codex MCP session have consumed images and completed observation-bound action loops. Unlocked Android/iOS Settings pages have completed the physical MCP loop, and one device on each platform has passed the physical media performance/fallback gate. Remaining external work is broader OS/OEM/account, reconnect, rotation, lock-state, multi-device coverage, and a real provider call through the rc.2 `deepseek-flash` image route; catalog metadata alone is not model-consumption evidence.
-# 2026-10-02：区域 OCR 与双槽矩阵补充
+## 2026-10-02：区域 OCR 与双槽矩阵补充
 
 既有单设备运行时不变。区域 OCR 的识别子进程无设备权限，在同一运行租约检查点消费 PNG；冻结评测与人工批准后才可用显式断言，默认关闭。矩阵是单设备运行时的进程级组合，不是第二套 provider：父协调器持久调度，每槽独立 Store 与机器级 claim，MCP／DSH 只读摘要。见 [ADR 0015](decisions/0015-local-device-matrix.md)、[OCR](local-region-ocr.md)、[矩阵](local-device-matrix.md)。软件／Mock 验证不替代真实 OCR 质量或双设备业务验收。
 
-### 报告展示与离线阅读边界
+## 报告展示与离线阅读边界
 
 报告摘要查询、分析和被动 HTML 继续使用工作台权威结果投影；展示层不重新裁决结果。HTML 由现有分享 owner 将派生材料转换为严格白名单 snapshot，再交给不读取源对象/路径的被动渲染器。确认绑定冻结字节，发布沿用来源引用、lease、容量与原子提交。Viewer/CLI/MCP/DSH 的设备/连续视频/控制边界不变。操作与回滚说明见 [报告阅读与离线分享](report-reading-and-sharing.md)，设计理由见 ADR 0010。

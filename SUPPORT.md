@@ -4,7 +4,7 @@ FlowAssert is a `0.1.0-alpha.2` Developer Preview candidate maintained on a best
 
 ## Where to ask
 
-Invited beta testers: use the dev branch and follow the [task card](docs/beta-start.md). Include the branch, commit SHA and whether local changes exist in the [experience record](docs/beta-feedback.md). Installation time and task time are recorded separately; incomplete attempts are useful feedback too.
+Invited beta testers: use the main branch and follow the [task card](docs/beta-start.md). Include the branch, commit SHA and whether local changes exist in the [experience record](docs/beta-feedback.md). Installation time and task time are recorded separately; incomplete attempts are useful feedback too.
 
 - Reproducible product bugs: use the **Bug report** issue form.
 - Installation, Doctor or host configuration problems: use the **Setup and configuration** issue form.

@@ -4,7 +4,7 @@
 
 本轮受邀用户直接从 **main 分支**按 [小范围内测任务卡](https://github.com/qmkCamel/flowassert/blob/main/docs/beta-start.md) 启动，不需要单独的内测包。下文保留维护者完整配置与未来发布模板，不作为本轮内测前置步骤。
 
-更新：2026-10-07，当前核对 `origin/dev@REDACTED_REVISION`。当前源码包版本是 `0.1.0-alpha.2`，Developer Preview，锁定并验证 Harness `0.2.0-rc.2`。包版本或候选说明文件存在，不表示对应 tag/Release/资产已发布；本轮远端 tag 查询仍仅发现 alpha.1，未重新核验 Release API 或下载资产，因此不提供“当前可下载 alpha.2”的承诺。alpha.1 的 rc.8 历史基线不可变，不作为 Workbench 数据降级目标；见[兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md)。
+当前源码包版本为 `0.1.0-alpha.2`，DSH 适配基线为 `0.2.0-rc.2`。迁移前 2026-10-07 的同包安装与宿主结果见[历史验证](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/upgrade-dsh-020-rc2/merge-validation.md)；旧 alpha.1/rc.8 不作为 Workbench 数据降级目标。具体格式和回滚限制见[兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md)。
 
 当前体验使用源码路径：`pnpm install --frozen-lockfile` → `pnpm build` → `pnpm start`。生成本机候选用 `pnpm pack --pack-destination /ABSOLUTE/CANDIDATE_DIR`，另算 SHA256 并记录源码 SHA；不会自动发布或安装平台依赖。完整源文档见[文档索引](https://github.com/qmkCamel/flowassert/blob/main/docs/README.md)，安装包只携带选定指南。
 
@@ -31,7 +31,7 @@ Linux 也可以使用 `sha256sum --check`。校验失败时不要安装；重新
 
 ## 2. 独立前缀安装候选包
 
-2026-10-07 的 0.2.0-rc.2 适配候选已在新前缀完成下列 `pnpm add --ignore-scripts` 与 `pnpm peers check`，无 peer 问题；同包 CLI/Viewer/MCP 和真实 DSH clean-profile 探针另行通过。旧 `dev@REDACTED_REVISION` 曾解析出 Harness 0.1.5-rc.3 的失败属于旧候选记录，不代表本次包。使用本次候选的实际 SHA256，并保留 peer 检查；失败时停止，不用版本豁免绕过。
+以下是维护者验证本机候选的步骤。迁移前 rc.2 候选曾通过新前缀安装、peer 检查和同包宿主探针；当前构建仍须使用自己的 SHA256 重新验证，不能沿用历史结果。peer 检查失败时停止，不用版本豁免绕过。
 
 ```bash
 MOBILE_MIRROR_PREFIX="$PWD/.mobile-mirror-alpha2"

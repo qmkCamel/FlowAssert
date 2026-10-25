@@ -1,6 +1,8 @@
 # Validation record
 
-## 2026-10-07 — Current dev compatibility and repair Preview
+This is a dated evidence log. Pre-migration `dev` revisions, package names, and host versions describe their original runs; they do not establish fresh FlowAssert acceptance. Use the [technical guide](technical-guide.md) for current commands and the [capability matrix](https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md) for consolidated boundaries.
+
+## 2026-10-07 — Pre-migration dev compatibility and repair Preview
 
 Current code baseline: `dev@REDACTED_REVISION`. DSH is pinned to `0.2.0-rc.2`; see the [upgrade report](dsh-020-validation.md) and [merged-candidate validation](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/upgrade-dsh-020-rc2/merge-validation.md). The repair loop is Preview and off by default (53/65); [software/Mock and safety-fix evidence](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-evidence-guided-repair-loop/safety-fixes-validation.md) does not establish a full physical-device repair loop. The [documentation audit](https://github.com/qmkCamel/flowassert/blob/main/docs/dev-documentation-audit-2026-10-07.md) records this turn's gates. Older dated versions, tool counts and device results below remain historical, not current-host claims.
 
