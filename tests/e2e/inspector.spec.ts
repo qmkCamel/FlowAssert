@@ -7,7 +7,7 @@ let viewer: ViewerServer, service: MirrorService
 async function setup(page: Page) {
   const config = resolveMirrorConfig({ viewerPort: 0, mockStartupDelayMs: 0, frameIntervalMs: 250 })
   service = new MirrorService(config, 'http://127.0.0.1', { providerFactory: () => new MockProvider(0) })
-  viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true })
+  viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true, workbenchRoot: test.info().outputPath('workbench') })
   await viewer.listen(); await service.start({ provider: 'mock' }); await page.goto(viewer.url)
   await page.locator('#language-select').selectOption('en')
   await expect(page.locator('#inspect-button')).toBeEnabled()
@@ -157,7 +157,7 @@ for (const platform of ['Android', 'iOS']) test(`fake ${platform} Appium capture
   await new Promise<void>(resolve => upstream.listen(0, '127.0.0.1', resolve))
   try {
     const config = resolveMirrorConfig({ viewerPort: 0, appiumUrl: `http://127.0.0.1:${(upstream.address() as {port:number}).port}`, viewerMediaMode: 'polling' })
-    service = new MirrorService(config, 'http://127.0.0.1'); viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true })
+    service = new MirrorService(config, 'http://127.0.0.1'); viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true, workbenchRoot: test.info().outputPath('workbench') })
     await viewer.listen(); await service.start({ provider: 'appium', capabilities: { platformName: platform } }); await page.goto(viewer.url)
     await page.locator('#language-select').selectOption('en'); await page.locator('#inspect-button').click()
     await expect(page.locator('#inspection-status')).toHaveText('Frozen inspection')

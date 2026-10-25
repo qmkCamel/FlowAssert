@@ -3,7 +3,7 @@ import { Config, type Config as MirrorConfig } from '../../src/config.js'
 import { ViewerServer } from '../../src/viewer-server.js'
 
 test('scoped preflight stays interactive, preserves results and rejects stale replies', async ({ page }) => {
-  const viewer = new ViewerServer(Config({ viewerPort: 0 } as MirrorConfig))
+  const viewer = new ViewerServer(Config({ viewerPort: 0 } as MirrorConfig), { workbenchRoot: test.info().outputPath('workbench') })
   await viewer.listen()
   try {
     await page.goto(viewer.url)
@@ -57,7 +57,7 @@ test('scoped preflight stays interactive, preserves results and rejects stale re
 })
 
 test('preflight HTTP rejects authority/path injection and cross-origin requests', async ({ request }) => {
-  const viewer = new ViewerServer(Config({ viewerPort: 0 } as MirrorConfig)); await viewer.listen()
+  const viewer = new ViewerServer(Config({ viewerPort: 0 } as MirrorConfig), { workbenchRoot: test.info().outputPath('workbench') }); await viewer.listen()
   try {
     for (const context of [{ entry: 'dsh' }, { executable: '/bin/echo' }, { operation: 'report', platform: 'ios' }]) {
       expect((await request.post(`${viewer.url}/api/environment-preflight`, { headers: { origin: viewer.url }, data: { context } })).ok()).toBe(false)
