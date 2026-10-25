@@ -113,7 +113,9 @@ export function scanText(text, filePath) {
 }
 
 export function isNoreplyEmail(email) {
-  return /@users\.noreply\.github\.com$/i.test(email.trim())
+  // GitHub-signed web-flow commits (including Dependabot) use this public
+  // service address; personal github.com mailboxes remain disallowed.
+  return /@users\.noreply\.github\.com$/i.test(email.trim()) || /^noreply@github\.com$/i.test(email.trim())
 }
 
 function safeIdentifier(value) {
@@ -292,29 +294,29 @@ export async function checkPublicSurface(root, paths, config) {
   const readmeZh = await readUtf8IfPresent(root, 'README.zh-CN.md')
   requireFragments(findings, 'README.md', readme, [
     'Developer Preview',
-    '## Start here',
-    '## Product positioning',
-    '## Product shape',
-    '## Supported baseline',
-    '## Five-minute Mock quickstart',
-    '## Current maturity',
+    '## Why FlowAssert?',
+    '## Quickstart',
+    '## Choose your workflow',
+    '## Requirements and integrations',
+    '## Status and limits',
+    '## Data and privacy',
     'docs/technical-guide.md',
-    'only prebuilt package channel',
-    'not published to public npm',
+    'No FlowAssert release has been published',
+    'not on public npm',
     'CONTRIBUTING.md',
     '.github/SECURITY.md',
   ])
   requireFragments(findings, 'README.zh-CN.md', readmeZh, [
-    'Developer Preview',
-    '## 从这里开始',
-    '## 产品定位',
-    '## 产品形态',
-    '## 支持基线',
-    '## 五分钟 Mock 快速开始',
-    '## 当前成熟度',
+    '开发者预览',
+    '## 为什么使用 FlowAssert？',
+    '## 快速开始',
+    '## 选择你的使用方式',
+    '## 环境与集成',
+    '## 当前状态与限制',
+    '## 数据与隐私',
     'docs/technical-guide.zh-CN.md',
-    '唯一的预构建安装包渠道',
-    '不发布到公共 npm',
+    'FlowAssert 尚未发布安装包',
+    '未发布到公共 npm',
     'CONTRIBUTING.md',
     '.github/SECURITY.md',
   ])

@@ -290,7 +290,9 @@ test('separates iPhone signing readiness from WDA startup and supports safe retr
 })
 
 test('quick-connects the only saved Android setup and makes persistence explicit for manual connections', async ({ page }) => {
-  const harness = createGuidedHarness({ androidDelayMs: 550 })
+  const checkGate = Promise.withResolvers<void>()
+  const connectGate = Promise.withResolvers<void>()
+  const harness = createGuidedHarness({ androidCheckGate: checkGate.promise, connectGate: connectGate.promise })
   await replaceViewer(page, harness.service, harness.assistant, () => ({ persistenceAvailable: true, preferredPlatform: 'android' }))
 
   await expect(page.getByTestId('provider-select')).toHaveValue('appium')
@@ -301,9 +303,23 @@ test('quick-connects the only saved Android setup and makes persistence explicit
   await expect(page.getByTestId('assistant-saved-setup')).toContainText('点击即确认 UiAutomator2 可能安装或更新辅助 APK')
   await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-saved-setup-zh-cn.png')
   await page.getByTestId('language-select').selectOption('en')
-  await page.getByTestId('assistant-quick-connect-button').click()
-  await expect(page.getByText('Checking Android…')).toBeVisible()
-  await expect(page.getByText('Connecting Android…')).toBeVisible()
+  // Keep each phase pending until its UI contract is observed, including on
+  // slower CI runners that can miss a fixed 350 ms connection window.
+  try {
+    await page.getByTestId('assistant-quick-connect-button').click()
+    await expect(page.getByText('Checking Android…')).toBeVisible()
+    await expect(page.getByTestId('assistant-quick-connect-button')).toBeDisabled()
+    checkGate.resolve()
+    await expect(page.getByText('Connecting Android…')).toBeVisible()
+    await expect(page.getByTestId('assistant-quick-connect-button')).toBeDisabled()
+    await page.getByTestId('theme-button').click()
+    await expect(page.locator('body')).toHaveClass(/light-stage/)
+    await expect(page.getByText('Connecting Android…')).toBeVisible()
+    await page.getByTestId('assistant-panel').screenshot({ path: test.info().outputPath('quick-connect-running.png') })
+  } finally {
+    checkGate.resolve()
+    connectGate.resolve()
+  }
   await expect(page.getByTestId('connection-pill')).toContainText('Streaming')
   expect(harness.connectPayload()).toMatchObject({
     targetPreset: 'android-current-screen',
@@ -1033,7 +1049,7 @@ async function zoomSnapshot(page: Page): Promise<{
   }).__mobileMirrorZoomMetrics.snapshot())
 }
 
-function createGuidedHarness(options: { androidDelayMs?: number; connectDelayMs?: number; failSecondAndroidCheck?: boolean; failAndroidCheckNumber?: number; settingsAvailable?: boolean; iosSigningReady?: boolean; iosFailureOnConnect?: number; runtimeChoices?: ConnectionAssistantReport['runtimeChoices'] } = {}) {
+function createGuidedHarness(options: { androidDelayMs?: number; connectDelayMs?: number; androidCheckGate?: Promise<void>; connectGate?: Promise<void>; failSecondAndroidCheck?: boolean; failAndroidCheckNumber?: number; settingsAvailable?: boolean; iosSigningReady?: boolean; iosFailureOnConnect?: number; runtimeChoices?: ConnectionAssistantReport['runtimeChoices'] } = {}) {
   const privateCanary = 'PRIVATE-DEVICE-UDID-MODEL-PATH'
   const assistantToken = Buffer.alloc(16, 7).toString('base64url')
   const deviceToken = Buffer.alloc(16, 8).toString('base64url')
@@ -1054,6 +1070,7 @@ function createGuidedHarness(options: { androidDelayMs?: number; connectDelayMs?
   const assistant: ConnectionAssistantApi = {
     check: async ({ platform, deviceKind }, signal) => {
       checkCount += 1
+      if (platform === 'android') await options.androidCheckGate
       if (platform === 'android' && options.androidDelayMs) await assistantDelay(options.androidDelayMs, signal)
       if (platform === 'android' && options.failSecondAndroidCheck && checkCount === (options.failAndroidCheckNumber ?? 2)) throw new Error('simulated local check failure')
       const report = guidedReport(platform, assistantToken, deviceToken, options.runtimeChoices)
@@ -1080,6 +1097,7 @@ function createGuidedHarness(options: { androidDelayMs?: number; connectDelayMs?
       if (input.assistantId === Buffer.alloc(16, 11).toString('base64url')) throw new ConnectionAssistantError('assistant_input_invalid')
       lastConnect = structuredClone(input) as unknown as Record<string, unknown>
       current = guidedState('connecting', current.viewerUrl, current.revision + 1)
+      await options.connectGate
       await assistantDelay(options.connectDelayMs ?? 350, signal)
       if (input.targetPreset.startsWith('ios-') && ++iosConnectCount === options.iosFailureOnConnect) {
         current = { ...guidedState('idle', current.viewerUrl, current.revision + 1), frameUpdatedAt: lastFrameUpdatedAt }

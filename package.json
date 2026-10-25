@@ -197,7 +197,7 @@
     "@appclaw/vision": "^2.0.0",
     "@deepseek-ai/schemastery": "3.18.5",
     "@modelcontextprotocol/sdk": "1.32.0",
-    "ai": "^6.0.72",
+    "ai": "^6.0.312",
     "ai-sdk-ollama": "3.8.3",
     "boxen": "^8.0.1",
     "chalk": "^5.6.2",
@@ -214,14 +214,14 @@
     "zod": "^4.6.6"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/cordis": "~4.0.5",
     "@deepseek-ai/dsh-attachment": "0.2.0-rc.2",
     "@deepseek-ai/dsh-llm": "0.2.0-rc.2",
     "@deepseek-ai/dsh-tools": "0.2.0-rc.2"
   },
   "devDependencies": {
     "@appclaw/core": "2.7.0",
-    "@deepseek-ai/cordis": "4.0.4",
+    "@deepseek-ai/cordis": "4.0.5",
     "@deepseek-ai/dsh-agent": "0.2.0-rc.2",
     "@deepseek-ai/dsh-attachment": "0.2.0-rc.2",
     "@deepseek-ai/dsh-invariants": "0.2.0-rc.2",
@@ -238,7 +238,7 @@
     "@playwright/test": "1.62.1",
     "@types/node": "24.10.13",
     "tsdown": "0.22.2",
-    "tsx": "4.22.4",
+    "tsx": "4.23.15",
     "typescript": "6.0.3",
     "vitest": "4.1.12"
   },
