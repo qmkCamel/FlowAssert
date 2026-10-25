@@ -34,7 +34,7 @@ jobs:
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Run Viewer E2E
-        run: pnpm test:e2e
+        run: pnpm test:e2e --max-failures=1
       - name: Build and inspect package
         run: |
           pnpm build
