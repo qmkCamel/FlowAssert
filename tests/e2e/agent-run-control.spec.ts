@@ -20,12 +20,17 @@ test('Viewer shows Agent-originated execution in the shared history', async ({ p
     const catalog = await runtime.coordinator.catalog() as { catalogRevision: string }
     const accepted = await runtime.coordinator.start({ requestId: 'viewer-source-proof', target: { kind: 'flow', id: 'fixture' }, catalogRevision: catalog.catalogRevision }) as { executionId: string }
     await expect.poll(async () => (await runtime.coordinator.status({ executionId: accepted.executionId }) as { phase: string }).phase).toBe('finished')
+    await page.setViewportSize({ width: 1440, height: 1200 })
     await page.goto(runtime.viewer.url)
     await page.getByRole('button', { name: 'Test workbench' }).click()
     await expect(page.getByText('Started by Agent').first()).toBeVisible()
-    await page.setViewportSize({ width: 1440, height: 1200 })
-    await page.getByText('Started by Agent').first().scrollIntoViewIfNeeded()
-    await expect(page.getByText('Started by Agent').first()).toBeInViewport()
+    // History polling can replace a row between locator resolution and scroll.
+    // Re-resolve the row within a bounded capture attempt; still require the
+    // Agent attribution to be visible in the viewport before taking evidence.
+    await expect(async () => {
+      await page.getByText('Started by Agent').first().scrollIntoViewIfNeeded({ timeout: 1000 })
+      await expect(page.getByText('Started by Agent').first()).toBeInViewport({ timeout: 1000 })
+    }).toPass({ timeout: 5000 })
     await page.screenshot({ path: resolve('artifacts/screenshots/mobile-mirror-agent-run-source.png') })
   } finally {
     await runtime.close(); await rm(root, { recursive: true, force: true })
