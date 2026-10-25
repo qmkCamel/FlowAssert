@@ -17,8 +17,12 @@ import { spawn } from 'node:child_process'
 import { execFileSync } from 'node:child_process'
 export async function externalPreview(service: WorkbenchExternalAssets, input: unknown = externalFixture()) {
   const accepted = await service.preview(input)
-  await expect.poll(async () => (await service.getJob(accepted.id)).phase).toBe('preview')
-  return service.getJob(accepted.id)
+  // This fixture runs one parser and up to two attachment workers, each with a
+  // 10 s runtime budget. Wait for a settled phase; surface failures immediately.
+  await expect.poll(async () => (await service.getJob(accepted.id)).phase, { timeout: 35_000 }).not.toMatch(/^(accepted|parsing)$/)
+  const job = await service.getJob(accepted.id)
+  expect(job.phase, job.error).toBe('preview')
+  return job
 }
 it('imports immutable reports, verifies downloads, defaults private, revokes grants and protects references', async () => {
   const root = await realpath(await mkdtemp(join(tmpdir(), 'external-assets-'))), store = new WorkbenchStore(root), service = new WorkbenchExternalAssets(store)
@@ -56,7 +60,7 @@ it('imports immutable reports, verifies downloads, defaults private, revokes gra
     expect((await service.list()).items).toHaveLength(0)
     await expect(service.get(job.assetId)).rejects.toThrow('retired')
   } finally { await service.close(); await store.close(); await rm(root, { recursive: true, force: true }) }
-})
+}, 45_000)
 it('limits jobs, binds previews, fails closed on capacity and interrupts previews without replay', async () => {
   const root = await realpath(await mkdtemp(join(tmpdir(), 'external-boundaries-'))); let capacity = 1024 ** 3
   const store = new WorkbenchStore(root, async () => capacity), service = new WorkbenchExternalAssets(store)
@@ -75,7 +79,7 @@ it('limits jobs, binds previews, fails closed on capacity and interrupts preview
     const restart = new WorkbenchExternalAssets(store)
     try { expect((await restart.getJob(first.id)).phase).toBe('interrupted'); expect((await restart.list()).items).toHaveLength(0) } finally { await restart.close() }
   } finally { await service.close(); await store.close(); await rm(root, { recursive: true, force: true }) }
-})
+}, 45_000)
 it('reads only explicit regular files, checks true media formats and rejects active attachments', async () => {
   const root = await realpath(await mkdtemp(join(tmpdir(), 'external-files-')))
   try {
@@ -117,7 +121,7 @@ it('requires native revalidation and matching provenance; external failure remai
       expect(evaluateAcceptanceCell(input, { ...cell, build: 'different' }, lease.sources, lease.external).reasons).toContain('external-source-unmatched')
     } finally { lease.release() }
   } finally { await service.close(); await store.close(); await rm(root, { recursive: true, force: true }) }
-})
+}, 45_000)
 it('aborts an in-flight parser and drains staging on close without device context', async () => {
   const root = await realpath(await mkdtemp(join(tmpdir(), 'external-cancel-'))), store = new WorkbenchStore(root)
   let entered = false, aborted = false
