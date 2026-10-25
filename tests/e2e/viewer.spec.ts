@@ -49,7 +49,7 @@ const config: Config = {
 }
 
 test.beforeEach(async ({ page }) => {
-  viewer = new ViewerServer(config)
+  viewer = new ViewerServer(config, { workbenchRoot: test.info().outputPath('workbench') })
   await viewer.listen()
   await page.goto(viewer.url)
 })
@@ -998,7 +998,7 @@ async function replaceViewer(
   localSetup?: () => { persistenceAvailable: boolean; preferredPlatform: 'android' | 'ios' | null },
 ): Promise<void> {
   await viewer?.close()
-  viewer = new ViewerServer(config, { service, assistant, ...(localSetup ? { localSetup } : {}) })
+  viewer = new ViewerServer(config, { service, assistant, workbenchRoot: test.info().outputPath('workbench'), ...(localSetup ? { localSetup } : {}) })
   await viewer.listen()
   await page.goto(viewer.url)
 }

@@ -16,7 +16,7 @@ async function connect(page: Page, rotate = false) {
   }
   const config = resolveMirrorConfig({ viewerPort: 0, frameIntervalMs: 250, mockStartupDelayMs: 0 })
   const service = new MirrorService(config, 'http://127.0.0.1', { providerFactory: () => new ColorPhone(0) })
-  viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true })
+  viewer = new ViewerServer(config, { service, assistant: null, disposeServiceOnClose: true, workbenchRoot: test.info().outputPath('workbench') })
   await viewer.listen(); await page.goto(viewer.url)
   await expect(page.locator('#capture-screenshot')).toBeDisabled()
   await service.start({ provider: 'mock' })

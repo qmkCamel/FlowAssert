@@ -1,6 +1,6 @@
 export const SUPPORTED_DSH_VERSION = '0.2.0-rc.2'
 export const SUPPORTED_CORDIS_VERSION = '4.0.5'
-export const SUPPORTED_SCHEMASTERY_VERSION = '3.18.4'
+export const SUPPORTED_SCHEMASTERY_VERSION = '3.18.5'
 
 type PackageManifest = {
   dependencies?: Record<string, string>

@@ -9,6 +9,22 @@ const demo = await readFile(new URL('../../examples/flows/demo.yaml', import.met
 test('previews protected references, moves only an unpinned fixture, and restores it', async ({ page }) => {
   const root = await mkdtemp(join(tmpdir(), 'mirror-retention-ui-'))
   const viewer = new ViewerServer(Config({ viewerPort: 0, mockStartupDelayMs: 0 }), { workbenchRoot: root })
+  async function previewMovable(ids: string[]) {
+    // A concurrent report read must protect its evidence. Ask for a fresh plan
+    // once that transient lease ends instead of treating any listed ID (which
+    // may be protected) as authorization to move it.
+    await expect(async () => {
+      const [response] = await Promise.all([
+        page.waitForResponse(response => new URL(response.url()).pathname === '/api/workbench/retention/plan'
+          && response.request().method() === 'POST', { timeout: 2000 }),
+        page.locator('#wb-retention-plan').click({ timeout: 1000 }),
+      ])
+      expect(response.ok()).toBe(true)
+      const plan = await response.json() as { candidates: { id: string }[] }
+      expect(plan.candidates.map(entry => entry.id).sort()).toEqual([...ids].sort())
+      await expect(page.locator('#wb-retention-results').getByLabel('我已核对候选与保护原因')).toBeEnabled({ timeout: 1000 })
+    }).toPass({ timeout: 10000 })
+  }
   try {
     await viewer.listen(); await page.goto(viewer.url); await viewer.service.start({ provider: 'mock' })
     await page.locator('#workbench-toggle').click(); await page.locator('#wb-yaml').fill(demo)
@@ -20,7 +36,7 @@ test('previews protected references, moves only an unpinned fixture, and restore
     await expect(page.locator('#wb-retention-status')).toContainText('Scanning references')
     await page.locator('#language-select').selectOption('zh-CN')
     await expect(page.locator('#wb-retention-status')).toContainText('容量已刷新', { timeout: 10000 })
-    await page.locator('#wb-retention-plan').click()
+    await previewMovable([id])
     await expect(page.locator('#wb-retention-results')).toContainText(id)
     await expect(page.locator('#wb-retention-results')).toContainText('移动后实际释放 0 字节')
     await page.locator('#wb-retention-results').screenshot({ path: 'artifacts/physical-validation/retention-preview-desktop.png' })
@@ -41,7 +57,7 @@ test('previews protected references, moves only an unpinned fixture, and restore
     await expect(page.locator('#wb-detail .wb-verdict').first()).toHaveText('通过', { timeout: 20000 })
     const secondId = (await page.locator('.wb-run-id').textContent())!.trim()
     expect(secondId).not.toBe(id)
-    await page.locator('#wb-retention-plan').click()
+    await previewMovable([id, secondId])
     await expect(page.locator('#wb-retention-results')).toContainText(secondId)
     await expect(page.locator('#wb-retention-results')).toContainText(id)
     await page.locator('#wb-retention-results').getByLabel('我已核对候选与保护原因').check()
