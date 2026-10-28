@@ -8,6 +8,7 @@
 
 | 任务 | 阅读入口 |
 | --- | --- |
+| 在线了解与体验 | [产品网站与 Playground](https://qmkCamel.github.io/FlowAssert/?lang=zh) · [网站维护](https://github.com/qmkCamel/flowassert/blob/main/docs/public-site.md) |
 | 首次体验、排障与反馈 | [内测任务卡](https://github.com/qmkCamel/flowassert/blob/main/docs/beta-start.md) · [FAQ](https://github.com/qmkCamel/flowassert/blob/main/docs/faq.md) · [反馈模板](https://github.com/qmkCamel/flowassert/blob/main/docs/beta-feedback.md) · [术语](glossary.md) |
 | 判断适用性与能力边界 | [采用指南](https://github.com/qmkCamel/flowassert/blob/main/docs/adoption-guide.md) · [能力总表](https://github.com/qmkCamel/flowassert/blob/main/docs/capabilities.md) · [产品形态](product-shape.md) |
 | 启动 Viewer、检查环境 | [本机 Viewer](local-viewer.md) · [环境预检 / Doctor](environment-preflight.md) |

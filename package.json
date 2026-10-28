@@ -188,7 +188,10 @@
     "test:visual:pilot": "tsx scripts/web-visual-acceptance/run.mjs",
     "test:visual:gate": "node scripts/web-visual-acceptance/gate.mjs",
     "docs:check": "node scripts/check-docs.mjs",
-    "docs:render": "node scripts/render-technical-introduction.mjs && node scripts/render-faq.mjs"
+    "docs:render": "node scripts/render-technical-introduction.mjs && node scripts/render-faq.mjs",
+    "site:build": "node scripts/site/build.mjs",
+    "site:preview": "pnpm site:build && node scripts/site/serve.mjs",
+    "site:test": "vitest run tests/public-site.test.js && playwright test tests/e2e/public-site.spec.js --workers=1"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.0",

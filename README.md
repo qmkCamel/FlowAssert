@@ -4,7 +4,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-[Quickstart](#quickstart) · [Documentation](https://github.com/qmkCamel/flowassert/blob/main/docs/README.md) · [MCP integration](docs/mcp-hosts.md) · [Contributing](https://github.com/qmkCamel/flowassert/blob/main/CONTRIBUTING.md)
+[Website](https://qmkCamel.github.io/FlowAssert/?lang=en) · [Playground](https://qmkCamel.github.io/FlowAssert/?lang=en#playground) · [Quickstart](#quickstart) · [Documentation](https://github.com/qmkCamel/flowassert/blob/main/docs/README.md) · [MCP integration](docs/mcp-hosts.md) · [Contributing](https://github.com/qmkCamel/flowassert/blob/main/CONTRIBUTING.md)
 
 FlowAssert is a local automation test workbench for Android and iOS. Write readable YAML flows, watch them run, and inspect screenshots, assertion diagnostics, and run history in one place. Use the workbench on its own, or connect a coding agent through MCP or DeepSeek Harness.
 
@@ -14,7 +14,7 @@ FlowAssert is a local automation test workbench for Android and iOS. Write reada
 
 *24-second silent GIF preview. Edited Mock demonstration; not physical-device acceptance evidence.*
 
-[Download the full 46-second MP4 (Chinese narration and music)](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [Subtitles and production source](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md).
+[Watch the full 46-second video with English subtitles](https://qmkCamel.github.io/FlowAssert/?lang=en#film) · [Download MP4](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [Subtitles and production source](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md).
 
 ## Why FlowAssert?
 

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070a11">
+  <meta name="description" content="FlowAssert: readable mobile tests, explicit assertions, and evidence you can inspect. Explore the browser playground for Android and iOS testing.">
+  <meta property="og:title" content="FlowAssert — Every test tells a story.">
+  <meta property="og:description" content="A local mobile testing workbench. Write a flow. Run it. Keep the evidence.">
+  <meta property="og:image" content="https://qmkCamel.github.io/FlowAssert/assets/cover.png">
+  <title>FlowAssert — Every test tells a story.</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="importmap">{"imports":{"yaml":"./vendor/yaml/index.js"}}</script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="FlowAssert"><span class="brand-mark" aria-hidden="true"><i></i></span><strong>FlowAssert</strong></a>
+    <nav aria-label="Main navigation" data-label="navigation"><a href="#why" data-i18n="navWhy">Why FlowAssert</a><a href="#playground">Playground</a><a href="#film" data-i18n="navFilm">Watch the film</a></nav>
+    <div class="header-actions"><button id="language" type="button" aria-label="切换为中文">中文</button><a class="github-link" href="https://github.com/qmkCamel/FlowAssert">GitHub <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span><span data-i18n="preview">DEVELOPER PREVIEW · OPEN SOURCE</span></div>
+        <h1><span data-i18n="heroOne">Every test</span><br><span class="accent" data-i18n="heroTwo">tells a story.</span></h1>
+        <p class="hero-description" data-i18n="heroBody">Turn mobile interactions into repeatable flows. Know what passed, understand what failed, and keep the evidence.</p>
+        <div class="hero-actions"><a class="button primary" href="#playground"><span data-i18n="try">Try the playground</span><span aria-hidden="true">↗</span></a><a class="text-link" href="#film"><span class="play-icon" aria-hidden="true">▷</span><span data-i18n="watch">Watch in 46 seconds</span></a></div>
+        <p class="fine-print" data-i18n="heroNote">No install. No device. Start with a browser Mock.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-label"><span>FLOWASSERT / WORKBENCH</span><span class="live-dot" data-i18n="mockCapture">MOCK CAPTURE</span></div>
+        <div class="workbench-frame"><div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span data-i18n="localWorkbench">Your local test workbench</span><span>↗</span></div><img src="./assets/workbench.png" alt="FlowAssert workbench with a YAML test and a Mock phone" data-alt="workbenchAlt" width="1440" height="1000" fetchpriority="high"></div>
+        <div class="assertion-receipt"><span class="receipt-icon" aria-hidden="true">✓</span><div><small>assertVisible</small><strong>1 actions received</strong></div><span class="receipt-state" data-i18n="evidenceKept">Evidence kept</span></div>
+        <p class="visual-caption" data-i18n="captureNote">Actual workbench capture · Mock device</p>
+      </div>
+    </section>
+    <div class="platform-strip wrap"><span data-i18n="builtFor">BUILT FOR YOUR WORKFLOW</span><span>Android & iOS</span><span>YAML</span><span>MCP</span><span>DeepSeek Harness</span><span data-i18n="localFirst">Local first</span></div>
+    <section class="why wrap section" id="why">
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="whyEyebrow">FROM ACTION TO ANSWER</p><h2 data-i18n="whyTitle">A green check is just the beginning.</h2></div><p data-i18n="whyBody">The useful part is knowing why—and being able to come back to it.</p></div>
+      <div class="principles">
+        <article><span class="number">01 /</span><h3 data-i18n="flowTitle">Write what matters.</h3><p data-i18n="flowBody">Readable YAML for taps, waits, and explicit assertions. Fixed flows run without asking a model at every step.</p><code>tap → assertVisible → done</code></article>
+        <article><span class="number">02 /</span><h3 data-i18n="inspectTitle">See the whole story.</h3><p data-i18n="inspectBody">Watch execution. Inspect step screenshots, interface structure, and the expected versus actual result.</p><div class="mini-compare"><span data-i18n="expected">Expected</span><b>2</b><span data-i18n="actual">Actual</span><b>1</b></div></article>
+        <article><span class="number">03 /</span><h3 data-i18n="historyTitle">Keep the before and after.</h3><p data-i18n="historyBody">A rerun creates a new record. The original failure stays available, with reviewed reports ready to share.</p><div class="mini-history"><span data-i18n="failed">Failed</span><i aria-hidden="true">→</i><span data-i18n="passed">Passed</span></div></article>
+      </div>
+    </section>
+    <section class="section playground-section" id="playground">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">THE PLAYGROUND</p><h2 data-i18n="playTitle">Make a test. Break a test. See the difference.</h2></div><p data-i18n="playBody">Edit the YAML, run it against a browser Mock, and explore each step. Try the failing example to see the mismatch.</p></div>
+        <div class="playground-window">
+          <div class="playground-toolbar"><div class="playground-brand"><span class="status-dot"></span><strong data-i18n="browserMock">Browser Mock</strong><span class="toolbar-divider">/</span><span id="run-status" class="status" role="status" aria-live="polite">Ready</span></div><div class="run-actions"><button id="cancel-run" class="button subtle" type="button" hidden data-i18n="cancel">Cancel</button><button id="run-flow" class="button primary" type="button" aria-keyshortcuts="Control+Enter Meta+Enter"><span aria-hidden="true">▷</span><span data-i18n="run">Run flow</span></button></div></div>
+          <div class="progress-track"><div id="run-progress"></div></div>
+          <div class="playground-grid">
+            <div class="editor-pane">
+              <div class="pane-title"><span>01 <span data-i18n="editor">FLOW EDITOR</span></span><span class="file-tag">demo.yaml</span></div>
+              <div class="examples" role="group" aria-label="Example flows" data-label="examples"><button data-example="pass" aria-pressed="true" data-i18n="examplePass">Passing</button><button data-example="fail" aria-pressed="false" data-i18n="exampleFail">Failing</button><button data-example="double" aria-pressed="false" data-i18n="exampleDouble">Two taps</button></div>
+              <label class="sr-only" for="flow-source" data-i18n="yamlLabel">Edit the YAML flow</label><div class="code-editor"><pre id="line-numbers" aria-hidden="true"></pre><textarea id="flow-source" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="12000" aria-describedby="syntax-help"></textarea></div>
+              <div class="editor-footer"><span id="editor-note" data-i18n="editHint">Change the expected count. Run again.</span><span>⌘ / Ctrl ↵</span></div>
+              <details id="syntax-help"><summary data-i18n="supported">Supported YAML</summary><p data-i18n="syntaxBody">Use two YAML documents: name, platform (ios/android), and the Mock appId; then launchApp, tap (action-card), assertVisible, assertNotVisible, or done. Assertions match the displayed text exactly. Up to 40 steps.</p></details>
+            </div>
+            <div class="device-pane"><div class="pane-title"><span>02 <span data-i18n="device">DEVICE PREVIEW</span></span><span class="muted" id="device-platform">iOS</span></div><div class="phone"><div class="phone-island" aria-hidden="true"></div><div class="phone-content"><small>FLOWASSERT / MOCK</small><h3>Hello, harness.</h3><div class="action-card"><span>LIVE SESSION</span><strong id="phone-count">0</strong><span>actions received</span></div><div class="phone-event"><small data-i18n="lastEvent">LAST EVENT</small><span id="phone-event" data-i18n="waiting">Waiting for your flow</span></div><div class="phone-bottom" aria-hidden="true"></div></div></div><p class="device-note" id="snapshot-label" data-i18n="deviceNote">An interactive browser simulation.</p></div>
+            <div class="results-pane"><div class="pane-title"><span>03 <span data-i18n="results">STEP EVIDENCE</span></span><span id="result-badge" class="status">—</span></div><div id="result-empty" class="empty-state"><span aria-hidden="true">⌁</span><h3 data-i18n="emptyTitle">Your first run starts here.</h3><p data-i18n="emptyBody">Run a flow to inspect its steps, assertions, and state snapshots.</p></div><div id="result-content" hidden><p id="result-name"></p><ol id="result-steps" aria-label="Run steps" data-label="stepsLabel"></ol><div id="step-detail" aria-live="polite"></div><div class="result-actions"><button id="rerun" class="text-button" data-i18n="rerun">Load this flow</button><button id="export-result" class="text-button" data-i18n="export">Export JSON ↗</button></div></div></div>
+          </div>
+          <div class="run-history"><span data-i18n="sessionHistory">SESSION HISTORY</span><div id="history-list"><span class="muted" data-i18n="noHistory">Your runs stay here until you leave this page.</span></div></div>
+        </div>
+        <p id="playground-error" class="error-message" role="alert" hidden></p>
+        <div class="playground-footnote"><span><i class="scope-dot" aria-hidden="true"></i><span data-i18n="scope">Browser simulation only. No phone or local service is contacted. These are simulated state snapshots, not device evidence.</span></span><span data-i18n="resetNote">Each run starts at zero · Last 8 runs kept in memory</span></div>
+      </div>
+    </section>
+    <section class="section film-section wrap" id="film"><div class="section-heading"><div><p class="eyebrow" data-i18n="filmEyebrow">MEET FLOWASSERT</p><h2 data-i18n="filmTitle">The full picture. In 46 seconds.</h2></div><p data-i18n="filmBody">From a readable flow to a failure you can explain. A short tour of the local workbench.</p></div><div class="film-frame"><video id="intro-video" controls playsinline preload="none" poster="./assets/cover.png" aria-label="FlowAssert product introduction" data-label="videoLabel"><source src="./assets/flowassert-introduction.zh-CN.mp4" type="video/mp4"><track kind="subtitles" src="./assets/subtitles.en.vtt" srclang="en" label="English" default><track kind="subtitles" src="./assets/subtitles.zh-CN.vtt" srclang="zh-CN" label="简体中文"><p><a href="./assets/flowassert-introduction.zh-CN.mp4" data-i18n="downloadVideo">Download the video</a></p></video></div><div class="film-meta"><p data-i18n="videoNote">Chinese narration · English subtitles available · Edited Mock demonstration</p><a href="./assets/flowassert-introduction.zh-CN.mp4" download class="text-link" data-i18n="downloadVideo">Download the video ↗</a></div></section>
+    <section class="section start-section wrap" id="start"><div><p class="eyebrow" data-i18n="startEyebrow">TAKE IT TO YOUR WORKBENCH</p><h2 data-i18n="startTitle">Your next test. On your own machine.</h2><p data-i18n="startBody">Start with the local Mock, then connect your Android or iOS device. Use the workbench directly or bring your coding agent through MCP.</p><div class="start-actions"><a id="quickstart-link" class="button primary" href="https://github.com/qmkCamel/flowassert#quickstart" data-i18n="quickstart">Open the quickstart ↗</a><a class="text-link" href="https://github.com/qmkCamel/flowassert/blob/main/docs/mcp-hosts.md" data-i18n="mcpGuide">MCP guide ↗</a></div></div><div class="terminal"><div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span data-i18n="terminalTitle">Start from source</span></div><pre><code><span class="comment" data-i18n="toolchain"># Node 24.19.0 · pnpm 11.7.0</span>
+git clone --branch main --single-branch \
+  https://github.com/qmkCamel/flowassert.git
+cd flowassert
+pnpm install --frozen-lockfile
+pnpm dev</code></pre><p data-i18n="terminalNote">The local Mock needs no device, Appium, or model credentials. Full setup instructions are in the quickstart.</p></div></section>
+    <section class="limits wrap"><span class="eyebrow" data-i18n="honestLabel">A CLEAR STARTING POINT</span><p data-i18n="limits">FlowAssert is a developer preview. A passing assertion confirms a declared condition—not general visual accuracy or business correctness. Physical devices require their own setup and validation.</p><a id="limits-link" href="https://github.com/qmkCamel/flowassert#status-and-limits" data-i18n="readLimits">Read the current limits ↗</a></section>
+  </main>
+  <footer class="wrap"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><i></i></span><strong>FlowAssert</strong></a><span data-i18n="footer">Readable flows. Reviewable evidence.</span><div><a href="https://github.com/qmkCamel/flowassert/blob/main/docs/README.md" data-i18n="docs">Documentation</a><a href="https://github.com/qmkCamel/flowassert">GitHub</a><a href="https://github.com/qmkCamel/flowassert/blob/main/LICENSE">MIT</a></div></footer>
+  <noscript><p class="wrap">JavaScript is required for the playground and language switch. 产品介绍与视频仍可浏览；Playground 和语言切换需要 JavaScript。</p></noscript>
+</body>
+</html>

@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.395 --> 00:00:01.845
+The issue is fixed.
+
+2
+00:00:01.845 --> 00:00:04.366
+How do you keep a record of this verification?
+
+3
+00:00:06.395 --> 00:00:08.720
+Save repetitive actions as a test case.
+
+4
+00:00:08.720 --> 00:00:11.518
+Next time, just run it again.
+
+5
+00:00:14.395 --> 00:00:16.634
+See which step is running and how it turned out,
+
+6
+00:00:16.634 --> 00:00:18.750
+right in the workbench.
+
+7
+00:00:22.395 --> 00:00:24.668
+When something fails, return to that step.
+
+8
+00:00:24.668 --> 00:00:27.206
+Compare what you expected with what happened.
+
+9
+00:00:30.395 --> 00:00:32.766
+Fix it and rerun. The old record stays.
+
+10
+00:00:32.766 --> 00:00:36.382
+Review what you want to share, then export a report.
+
+11
+00:00:38.395 --> 00:00:40.459
+This is FlowAssert.
+
+12
+00:00:40.459 --> 00:00:44.670
+Run each verification again, and revisit the evidence anytime.
