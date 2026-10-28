@@ -239,7 +239,7 @@
     "@deepseek-ai/dsh-tools": "0.2.0-rc.2",
     "@deepseek-ai/dsh-user-approval": "0.2.0-rc.2",
     "@playwright/test": "1.62.1",
-    "@types/node": "24.10.13",
+    "@types/node": "26.6.5",
     "tsdown": "0.22.2",
     "tsx": "4.23.15",
     "typescript": "6.0.3",
