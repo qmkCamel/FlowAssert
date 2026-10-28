@@ -8,11 +8,13 @@
 
 FlowAssert 是面向 Android 和 iOS 的本机自动化测试工作台。用可读 YAML 编写流程，实时观看执行，在同一个界面查看截图、断言诊断和运行历史。你可以独立使用工作台，也可以通过 MCP 或 DeepSeek Harness 接入编程 Agent。
 
-> **开发者预览 · `0.1.0-alpha.2`。** 请从源码启动。FlowAssert 尚未发布安装包，也未发布到公共 npm。仓库目前为私有，克隆需要访问权限。独立工作台无需模型凭据或 DeepSeek Harness。
+> **开发者预览 · `0.1.0-alpha.2`。** 请从源码启动。FlowAssert 尚未发布安装包，也未发布到公共 npm。源码仓库已公开。独立工作台无需模型凭据或 DeepSeek Harness。
 
 ![FlowAssert Mock 工作台：运行结果、步骤证据与实时画面](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/flowassert-workbench.png)
 
 *确定性 Mock 演示，采集于 2026 年 10 月 24 日；此图不代表真机验收结果。*
+
+[观看 46 秒产品介绍视频](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [字幕与制作源文件](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md)。中文旁白与电子配乐，画面为经过剪辑的 Mock 演示。
 
 ## 为什么使用 FlowAssert？
 

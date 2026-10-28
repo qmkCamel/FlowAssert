@@ -1,0 +1,102 @@
+{
+  "title": "FlowAssert 产品介绍",
+  "createdDate": "2026-10-28",
+  "sourceCommit": "f9d54a0533d1457b8a59aedb8db87e1fcd936d7f",
+  "format": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationSeconds": 46,
+    "language": "zh-CN"
+  },
+  "visualSources": [
+    "viewer/styles.css",
+    "viewer/index.html",
+    "fresh local Mock Viewer screenshots"
+  ],
+  "contentSources": [
+    "README.zh-CN.md",
+    "docs/communications/product-introduction.zh-CN.md",
+    "docs/report-reading-and-sharing.md",
+    "examples/flows/demo.yaml"
+  ],
+  "scope": "Product introduction using edited Mock captures and explanatory motion graphics. Not a continuous screencast, physical-device acceptance record, or execution-time measurement.",
+  "speech": {
+    "provider": "Microsoft Edge online text-to-speech",
+    "client": "edge-tts 7.3.1",
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "+10%",
+    "pitch": "-1Hz",
+    "timeStretch": false,
+    "captionAlignment": "Service word boundaries",
+    "paragraphs": 6
+  },
+  "music": {
+    "title": "FlowAssert / Circuit Motion",
+    "origin": "Original local procedural composition; no external samples",
+    "bpm": 120,
+    "durationSeconds": 46,
+    "sampleRate": 48000,
+    "channels": 2,
+    "parts": [
+      "stereo minor/add9 synth pads",
+      "FM-style eighth-note plucks with stereo delay",
+      "warm syncopated bass pulse",
+      "soft electronic kick and rim",
+      "high-frequency ticks",
+      "scene-aligned electronic swells"
+    ],
+    "musicLufsTarget": -24,
+    "speechDucking": {
+      "threshold": 0.035,
+      "ratio": 4,
+      "attackMs": 15,
+      "releaseMs": 280,
+      "mix": 0.75
+    },
+    "rawPeak": 0.20744905309015663
+  },
+  "chapters": [
+    {
+      "start": 0,
+      "title": "修好了，然后呢？"
+    },
+    {
+      "start": 6,
+      "title": "保存流程"
+    },
+    {
+      "start": 14,
+      "title": "查看证据"
+    },
+    {
+      "start": 22,
+      "title": "定位失败"
+    },
+    {
+      "start": 30,
+      "title": "复验与分享"
+    },
+    {
+      "start": 38,
+      "title": "FlowAssert"
+    }
+  ],
+  "cloudTextSent": true,
+  "payloadScope": "Only the six narration paragraphs, as expressly requested by the user. No code, screenshots, or account data.",
+  "audioMeasurements": {
+    "mixedSoundtrackIntegratedLufs": -19.56,
+    "mixedSoundtrackTruePeakDbtp": -4.95,
+    "mixedSoundtrackLoudnessRangeLu": 5.3
+  },
+  "publicationDate": "2026-10-28",
+  "repositoryVisibility": "public; verified with authenticated GitHub repository metadata on 2026-10-28",
+  "publicationEdit": "Updated the closing caption to match the public repository. Approved narration, music, scene timing, and Mock captures preserved.",
+  "reproductionGuide": "README.md",
+  "publishedFile": {
+    "path": "flowassert-introduction.zh-CN.mp4",
+    "sha256": "674bf06aad80ccf5fa7f1a6c1b797f3eed66ba8bccd9de449ce7e67fbe1f4d54",
+    "bytes": 7324840,
+    "approvedAudioPreserved": true
+  }
+}

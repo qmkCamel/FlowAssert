@@ -1565,6 +1565,79 @@
         "svg-source-review"
       ],
       "retention": "architecture-explanation"
+    },
+    {
+      "path": "docs/communications/product-video/cover.png",
+      "sha256": "9fe3dddc60b45b1f25ccc2d7c72521d788f27328a042762ff7764951374d840a",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/flowassert-introduction.zh-CN.mp4",
+      "sha256": "674bf06aad80ccf5fa7f1a6c1b797f3eed66ba8bccd9de449ce7e67fbe1f4d54",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "six-scene-frame-review",
+        "source-asset-review",
+        "narration-text-review",
+        "full-decode-check",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/source/assets/failure.png",
+      "sha256": "f20f8562556e00b1054fd9eedc30c63982345185f279aee62bad724c1df4ae80",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/source/assets/live-after.png",
+      "sha256": "5bfc7efd1a5d59d2c616ed6f228fb3a5b3780b01134c8186ded6a29502aaba0e",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/source/assets/live-phone-after.png",
+      "sha256": "4a4d7533d5af8147ee56c7227c6a906243014d49538fd15d8a7e59847f38e4f0",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/source/assets/live-phone-before.png",
+      "sha256": "3ceb5d70ad9c8556ab8c548706996906ebbc03e22818d20479680a7411661bb4",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/source/assets/workbench.png",
+      "sha256": "d2659408569f64d4f612c19aba58b7bc68d0ada8e1ac795f6ca04465b64daa46",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "individual-image-review",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
     }
   ]
 }

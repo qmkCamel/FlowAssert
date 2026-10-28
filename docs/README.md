@@ -20,7 +20,7 @@
 | 接入 Agent 与无头执行 | [MCP 宿主](mcp-hosts.md) · [已登记测试执行](agent-test-run-control.md) · [Managed job](managed-job.md) |
 | 配置 DSH 或候选包 | [安装与回滚](beta-installation.md) · [兼容边界](https://github.com/qmkCamel/flowassert/blob/main/docs/workbench-compatibility.md) |
 | 开发、打包与维护 | [中文技术指南](technical-guide.zh-CN.md) · [English](technical-guide.md) · [工作台维护](workbench-maintenance.md) · [文档维护](documentation-maintenance.md) |
-| 介绍与演示 | [技术介绍](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/technical-introduction.zh-CN.md) · [内测介绍稿](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-introduction.zh-CN.md) · [离线 Mock 演示](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/mobile-mirror-demo.html) · [本机历史材料](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/local-recorded-demo.md) |
+| 介绍与演示 | [46 秒产品视频](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md) · [技术介绍](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/technical-introduction.zh-CN.md) · [内测介绍稿](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-introduction.zh-CN.md) · [离线 Mock 演示](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/mobile-mirror-demo.html) · [本机历史材料](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/local-recorded-demo.md) |
 
 ## 调研、方案与架构图
 
