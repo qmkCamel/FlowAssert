@@ -1638,6 +1638,18 @@
         "mock-only-content"
       ],
       "retention": "product-introduction-media"
+    },
+    {
+      "path": "docs/communications/product-video/flowassert-preview.gif",
+      "sha256": "d430b74a9feeab77e56e87681dfe8937f98b0f58d8500c9db091ac043c7d4fdb",
+      "reviewedOn": "2026-10-28",
+      "review": [
+        "six-scene-frame-review",
+        "derived-from-reviewed-mp4",
+        "full-decode-check",
+        "mock-only-content"
+      ],
+      "retention": "product-introduction-media"
     }
   ]
 }

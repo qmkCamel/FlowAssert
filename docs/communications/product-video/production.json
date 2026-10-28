@@ -98,5 +98,43 @@
     "sha256": "674bf06aad80ccf5fa7f1a6c1b797f3eed66ba8bccd9de449ce7e67fbe1f4d54",
     "bytes": 7324840,
     "approvedAudioPreserved": true
+  },
+  "readmePreview": {
+    "path": "flowassert-preview.gif",
+    "sha256": "d430b74a9feeab77e56e87681dfe8937f98b0f58d8500c9db091ac043c7d4fdb",
+    "bytes": 4004667,
+    "durationSeconds": 24,
+    "width": 960,
+    "height": 540,
+    "fps": 10,
+    "frames": 240,
+    "audio": false,
+    "loop": "infinite",
+    "sourceSegmentsSeconds": [
+      [
+        1,
+        5
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        16,
+        20
+      ],
+      [
+        24,
+        28
+      ],
+      [
+        32,
+        36
+      ],
+      [
+        40,
+        44
+      ]
+    ]
   }
 }

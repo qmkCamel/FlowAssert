@@ -10,11 +10,11 @@ FlowAssert is a local automation test workbench for Android and iOS. Write reada
 
 > **Developer Preview · `0.1.0-alpha.2`.** Start from source. No FlowAssert release has been published, and the package is not on public npm. The source repository is public. The standalone workbench needs no model credentials or DeepSeek Harness.
 
-[![Watch the 46-second FlowAssert product introduction (Chinese narration)](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/cover.png)](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4)
+![FlowAssert animated preview: readable flows, step evidence, failure diagnostics, and reruns](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-preview.gif)
 
-*Click the cover to open the 46-second video. Edited Mock demonstration with Chinese narration and electronic music; not physical-device acceptance evidence.*
+*24-second silent GIF preview. Edited Mock demonstration; not physical-device acceptance evidence.*
 
-[▶ Watch video (中文)](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [Subtitles and production source](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md).
+[Download the full 46-second MP4 (Chinese narration and music)](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [Subtitles and production source](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md).
 
 ## Why FlowAssert?
 

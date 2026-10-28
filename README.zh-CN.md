@@ -10,11 +10,11 @@ FlowAssert 是面向 Android 和 iOS 的本机自动化测试工作台。用可�
 
 > **开发者预览 · `0.1.0-alpha.2`。** 请从源码启动。FlowAssert 尚未发布安装包，也未发布到公共 npm。源码仓库已公开。独立工作台无需模型凭据或 DeepSeek Harness。
 
-[![点击观看 FlowAssert 46 秒产品介绍视频](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/cover.png)](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4)
+![FlowAssert 动图预览：可读流程、步骤证据、失败诊断与复验](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-preview.gif)
 
-*点击封面打开 46 秒视频。中文旁白与电子配乐，画面为经过剪辑的 Mock 演示，不代表真机验收结果。*
+*24 秒无声动图预览。画面为经过剪辑的 Mock 演示，不代表真机验收结果。*
 
-[▶ 观看视频](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [字幕与制作源文件](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md)。
+[下载完整 46 秒 MP4（中文旁白与电子配乐）](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [字幕与制作源文件](https://github.com/qmkCamel/flowassert/blob/main/docs/communications/product-video/README.md)。
 
 ## 为什么使用 FlowAssert？
 

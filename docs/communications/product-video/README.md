@@ -1,8 +1,10 @@
 # FlowAssert 产品介绍视频
 
-[![播放 FlowAssert 产品介绍](cover.png)](flowassert-introduction.zh-CN.mp4)
+![FlowAssert 动图预览](flowassert-preview.gif)
 
-[观看或下载 MP4](flowassert-introduction.zh-CN.mp4) · [中文字幕 SRT](flowassert-introduction.zh-CN.srt) · [制作记录](production.json)
+[下载完整 MP4（含旁白与配乐）](https://raw.githubusercontent.com/qmkCamel/flowassert/main/docs/communications/product-video/flowassert-introduction.zh-CN.mp4) · [中文字幕 SRT](flowassert-introduction.zh-CN.srt) · [静态封面](cover.png) · [制作记录](production.json)
+
+README 使用 24 秒无声循环 GIF，960 × 540，10 fps，约 4 MB。从成片的六个场景各截取 4 秒，保持原速。完整视频保留配音和配乐，可通过上方直链下载。
 
 2026-10-28 定稿，46 秒，1920 × 1080，30 fps，H.264 / AAC。采用微软晓晓 `zh-CN-XiaoxiaoNeural` 中文旁白，原生语速 `+10%`；原创 120 BPM 电子配乐包含低频脉冲、立体声琶音、轻鼓点与转场音效，人声响起时自动降低配乐音量。字幕已嵌入画面，SRT 另供复用。
 
@@ -16,6 +18,16 @@
 | 00:22 | 定位失败 |
 | 00:30 | 复验与分享 |
 | 00:38 | FlowAssert 与源码入口 |
+
+## 重新生成 README 动图
+
+需要 Node 和 PATH 中的 FFmpeg / FFprobe；从仓库根目录运行：
+
+```bash
+node docs/communications/product-video/source/render-gif.mjs
+```
+
+脚本从已有 MP4 提取六段画面，在 `.build/` 中生成并检查完整解码、时长、尺寸和 5 MiB 体积上限，通过后替换 `flowassert-preview.gif`，并输出文件哈希和参数。重新生成后，检查六个场景与 README 播放效果，再同步 `production.json` 的 `readmePreview` 和 `public-media-review.json` 的审查记录。
 
 ## 修改画面并重新导出
 
