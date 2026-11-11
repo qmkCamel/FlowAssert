@@ -10,10 +10,10 @@ const udid = process.env.MOBILE_MIRROR_UDID
 if (platform !== 'android' && platform !== 'ios') throw new Error('MOBILE_MIRROR_PLATFORM must be android or ios')
 if (!udid) throw new Error('MOBILE_MIRROR_UDID is required')
 
-const evidenceRoot = resolve('artifacts/physical-validation')
+const evidenceRoot = resolve('artifacts/local/physical-validation')
 const evidencePath = resolve(process.env.MOBILE_MIRROR_EVIDENCE_PATH
-  ?? `artifacts/physical-validation/mcp-observation-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}.png`)
-if (!evidencePath.startsWith(`${evidenceRoot}/`)) throw new Error('Evidence path must be inside artifacts/physical-validation')
+  ?? `artifacts/local/physical-validation/mcp-observation-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}.png`)
+if (!evidencePath.startsWith(`${evidenceRoot}/`)) throw new Error('Evidence path must be inside artifacts/local/physical-validation')
 await mkdir(evidenceRoot, { recursive: true, mode: 0o700 })
 
 const launcher = resolve(process.env.MOBILE_MIRROR_MCP_LAUNCHER ?? 'scripts/mobile-mirror-mcp.mjs')

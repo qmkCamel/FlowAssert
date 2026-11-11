@@ -32,7 +32,7 @@ for (const entry of ['legacy', 'analysis']) test(`${entry}: reviews an evidence-
     await expect(section).toContainText('action-card')
     if (entry === 'legacy') {
     await page.locator('#workbench-panel').evaluate(panel => { const target = panel.querySelector('.wb-repair')!; panel.scrollTop += target.getBoundingClientRect().top - panel.getBoundingClientRect().top - 16 })
-    await page.screenshot({ path: 'artifacts/physical-validation/repair-candidate-desktop.png' })
+    await page.screenshot({ path: 'artifacts/local/physical-validation/repair-candidate-desktop.png' })
     const caseId = '933172b8-712e-4ba8-bbbb-8844630e74bf'
     let phase = 'queued', failDetails = false
     await page.route('**/api/workbench/repairs**', async route => {
@@ -77,7 +77,7 @@ for (const entry of ['legacy', 'analysis']) test(`${entry}: reviews an evidence-
     await page.setViewportSize({ width: 390, height: 844 })
     await tracked.scrollIntoViewIfNeeded()
     await page.screenshot({ path: info.outputPath('repair-failed-narrow.png') })
-    const screenshots = join(process.cwd(), 'artifacts/repair-case')
+    const screenshots = join(process.cwd(), 'artifacts/local/repair-case')
     await mkdir(screenshots, { recursive: true })
     for (const name of ['repair-running-desktop.png', 'repair-failed-narrow.png'])
       await copyFile(info.outputPath(name), join(screenshots, name))
@@ -178,7 +178,7 @@ test('source repair handoff and slow independent checks keep history, evidence a
     await page.setViewportSize({ width: 390, height: 844 })
     await tracked.scrollIntoViewIfNeeded()
     await page.screenshot({ path: info.outputPath('repair-code-failed-narrow.png') })
-    const screenshots = join(process.cwd(), 'artifacts/repair-case')
+    const screenshots = join(process.cwd(), 'artifacts/local/repair-case')
     await mkdir(screenshots, { recursive: true })
     for (const name of ['repair-code-running-desktop.png', 'repair-code-failed-narrow.png'])
       await copyFile(info.outputPath(name), join(screenshots, name))
@@ -264,7 +264,7 @@ test('slow build and exact-artifact installation preserve evidence and navigatio
     await page.setViewportSize({ width: 390, height: 844 })
     await tracked.scrollIntoViewIfNeeded()
     await page.screenshot({ path: info.outputPath('repair-install-blocked-narrow.png') })
-    const screenshots = join(process.cwd(), 'artifacts/repair-case')
+    const screenshots = join(process.cwd(), 'artifacts/local/repair-case')
     await mkdir(screenshots, { recursive: true })
     for (const name of ['repair-build-running-desktop.png', 'repair-install-running-desktop.png', 'repair-install-blocked-narrow.png'])
       await copyFile(info.outputPath(name), join(screenshots, name))

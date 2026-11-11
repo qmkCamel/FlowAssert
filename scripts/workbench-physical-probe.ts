@@ -31,7 +31,7 @@ if (typeof supplied['appium:udid'] !== 'string' || supplied['appium:udid'].inclu
 if (String(supplied.platformName).toLowerCase() !== flow.parsed.meta.platform) throw new Error('Flow and device platforms differ')
 if (supplied['appium:fullReset'] || supplied['appium:app']) throw new Error('The probe does not install or reset apps')
 const caps = { ...supplied, 'appium:noReset': true, 'appium:fullReset': false, 'appium:autoLaunch': false, 'appium:allowProvisioningDeviceRegistration': false }
-const root = resolve('artifacts/physical-validation', `workbench-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `workbench-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const config = resolveMirrorConfig({
   defaultProvider: 'appium', appiumUrl, viewerPort: 0, viewerMediaMode: 'auto',

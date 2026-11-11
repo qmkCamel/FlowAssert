@@ -12,11 +12,11 @@
 
 - `tests/workbench-video.test.ts`：真实 HTTP/磁盘读写，视频绑定、同源、容器/元数据校验、大小上限、互斥、关闭时终止在途上传、幂等、禁止覆盖、独立索引故障重试、哈希损坏拒读、Range/416/尾部范围、重启及旧记录兼容。此层视频仅为容器头 fixture，不声称可解码。
 - `tests/e2e/workbench-video.spec.ts`：真实 Chromium Canvas/MediaRecorder 编码，下载比对、视频实际解码、无音轨、重启历史、步骤跳转、慢保存时主题/截图交互、上传失败重试、提前停止及关闭工作台面板后隐藏页面自动保存部分视频；不支持录屏时不派发已勾选录像的流程，取消勾选后正常运行。
-- 保留并检查 [历史回放](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-video-history.png) 和 [窄屏](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-video-narrow.png) runtime 截图。
+- 保留并检查 [历史回放](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-video-history.png) 和 [窄屏](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-video-narrow.png) runtime 截图。
 
 2026-09-16 补验：iPhone 16 Plus / iOS 26.2.1，系统设置页 7 步流程通过，流程与 Viewer 共用同一 Appium 会话。录像 42.640 秒、8,408,564 字节，VP8 886×1920，无音轨；完整解码 1,279 帧，其中 657 个不同帧哈希。SHA-256：`98ef1422f3f842cb2aef4f3105db4b24af59f72af3fadda6d1c247293d96ec3d`。
 
-停止会话并重启 Viewer 后，历史记录恢复、视频可解码、步骤跳转至 3.60 秒；录制期间主题切换和截图可用。运行 ID `a1913b60-0502-480e-9a67-a7bda880ded0`。原始材料位于本机忽略目录 `artifacts/physical-validation/workbench-video-2026-09-16T04-13-36-822Z/`；已打开检查 restored.png，含个人设置页面，不公开入库。停止后另查 4723/8100/9100 无监听、设备进程无 WDA runner。首次 WDA Xcode 65 启动失败材料另存，后续开启诊断重试通过，不覆盖失败记录或声称已定位首次失败根因。
+停止会话并重启 Viewer 后，历史记录恢复、视频可解码、步骤跳转至 3.60 秒；录制期间主题切换和截图可用。运行 ID `a1913b60-0502-480e-9a67-a7bda880ded0`。原始材料位于本机忽略目录 `artifacts/local/physical-validation/workbench-video-2026-09-16T04-13-36-822Z/`；已打开检查 restored.png，含个人设置页面，不公开入库。停止后另查 4723/8100/9100 无监听、设备进程无 WDA runner。首次 WDA Xcode 65 启动失败材料另存，后续开启诊断重试通过，不覆盖失败记录或声称已定位首次失败根因。
 
 可复用入口：`pnpm test:video:physical`，显式提供 `MOBILE_MIRROR_CAPABILITIES_PATH`、`MOBILE_MIRROR_FLOW_PATH`、`MOBILE_MIRROR_APPIUM_EXECUTABLE` 三个绝对路径；Android 媒体另按本地安装提供 scrcpy 配置。Android 同日补验通过：设置页 7 步、11.4 秒 VP8、重启回放与步骤跳转，完整解码 342 帧；详见 [Android 报告](https://github.com/qmkCamel/flowassert/blob/main/docs/android-acceptance-2026-09-16.md)。两端均有独立 run 归档证据，不以旧手动录屏代替。
 

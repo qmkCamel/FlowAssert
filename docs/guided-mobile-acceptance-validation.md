@@ -45,10 +45,10 @@ DSH 探针使用 `scripts/install-dsh-probe-runtime.mjs` 安装隔离的精确�
 
 ## 运行截图（全部为 Mock）
 
-- [首次验收：桌面](../artifacts/guided-mobile-acceptance/mock-acceptance-desktop.png)
-- [首次验收：窄屏](../artifacts/guided-mobile-acceptance/mock-acceptance-narrow.png)
-- [核查计划：桌面](../artifacts/guided-mobile-acceptance/mock-investigation-desktop.png)
-- [核查计划：窄屏](../artifacts/guided-mobile-acceptance/mock-investigation-narrow.png)
+- [首次验收：桌面](../artifacts/curated/guided-mobile-acceptance/mock-acceptance-desktop.png)
+- [首次验收：窄屏](../artifacts/curated/guided-mobile-acceptance/mock-acceptance-narrow.png)
+- [核查计划：桌面](../artifacts/curated/guided-mobile-acceptance/mock-investigation-desktop.png)
+- [核查计划：窄屏](../artifacts/curated/guided-mobile-acceptance/mock-investigation-narrow.png)
 
 截图保留实际滚动视口，不把超长侧栏误截为顶部编辑器。回归改写的其他历史截图不属于这次提交。
 

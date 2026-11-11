@@ -82,7 +82,7 @@ appId: dev.mobilemirror.fixture
 - `pnpm exec tsx scripts/recovery-controlled-probe.ts --deepseek`：真实模型加模拟设备的恢复/归档闭环；不带参数仍为确定性测试 planner。报告明确记录 realModel 与 physicalDevice。
 
 - `tests/workbench-recovery.test.ts`：正常零模型、保留失败、不重放前序动作、越界建议、suggest、取消/迟到、未知写入、套件非零和证据损坏。
-- `tests/e2e/recovery.spec.ts`：慢模型期间其他控件可用、原失败可见、重启回看；[截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-ai-recovery.png)使用测试 planner，不是真实模型证据。
+- `tests/e2e/recovery.spec.ts`：慢模型期间其他控件可用、原失败可见、重启回看；[截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-ai-recovery.png)使用测试 planner，不是真实模型证据。
 - Fixture App 新增 Recovery Lab 的十种合成导航页面，两端已完成真实模型每场景三轮矩阵，并补 suggest/normal 边界；SDK 对照仍待验。
 - `scripts/recovery-physical-probe.ts`：从显式能力配置选择 Android/iOS，仅允许已安装的 Fixture，归档真机截图、模型建议、实际派发及重启哈希验证；不自动安装或重置手机。RECOVERY_SCENARIOS=suggest,normal 可单独补测边界，默认每场景三轮。
 - [设计](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-bounded-ai-recovery/design.md)、[实施任务](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-bounded-ai-recovery/tasks.md)。

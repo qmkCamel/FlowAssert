@@ -26,7 +26,7 @@
 
 首轮 E2E 使用两个 worker，81 项通过、1 项跳过、1 项 PNG 初始化可见性超时。该场景单 worker 定向复测通过，随后单 worker 全量 82 项通过。未改代码或放宽断言；超时原因未确认。
 
-保留并查看 `artifacts/dsh-020/dev-merge-repair-progress.png`，展示新 dev 修复流程的 Mock preparing 状态和局部取消/刷新控件。既有 E2E 生成截图已恢复，未刷新历史截图基线。
+保留并查看 `artifacts/curated/dsh-020/dev-merge-repair-progress.png`，展示新 dev 修复流程的 Mock preparing 状态和局部取消/刷新控件。既有 E2E 生成截图已恢复，未刷新历史截图基线。
 
 ## Same merged candidate
 

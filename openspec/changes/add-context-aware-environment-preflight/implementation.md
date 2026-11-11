@@ -54,7 +54,7 @@ node scripts/preflight-dsh-probe.mjs /ABSOLUTE/SELECTED_DSH /ABSOLUTE/CANDIDATE.
 
 ## 浏览器运行证据
 
-已人工查看仓库内截图：`artifacts/screenshots/preflight-progress-desktop.png`（1100 ms 等待期间：局部进度、取消、旧结果可见、主题可操作）与 `artifacts/screenshots/preflight-completed-narrow.png`（390 px 窄屏完成结果）。修正了通用 label 样式覆盖 hidden 的问题；未选测试引用保持隐藏，窄屏结果可换行。测试不涉及真实手机控制。
+已人工查看仓库内截图：`artifacts/curated/screenshots/preflight-progress-desktop.png`（1100 ms 等待期间：局部进度、取消、旧结果可见、主题可操作）与 `artifacts/curated/screenshots/preflight-completed-narrow.png`（390 px 窄屏完成结果）。修正了通用 label 样式覆盖 hidden 的问题；未选测试引用保持隐藏，窄屏结果可换行。测试不涉及真实手机控制。
 
 ## 收尾与未完成项
 

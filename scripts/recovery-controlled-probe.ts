@@ -18,7 +18,7 @@ class NavigationFixture extends MockProvider {
     return source
   }
 }
-const root=resolve(`artifacts/fixture/${realModel?'recovery-deepseek-workbench':'recovery-controlled'}`,new Date().toISOString().replaceAll(':','-'))
+const root=resolve(`artifacts/local/fixture/${realModel?'recovery-deepseek-workbench':'recovery-controlled'}`,new Date().toISOString().replaceAll(':','-'))
 await mkdir(root,{recursive:true})
 const mirror=new MirrorService(resolveMirrorConfig({mockStartupDelayMs:0}),'http://127.0.0.1',{providerFactory:()=>new NavigationFixture(0)})
 let requests=0

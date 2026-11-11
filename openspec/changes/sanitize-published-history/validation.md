@@ -21,7 +21,7 @@
 | 安装包 | 68 份 Markdown 的相对链接及锚点检查通过 |
 | 最终隐私扫描 | 1,329 个当前文件、103 个可达提交通过，无历史豁免 |
 
-本次[通用示例截图](../../../artifacts/screenshots/privacy-generic-sample.png)已保留。E2E 改写的 116 份旧取证文件恢复起始字节，生成副本保留在本地维护目录，避免把本轮 Mock 重跑覆盖到历史真机记录。
+本次[通用示例截图](../../../artifacts/curated/screenshots/privacy-generic-sample.png)已保留。E2E 改写的 116 份旧取证文件恢复起始字节，生成副本保留在本地维护目录，避免把本轮 Mock 重跑覆盖到历史真机记录。
 
 ## 远端与本地切换
 

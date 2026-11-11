@@ -7,7 +7,7 @@ const xcrunPath = process.env.MOBILE_MIRROR_XCRUN_PATH ?? ''
 if (!isAbsolute(capsPath) || !isAbsolute(xcrunPath)) throw new Error('Explicit private capabilities and absolute Xcode xcrun required')
 const caps = JSON.parse(await readFile(capsPath, 'utf8')) as Record<string, unknown>
 if (String(caps.platformName).toLowerCase() !== 'ios' || typeof caps['appium:udid'] !== 'string') throw new Error('Explicit physical iPhone required')
-const root = resolve('artifacts/physical-validation', `ios-health-source-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `ios-health-source-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const report = await probeIosDiagnosticSource({ xcrunPath, deviceId: caps['appium:udid'], privateRoot: root }, AbortSignal.timeout(30000))
 await writeFile(resolve(root, 'report.json'), JSON.stringify(report, null, 2), { mode: 0o600 })

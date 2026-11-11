@@ -45,10 +45,10 @@
 
 ## 本地证据入口
 
-- [动作前后对照](../../../artifacts/screenshots/workbench-action-comparison.png)、[窄屏缺图保留旧证据](../../../artifacts/screenshots/playback-stable-narrow-failure.png)、[Web 用例保存](../../../artifacts/screenshots/web-case-saved.png)。
-- [技术介绍桌面](../../../artifacts/screenshots/technical-introduction-port-desktop.png)、[FAQ 窄屏](../../../artifacts/screenshots/faq-port-narrow.png)。
-- 编译探针：`artifacts/visual-acceptance/compiled-2026-10-12T14-02-51.791Z/probe.json`，运行 `1f7b973b-1f48-483c-938b-995ef3cf0a42`。
-- 八场景自检运行 `bc4d806d-812a-4c9b-8c0c-2ebfbfe2bd20` 的材料位于本机忽略的 `artifacts/visual-acceptance/selfhost-*/`；保持 needs-review，未计为视觉验收通过。
+- [动作前后对照](../../../artifacts/curated/screenshots/workbench-action-comparison.png)、[窄屏缺图保留旧证据](../../../artifacts/curated/screenshots/playback-stable-narrow-failure.png)、[Web 用例保存](../../../artifacts/curated/screenshots/web-case-saved.png)。
+- [技术介绍桌面](../../../artifacts/curated/screenshots/technical-introduction-port-desktop.png)、[FAQ 窄屏](../../../artifacts/curated/screenshots/faq-port-narrow.png)。
+- 编译探针：`artifacts/local/visual-acceptance/compiled-2026-10-12T14-02-51.791Z/probe.json`，运行 `1f7b973b-1f48-483c-938b-995ef3cf0a42`。
+- 八场景自检运行 `bc4d806d-812a-4c9b-8c0c-2ebfbfe2bd20` 的材料位于本机忽略的 `artifacts/local/visual-acceptance/selfhost-*/`；保持 needs-review，未计为视觉验收通过。
 
 ## 独立边界
 

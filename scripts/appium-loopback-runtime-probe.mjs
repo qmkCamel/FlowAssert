@@ -43,7 +43,7 @@ try {
     })
     if (opened) report.cleanup = false
   }
-  const root = resolve('artifacts/physical-validation', `loopback-forwarder-${new Date().toISOString().replaceAll(':', '-')}`)
+  const root = resolve('artifacts/local/physical-validation', `loopback-forwarder-${new Date().toISOString().replaceAll(':', '-')}`)
   await mkdir(root, { recursive: true, mode: 0o700 })
   await writeFile(resolve(root, 'report.json'), JSON.stringify(report, null, 2), { mode: 0o600 })
   console.log(JSON.stringify({ root, ...report }))

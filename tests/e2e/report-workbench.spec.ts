@@ -20,7 +20,7 @@ async function open(page: Page, step = 1) {
   await expect(page.locator('#analysis-evidence .report-image-viewport img')).toBeVisible()
 }
 async function capture(page: Page, name: string, fullPage = false) {
-  const path = `artifacts/screenshots/${name}.png`
+  const path = `artifacts/local/screenshots/${name}.png`
   await page.screenshot({ path, fullPage }); await test.info().attach(name, { path, contentType: 'image/png' })
 }
 test('first-screen playback, semantic steps, bounded filmstrip and keyboard seeking', async ({ page }) => {

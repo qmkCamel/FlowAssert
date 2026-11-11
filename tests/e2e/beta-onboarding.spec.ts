@@ -44,8 +44,8 @@ test('beta task card YAML completes pass, fail, new revision and offline report 
       await expect(page.locator('#analysis-summary')).toContainText(`Recorded verdict: ${expected}`, { timeout: 20000 })
       if (expected === 'Failed') {
         failedId = page.url().split('/runs/')[1]!
-        await page.screenshot({ path: 'artifacts/screenshots/beta-workbench-failure.png', fullPage: true })
-        await info.attach('real workbench Mock failure', { path: 'artifacts/screenshots/beta-workbench-failure.png', contentType: 'image/png' })
+        await page.screenshot({ path: 'artifacts/local/screenshots/beta-workbench-failure.png', fullPage: true })
+        await info.attach('real workbench Mock failure', { path: 'artifacts/local/screenshots/beta-workbench-failure.png', contentType: 'image/png' })
       }
     }
     await page.reload()
@@ -62,8 +62,8 @@ test('beta task card YAML completes pass, fail, new revision and offline report 
     expect(html).toBe(await share.locator('iframe').getAttribute('srcdoc'))
     await share.locator('iframe').scrollIntoViewIfNeeded()
     await expect.poll(async () => (await sharp(await share.locator('iframe').screenshot()).stats()).channels[0]!.stdev).toBeGreaterThan(10)
-    await page.screenshot({ path: 'artifacts/screenshots/beta-workbench-share.png' })
-    await info.attach('real workbench Mock report', { path: 'artifacts/screenshots/beta-workbench-share.png', contentType: 'image/png' })
+    await page.screenshot({ path: 'artifacts/local/screenshots/beta-workbench-share.png' })
+    await info.attach('real workbench Mock report', { path: 'artifacts/local/screenshots/beta-workbench-share.png', contentType: 'image/png' })
     await page.goto(`${viewer.url}/#/runs/${failedId}`)
     await expect(page.locator('#analysis-summary')).toContainText('Recorded verdict: Failed')
     await page.goto(`${viewer.url}/#/runs`)

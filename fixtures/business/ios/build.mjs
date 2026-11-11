@@ -3,7 +3,7 @@ import { copyFileSync, mkdirSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 const root = dirname(fileURLToPath(import.meta.url))
-const out = resolve(root, '../../../artifacts/fixture/ios')
+const out = resolve(root, '../../../artifacts/local/fixture/ios')
 mkdirSync(out, { recursive: true })
 for (const file of ['project.yml', 'MirrorFixture.swift']) copyFileSync(resolve(root, file), resolve(out, file))
 execFileSync('xcodegen', ['generate', '--spec', resolve(out, 'project.yml')], { stdio: 'inherit' })

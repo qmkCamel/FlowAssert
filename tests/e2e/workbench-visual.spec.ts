@@ -27,7 +27,7 @@ test('shows independent visual and UI verdicts from one mock session', async ({ 
     await expect(page.locator('#wb-detail')).toContainText('Visual verdict: Passed')
     await expect(page.locator('.wb-step').filter({ hasText: 'assertVisual' })).toContainText('home r1')
     await page.locator('#workbench-panel').evaluate(panel => { const target = [...panel.querySelectorAll('.wb-step')].find(step => step.textContent?.includes('assertVisual'))!; panel.scrollTop += target.getBoundingClientRect().top - panel.getBoundingClientRect().top - 16 })
-    await page.screenshot({ path: 'artifacts/physical-validation/visual-verdict-desktop.png' })
+    await page.screenshot({ path: 'artifacts/local/physical-validation/visual-verdict-desktop.png' })
     const runId = (await page.locator('.wb-run-id').textContent())!.trim()
     const run = await viewer.workbench.get(runId)
     expect(run.productContract?.verification).toMatchObject({ ui: { status: 'pass' }, visual: { required: true, status: 'pass' } })

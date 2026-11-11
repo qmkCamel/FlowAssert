@@ -48,7 +48,7 @@ node scripts/dsh-clean-profile-probe.mjs --dsh /tmp/mobile-acceptance-dsh.n9vi07
 
 ## 界面证据
 
-保留并查看 [桌面截图](../artifacts/change-acceptance/desktop.png) 与 [窄屏截图](../artifacts/change-acceptance/narrow.png)。截图来自实际 Viewer＋Mock，不是设计稿。检查后修复复选框尺寸与表格挤压，表格在窄栏内水平滚动，不拉宽页面。
+保留并查看 [桌面截图](../artifacts/curated/change-acceptance/desktop.png) 与 [窄屏截图](../artifacts/curated/change-acceptance/narrow.png)。截图来自实际 Viewer＋Mock，不是设计稿。检查后修复复选框尺寸与表格挤压，表格在窄栏内水平滚动，不拉宽页面。
 
 浏览器测试在慢预览期间操作原生运行历史和语言切换；检查固定核查时间、失败保留已发布结果、取消后迟到响应隔离、下载 JSON/Markdown 实际字节和私密字段排除。
 

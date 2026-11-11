@@ -50,7 +50,7 @@
 
 新增用例在点击捕获阶段确定性模拟图片自然尺寸归零，并在录屏中要求收到 PNG、旧结果可见且主题仍可操作。临时将该页面的 capture.js 替换为已提交 `REDACTED_REVISION` 原实现：用例在 5 秒内稳定报 PNG 下载超时；恢复新实现：通过。临时基线替换代码不进入提交。此对照证明 decode-gap 缺陷已修复；原现场没有点击瞬间的尺寸遥测，因此不声称已排除所有其他偶发下载原因。
 
-按 user-action-contract 复核慢保存局部状态、主题切换、截图与录屏独立、失败保留旧 PNG/视频；最终运行截图已检查并保留：[桌面录制中截图](../artifacts/screenshots/evidence-boundaries-capture-desktop.png)、[窄屏导出结果](../artifacts/screenshots/evidence-boundaries-capture-narrow.png)。
+按 user-action-contract 复核慢保存局部状态、主题切换、截图与录屏独立、失败保留旧 PNG/视频；最终运行截图已检查并保留：[桌面录制中截图](../artifacts/curated/screenshots/evidence-boundaries-capture-desktop.png)、[窄屏导出结果](../artifacts/curated/screenshots/evidence-boundaries-capture-narrow.png)。
 
 ## 宿主与真机边界
 

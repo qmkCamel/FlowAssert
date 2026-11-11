@@ -17,7 +17,7 @@
 
 前三项共用 [add-guided-mobile-acceptance tasks](../add-guided-mobile-acceptance/tasks.md)，14/16；第四项 [tasks](tasks.md)，21/24；第五项 [tasks](../add-external-test-assets/tasks.md)，21/24；第六项 [tasks](../add-local-ocr-and-device-matrix/tasks.md)，33/39。原任务勾选与验收门槛不因这次文档同步改变。
 
-最新整合工程验证：91 文件／747 测试、62/62 E2E、构建／打包及严格 OpenSpec 校验通过；同包实际中英文 Vision 合成识别、双 Mock、CLI、20 工具 MCP 与 DSH 0.1.5-rc.2 Native/PTC 通过。见[第六项集成证据](../../../artifacts/local-device-matrix/validation.md)。各阶段原始记录保留：[前三项](../../../docs/guided-mobile-acceptance-validation.md)、[第四项](../../../docs/change-acceptance-validation.md)、[第五项](../../../artifacts/external-assets/validation.md)。
+最新整合工程验证：91 文件／747 测试、62/62 E2E、构建／打包及严格 OpenSpec 校验通过；同包实际中英文 Vision 合成识别、双 Mock、CLI、20 工具 MCP 与 DSH 0.1.5-rc.2 Native/PTC 通过。见[第六项集成证据](../../../artifacts/curated/local-device-matrix/validation.md)。各阶段原始记录保留：[前三项](../../../docs/guided-mobile-acceptance-validation.md)、[第四项](../../../docs/change-acceptance-validation.md)、[第五项](../../../artifacts/curated/external-assets/validation.md)。
 
 ## 剩余 14 项：不是全部等真机
 

@@ -13,8 +13,8 @@
 
 本地证据目录（被 Git 忽略）：
 
-- `artifacts/simulator-validation/ios-2026-10-09T08-00-39-633Z/`
-- `artifacts/simulator-validation/android-2026-10-09T08-03-06-342Z/`
+- `artifacts/local/simulator-validation/ios-2026-10-09T08-00-39-633Z/`
+- `artifacts/local/simulator-validation/android-2026-10-09T08-03-06-342Z/`
 
 各含 `probe.json` 及 `current-screen` / `settings` 的 ready、connecting、viewer、device PNG 和 structure JSON。已查看双端 Viewer 实测截图。最初 iOS 探针错误地在隐藏且尚未更新的连接按钮上判断 ready；修正为等待 report 和检查完成后重跑通过，原失败目录保留，未算作产品连接失败。
 
@@ -26,8 +26,8 @@
 - `pnpm check` 首轮并行执行与模拟器启动重叠，9 项超时/等待失败；`vitest run --maxWorkers=2` 完整复跑后为 1157 通过 / 1 失败。唯一剩余项为未改动的 `public-readiness.test.mjs` 全 Git 历史扫描超过 90 秒。未跳过、放宽或修改该检查，完整 check 门禁仍未通过。
 - `pnpm test:e2e --workers=2`：88 通过、1 跳过、1 超时。超时项为内测引导中等待 `journey-run` 可用；单独原样复跑该用例通过（11.8 秒）。跳过项为已有的 1000 条报告目录性能抽样。新增模拟器交互用例首轮通过。
 - Viewer 自动化覆盖类型切换失效、签名输入清理、Android helper 确认保留、检查期间语言切换、迟到检查不能覆盖新选择、连接期间禁用类型切换。
-- 已保留 `artifacts/screenshots/simulator-ios-ready.png` 和 `simulator-android-ready.png`（假设备 UI 状态，明确不作实测）；其他回归生成的截图收于忽略的 `artifacts/runtime/simulator-regression-screenshots/`，避免覆盖无关既有材料。
-- 其他 OCR、设备矩阵和修复回归产物保存在 `artifacts/runtime/simulator-regression-artifacts/`；门禁原始输出保存在 `artifacts/runtime/simulator-validation-logs/`。
+- 已保留 `artifacts/curated/screenshots/simulator-ios-ready.png` 和 `simulator-android-ready.png`（假设备 UI 状态，明确不作实测）；其他回归生成的截图收于忽略的 `artifacts/local/runtime/simulator-regression-screenshots/`，避免覆盖无关既有材料。
+- 其他 OCR、设备矩阵和修复回归产物保存在 `artifacts/local/runtime/simulator-regression-artifacts/`；门禁原始输出保存在 `artifacts/local/runtime/simulator-validation-logs/`。
 
 ## 限制
 

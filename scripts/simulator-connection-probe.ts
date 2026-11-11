@@ -9,7 +9,7 @@ import { resolveMirrorConfig } from '../src/mcp-config.js'
 const platform = process.env.MOBILE_MIRROR_SIMULATOR_PLATFORM
 const executable = process.env.MOBILE_MIRROR_APPIUM_EXECUTABLE ?? ''
 if ((platform !== 'android' && platform !== 'ios') || !isAbsolute(executable)) throw new Error('Explicit simulator platform (android/ios) and absolute Appium executable required')
-const root = resolve('artifacts/simulator-validation', `${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/simulator-validation', `${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const viewer = new ViewerServer(resolveMirrorConfig({
   viewerPort: 0, defaultProvider: 'appium', appiumRuntimeMode: 'managed', appiumExecutablePath: executable,

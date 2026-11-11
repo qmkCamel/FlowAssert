@@ -31,7 +31,7 @@ test('Viewer shows Agent-originated execution in the shared history', async ({ p
       await page.getByText('Started by Agent').first().scrollIntoViewIfNeeded({ timeout: 1000 })
       await expect(page.getByText('Started by Agent').first()).toBeInViewport({ timeout: 1000 })
     }).toPass({ timeout: 5000 })
-    await page.screenshot({ path: resolve('artifacts/screenshots/mobile-mirror-agent-run-source.png') })
+    await page.screenshot({ path: resolve('artifacts/local/screenshots/mobile-mirror-agent-run-source.png') })
   } finally {
     await runtime.close(); await rm(root, { recursive: true, force: true })
   }

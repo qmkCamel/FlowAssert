@@ -16,7 +16,7 @@
 - 真实原生 worker：在固定等待期间终止线程，先前 PNG/XML 保留，后续点击未发生，最终 inconclusive 并释放租约。
 - 真实宿主 SIGKILL：子进程启动同一 WorkbenchService，在 PNG fsync/发布后、manifest 更新前自终止。新 Store 接管已死亡锁，找到 PNG，以 recovered/inconclusive 记录并校验当前字节，不能复原为通过。
 - 源树故障保留 PNG；截图故障保留 XML；manifest 持续失败时当前界面保留材料，重启可发现两个未登记文件；临时半文件保留原字节、标记 incomplete，symlink 不作为材料读取。
-- Viewer 慢源树采集中主题、历史和画面仍可操作；取消后只有当前步骤，原图、取证错误和分阶段耗时保留。截图见 [部分取证与计时](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-partial-evidence.png)、[正常步骤证据](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-evidence.png)。这些是 Mock runtime 截图。
+- Viewer 慢源树采集中主题、历史和画面仍可操作；取消后只有当前步骤，原图、取证错误和分阶段耗时保留。截图见 [部分取证与计时](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-partial-evidence.png)、[正常步骤证据](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-evidence.png)。这些是 Mock runtime 截图。
 
 ## 验证命令
 
@@ -74,7 +74,7 @@
 
 逐轮外部采样与下一轮启动可能重叠：第一轮结束采样已经看到下一轮 runner/listener，不能把该快照当“第一轮清理后为零”的证据；第二/三轮采样及无下一轮竞争的最终清单均保留。最终独立核验与四轮 runtime 停止结果共同支持本次正常断开清理结论，不扩展为强杀宿主、所有 iOS/签名环境的承诺。
 
-原始材料均在本机忽略目录 `artifacts/physical-validation/`：
+原始材料均在本机忽略目录 `artifacts/local/physical-validation/`：
 
 - `iphone-p0-2026-09-14/benchmark.json`：三轮完整汇总；`acceptance-summary.json`：验收摘要；`initial-failed-*`：首轮失败，不覆盖。
 - `workbench-2026-09-14T09-41-01-415Z/`、`workbench-2026-09-14T09-41-40-471Z/`、`workbench-2026-09-14T09-42-26-262Z/`：三轮 run、原始 PNG/XML、运行中/result/history-restored 截图。
@@ -130,7 +130,7 @@ Android 三轮中位数 45,061 ms，样本 p95/max 54,023 ms，校准预算 `cei
 
 已查看第一轮 running、第三轮 history-restored、反例 result 的真实 Viewer 截图，确认运行中画面、历史原图、计时与失败提示可见。原始截图、XML、日志和设备配置只保留本机忽略目录，不提交公共 Git：
 
-- `artifacts/physical-validation/android-p0-2026-09-14/benchmark.json`、`acceptance-summary.json`：三轮统计、runId、各阶段明细和验收摘要。
+- `artifacts/local/physical-validation/android-p0-2026-09-14/benchmark.json`、`acceptance-summary.json`：三轮统计、runId、各阶段明细和验收摘要。
 - `workbench-2026-09-14T13-04-54-310Z/`、`workbench-2026-09-14T13-06-02-143Z/`、`workbench-2026-09-14T13-06-59-050Z/`：同一 physical-validation 目录下的三轮完整材料。
 - `workbench-2026-09-14T13-08-59-930Z/`：反例原始材料、结果与恢复截图。
 - `android-p0-2026-09-14/device-after-{benchmark,negative}.txt`、对应 `forward-*`、`ports-*`、`host-*`：独立资源核验清单。

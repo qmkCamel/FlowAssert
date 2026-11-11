@@ -40,7 +40,7 @@
 
 ## 本机证据
 
-原始材料仅本机保留在 `artifacts/physical-validation/iphone-acceptance-2026-09-15/`，不提交手机页面、签名数据、设备/session 标识：
+原始材料仅本机保留在 `artifacts/local/physical-validation/iphone-acceptance-2026-09-15/`，不提交手机页面、签名数据、设备/session 标识：
 
 - `guided-report.json`、`first-settings-source.xml`、`saved-quick-source.xml`。
 - `first-settings.png` / `.webm`、`saved-quick.png` / `.webm`，两张对应 Viewer runtime 截图。

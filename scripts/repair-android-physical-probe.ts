@@ -18,7 +18,7 @@ const systemPort = Number(process.env.MOBILE_MIRROR_ANDROID_SYSTEM_PORT ?? '8207
 if (!deviceId || !isAbsolute(executable) || ![appiumPort, systemPort].every(p => Number.isInteger(p) && p > 1024 && p <= 65535) || appiumPort === systemPort)
   throw new Error('Explicit Android identity, absolute executable and distinct valid ports required')
 const appId = 'dev.mobilemirror.fixture'
-const root = resolve('artifacts/physical-validation', `repair-android-${new Date().toISOString().replaceAll(':', '-')}`)
+const root = resolve('artifacts/local/physical-validation', `repair-android-${new Date().toISOString().replaceAll(':', '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const config = resolveMirrorConfig({ appiumRuntimeMode: 'managed', appiumUrl: `http://127.0.0.1:${appiumPort}`,
   appiumExecutablePath: executable, appiumSessionStartupTimeoutMs: 120000, startupTimeoutMs: 30000,

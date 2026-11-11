@@ -22,4 +22,4 @@
 - 实测发现 Inspector 输出 schema 同时声明 type/oneOf 被 rc.1 拒绝；只在 DSH 投影层移除联合根冗余 type，分支及 MCP schema 保留，真实 defineTool 十工具注册加入单测。
 - 工程门禁：303 项单测、41 项浏览器 E2E、类型/契约检查、build、pack:check 通过；OpenSpec 1.9.0 全库 strict 24/24。浏览器截图已保留并人工检查。未发布新版本。
 
-验收候选包 SHA-256：`f36d885c95a9b5123d51311e029db59af07ba7764e9cf7bc10f3afe8529c58df`。本机日志与浏览器截图保留于 `artifacts/physical-validation/packaged-runtime-2026-09-16/`，未公开原始手机画面。候选包未经发布，文档收尾不改变已测运行代码。
+验收候选包 SHA-256：`f36d885c95a9b5123d51311e029db59af07ba7764e9cf7bc10f3afe8529c58df`。本机日志与浏览器截图保留于 `artifacts/local/physical-validation/packaged-runtime-2026-09-16/`，未公开原始手机画面。候选包未经发布，文档收尾不改变已测运行代码。

@@ -44,7 +44,7 @@ dd14e8a34200486e249d4a5de76c5e55cf794fc42a96ac6ab5f32e871edc893f
 实际执行：
 
 ```sh
-node scripts/release-candidate-probe.mjs --tarball /private/tmp/mobile-matrix-engineering.aAj6y3/mobile-mirror-verified.tgz --checksum /private/tmp/mobile-matrix-engineering.aAj6y3/mobile-mirror-verified.sha256 --ocr-output <WORKTREE_ABSOLUTE>/artifacts/local-device-matrix/ocr-packaged
+node scripts/release-candidate-probe.mjs --tarball /private/tmp/mobile-matrix-engineering.aAj6y3/mobile-mirror-verified.tgz --checksum /private/tmp/mobile-matrix-engineering.aAj6y3/mobile-mirror-verified.sha256 --ocr-output <WORKTREE_ABSOLUTE>/artifacts/curated/local-device-matrix/ocr-packaged
 node scripts/dsh-clean-profile-probe.mjs --dsh /private/tmp/mobile-acceptance-dsh.n9vi07/node_modules/.bin/dsh --tarball /private/tmp/mobile-matrix-engineering.aAj6y3/mobile-mirror-verified.tgz
 ```
 
@@ -57,7 +57,7 @@ node scripts/dsh-clean-profile-probe.mjs --dsh /private/tmp/mobile-acceptance-ds
 - DSH 干净 profile 禁用安装脚本、使用 `patchReload: startup`，Native／PTC 均完成实际 Agent 流程、双 Mock 矩阵摘要查询、外部结果与验收查询；图像能力／纯文字模型边界和关闭链通过。未修改 Harness agent loop，也不代表真实手机业务通过。
 - OCR 读取能力／登记配置也补了按钮局部进度，慢请求期间历史／语言可操作；配置编辑后迟到响应不覆盖新输入。最终 62 项 E2E 包含这些断言。
 
-分段提交：`REDACTED_REVISION`（OCR）、`REDACTED_REVISION`（矩阵），本报告及回归修复在后续集成提交。OCR 提交还在独立 detached checkout 用 Node 24.19.0 直接运行 TypeScript `--noEmit` 和 8 文件／36 测试，均通过；临时目录的 mise trust 提示没有通过修改用户信任配置绕过。原 `artifacts/screenshots/` 中既有及本轮重生成文件不纳入本次提交，仅纳入本变更专用证据目录。
+分段提交：`REDACTED_REVISION`（OCR）、`REDACTED_REVISION`（矩阵），本报告及回归修复在后续集成提交。OCR 提交还在独立 detached checkout 用 Node 24.19.0 直接运行 TypeScript `--noEmit` 和 8 文件／36 测试，均通过；临时目录的 mise trust 提示没有通过修改用户信任配置绕过。原 `artifacts/curated/screenshots/` 中既有及本轮重生成文件不纳入本次提交，仅纳入本变更专用证据目录。
 
 此前中间检查曾通过 743／744 测试，文档链接检查发现本报告尚未创建；已补齐并在最终 747 项检查中通过。首次完整 E2E 的截图竞态失败见上文，未将其当作通过。
 

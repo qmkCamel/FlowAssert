@@ -55,4 +55,4 @@ flowassert test external-results revoke --url http://127.0.0.1:3210 --id ASSET_U
 
 ## 工程验收记录
 
-见 `artifacts/external-assets/validation.md`。浏览器截图位于同目录 desktop.png、narrow.png。真实框架样本、实际使用方迁移验收仍是 OpenSpec 未完成项；不因此阻止独立的软件工程迭代，也不据此归档整个变更。
+见 `artifacts/curated/external-assets/validation.md`。浏览器截图位于同目录 desktop.png、narrow.png。真实框架样本、实际使用方迁移验收仍是 OpenSpec 未完成项；不因此阻止独立的软件工程迭代，也不据此归档整个变更。

@@ -17,3 +17,10 @@
 ## Required gates
 
 Run `pnpm check`, `pnpm test:e2e`, `pnpm build`, and `pnpm pack:check`. For Viewer changes, retain and inspect a runtime screenshot.
+
+## Artifact storage
+
+- Write all generated screenshots, recordings, logs, probe output and raw device evidence to `artifacts/local/` (Git-ignored).
+- Only intentionally selected, sanitized and reviewed evidence belongs in `artifacts/curated/`. Never make tests or probes overwrite this directory automatically.
+- Promote the minimum useful files manually; update their document references and `public-media-review.json` for retained media. Moving a file does not constitute review or new acceptance.
+- Keep `artifacts/README.md` as the storage policy. Do not add other artifact roots or force-add local output. `pnpm check` enforces directory admission; `pnpm public:check` checks public media review and privacy.

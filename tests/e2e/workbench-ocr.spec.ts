@@ -48,7 +48,7 @@ test('OCR preview isolates screenshot identity, keeps history interactive and pr
     const download = page.waitForEvent('download'); await page.locator('#ocr-save').click(); expect((await download).suggestedFilename()).toBe('ocr-profile-draft.json')
     await page.setViewportSize({ width: 1440, height: 1100 }); await page.locator('#ocr-preview').scrollIntoViewIfNeeded(); await page.screenshot({ path: info.outputPath('ocr-desktop.png') })
     await page.setViewportSize({ width: 390, height: 844 }); await page.locator('#ocr-preview').scrollIntoViewIfNeeded(); await page.screenshot({ path: info.outputPath('ocr-narrow.png') })
-    const artifacts = join(process.cwd(), 'artifacts/local-ocr'); await mkdir(artifacts, { recursive: true })
+    const artifacts = join(process.cwd(), 'artifacts/local/local-ocr'); await mkdir(artifacts, { recursive: true })
     for (const name of ['ocr-desktop.png', 'ocr-narrow.png']) await copyFile(info.outputPath(name), join(artifacts, name))
   } finally { await runtime.close(); await rm(root, { recursive: true, force: true }) }
 })

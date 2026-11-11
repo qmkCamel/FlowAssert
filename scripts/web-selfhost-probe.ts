@@ -5,7 +5,7 @@ import { chromium } from '@playwright/test'
 import { ViewerServer } from '../src/viewer-server.js'
 import { resolveMirrorConfig } from '../src/mcp-config.js'
 
-const root=resolve('artifacts/visual-acceptance',`selfhost-${new Date().toISOString().replaceAll(':','-')}`)
+const root=resolve('artifacts/local/visual-acceptance',`selfhost-${new Date().toISOString().replaceAll(':','-')}`)
 await mkdir(root,{recursive:true});console.log(root)
 const viewer=new ViewerServer(resolveMirrorConfig({viewerPort:0,mockStartupDelayMs:0}),{workbenchRoot:join(root,'a-runs'),webTests:true})
 const browser=await chromium.launch({channel:'chrome'}),page=await browser.newPage({viewport:{width:1280,height:800}})

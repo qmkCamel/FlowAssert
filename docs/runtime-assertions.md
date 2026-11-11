@@ -86,7 +86,7 @@ pnpm exec tsx scripts/mobile-mirror-cli.mjs health-probe --platform ios
 
 ```sh
 ANDROID_HOME=/absolute/path/to/sdk ANDROID_BUILD_TOOLS=34.0.0 ANDROID_PLATFORM=android-34 node fixtures/runtime/android/build.mjs
-adb -s SELECTED_DEVICE install artifacts/fixture/runtime-android/fixture.apk
+adb -s SELECTED_DEVICE install artifacts/local/fixture/runtime-android/fixture.apk
 ```
 
 确保 JDK 17 的 javac/keytool 在 PATH；在手机端确认系统安装提示并保持解锁，不绕过 OEM 安装授权。APK 使用独立本机调试签名，构建产物和密钥不进入 Git/发布包。用已选设备和本机 Appium 执行：
@@ -95,7 +95,7 @@ adb -s SELECTED_DEVICE install artifacts/fixture/runtime-android/fixture.apk
 MOBILE_MIRROR_DEVICE_ID=SELECTED_DEVICE MOBILE_MIRROR_ADB_PATH=/absolute/path/to/adb MOBILE_MIRROR_APPIUM_EXECUTABLE=/absolute/path/to/appium pnpm exec tsx scripts/workbench-runtime-android-probe.ts
 ```
 
-脚本只针对 dev.mobilemirror.runtimefixture，覆盖延迟/闪烁、固定值重启保留与丢失、时限正反例、取消；同时故意暂停自己的探针宿主 8 秒以验证采样缺口，自有辅助进程会恢复它。不会暂停/关闭其他宿主或外部 Appium/ADB 服务，不清除现有业务 App 数据。USB 断线场景需另加 MOBILE_MIRROR_MANUAL_DISCONNECT=1 并按提示人工拔线；默认明确记录 not-performed，不替你清空全局 ADB 连接。材料仅存 artifacts/physical-validation/，是默认忽略的本机私有目录。脚本准备完毕不代表真机已验收，当前健康来源仍不开放 crash/ANR 通过判定。
+脚本只针对 dev.mobilemirror.runtimefixture，覆盖延迟/闪烁、固定值重启保留与丢失、时限正反例、取消；同时故意暂停自己的探针宿主 8 秒以验证采样缺口，自有辅助进程会恢复它。不会暂停/关闭其他宿主或外部 Appium/ADB 服务，不清除现有业务 App 数据。USB 断线场景需另加 MOBILE_MIRROR_MANUAL_DISCONNECT=1 并按提示人工拔线；默认明确记录 not-performed，不替你清空全局 ADB 连接。材料仅存 artifacts/local/physical-validation/，是默认忽略的本机私有目录。脚本准备完毕不代表真机已验收，当前健康来源仍不开放 crash/ANR 通过判定。
 
 只重试人工 USB 场景时，再设置 MOBILE_MIRROR_RUNTIME_PROBE_MODE=disconnect（必须同时设置 MOBILE_MIRROR_MANUAL_DISCONNECT=1）。等脚本提示进入采样后拔线，结果保留后再插回；没有实际断线则该验收失败，不能记为通过。Fixture 1.1 将合成延迟/闪烁窗口延长，以确保真机自动化开销下仍能采到变化前后；探针要求实际保留负→正和正→反例样本，不靠单张最终截图确认时序。
 
@@ -110,7 +110,7 @@ FIXTURE_SIGN_IDENTITY=EXISTING_CERTIFICATE_SHA1 \
 MOBILE_MIRROR_DEVICE_ID=SELECTED_HARDWARE_UDID node fixtures/runtime/ios/build.mjs
 ```
 
-构建器检查 profile 时效、设备、Bundle ID 与签名证书，支持一个 profile 中多个证书。不自动申请/更新 profile 或注册设备；签名制品、entitlements、profile 与构建身份仅存被忽略的 artifacts/fixture/。用 `xcrun devicectl device install app --device SELECTED_COREDEVICE_ID /absolute/path/to/RuntimeFixture.app` 安装新制品，并核对安装回执与版本。CoreDevice Identifier 与 Appium hardware UDID 不可混用。
+构建器检查 profile 时效、设备、Bundle ID 与签名证书，支持一个 profile 中多个证书。不自动申请/更新 profile 或注册设备；签名制品、entitlements、profile 与构建身份仅存被忽略的 artifacts/local/fixture/。用 `xcrun devicectl device install app --device SELECTED_COREDEVICE_ID /absolute/path/to/RuntimeFixture.app` 安装新制品，并核对安装回执与版本。CoreDevice Identifier 与 Appium hardware UDID 不可混用。
 
 沿用跨平台探针的历史脚本名称，显式选择 iOS：
 

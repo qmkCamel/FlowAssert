@@ -24,7 +24,7 @@
 | 历史 USB 中断证据复验 | 10 月 6 日两端实际拔线 run：Android 17 份 / iOS 41 份登记材料 hash 复验，temporal/measurement 原生语义重放均通过，原 manifest 不变 | 仍是历史合成 RuntimeFixture 中断记录，不升级为最新候选业务/健康信号放行或完整可靠性矩阵 |
 | 历史宿主 SIGKILL 复核 | 双端各 1 份 run、2 份登记材料复核；0 dispatch，inconclusive 原件保持；既有报告记录 stale owner 阻止重连及显式诊断回收 | 不是新执行的宿主强杀，也不证明任意外部资源可自动回收 |
 
-私有证据保留在 Git 忽略的 `artifacts/physical-validation/`，包括首次失败报告，不上传设备标识、签名配置、原始诊断 JSON、截图/XML 或录像。公开文档只记录范围、数量、稳定状态及限制，不把本机未入库原件作为公共可点击附件。
+私有证据保留在 Git 忽略的 `artifacts/local/physical-validation/`，包括首次失败报告，不上传设备标识、签名配置、原始诊断 JSON、截图/XML 或录像。公开文档只记录范围、数量、稳定状态及限制，不把本机未入库原件作为公共可点击附件。
 
 只读复验入口：`pnpm exec tsx scripts/physical-evidence-audit.ts <absolute-private-runs-directory> [...]`。它不初始化/修复原 Store，不调用设备/provider/模型/业务扩展，不升级 verdict；检查登记文件大小/hash、runtime 冻结计划和 temporal/measurement 证据，并核对前后 manifest 摘要。live iOS 入口：`pnpm test:health:ios:physical`，显式提供私有 capabilities 路径和 Xcode xcrun 路径；输出只有有界事实。未认可来源仍在动作前拒绝 required health。
 

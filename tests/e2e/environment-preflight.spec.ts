@@ -28,7 +28,7 @@ test('scoped preflight stays interactive, preserves results and rejects stale re
     await page.locator('#theme-button').click()
     await expect(page.locator('body')).toHaveClass(/light-stage/)
     await expect(page.locator('#preflight-progress')).toBeVisible()
-    await page.screenshot({ path: 'artifacts/screenshots/preflight-progress-desktop.png', fullPage: true })
+    await page.screenshot({ path: 'artifacts/local/screenshots/preflight-progress-desktop.png', fullPage: true })
     await expect(page.locator('#preflight-progress')).toBeHidden()
     const successful = await page.locator('#preflight-result').textContent() ?? ''
     expect(successful).not.toBe(previous)
@@ -52,7 +52,7 @@ test('scoped preflight stays interactive, preserves results and rejects stale re
     await page.locator('#preflight-check').click()
     await expect(page.locator('#preflight-result')).toContainText('viewer / mock / none: ready')
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.screenshot({ path: 'artifacts/screenshots/preflight-completed-narrow.png', fullPage: true })
+    await page.screenshot({ path: 'artifacts/local/screenshots/preflight-completed-narrow.png', fullPage: true })
   } finally { await viewer.close() }
 })
 

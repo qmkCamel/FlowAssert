@@ -4,7 +4,7 @@
 
 用户确认无需独立内测包。任务卡、README、宣传稿/demo、反馈模板与 OpenSpec 已统一为 dev 分支源码启动，依赖沿用仓库 lockfile，反馈记录提交 SHA 与本地修改情况。撤销本轮 package.files 四项增量；旧包保留为本机历史产物，不再作为推荐入口。下文包 hash 和安装结果只描述调整前的实际验证，不代表当前分发方案。验证完成时改动尚未提交；后续提交与推送状态以 Git 记录为准。
 
-本次调整后验证：构建、pack:check、peer 检查、Mock Doctor、OpenSpec 单 change strict 和 diff 检查通过；宣传页/实际工作台三项 E2E 全部通过（43.0 秒），并重新检查宣传页截图中的 dev 入口。定向 `pnpm check` 的 TypeScript/契约通过，10 项测试中 9 通过，1 失败仍为下文既有历史路径 finding。日志保留在本机忽略目录 `artifacts/runtime/beta-branch/`。
+本次调整后验证：构建、pack:check、peer 检查、Mock Doctor、OpenSpec 单 change strict 和 diff 检查通过；宣传页/实际工作台三项 E2E 全部通过（43.0 秒），并重新检查宣传页截图中的 dev 入口。定向 `pnpm check` 的 TypeScript/契约通过，10 项测试中 9 通过，1 失败仍为下文既有历史路径 finding。日志保留在本机忽略目录 `artifacts/local/runtime/beta-branch/`。
 
 通过 GitHub API 确认仓库为私有、dev 分支存在且指向下列基线。匿名 HTTPS Git 探针因缺少认证失败，不算新用户克隆验收；任务卡已明确仓库授权和 GitHub 认证前提，并用 `mise exec --` 固定运行 Node。尚未验证非作者授权、全新源码克隆安装或真人体验。
 
@@ -21,7 +21,7 @@
 
 ## 固定候选（调整前历史）
 
-本机忽略目录：`artifacts/runtime/beta-kit-2026-10-08/`。目录含安装清单、冻结依赖锁、tarball/checksum、candidate.json、SHA256SUMS、任务文档、离线 demo 和录屏；不含 node_modules、私人真机素材或 Git 历史。最终 zip 为相邻的 `mobile-mirror-beta-2026-10-08.zip`，只供本机审阅/小范围内测准备，不作为公开放行。
+本机忽略目录：`artifacts/local/runtime/beta-kit-2026-10-08/`。目录含安装清单、冻结依赖锁、tarball/checksum、candidate.json、SHA256SUMS、任务文档、离线 demo 和录屏；不含 node_modules、私人真机素材或 Git 历史。最终 zip 为相邻的 `mobile-mirror-beta-2026-10-08.zip`，只供本机审阅/小范围内测准备，不作为公开放行。
 
 - 包：`flowassert-0.1.0-alpha.2.tgz`，2,060,922 bytes。
 - 包 SHA256：`6713055351bdd7878c9964befa99ee639ab61768bb8eac362f733baf22eb0dd2`。

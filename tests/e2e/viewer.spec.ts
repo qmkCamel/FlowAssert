@@ -73,7 +73,7 @@ test('simulator selection hides signing, invalidates previous checks and remains
   await expect(page.locator('#ios-team-id')).toHaveValue('')
   await page.getByTestId('assistant-check-button').click()
   await expect(page.getByTestId('assistant-device')).toContainText('iPhone Simulator')
-  await page.screenshot({ path: 'artifacts/screenshots/simulator-ios-ready.png', fullPage: true })
+  await page.screenshot({ path: 'artifacts/local/screenshots/simulator-ios-ready.png', fullPage: true })
   await page.getByTestId('assistant-connect-button').click()
   await expect(page.getByTestId('assistant-device-kind')).toBeDisabled()
   await expect.poll(() => harness.connectPayload()).toMatchObject({ targetPreset: 'ios-current-screen' })
@@ -93,7 +93,7 @@ test('simulator selection hides signing, invalidates previous checks and remains
   await page.getByTestId('assistant-check-button').click()
   await expect(page.getByTestId('assistant-device')).toContainText('Android Simulator')
   await expect(page.locator('#android-assistant-fields .manual-boundary')).toBeHidden()
-  await page.screenshot({ path: 'artifacts/screenshots/simulator-android-ready.png', fullPage: true })
+  await page.screenshot({ path: 'artifacts/local/screenshots/simulator-android-ready.png', fullPage: true })
 })
 
 test('shows progress, remains interactive, completes, acts, and stops', async ({ page }) => {
@@ -104,7 +104,7 @@ test('shows progress, remains interactive, completes, acts, and stops', async ({
   await page.getByTestId('advanced-appium').locator('summary').click()
   await expect(page.getByTestId('android-policy-warning')).toBeVisible()
   await expect(page.getByTestId('provisioning-warning')).toBeHidden()
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-android-compatibility-warning.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-android-compatibility-warning.png')
   await page.locator('#capabilities').fill(JSON.stringify({
     platformName: 'Android',
     'appium:automationName': 'UiAutomator2',
@@ -118,7 +118,7 @@ test('shows progress, remains interactive, completes, acts, and stops', async ({
   }, null, 2))
   await expect(page.getByTestId('android-policy-warning')).toBeHidden()
   await expect(page.getByTestId('provisioning-warning')).toBeVisible()
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-ios-provisioning-warning.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-ios-provisioning-warning.png')
   await page.locator('#session-id').fill('existing-session')
   await expect(page.getByTestId('android-policy-warning')).toBeHidden()
   await expect(page.getByTestId('provisioning-warning')).toBeHidden()
@@ -141,8 +141,8 @@ test('shows progress, remains interactive, completes, acts, and stops', async ({
   await expect(page.getByTestId('agent-observation')).toContainText('Agent observation ready')
   await expect(page.locator('#meta-agent-policy')).toHaveText('mock-only')
   await expect(page.getByTestId('stop-button')).toBeEnabled()
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-streaming.png', true)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-mcp-runtime-final.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-streaming.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-mcp-runtime-final.png', true)
 
   await page.getByTestId('stop-button').click()
   await expect(page.getByTestId('connection-pill')).toContainText('Idle')
@@ -161,7 +161,7 @@ test('keeps the retained frame and controls interactive while managed Appium is 
   await expect(page.getByTestId('stop-button')).toBeEnabled()
   await page.getByTestId('theme-button').click()
   await expect(page.locator('body')).toHaveClass(/light-stage/)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-managed-appium-starting.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-managed-appium-starting.png', true)
 
   await page.getByTestId('stop-button').click()
   await expect(page.getByTestId('connection-pill')).toContainText('Idle')
@@ -195,14 +195,14 @@ test('guides Android with slow checks, platform isolation, last-good retention, 
   await expect(page.getByTestId('assistant-report')).toContainText('PNG polling')
   expect(await page.locator('body').innerText()).not.toContain(harness.privateCanary)
   expect(await page.locator('body').innerText()).not.toContain(harness.assistantToken)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-guided-android-action-required.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-guided-android-action-required.png')
 
   await expect(page.getByTestId('assistant-target')).toHaveValue('current-screen')
   await page.getByTestId('assistant-target').selectOption('settings')
   await page.getByTestId('language-select').selectOption('zh-CN')
   await expect(page.getByTestId('assistant-connect-button')).toHaveText('连接设备')
   await expect(page.getByTestId('assistant-target')).toHaveValue('settings')
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-connect-device-zh-cn.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-connect-device-zh-cn.png')
   await page.getByTestId('language-select').selectOption('en')
   await page.getByTestId('assistant-check-button').click()
   await expect(page.getByTestId('assistant-target')).toBeDisabled()
@@ -232,7 +232,7 @@ test('guides iPhone signing without exposing private identifiers and keeps advan
   await expect(page.getByTestId('advanced-appium')).not.toHaveAttribute('open', '')
   await expect(page.getByTestId('policy-summary')).toContainText('Apple device registration')
   expect(await page.locator('body').innerText()).not.toContain(harness.privateCanary)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-guided-ios-signing-required.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-guided-ios-signing-required.png')
 
   await page.locator('#ios-team-id').fill('ABCDE12345')
   await page.locator('#ios-wda-bundle-id').fill('com.example.WebDriverAgentRunner')
@@ -279,7 +279,7 @@ test('separates iPhone signing readiness from WDA startup and supports safe retr
   await expect(page.locator('#meta-frame')).not.toHaveText('—')
   await expect(page.getByTestId('assistant-report')).toBeVisible()
   expect(await page.locator('body').innerText()).not.toMatch(/PRIVATE_ACCOUNT|TEAM-SECRET|\/Users\/private/)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-ios-wda-account-recovery.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-ios-wda-account-recovery.png', true)
   await page.getByTestId('language-select').selectOption('zh-CN')
   await expect(page.locator('#error-message')).toContainText('Xcode')
   await expect(page.getByTestId('assistant-report')).toContainText('只读检查尚未启动 WDA')
@@ -298,10 +298,10 @@ test('quick-connects the only saved Android setup and makes persistence explicit
   await expect(page.getByTestId('provider-select')).toHaveValue('appium')
   await expect(page.getByTestId('assistant-saved-setup')).toBeVisible()
   await expect(page.getByTestId('assistant-saved-setup')).toContainText('UiAutomator2 may install/update helper APKs')
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-saved-setup-en.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-saved-setup-en.png')
   await page.getByTestId('language-select').selectOption('zh-CN')
   await expect(page.getByTestId('assistant-saved-setup')).toContainText('点击即确认 UiAutomator2 可能安装或更新辅助 APK')
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-saved-setup-zh-cn.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-saved-setup-zh-cn.png')
   await page.getByTestId('language-select').selectOption('en')
   // Keep each phase pending until its UI contract is observed, including on
   // slower CI runners that can miss a fixed 350 ms connection window.
@@ -398,7 +398,7 @@ test('quick-connects saved iPhone to current-screen and never continues an Andro
   await expect(page.getByTestId('assistant-connect-button')).toBeEnabled()
   expect(android.connectPayload()).toBeNull()
   await expect(page.getByTestId('connection-pill')).toContainText('Idle')
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-connect-device-en.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-connect-device-en.png')
   await page.locator('#assistant-cancel-button').click()
   await page.getByTestId('assistant-quick-connect-button').click()
   await expect(page.getByText('Checking Android…')).toBeVisible()
@@ -513,7 +513,7 @@ test('shows slow semantic control progress without exposing text or app targets'
     await page.getByTestId('theme-button').click()
     await expect(page.locator('body')).toHaveClass(/light-stage/)
     expect(await page.locator('body').innerText()).not.toContain(marker)
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-semantic-control-progress.png', true)
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-semantic-control-progress.png', true)
     await input
     await expect(page.getByTestId('agent-control')).toContainText('Agent control complete')
 
@@ -522,7 +522,7 @@ test('shows slow semantic control progress without exposing text or app targets'
     expect(await page.locator('body').innerText()).not.toMatch(/com\.example|nodeId|private-element/)
     await manage
     await expect(page.getByTestId('agent-control')).toContainText('Agent control complete')
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-semantic-control-final.png', true)
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-semantic-control-final.png', true)
   } finally {
     await service.dispose()
   }
@@ -537,7 +537,7 @@ test('backs off failing PNG polling while actions stay responsive and trigger an
   ).__mobileMirrorPollingMetrics.snapshot().degraded), { timeout: 6_000 }).toBe(true)
   await expect(page.locator('#meta-media')).toContainText('degraded (10s retry)')
   expect(fake.maxConcurrentFrames()).toBe(1)
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-polling-degraded.png')
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-polling-degraded.png')
 
   await page.getByRole('button', { name: 'Test tap' }).click()
   await expect.poll(fake.actions).toBe(1)
@@ -665,7 +665,7 @@ test('renders Android media after a slow first frame and falls back without bloc
   expect(fake.frameRequests()).toBe(0)
   await page.getByTestId('zoom-fit-button').click()
   await expect(page.getByTestId('zoom-value')).toHaveText('Fit')
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-android-media-final.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-android-media-final.png', true)
 
   await page.locator('#inspect-button').click()
   await expect(page.locator('#inspection-status')).toHaveText('Frozen inspection')
@@ -712,7 +712,7 @@ test('renders iOS MJPEG, keeps the slow-start controls interactive, and restores
   expect(mjpegAfter!.height).toBeGreaterThan(mjpegBefore!.height)
   expect(fake.frameRequests()).toBe(0)
   await page.getByTestId('zoom-fit-button').click()
-  await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-ios-media-final.png', true)
+  await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-ios-media-final.png', true)
 
   await page.locator('#inspect-button').click()
   await expect(page.locator('#inspection-status')).toHaveText('Frozen inspection')
@@ -816,9 +816,9 @@ test.describe('Viewer preview zoom', () => {
     const frameBox = await page.locator('#device-frame').boundingBox()
     const frameShellBox = await page.locator('.phone-frame').boundingBox()
     expect(frameBox).toEqual(frameShellBox)
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-preview-zoom-200.png', true)
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-preview-zoom-200.png', true)
     await page.getByTestId('zoom-fit-button').click()
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-preview-zoom-fit.png', true)
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-preview-zoom-fit.png', true)
     await page.getByTestId('stop-button').click()
   })
 
@@ -966,10 +966,10 @@ test.describe('Viewer localization', () => {
     await page.getByTestId('platform-ios').click()
     await page.getByTestId('assistant-check-button').click()
     await expect(page.getByTestId('assistant-report')).toContainText('请补齐本地 WDA 签名字段后重试')
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-zh-cn.png')
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-zh-cn.png')
     await page.setViewportSize({ width: 390, height: 844 })
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-    await captureStableScreenshot(page, 'artifacts/screenshots/mobile-mirror-zh-cn-narrow.png')
+    await captureStableScreenshot(page, 'artifacts/local/screenshots/mobile-mirror-zh-cn-narrow.png')
     await page.setViewportSize({ width: 1280, height: 720 })
 
     await page.locator('#ios-team-id').fill('ABCDE12345')

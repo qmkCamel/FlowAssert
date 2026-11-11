@@ -12,7 +12,7 @@ it('requires protected manual opt-in and preserves visual evidence without appro
   expect(ci.permissions).toEqual({ contents: 'read' })
   expect(ci.concurrency['cancel-in-progress']).toBe(false)
   const upload = job.steps.find((step: { uses?: string }) => step.uses?.startsWith('actions/upload-artifact@'))
-  expect(upload).toMatchObject({ if: 'always()', with: { 'retention-days': 14, path: 'artifacts/visual-acceptance/' } })
+  expect(upload).toMatchObject({ if: 'always()', with: { 'retention-days': 14, path: 'artifacts/local/visual-acceptance/' } })
   const commands = job.steps.map((step: { run?: string }) => step.run ?? '').join('\n')
   expect(commands).toContain('This job does not assert acceptance')
   expect(commands).not.toMatch(/approve|install.*global|--update/)

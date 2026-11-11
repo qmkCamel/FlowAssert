@@ -67,6 +67,12 @@ Normal contributors are not required to own a physical device. Use deterministic
 
 A passing Doctor is not physical-device acceptance.
 
+### Artifact storage
+
+All tests, probes and manual captures write to `artifacts/local/`, which Git ignores. Keep raw screenshots, recordings, logs and host/device diagnostics there. Retaining and inspecting a Viewer screenshot does not require committing it.
+
+Use `artifacts/curated/` only for the minimum evidence intentionally selected for review: sanitized Mock screenshots, documentation illustrations and concise validation summaries. Copy selected files manually after inspection, update document links and register retained media in `public-media-review.json`. Tests must never overwrite curated evidence. See the [artifact policy](artifacts/README.md) for details.
+
 ## Privacy and safe diagnostics
 
 Before opening an issue or pull request:

@@ -18,7 +18,7 @@
 - 实施验收时的候选尚未 commit/push。主目录原有截图和其他 change 未被暂存、覆盖或清理；自身工作区回归产生的既有黄金截图已恢复，新的 report-* 证据保留。
 - 交付授权（2026-10-07，Asia/Shanghai）：用户要求提交到 dev 并推送。提交前 `git fetch origin dev` 已恢复成功，远端基线仍为上述 `REDACTED_REVISION`，与已验源码基线无差异；采用正常快进推送，不改写历史。主目录 dev 停在 `REDACTED_REVISION` 且有原有改动，本次保留该目录状态；交付提交与远端 SHA 以 Git 核对结果为准。
 - 本次 Git 提交范围为功能代码、测试、开发验证脚本、OpenSpec 与文档。以下生成的 artifacts/reports、report-* 截图及私有真机材料只保留在本机，不加入提交；性能数值、包身份与验证范围在本文提供可评审摘要。
-- 候选源码 fingerprint：`6433c02cc41d74aa12d3ccaad715661110eeb9e666b049d1bcee8b0fe589d61c`。算法与 414 个输入文件定义在 `artifacts/reports/report-candidate.json`；它不是 Git commit SHA。包含开发验证脚本，部分脚本不随包发布。
+- 候选源码 fingerprint：`6433c02cc41d74aa12d3ccaad715661110eeb9e666b049d1bcee8b0fe589d61c`。算法与 414 个输入文件定义在 `artifacts/local/reports/report-candidate.json`；它不是 Git commit SHA。包含开发验证脚本，部分脚本不随包发布。
 - 唯一最终 tarball：`flowassert-0.1.0-alpha.2.tgz`，1780848 bytes，SHA256 `f6edf4d25d8465f4bed81e7f0d19b593347e43b420b50ca63aeecb67b1662f54`。位于本机临时候选目录 `mobile-report-candidate-final-20261006`。下列包探针与 DSH 使用同一字节的包，安装脚本关闭、离线干净依赖目录，不修改个人 profile。
 - Node 24.19.0 / pnpm 11.7.0；开发预览 Harness 精确验证版本 0.1.5-rc.2，不能外推为 rc.8 或其他版本已验。
 
@@ -60,7 +60,7 @@ HTML 无脚本/网络/表单/外链，完全冻结 ID、时间和字节；Viewer
 
 Chromium 151.0.7922.34 为默认软件回归；真实安装 Chrome 154.0.8037.98 使用独立 headless profile；Firefox 153.0 是下载的 Playwright 管理构建。后两者断网打开相同 reviewed HTML，HTTP请求0，Tab/Enter/锚点、390px无溢出和打印媒体通过。Safari 26.3.1 已安装，但 native 接口提示 Mac 锁定/自动解锁失败；已请求用户解锁，尚未收到回复。没有用 WebKit 模拟冒充实际 Safari。
 
-新运行截图已逐张检查：`report-catalog-desktop/narrow`、`report-analysis-desktop/narrow/200-percent`、`report-share-preview`、`report-offline-print`、`report-trends-desktop/narrow`，以及 `report-offline-chrome/firefox-narrow/print`。最终包的 Viewer/运行门禁截图另存为 `report-packaged-viewer.png`、`report-packaged-runtime.png`；旧黄金截图已恢复，最终软件结果摘要见 `artifacts/reports/report-validation.json`。真机历史对照/缺图截图仅在私有输出目录。目录错误/上次成功时间在语言切换后继续保留；不能精确表达时刻边界的趋势不跳到更宽的日期列表。首次预览截图暴露了 CSP 拦截内嵌样式，已改为固定模板 hash，并以 computed background、非白像素和实际截图检查复验；渲染文件与下载仍同字节。
+新运行截图已逐张检查：`report-catalog-desktop/narrow`、`report-analysis-desktop/narrow/200-percent`、`report-share-preview`、`report-offline-print`、`report-trends-desktop/narrow`，以及 `report-offline-chrome/firefox-narrow/print`。最终包的 Viewer/运行门禁截图另存为 `report-packaged-viewer.png`、`report-packaged-runtime.png`；旧黄金截图已恢复，最终软件结果摘要见 `artifacts/local/reports/report-validation.json`。真机历史对照/缺图截图仅在私有输出目录。目录错误/上次成功时间在语言切换后继续保留；不能精确表达时刻边界的趋势不跳到更宽的日期列表。首次预览截图暴露了 CSP 拦截内嵌样式，已改为固定模板 hash，并以 computed background、非白像素和实际截图检查复验；渲染文件与下载仍同字节。
 
 键盘操作、失败导航、焦点返回、画框移动/撤销及200%已测试。13项代表文字的固色背景计算 contrast 最低9.71:1，见 report-text-contrast.json。该测量不覆盖渐变合成、全部非文字控件或原生读屏，不宣称已达到完整 WCAG 合规；独立读屏/用户理解仍待验。
 

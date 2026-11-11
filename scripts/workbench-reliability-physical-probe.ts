@@ -19,7 +19,7 @@ if (!['ios', 'android'].includes(platform) || appId !== 'dev.mobilemirror.fixtur
   typeof supplied['appium:udid'] !== 'string' || !supplied['appium:udid'] ||
   supplied['appium:app'] || supplied['appium:fullReset']) throw new Error('Only an explicit physical device with preinstalled Fixture is allowed')
 const caps = { ...supplied, 'appium:noReset': true, 'appium:fullReset': false, 'appium:autoLaunch': false }
-const root = resolve('artifacts/physical-validation', `reliability-workbench-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `reliability-workbench-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const yaml = `${stringify({ name: 'Physical evidence fault', platform, appId })}---\n${stringify(['launchApp', { assertVisible: { text: 'Mirror Fixture · Test Order' } }])}`
 

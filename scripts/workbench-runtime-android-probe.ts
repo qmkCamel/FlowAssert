@@ -24,7 +24,7 @@ if (platform === 'ios' && (!isAbsolute(iosApp) || !/^[A-Za-z0-9][A-Za-z0-9._-]{1
 if (iosDerivedData && !isAbsolute(iosDerivedData)) throw new Error('Prebuilt WDA derived data must be absolute')
 const mode = process.env.MOBILE_MIRROR_RUNTIME_PROBE_MODE ?? 'standard'
 if (!['standard', 'disconnect'].includes(mode) || (mode === 'disconnect' && process.env.MOBILE_MIRROR_MANUAL_DISCONNECT !== '1')) throw new Error('Use standard mode or explicitly authorize a manual disconnect probe')
-const root = resolve('artifacts/physical-validation', (platform === 'ios' ? 'runtime-gates-ios-' : 'runtime-gates-') + new Date().toISOString().replace(/[:.]/g, '-'))
+const root = resolve('artifacts/local/physical-validation', (platform === 'ios' ? 'runtime-gates-ios-' : 'runtime-gates-') + new Date().toISOString().replace(/[:.]/g, '-'))
 await mkdir(root, { recursive: true, mode: 0o700 })
 const fixtureName = platform === 'ios' ? 'iOS runtime fixture' : 'Android runtime fixture'
 const header = 'name: ' + fixtureName + '\nplatform: ' + platform + '\nappId: ' + appId + '\n---\n'
@@ -68,7 +68,7 @@ try {
     liveDiagnosticSourceChecked: false, release: 'not-performed-no-approved-source' } }
     : await probeAndroidHealth({ deviceId, appId, adbPath: process.env.MOBILE_MIRROR_ADB_PATH ?? 'adb' }, AbortSignal.timeout(25000))
   await writeFile(resolve(root, 'source-probe.json'), JSON.stringify(capability, null, 2), { mode: 0o600 })
-  const fixtureSha256 = createHash('sha256').update(await readFile(platform === 'ios' ? resolve(iosApp, 'RuntimeFixture') : resolve('artifacts/fixture/runtime-android/fixture.apk'))).digest('hex')
+  const fixtureSha256 = createHash('sha256').update(await readFile(platform === 'ios' ? resolve(iosApp, 'RuntimeFixture') : resolve('artifacts/local/fixture/runtime-android/fixture.apk'))).digest('hex')
   await writeFile(resolve(root, 'identity.json'), JSON.stringify({ scope: 'synthetic-' + platform + '-physical', appId, fixtureSha256,
     artifactKind: platform === 'ios' ? 'local-signed-mach-o-not-installed-binary-readback' : 'apk', mode,
     runtime: viewer.service.state().appiumRuntime }, null, 2), { mode: 0o600 })

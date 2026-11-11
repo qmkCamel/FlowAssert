@@ -132,7 +132,7 @@ pnpm run test:media:physical
 
 该模式只识别中英文的“秒表/Stopwatch”“开始/Start”“暂停/Stop”控件，使用 Appium 完成准备、正常 500 ms 安全滑动和收尾；scrcpy 仍固定 `control=false`，不会用 ADB input 伪造控制证明。若目标时钟没有这些可访问名称，探针会失败，不会回退到坐标猜测。
 
-探针验证 Viewer 首帧/fps/receive-to-paint、媒体 live 期间 fresh observation 与安全滑动、固定枚举故障后的 2 秒回退和 owned stop；只输出脱敏指标，并把最终 Viewer 截图与 JSON 写入 `artifacts/screenshots/`、`artifacts/metrics/`。UDID、scrcpy 路径、端口、generation 和命令不会进入证据。
+探针验证 Viewer 首帧/fps/receive-to-paint、媒体 live 期间 fresh observation 与安全滑动、固定枚举故障后的 2 秒回退和 owned stop；只输出脱敏指标，并把最终 Viewer 截图与 JSON 写入 `artifacts/curated/screenshots/`、`artifacts/curated/metrics/`。UDID、scrcpy 路径、端口、generation 和命令不会进入证据。
 
 仓库提供感知版探针。先人工解锁设备并停留在允许测试的页面，再启动 loopback Appium：
 
@@ -142,7 +142,7 @@ MOBILE_MIRROR_UDID=DEVICE_UDID \
 pnpm tsx scripts/physical-observation-probe.ts
 ```
 
-探针使用 `image-and-structure` 核心策略执行 `start → PNG/structure → observation-bound viewport swipe → re-observe → stop`，只输出版本、尺寸、revision/epoch、节点数和清理状态，并把最终 PNG 留在 `artifacts/screenshots/`。它不会绕过 PIN/生物识别；设备锁定时只能证明锁屏观察链路，不能报告为已解锁 Settings 页面验收。
+探针使用 `image-and-structure` 核心策略执行 `start → PNG/structure → observation-bound viewport swipe → re-observe → stop`，只输出版本、尺寸、revision/epoch、节点数和清理状态，并把最终 PNG 留在 `artifacts/curated/screenshots/`。它不会绕过 PIN/生物识别；设备锁定时只能证明锁屏观察链路，不能报告为已解锁 Settings 页面验收。
 
 验证通用 MCP adapter 时使用 stdio 版本探针：
 

@@ -8,11 +8,11 @@
 - 隔离 worker 完成步骤对齐、PNG/XML/断言/业务/清理/恢复/耗时比较，支持显式截图遮罩、资源预算、单 worker 有界队列、取消、缓存、重启 interrupted 与派生产物哈希复核。
 - Evidence Reduction 只把步骤增删、断言、业务、清理和恢复差异提升为 Diagnostic Context。截图像素、结构和单次耗时变化保留在完整报告，不自动写成业务失败或根因。
 - Viewer、DSH adapter 与独立 MCP 读取同一个 ComparisonService。`mobile_mirror_run_diagnostic_context` 默认只返回事实摘要和稳定引用；指定一个 `evidenceRef` 时仅返回登记元数据及受控本机 URL，不接受自由路径或整包导出。
-- 浏览器 E2E 已验证创建、轮询、报告下载、Context 展示、证据回钻、重启后 Context 完全一致和跨来源拒绝；保留并人工检查 [Viewer 截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-run-comparison.png)。
+- 浏览器 E2E 已验证创建、轮询、报告下载、Context 展示、证据回钻、重启后 Context 完全一致和跨来源拒绝；保留并人工检查 [Viewer 截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-run-comparison.png)。
 
 ## Android 真机
 
-设备为 PLA110，应用为仓库 Fixture，执行目录保留在本机 `artifacts/physical-validation/run-comparison-android-2026-09-18T09-13-19-742Z`，原始真机材料按仓库规则不提交。
+设备为 PLA110，应用为仓库 Fixture，执行目录保留在本机 `artifacts/local/physical-validation/run-comparison-android-2026-09-18T09-13-19-742Z`，原始真机材料按仓库规则不提交。
 
 | 场景 | 标识 | 结果 |
 | --- | --- | --- |
@@ -26,7 +26,7 @@
 
 ## iOS 真机
 
-设备为 iPhone 16 Plus / iOS 26.2.1，应用为仓库 Fixture，执行目录保留在本机 `artifacts/physical-validation/run-comparison-ios-2026-09-18T09-47-42-411Z`，原始真机材料按仓库规则不提交。
+设备为 iPhone 16 Plus / iOS 26.2.1，应用为仓库 Fixture，执行目录保留在本机 `artifacts/local/physical-validation/run-comparison-ios-2026-09-18T09-47-42-411Z`，原始真机材料按仓库规则不提交。
 
 | 场景 | 标识 | 结果 |
 | --- | --- | --- |

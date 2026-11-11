@@ -18,7 +18,7 @@ if (!['android', 'ios'].includes(platform) || appId !== 'dev.mobilemirror.fixtur
   throw new Error('Only an explicit physical device with the preinstalled Fixture is allowed')
 }
 
-const root = resolve('artifacts/physical-validation', `authoring-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `authoring-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const viewer = new ViewerServer(resolveMirrorConfig({
   viewerPort: 0, defaultProvider: 'appium', appiumRuntimeMode: 'managed', appiumExecutablePath: executable,

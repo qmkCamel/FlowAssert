@@ -12,7 +12,7 @@ import { runScenario, ALL_SCENARIOS } from './scenarios.mjs'
 const exec = promisify(execFile)
 const options = process.argv.slice(2)
 if (options.some(arg => !['--headless', '--smoke', '--extended'].includes(arg))) throw new Error('Only --headless / --smoke / --extended are supported; arbitrary targets are forbidden')
-const root = resolve('artifacts/visual-acceptance', `${new Date().toISOString().replaceAll(':', '-')}-${randomUUID().slice(0, 8)}`)
+const root = resolve('artifacts/local/visual-acceptance', `${new Date().toISOString().replaceAll(':', '-')}-${randomUUID().slice(0, 8)}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const abort = new AbortController(), cancel = () => abort.abort(new Error('User cancelled'))
 process.once('SIGINT', cancel); process.once('SIGTERM', cancel)

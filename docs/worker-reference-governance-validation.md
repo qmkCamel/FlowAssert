@@ -27,7 +27,7 @@
 | 新旧读取器保护探针 | 前次保留的 REDACTED_REVISION 候选继续保护新 pin/child；旧 unpin 导致的元数据不一致在新版失败关闭，重试恢复；child purge 后父运行释放，源 manifest 不变；既有 comparison/share 兼容探针也通过 |
 | OpenSpec strict | 36/36 通过 |
 
-浏览器验收使用真实本地 Viewer + mock 设备：引用扫描/确认期间的局部状态、主题/语言可交互、完成刷新，以及失败后保留非空的已有清理结果。已查看截图：[操作等待中](../artifacts/screenshots/governance-retention-progress.png)、[失败保留结果](../artifacts/screenshots/governance-retention-preserved.png)。没有新增 Viewer 产品交互。
+浏览器验收使用真实本地 Viewer + mock 设备：引用扫描/确认期间的局部状态、主题/语言可交互、完成刷新，以及失败后保留非空的已有清理结果。已查看截图：[操作等待中](../artifacts/curated/screenshots/governance-retention-progress.png)、[失败保留结果](../artifacts/curated/screenshots/governance-retention-preserved.png)。没有新增 Viewer 产品交互。
 
 最终受测候选包 SHA-256：`61c7593fb948688df31bcaee0dad0b1155652be6c5f334bc0e6e11c24a000b17`。此值标识受测 tarball，之后补入验收与规范归档，不等于未来重新打包的 hash。application/MCP/兼容探针使用解包入口与锁定依赖；DSH 使用隔离临时 profile 安装同一个 tarball，不改变全局 Harness 配置。最初 DSH 探针的旧临时 CLI 路径已失效，换用明确核对版本的现存 rc.2 入口后通过；这不是插件运行失败。
 

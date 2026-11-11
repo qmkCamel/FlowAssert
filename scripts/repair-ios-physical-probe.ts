@@ -36,7 +36,7 @@ const caps: Record<string, unknown> = { platformName: 'iOS', 'appium:automationN
   'appium:mjpegServerPort': mjpegPort, 'appium:newCommandTimeout': 120 }
 for (const key of ['appium:xcodeOrgId', 'appium:xcodeSigningId', 'appium:updatedWDABundleId'])
   if (typeof supplied[key] === 'string') caps[key] = supplied[key]
-const root = resolve('artifacts/physical-validation', `repair-ios-${new Date().toISOString().replaceAll(':', '-')}`)
+const root = resolve('artifacts/local/physical-validation', `repair-ios-${new Date().toISOString().replaceAll(':', '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const wdaProducts = process.env.MOBILE_MIRROR_IOS_WDA_PRODUCTS
 if (wdaProducts) {

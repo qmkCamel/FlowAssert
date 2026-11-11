@@ -14,7 +14,7 @@ if (!existsSync(new URL('../lib/viewer/report-presentation.js', import.meta.url)
 const supplied = JSON.parse(await readFile(capsPath, 'utf8')) as Record<string, unknown>
 if (!supplied['appium:udid'] || supplied['appium:fullReset'] || supplied['appium:app']) throw new Error('Select a physical phone without installing/resetting the app')
 const caps = { ...supplied, 'appium:noReset': true, 'appium:fullReset': false, 'appium:autoLaunch': false, 'appium:allowProvisioningDeviceRegistration': false }
-const root = resolve('artifacts/physical-validation', `workbench-video-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `workbench-video-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 let viewer = new ViewerServer(resolveMirrorConfig({ viewerPort: 0, defaultProvider: 'appium', appiumRuntimeMode: 'managed', appiumExecutablePath: appium, appiumUrl: process.env.MOBILE_MIRROR_APPIUM_URL ?? 'http://127.0.0.1:4723', androidScrcpyPath: process.env.MOBILE_MIRROR_SCRCPY_PATH ?? '', androidScrcpyServerPath: process.env.MOBILE_MIRROR_SCRCPY_SERVER_PATH ?? '', appiumSessionStartupTimeoutMs: 120000 }), { workbenchRoot: resolve(root, 'runs') })
 const browser = await chromium.launch({ headless: true, ...(!existsSync(chromium.executablePath()) ? { executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' } : {}) })

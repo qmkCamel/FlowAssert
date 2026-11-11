@@ -26,7 +26,7 @@ const certificates = [...extract('DeveloperCertificates', 'xml1').matchAll(/<dat
   .map(match => new X509Certificate(Buffer.from(match[1].replace(/\s/g, ''), 'base64')))
 if (!certificates.some(certificate => certificate.fingerprint.replaceAll(':', '').toLowerCase() === identity.toLowerCase()
   && new Date(certificate.validTo).getTime() > Date.now())) throw new Error('Signing identity does not match a valid supplied profile certificate')
-const out = resolve(root, '../../../artifacts/fixture', 'runtime-ios-' + new Date().toISOString().replace(/[:.]/g, '-'))
+const out = resolve(root, '../../../artifacts/local/fixture', 'runtime-ios-' + new Date().toISOString().replace(/[:.]/g, '-'))
 const app = resolve(out, 'RuntimeFixture.app')
 mkdirSync(app, { recursive: true, mode: 0o700 })
 copyFileSync(resolve(root, 'Info.plist'), resolve(app, 'Info.plist'))

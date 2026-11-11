@@ -12,7 +12,7 @@
 - 单设备串行套件、参数行隔离、安全重试；首次失败再次通过为 flaky/CI 非零；取消不启动剩余数据行。
 - 原快照重跑不受登记文件后续修改影响；条件查询错误不能转成 false 分支；根 blockers 继续约束子流程断言。
 
-浏览器验证包括慢 prepare 期间进度、主题/画面保持可用，业务/清理分项、case/attempt 和源步骤路径；截图为 `artifacts/screenshots/mobile-mirror-orchestration-suite.png`，已打开检查。另修复关闭期间异步初始化可能留下证据目录锁的问题，慢失败场景已复验。
+浏览器验证包括慢 prepare 期间进度、主题/画面保持可用，业务/清理分项、case/attempt 和源步骤路径；截图为 `artifacts/curated/screenshots/mobile-mirror-orchestration-suite.png`，已打开检查。另修复关闭期间异步初始化可能留下证据目录锁的问题，慢失败场景已复验。
 
 ## 仓库外安装包
 
@@ -22,7 +22,7 @@
 
 设备发现确认一台 Android USB 真机，ADB 版本读取正常。首轮 suite `64f95669-ad31-410e-b41b-521a3efb740f` 的两个正例均因设置页文本不可见失败，故意失败反例亦失败。PNG 为黑屏；随后只读系统诊断显示 Dozing、keyguard showing=true。**不计真机正例通过**，已请求解锁后补验。
 
-材料仅本机：`artifacts/physical-validation/orchestration-android-2026-09-16T11-12-02-966Z/`，包括 suite/case/attempt、逐步 PNG/XML、快照和 report。首次探针配置参数错误发生在连接前，亦不计实测成功。
+材料仅本机：`artifacts/local/physical-validation/orchestration-android-2026-09-16T11-12-02-966Z/`，包括 suite/case/attempt、逐步 PNG/XML、快照和 report。首次探针配置参数错误发生在连接前，亦不计实测成功。
 
 ## 2026-09-16 当时尚待验证（后续状态见文末）
 
@@ -56,7 +56,7 @@ pnpm exec tsx scripts/workbench-orchestration-physical-probe.ts
 
 需预先打开已安装 Fixture 的主页面；脚本不安装、不清空数据。探针生成有界 YAML、项目和数据快照；等待取消点最多 60 秒，失败明确退出。
 
-正式材料（仅本机）：`artifacts/physical-validation/orchestration-android-2026-09-18T02-47-27-411Z/`，包括报告、suite/case/attempt、每步 PNG/XML 和已检查的 `viewer.png`。
+正式材料（仅本机）：`artifacts/local/physical-validation/orchestration-android-2026-09-18T02-47-27-411Z/`，包括报告、suite/case/attempt、每步 PNG/XML 和已检查的 `viewer.png`。
 
 | 场景 | 结果与证明 |
 | --- | --- |
@@ -75,7 +75,7 @@ iPhone 16 Plus 在 Android 补验时为 unavailable；同日随后连接并完�
 
 ## 2026-09-18 iPhone 编排矩阵补验通过
 
-设备 iPhone 16 Plus / iOS 26.2.1，预装 Mirror Fixture，采用同一探针和 Ready 条件。材料（仅本机）：`artifacts/physical-validation/orchestration-ios-2026-09-18T02-57-05-883Z/`。已打开检查 `viewer.png`，手机夹具及两组套件终态可见；每步 PNG/XML 保留。
+设备 iPhone 16 Plus / iOS 26.2.1，预装 Mirror Fixture，采用同一探针和 Ready 条件。材料（仅本机）：`artifacts/local/physical-validation/orchestration-ios-2026-09-18T02-57-05-883Z/`。已打开检查 `viewer.png`，手机夹具及两组套件终态可见；每步 PNG/XML 保留。
 
 | 场景 | 结果与证明 |
 | --- | --- |

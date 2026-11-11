@@ -17,7 +17,7 @@ if (!Number.isInteger(rounds) || rounds < 1 || rounds > 3) throw new Error('Roun
 const defaultScenarios = ['id-drift', 'renamed', 'moved', 'similar', 'icon', 'ambiguous', 'blocked', 'no-node', 'wrong-page', 'injection']
 const scenarios = process.env.RECOVERY_SCENARIOS?.split(',') ?? defaultScenarios
 if (!scenarios.length || scenarios.some(s => ![...defaultScenarios, 'suggest', 'normal'].includes(s))) throw new Error('Unknown fixture scenario')
-const root = resolve('artifacts/physical-validation', `ai-recovery-${platform}-${new Date().toISOString().replaceAll(':', '-')}`)
+const root = resolve('artifacts/local/physical-validation', `ai-recovery-${platform}-${new Date().toISOString().replaceAll(':', '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const mirror = new MirrorService(resolveMirrorConfig({ appiumRuntimeMode: 'managed', appiumExecutablePath: executable, appiumSessionStartupTimeoutMs: 120000, startupTimeoutMs: 30000, agentScreenContentPolicy: 'image-and-structure' }), 'http://127.0.0.1')
 let workbench = new WorkbenchService(mirror, { root: resolve(root, 'runs') })

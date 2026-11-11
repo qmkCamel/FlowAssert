@@ -10,7 +10,7 @@
 
 ## 截图与生成来源
 
-下列图片均位于 `artifacts/screenshots/`；测试位于 `tests/e2e/`。
+下列图片均位于 `artifacts/curated/screenshots/`；测试位于 `tests/e2e/`。
 
 | 图片（省略 `mobile-mirror-` 前缀） | 生成测试 | 展示内容与边界 |
 | --- | --- | --- |

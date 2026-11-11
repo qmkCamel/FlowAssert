@@ -39,5 +39,5 @@ export async function createFixtureProject(root: string, platform: 'android' | '
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const platform = process.argv[2]
   if (platform !== 'android' && platform !== 'ios') throw new Error('Usage: project.ts android|ios [host origin] [device origin]')
-  console.log(await createFixtureProject(resolve('artifacts/fixture', platform, 'project'), platform, process.argv[3] ?? 'http://127.0.0.1:47831', process.argv[4] ?? 'http://127.0.0.1:47831'))
+  console.log(await createFixtureProject(resolve('artifacts/local/fixture', platform, 'project'), platform, process.argv[3] ?? 'http://127.0.0.1:47831', process.argv[4] ?? 'http://127.0.0.1:47831'))
 }

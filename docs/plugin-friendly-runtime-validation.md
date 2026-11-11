@@ -32,7 +32,7 @@
 
 `user-action-contract` 验证包括：分诊/分享慢操作有局部状态，刷新/历史等无关控件仍可交互；失败保留复核草稿/现有证据；成功刷新结果。桌面与 390px 窄屏分诊截图人工检查通过，结果文字和操作未被截断。
 
-保留截图：[桌面](../artifacts/screenshots/plugin-friendly-runtime-triage-desktop.png) · [窄屏](../artifacts/screenshots/plugin-friendly-runtime-triage-narrow.png)。
+保留截图：[桌面](../artifacts/curated/screenshots/plugin-friendly-runtime-triage-desktop.png) · [窄屏](../artifacts/curated/screenshots/plugin-friendly-runtime-triage-narrow.png)。
 
 初轮新工作树缺少 `lib/viewer` 导致一个 HTTP 静态资源测试失败，构建后解决。新增并发测试发现迟到取消写入覆盖终态，已通过串行状态写与终态保护修复；同时保留完整性验证主动降级为 failed 的合法路径。最终结果只按修复后门禁报告，不把失败运行算作通过。
 

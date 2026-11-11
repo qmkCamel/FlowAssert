@@ -6,7 +6,6 @@ lib/
 coverage/
 test-results/
 playwright-report/
-artifacts/runtime/
 .DS_Store
 *.log
 
@@ -24,26 +23,14 @@ mobile-mirror.device.json
 mobile-mirror.signing.json
 mobile-mirror.provisioning.json
 
-# Raw device evidence and host capabilities stay local, never in releases.
-artifacts/physical-validation/
-artifacts/simulator-validation/
-artifacts/fixture/
-# Uncurated physical-device screenshots stay on the capturing machine.
-artifacts/screenshots/*physical*
+# Artifacts default to local-only. Only curated evidence and this guide may be tracked.
+/artifacts/*
+!/artifacts/README.md
+!/artifacts/curated/
+/artifacts/local/
 
 # Original physical-case media for the local publicity demo.
 docs/communications/local-case-assets/
-
-artifacts/visual-acceptance/
-# Local recording scratch files; retain the curated MP4 and measurement JSON.
-artifacts/playback-layout/raw-video/
-artifacts/playback-layout/video-run/
-artifacts/playback-layout/recording.config.ts
-artifacts/playback-layout/recording-preview.png
-artifacts/playback-layout/demo-preview.png
-artifacts/playback-layout/playback-stability-2026-10-10.mp4
-artifacts/playback-layout/playback-stability-demo.webm
-artifacts/screenshots/playback-real-archive-*.png
 
 # Private environment/signing material, including future FlowAssert configs.
 *.p12

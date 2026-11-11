@@ -14,7 +14,7 @@ if(platform!=='android'&&platform!=='ios')throw new Error('Unknown platform')
 const appId=platform==='android'?caps['appium:appPackage']:caps['appium:bundleId']
 const text=process.env.MOBILE_MIRROR_EXPECTED_TEXT??'设置'
 if(!appId)throw new Error('Explicit installed appId required')
-const root=resolve('artifacts/physical-validation',`orchestration-${platform}-${new Date().toISOString().replace(/[:.]/g,'-')}`)
+const root=resolve('artifacts/local/physical-validation',`orchestration-${platform}-${new Date().toISOString().replace(/[:.]/g,'-')}`)
 await mkdir(root,{recursive:true,mode:0o700})
 const flow=(steps:unknown[],params?:unknown)=>`${stringify({name:'Physical composition',platform,appId,...(params?{params}:{})})}---\n${stringify(steps,{aliasDuplicateObjects:false})}`
 await writeFile(resolve(root,'common.yaml'),flow([{assertVisible:{text}}]))

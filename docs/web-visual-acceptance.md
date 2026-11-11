@@ -45,7 +45,7 @@ pnpm exec tsx scripts/web-selfhost-lifecycle-probe.ts # 隐藏重试、修复后
 
 ## 证据与复核
 
-每次输出 `artifacts/visual-acceptance/<新运行目录>/`，默认被 Git 忽略，本机不自动清理、不上传云端：
+每次输出 `artifacts/local/visual-acceptance/<新运行目录>/`，默认被 Git 忽略，本机不自动清理、不上传云端：
 
 - `manifest.json`：commit、工作区 diff 摘要、未跟踪文件摘要、工具/浏览器/环境、预算。
 - `fixture.json`：独立 origin、合成记录身份、预期动作坐标。
@@ -57,8 +57,8 @@ pnpm exec tsx scripts/web-selfhost-lifecycle-probe.ts # 隐藏重试、修复后
 采集后默认是 `visualReview=needs-review`，**不能报视觉通过**。人工或当前已授权 Agent 查看每张原始截图后填写 `review.json` 数组；每条包含 attempt `id`、`status`（pass/fail）、`reviewedAt`、`reviewer`（type/identity；Agent 另有 model，未知明确写 unknown），以及 `items`。每个 item 包含 `evidence` 相对路径、`sha256`、`verdict` 和具体 `observation`，不可批量用“截图存在”代替逐图观察。
 
 ```sh
-pnpm test:visual:gate artifacts/visual-acceptance/<运行目录>
-pnpm exec tsx scripts/web-visual-acceptance/probe-gate.mjs artifacts/visual-acceptance/<运行目录>
+pnpm test:visual:gate artifacts/local/visual-acceptance/<运行目录>
+pnpm exec tsx scripts/web-visual-acceptance/probe-gate.mjs artifacts/local/visual-acceptance/<运行目录>
 pnpm exec tsx scripts/web-visual-acceptance/safety-probe.mjs
 ```
 

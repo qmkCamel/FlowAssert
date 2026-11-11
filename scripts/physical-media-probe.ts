@@ -14,27 +14,27 @@ if (platform === 'android' && !process.env.MOBILE_MIRROR_SCRCPY_PATH) {
   throw new Error('MOBILE_MIRROR_SCRCPY_PATH must point to scrcpy 4.1')
 }
 
-const evidenceDirectory = resolve('artifacts/physical-validation', `media-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const evidenceDirectory = resolve('artifacts/local/physical-validation', `media-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(evidenceDirectory, { recursive: true, mode: 0o700 })
 const screenshotPath = validatedEvidencePath(
   process.env.MOBILE_MIRROR_MEDIA_SCREENSHOT_PATH,
   resolve(evidenceDirectory, 'viewer.png'),
-  'artifacts/physical-validation',
+  'artifacts/local/physical-validation',
 )
 const metricsPath = validatedEvidencePath(
   process.env.MOBILE_MIRROR_MEDIA_METRICS_PATH,
   resolve(evidenceDirectory, 'metrics.json'),
-  'artifacts/physical-validation',
+  'artifacts/local/physical-validation',
 )
 const failureScreenshotPath = validatedEvidencePath(
   undefined,
   resolve(evidenceDirectory, 'failure-viewer.png'),
-  'artifacts/physical-validation',
+  'artifacts/local/physical-validation',
 )
 const failureMetricsPath = validatedEvidencePath(
   undefined,
   resolve(evidenceDirectory, 'failure-metrics.json'),
-  'artifacts/physical-validation',
+  'artifacts/local/physical-validation',
 )
 
 const config = Config({

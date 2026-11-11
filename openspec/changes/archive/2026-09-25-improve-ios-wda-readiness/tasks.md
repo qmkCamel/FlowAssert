@@ -22,5 +22,5 @@
 - `pnpm test:e2e`：通过，47 项浏览器测试。其中新增用例在慢连接期间切换主题，确认脱敏错误、保留最后可用画面与检查报告，以及重新检查后成功重试。
 - `pnpm build`：通过。
 - `pnpm pack:check`：通过。
-- 人工检查 `artifacts/screenshots/mobile-mirror-ios-wda-account-recovery.png`：英文错误和签名/运行区分可见，未见账号、Team ID、UDID、路径等私人值。
+- 人工检查 `artifacts/curated/screenshots/mobile-mirror-ios-wda-account-recovery.png`：英文错误和签名/运行区分可见，未见账号、Team ID、UDID、路径等私人值。
 - 以上为模拟运行和本机软件门禁；未登录实际 Apple 账号、未连接物理 iPhone，因此未宣称真实 WDA 启动已通过。

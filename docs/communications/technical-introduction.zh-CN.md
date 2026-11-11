@@ -24,13 +24,13 @@
 
 ## 02 · 实际使用效果：运行、取证、回看
 
-![实际工作台运行结果：左侧为结果和验证范围，右侧为设备画面；Mock 数据](../../artifacts/screenshots/mobile-mirror-workbench-evidence.png)
+![实际工作台运行结果：左侧为结果和验证范围，右侧为设备画面；Mock 数据](../../artifacts/curated/screenshots/mobile-mirror-workbench-evidence.png)
 
 *图 1｜实际 Viewer 的浏览器截图，Mock provider，2026-10-08 刷新。左侧将 UI、业务、视觉、清理、证据分开显示；右侧保留设备画面。图中业务与视觉为“未执行”，不能由总结果推断为已验证。来源：[截图刷新记录](../screenshot-refresh-2026-10-08.md)。*
 
 典型使用路径是：连接设备 → 用界面检查器（Inspector）确认节点 → 保存 YAML → 执行并查看进度 → 打开失败步骤 → 修改后生成新运行 → 审查分享报告。用例库保存到本机，修订与运行记录分别管理；可独立运行的项目可导出后纳入团队 Git，保存用例不会自动同步给同事。
 
-![实际 Inspector：冻结画面、节点树和节点属性](../../artifacts/screenshots/mobile-mirror-inspector-final.png)
+![实际 Inspector：冻结画面、节点树和节点属性](../../artifacts/curated/screenshots/mobile-mirror-inspector-final.png)
 
 *图 2｜实际 Inspector，Mock 数据，2026-10-08 刷新。冻结截图与节点树联动，便于检查文本、可见性、可操作性及 bounds。画面中的几何块是 Mock 夹具，不是手机 App 的渲染效果。*
 
@@ -41,8 +41,8 @@
 下面两张都是 **Android 真机上的 Fixture App 原始截图**，来自 2026-09-17 的业务验证。Fixture 是仓库内的测试 App，使用合成订单数据和独立服务端；这是真实设备执行，但不代表线上订单系统验收。
 
 <div class="phone-pair">
-<figure><img src="../../artifacts/screenshots/mobile-mirror-fixture-android-positive.png" alt="Android 真机正例截图，Fixture App 显示 Order submitted"><figcaption>图 3A · 正例：UI 提交成功，独立校验金额 1200 分。</figcaption></figure>
-<figure><img src="../../artifacts/screenshots/mobile-mirror-fixture-android-business-negative.png" alt="Android 真机反例截图，Fixture App 同样显示 Order submitted"><figcaption>图 3B · 反例：UI 提交成功，故意声明错误金额 999 分。</figcaption></figure>
+<figure><img src="../../artifacts/curated/screenshots/mobile-mirror-fixture-android-positive.png" alt="Android 真机正例截图，Fixture App 显示 Order submitted"><figcaption>图 3A · 正例：UI 提交成功，独立校验金额 1200 分。</figcaption></figure>
+<figure><img src="../../artifacts/curated/screenshots/mobile-mirror-fixture-android-business-negative.png" alt="Android 真机反例截图，Fixture App 同样显示 Order submitted"><figcaption>图 3B · 反例：UI 提交成功，故意声明错误金额 999 分。</figcaption></figure>
 </div>
 
 | 检查维度 | 正例 | 故意失败反例 |
@@ -53,7 +53,7 @@
 | 清理 | pass | pass |
 | 最终结果 / 退出码 | pass / 0 | fail / 1 |
 
-对应 runId：正例 `949b7264-c071-4a12-8197-e3baa53344ff`；反例 `b4249e29-0e2e-4574-b47b-722b06cfbe30`。原记录包含重启后 36 份材料哈希复验、独立 SQLite 查询与清理结果。数据来源：[真机验收记录](../business-test-fixture.md#android-真实业务证据)、[机器可读摘要](../../artifacts/metrics/mobile-mirror-business-fixture-android.json)。本次核对了摘要与配图，没有重新审计私有原件。
+对应 runId：正例 `949b7264-c071-4a12-8197-e3baa53344ff`；反例 `b4249e29-0e2e-4574-b47b-722b06cfbe30`。原记录包含重启后 36 份材料哈希复验、独立 SQLite 查询与清理结果。数据来源：[真机验收记录](../business-test-fixture.md#android-真实业务证据)、[机器可读摘要](../../artifacts/curated/metrics/mobile-mirror-business-fixture-android.json)。本次核对了摘要与配图，没有重新审计私有原件。
 
 这个例子说明了为什么要单独接入业务 verifier：**屏幕上出现成功提示，只能证明声明的 UI 条件满足；订单是否以正确金额持久化，需要独立读取业务真值。** 未配置 verifier 的普通用例会明确显示业务验证未执行。
 
@@ -93,17 +93,17 @@
 
 结果需要同时看“原运行判定”和“当前材料完整性”。旧记录曾经通过，但今天材料丢失，报告会保留原记录并显示材料不可用。`cancelled`、`inconclusive`、`evidence-conflict` 和 `evidence-contaminated` 有各自含义，不应合并为业务失败或成功。
 
-![实际工作台故意失败：期望与实际、失败步骤和保留的运行记录](../../artifacts/screenshots/beta-workbench-failure.png)
+![实际工作台故意失败：期望与实际、失败步骤和保留的运行记录](../../artifacts/curated/screenshots/beta-workbench-failure.png)
 
 *图 6A｜实际工作台的 Mock 故意失败截图，2026-10-08。失败留在原运行，后续复验不会覆盖它。来源：[内测演示验证](beta-demo-validation.md)。*
 
-![实际跨运行比较界面：最早差异、步骤对照和 Diagnostic Context](../../artifacts/screenshots/mobile-mirror-run-comparison.png)
+![实际跨运行比较界面：最早差异、步骤对照和 Diagnostic Context](../../artifacts/curated/screenshots/mobile-mirror-run-comparison.png)
 
 *图 6B｜实际工作台比较效果，Mock 运行，2026-10-08 刷新。它展示确定性事实和 evidence refs；不代表 AI 已诊断根因。*
 
 比较过程先核对用例身份、输入、平台和环境，再保守对齐步骤，分别比较截图、结构、断言、业务、清理和耗时，最后压缩成 **Diagnostic Context**。Agent 可以从摘要回到必要证据，解释可能原因；系统不提供内置 AI verdict，像素变化也不会自动变成业务失败。跨平台或图像尺寸不同的记录可能仅适合并排阅读。
 
-![实际离线报告预览：派生报告、未重新执行验证，以及分项验证范围](../../artifacts/screenshots/beta-workbench-share.png)
+![实际离线报告预览：派生报告、未重新执行验证，以及分项验证范围](../../artifacts/curated/screenshots/beta-workbench-share.png)
 
 *图 7｜实际工作台的 Mock 报告预览，来源：[内测演示验证](beta-demo-validation.md)。导出的 HTML 明确标注派生、未重新验证和省略范围。*
 

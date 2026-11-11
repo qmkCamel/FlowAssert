@@ -1,0 +1,6 @@
+{
+  "reason": "Repository artifact storage only: the MCP runtime probe writes its screenshot to artifacts/local/. All runtime schemas, tool results and legacy evidence fixtures retain their existing hashes.",
+  "updatedFiles": {
+    "scripts/mcp-runtime-probe.ts": "968dd0526e1745ac873f9753b0e1617c00c7bd01e47670df1e6b3280c3eefe9f"
+  }
+}

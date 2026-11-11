@@ -16,7 +16,7 @@
 
 `tests/e2e/viewer.spec.ts` 的 iOS MJPEG 场景补充真实 JPEG 截图、录制、PNG 降级后继续录制和视频播放验证。这是原浏览器媒体链路验证；2026-09-15 已补充 iPhone 真机两轮截图/录屏、实际解码与清理，见[iPhone 补验](ios-acceptance-2026-09-15.md)。
 
-保留并查看运行截图：[录制中](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-capture-recording.png)、[窄屏下载入口](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-capture-narrow.png)。
+保留并查看运行截图：[录制中](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-capture-recording.png)、[窄屏下载入口](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-capture-narrow.png)。
 
 ## Android 真机
 
@@ -36,7 +36,7 @@ OnePlus 8T / Android 14，第三方 App REDACTED_APP_VERSION；Appium 3.2.0、Ui
 | 分辨率差异 | 开始录制时使用较高分辨率 PNG；切入 H.264 后保持初始画布 |
 | 断开清理 | managed runtime 停止；独立检查无 UiAutomator2 instrumentation、scrcpy 或 adb 转发残留 |
 
-仅本机原始材料：`artifacts/physical-validation/viewer-capture-2026-09-14T14-01-31-556Z/`，含 `probe.json`、`phone.png`、`phone.webm`、`recording.png`、`completed.png`、`video-inspection.json`、`decoded-frames.md5`、`export-verification.json` 及工作台步骤证据。失败材料另存于 `viewer-capture-2026-09-14T13-58-17-654Z/`；原始手机内容不进入 Git。
+仅本机原始材料：`artifacts/local/physical-validation/viewer-capture-2026-09-14T14-01-31-556Z/`，含 `probe.json`、`phone.png`、`phone.webm`、`recording.png`、`completed.png`、`video-inspection.json`、`decoded-frames.md5`、`export-verification.json` 及工作台步骤证据。失败材料另存于 `viewer-capture-2026-09-14T13-58-17-654Z/`；原始手机内容不进入 Git。
 
 SHA-256：
 

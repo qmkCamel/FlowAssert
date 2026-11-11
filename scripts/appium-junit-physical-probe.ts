@@ -11,7 +11,7 @@ import { builtinExternalAdapter } from '../src/workbench-external-adapters.js'
 const capsPath = process.env.MOBILE_MIRROR_CAPABILITIES_PATH ?? ''
 const appiumUrl = process.env.MOBILE_MIRROR_APPIUM_URL ?? ''
 if (!isAbsolute(capsPath) || !/^http:\/\/127\.0\.0\.1:\d+$/.test(appiumUrl)) throw new Error('Explicit private capabilities and loopback Appium URL required')
-const root = resolve('artifacts/physical-validation', `appium-junit-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `appium-junit-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const report: Record<string, unknown> = { complete: false, producer: `node:test ${process.version} + W3C HTTP client`, license: 'MIT (project probe); Node.js license applies to reporter', collectedAt: new Date().toISOString() }
 let runtime: LocalDeviceRuntime | undefined

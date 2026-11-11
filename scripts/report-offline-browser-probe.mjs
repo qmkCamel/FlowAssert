@@ -26,11 +26,11 @@ try {
   await page.getByRole('link', { name: '步骤 / Steps', exact: true }).click(); assert.match(page.url(), /#steps$/)
   await page.setViewportSize({width:390,height:844})
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
-  await mkdir('artifacts/screenshots',{recursive:true}); await page.screenshot({path:`artifacts/screenshots/report-offline-${name}-narrow.png`,fullPage:true})
-  await page.emulateMedia({media:'print'}); await page.screenshot({path:`artifacts/screenshots/report-offline-${name}-print.png`,fullPage:true})
+  await mkdir('artifacts/local/screenshots',{recursive:true}); await page.screenshot({path:`artifacts/local/screenshots/report-offline-${name}-narrow.png`,fullPage:true})
+  await page.emulateMedia({media:'print'}); await page.screenshot({path:`artifacts/local/screenshots/report-offline-${name}-print.png`,fullPage:true})
   assert.deepEqual(requests,[]); assert.deepEqual(errors,[])
-  await mkdir('artifacts/reports',{recursive:true})
+  await mkdir('artifacts/local/reports',{recursive:true})
   const result={browser:name,version:browser.version(),profile:'isolated/headless',scope:name==='firefox'?'Playwright-managed Firefox build':'installed Google Chrome',fileUrl:true,offline:true,externalRequests:requests.length,keyboard:'Tab/Enter and anchors pass',narrow:'390px no overflow',print:'screen rendering inspected separately',sourceSemantics:'not-revalidated/omitted visible'}
-  await writeFile(`artifacts/reports/report-offline-${name}.json`,JSON.stringify(result,null,2)); console.log(JSON.stringify(result))
+  await writeFile(`artifacts/local/reports/report-offline-${name}.json`,JSON.stringify(result,null,2)); console.log(JSON.stringify(result))
   await context.close()
 } finally {await browser.close()}

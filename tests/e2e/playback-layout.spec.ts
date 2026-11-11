@@ -25,7 +25,7 @@ async function geometry(page: Page) {
   })
 }
 async function capture(page: Page, name: string) {
-  const path = `artifacts/screenshots/${name}.png`
+  const path = `artifacts/local/screenshots/${name}.png`
   await page.screenshot({ path, fullPage: true }); await test.info().attach(name, { path, contentType: 'image/png' })
 }
 
@@ -55,8 +55,8 @@ async function assertStableSamples(page: Page, name: string) {
     const values = samples.map(row => row[key]!)
     return [key, Math.max(...values) - Math.min(...values)]
   }))
-  await mkdir('artifacts/playback-layout', { recursive: true })
-  const path = `artifacts/playback-layout/${name}.json`
+  await mkdir('artifacts/local/playback-layout', { recursive: true })
+  const path = `artifacts/local/playback-layout/${name}.json`
   await writeFile(path, JSON.stringify({ ranges, samples }, null, 2))
   await test.info().attach(name, { path, contentType: 'application/json' })
   expect(samples.every(row => row.blank === 0)).toBe(true)

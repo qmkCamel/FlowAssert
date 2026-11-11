@@ -27,7 +27,7 @@ const device = caps['appium:udid'] as string
 const safeCaps = { ...caps, 'appium:noReset': true, 'appium:fullReset': false, 'appium:autoLaunch': false }
 const config = resolveMirrorConfig({ defaultProvider: 'appium', appiumRuntimeMode: 'managed', appiumExecutablePath: appium,
   appiumSessionStartupTimeoutMs: 120_000, startupTimeoutMs: 5_000, viewerMediaMode: 'polling', agentScreenContentPolicy: 'image-and-structure' })
-const root = resolve('artifacts/physical-validation', `device-fault-${platform}-${mode}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `device-fault-${platform}-${mode}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 let ownedProcess: StreamingHostProcess | undefined
 const runner = new NodeStreamingHostProcessRunner()

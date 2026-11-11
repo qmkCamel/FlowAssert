@@ -36,7 +36,7 @@
 
 首次 `pnpm check` 为 809/810：发现外部解析 Worker 未登记到新架构守卫，补齐精确登记后全量复验通过。首次 E2E 在新工作区完成构建前启动，Viewer 所需 `lib/viewer` 模块尚不可用，57/64 通过；构建后截图／Inspector 定向 15/15，再全量 64/64 通过。没有通过放宽断言、增加重试或跳过测试消除失败。
 
-按 user-action-contract 验证：OCR 识别期间刷新历史、切换语言仍可用；取消、失败与输入改变后保留上次候选。双槽运行期间刷新历史、切换槽位和取消单槽不阻断另一槽；刷新失败保留结果。已检查本轮[矩阵运行截图](../artifacts/local-device-matrix/matrix-running-desktop.png)与[OCR 结果保留截图](../artifacts/local-ocr/ocr-desktop.png)。这些是 Mock／Fixture 交互证据，不是真机效果。
+按 user-action-contract 验证：OCR 识别期间刷新历史、切换语言仍可用；取消、失败与输入改变后保留上次候选。双槽运行期间刷新历史、切换槽位和取消单槽不阻断另一槽；刷新失败保留结果。已检查本轮[矩阵运行截图](../artifacts/curated/local-device-matrix/matrix-running-desktop.png)与[OCR 结果保留截图](../artifacts/curated/local-ocr/ocr-desktop.png)。这些是 Mock／Fixture 交互证据，不是真机效果。
 
 ## 不变的验收边界
 

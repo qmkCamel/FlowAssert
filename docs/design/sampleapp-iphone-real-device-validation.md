@@ -6,7 +6,7 @@
 
 状态：P0 对照 PoC 已完成；不等于工作台整体验收完成。实测日期：2026-09-10。
 
-本次在同一台 USB 连接的物理 iPhone 上，分别验证 FlowAssert Viewer、Maestro 真机 fork 和 AppClaw。三条链路串行执行，避免两个控制 session 同时占用设备。完整环境摘要见 environment.json（仅本机：`artifacts/physical-validation/sampleapp-iphone-2026-09-10-environment.json`）。
+本次在同一台 USB 连接的物理 iPhone 上，分别验证 FlowAssert Viewer、Maestro 真机 fork 和 AppClaw。三条链路串行执行，避免两个控制 session 同时占用设备。完整环境摘要见 environment.json（仅本机：`artifacts/local/physical-validation/sampleapp-iphone-2026-09-10-environment.json`）。
 
 ## 1. 范围与环境
 
@@ -40,9 +40,9 @@ Maestro runner ZIP 的 SHA-256 为 `16a1f6bc39fe2ffcb0fa569e2a34d1dcbfeea3f55a39
 
 可执行用例：
 
-- Maestro YAML（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/tab-switch-overlay-safe.yaml`）
-- AppClaw YAML（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/tab-switch.yaml`）
-- AppClaw 选中态失败探针（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/tab-switch-selected-state-probe.yaml`）
+- Maestro YAML（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/tab-switch-overlay-safe.yaml`）
+- AppClaw YAML（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/tab-switch.yaml`）
+- AppClaw 选中态失败探针（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/tab-switch-selected-state-probe.yaml`）
 
 ## 3. 结果
 
@@ -63,8 +63,8 @@ FlowAssert 通过 Appium owner 打开第三方 App，在浏览器 Viewer 中持�
 
 证据：
 
-- Viewer 第三方 App真机截图（仅本机：`artifacts/screenshots/mobile-mirror-ios-sampleapp-physical-media-final.png`）
-- [10 秒媒体指标](../../artifacts/metrics/mobile-mirror-ios-sampleapp-physical-media.json)
+- Viewer 第三方 App真机截图（仅本机：`artifacts/local/screenshots/mobile-mirror-ios-sampleapp-physical-media-final.png`）
+- [10 秒媒体指标](../../artifacts/curated/metrics/mobile-mirror-ios-sampleapp-physical-media.json)
 
 `14.33 fps` 是本机 relay 收到的 MJPEG 帧率。浏览器使用 MJPEG `<img>`，当前埋点只记录元素首画面，无法逐 JPEG 统计实际 display paint fps；本次也没有用相机或时间码测量“手机像素变化到人眼显示”的端到端延迟。因此可确认持续媒体链路与操作期间可见，不能把 112/166 ms 写成完整投屏延迟。
 
@@ -76,15 +76,15 @@ FlowAssert 通过 Appium owner 打开第三方 App，在浏览器 Viewer 中持�
 
 证据：
 
-- JUnit（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/junit-clean.xml`）
-- 逐命令事件与耗时（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/commands.json`）
-- 精选原图（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/takeScreenshot/featured-safe.png`）
-- 首页原图（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/takeScreenshot/home-final-safe.png`）
+- JUnit（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/junit-clean.xml`）
+- 逐命令事件与耗时（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/commands.json`）
+- 精选原图（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/takeScreenshot/featured-safe.png`）
+- 首页原图（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/debug-clean/第三方 App一级 Tab 切换、遮罩排除与页面特征验证/takeScreenshot/home-final-safe.png`）
 
 第一轮未加遮罩门禁时，Maestro JUnit 仍为绿色，但“精选”截图实际是启动广告。`拍摄` 在广告背后的 accessibility tree 中仍可见，条件等待仅用 236 ms 就通过。该 run 的框架状态保留为 passed，工作台最终判定必须改成 `evidence-conflict`：
 
-- 错误的绿色 JUnit（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/junit.xml`）
-- 广告页截图（仅本机：`artifacts/physical-validation/maestro-sampleapp-2026-09-10/debug/第三方 App一级 Tab 切换与页面特征验证/takeScreenshot/featured.png`）
+- 错误的绿色 JUnit（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/junit.xml`）
+- 广告页截图（仅本机：`artifacts/local/physical-validation/maestro-sampleapp-2026-09-10/debug/第三方 App一级 Tab 切换与页面特征验证/takeScreenshot/featured.png`）
 
 第二轮排除了应用广告，但截图时出现 iOS 通知；业务断言有效，证据画面被系统层遮挡，工作台应标 `evidence-contaminated` 并重采。第三轮得到上面的无遮挡证据。三次 attempt 都保留，不能只保留最后一个绿色结果。
 
@@ -96,17 +96,17 @@ Maestro 结束后没有残留 WDA xcodebuild、Appium 或 iproxy 进程。它的
 
 证据：
 
-- 成功 manifest（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T033505-8b5d18/manifest.json`）
-- 录屏（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T033505-8b5d18/recording.mp4`）
-- 精选检查点抽取图（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/appclaw-overlay-safe-featured.png`）
-- 首页检查点抽取图（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/appclaw-overlay-safe-home.png`）
-- 选中态故意失败 manifest（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T030747-472978/manifest.json`）
+- 成功 manifest（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T033505-8b5d18/manifest.json`）
+- 录屏（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T033505-8b5d18/recording.mp4`）
+- 精选检查点抽取图（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/appclaw-overlay-safe-featured.png`）
+- 首页检查点抽取图（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/appclaw-overlay-safe-home.png`）
+- 选中态故意失败 manifest（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/.appclaw/runs/20260910T030747-472978/manifest.json`）
 
 AppClaw 的 selector diagnostics 很有价值：报告保存 selector、匹配数、节点 ID、bounds、expected properties、actual unavailable 和触摸坐标。选中态失败 run 正确停止在 3/7，并保留当步截图，证明它没有把缺失属性冒充成功。
 
 本次成功不是 stock 2.7.0 开箱即用：
 
-1. 未修改的 `appium-ios-remotexpc` 在 WDA 尚未就绪时得到空 upstream socket，随后调用 `upstreamSocket.once()`，Node 进程直接崩溃。临时验证 fork 对空 socket 做 guard、销毁本地连接并让上层重试后才继续；补丁见 validation-only workaround（仅本机：`artifacts/physical-validation/appclaw-sampleapp-2026-09-10/appium-ios-remotexpc-null-upstream-workaround.patch`）。
+1. 未修改的 `appium-ios-remotexpc` 在 WDA 尚未就绪时得到空 upstream socket，随后调用 `upstreamSocket.once()`，Node 进程直接崩溃。临时验证 fork 对空 socket 做 guard、销毁本地连接并让上层重试后才继续；补丁见 validation-only workaround（仅本机：`artifacts/local/physical-validation/appclaw-sampleapp-2026-09-10/appium-ios-remotexpc-null-upstream-workaround.patch`）。
 2. `usePreinstalledWDA` 等待 60 秒失败；改为已有签名制品的 `usePrebuiltWDA + derivedDataPath` 后成功。
 3. 每次 run 结束后仍有 WDA `xcodebuild test-without-building` 进程，需要人工清理。工作台不能把 CLI exit 0 等同于设备已完全释放。
 4. 当前报告把每步 PNG 以内嵌 base64 放进 manifest，`screenshotPath` 是逻辑路径而没有对应独立文件。本轮 12 步 manifest 为 61 MiB，录屏为 1.8 MiB。导入器需要拆图、增量写入和 hash，不能只复制逻辑路径。
@@ -165,4 +165,4 @@ flowchart LR
 6. **session 与媒体共用 owner。** 运行 Maestro 时不能另开 Appium 控制 session看画面；运行 AppClaw/Appium 时从当前 owner 的 WDA 获取 MJPEG。引擎切换只发生在 run 边界，并经过静止、封存和清理。
 7. **WDA 是受管制品。** 固定 source/runner/xctestrun hash、签名 Team、Xcode/SDK/driver 兼容矩阵；区分 runner App 留存、WDA 复用进程、session、8100 和 9100 forwarding 的所有权。
 
-机器可读的最终状态见 verdict.json（仅本机：`artifacts/physical-validation/sampleapp-iphone-2026-09-10-verdict.json`），本次产物的 SHA-256 汇总见 SHA256SUMS（仅本机：`artifacts/physical-validation/sampleapp-iphone-2026-09-10-SHA256SUMS.txt`）。
+机器可读的最终状态见 verdict.json（仅本机：`artifacts/local/physical-validation/sampleapp-iphone-2026-09-10-verdict.json`），本次产物的 SHA-256 汇总见 SHA256SUMS（仅本机：`artifacts/local/physical-validation/sampleapp-iphone-2026-09-10-SHA256SUMS.txt`）。

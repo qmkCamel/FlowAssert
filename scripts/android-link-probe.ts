@@ -8,7 +8,7 @@ const serial = process.env.MOBILE_MIRROR_ANDROID_SERIAL
 if (!serial) throw new Error('Explicit MOBILE_MIRROR_ANDROID_SERIAL required')
 const adb = process.env.MOBILE_MIRROR_ADB_EXECUTABLE ?? 'adb'
 const label = process.env.MIRROR_LINK_LABEL ?? 'current-usb'
-const root = resolve('artifacts/physical-validation', `android-link-${new Date().toISOString().replaceAll(':', '-')}`)
+const root = resolve('artifacts/local/physical-validation', `android-link-${new Date().toISOString().replaceAll(':', '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const samples: unknown[] = []
 for (let round = 1; round <= 10; round++) {

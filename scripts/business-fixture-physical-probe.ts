@@ -17,7 +17,7 @@ if (platform !== 'android' && platform !== 'ios') throw new Error('Android or iO
 const uiOnly = process.env.FIXTURE_UI_ONLY === '1'
 if (!caps['appium:udid'] || caps['appium:app'] || caps['appium:fullReset']) throw new Error('Explicit device, preinstalled fixture, no reset required')
 if ((platform === 'android' ? caps['appium:appPackage'] : caps['appium:bundleId']) !== 'dev.mobilemirror.fixture') throw new Error('Only the dedicated fixture app is allowed')
-const root = resolve('artifacts/physical-validation', `business-fixture-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `business-fixture-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const host = process.env.FIXTURE_HOST ?? '127.0.0.1'
 if (isIP(host) !== 4 || host === '0.0.0.0') throw new Error('Explicit IPv4 interface address required; wildcard binding forbidden')

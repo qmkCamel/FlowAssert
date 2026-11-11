@@ -31,7 +31,7 @@ async function checkReportTextContrast(page: import('@playwright/test').Page, se
   },selectors)
   expect(measurements.length).toBeGreaterThan(3)
   for(const item of measurements) expect(item.ratio, `${item.selector}: ${item.text}`).toBeGreaterThanOrEqual(4.5)
-  await mkdir('artifacts/reports',{recursive:true}); await writeFile('artifacts/reports/report-text-contrast.json',JSON.stringify(measurements,null,2))
+  await mkdir('artifacts/local/reports',{recursive:true}); await writeFile('artifacts/local/reports/report-text-contrast.json',JSON.stringify(measurements,null,2))
 }
 async function phoneFixture() {
   const run = runFixture()
@@ -51,8 +51,8 @@ test('catalog preserves filtering, pagination, focus and prior page on delayed f
   await page.locator('#journey-run-refresh').click(); await expect(page.locator('#report-status')).toContainText('Reading reports'); await expect(page.locator('#report-list tbody tr')).toHaveCount(5)
   await page.locator('.report-tabs button[data-view=trends]').click(); await expect(page.locator('#wb-trend-load')).toBeVisible()
   await page.locator('.report-tabs button[data-view=all]').click(); await expect(page.locator('#journey-run-refresh')).toBeEnabled(); await expect(page.locator('#report-status')).toContainText('read unavailable'); await expect(page.locator('#report-status')).toContainText(/Last successful read|上次成功读取/)
-  await page.screenshot({path:'artifacts/screenshots/report-catalog-desktop.png',fullPage:true})
-  await page.setViewportSize({width:390,height:844}); await page.locator('#language-select').selectOption('zh-CN'); await expect(page.locator('#report-status')).toContainText('读取失败'); await expect(page.locator('#report-status')).toContainText('read unavailable'); await expect(page.locator('#report-status')).toContainText(/Last successful read|上次成功读取/); await page.screenshot({path:'artifacts/screenshots/report-catalog-narrow.png',fullPage:true})
+  await page.screenshot({path:'artifacts/local/screenshots/report-catalog-desktop.png',fullPage:true})
+  await page.setViewportSize({width:390,height:844}); await page.locator('#language-select').selectOption('zh-CN'); await expect(page.locator('#report-status')).toContainText('读取失败'); await expect(page.locator('#report-status')).toContainText('read unavailable'); await expect(page.locator('#report-status')).toContainText(/Last successful read|上次成功读取/); await page.screenshot({path:'artifacts/local/screenshots/report-catalog-narrow.png',fullPage:true})
 })
 test('a search delayed by 650ms cannot replace a newer filtered page', async ({page}) => {
   for(let index=1;index<=55;index++) await viewer.workbench.store.save(runFixture(index))
@@ -75,8 +75,8 @@ test('uses the existing trend denominator and maps its exact time range to the r
   await page.locator('#wb-trend-from').fill('2026-10-06'); await page.locator('#wb-trend-to').fill('2026-10-06')
   await page.locator('#wb-trend-load').click(); await expect(page.locator('#wb-trend-results')).toContainText('directory counts executions')
   await expect(page.locator('#wb-trend-results')).toContainText('1 unplanned')
-  await page.screenshot({path:'artifacts/screenshots/report-trends-desktop.png',fullPage:true})
-  await page.setViewportSize({width:390,height:844}); await page.screenshot({path:'artifacts/screenshots/report-trends-narrow.png',fullPage:true})
+  await page.screenshot({path:'artifacts/local/screenshots/report-trends-desktop.png',fullPage:true})
+  await page.setViewportSize({width:390,height:844}); await page.screenshot({path:'artifacts/local/screenshots/report-trends-narrow.png',fullPage:true})
   await page.getByRole('button',{name:'View executions in this time range',exact:false}).click()
   await expect(page.locator('#report-from')).toHaveValue('2026-10-06'); await expect(page.locator('#report-list tbody tr')).toHaveCount(1)
   await page.evaluate(()=>document.dispatchEvent(new CustomEvent('report:range',{detail:{from:'2026-10-06T00:15:00.000Z',to:'2026-10-06T00:45:00.000Z'}})))
@@ -100,9 +100,9 @@ test('reads real-size synthetic evidence, navigates failures, zooms and exports 
   await page.locator('#analysis-step-search').fill('Tap'); await expect(page.locator('#analysis-steps button[data-step="1"]')).toBeVisible(); await expect(page.locator('#analysis-steps button[data-step="3"]')).toBeHidden()
   await page.locator('#analysis-next-failure').click(); await expect(page).toHaveURL(/step=3/); await page.locator('#analysis-previous-failure').click(); await expect(page).toHaveURL(/step=1/)
   await page.locator('.report-image-tools').getByRole('button',{name:'Original size',exact:true}).click(); await expect(page.locator('#analysis-evidence img')).toHaveCSS('width','1170px')
-  await page.locator('.report-image-tools').getByRole('button',{name:'Fit',exact:true}).click(); await page.evaluate(()=>window.scrollTo(0,0)); await page.screenshot({path:'artifacts/screenshots/report-analysis-desktop.png'})
-  await page.setViewportSize({width:390,height:844}); await page.screenshot({path:'artifacts/screenshots/report-analysis-narrow.png',fullPage:true})
-  await page.locator('body').evaluate(element=>{element.style.zoom='2'}); await page.screenshot({path:'artifacts/screenshots/report-analysis-200-percent.png',fullPage:true}); await page.locator('body').evaluate(element=>{element.style.zoom='1'}); await page.setViewportSize({width:1440,height:900})
+  await page.locator('.report-image-tools').getByRole('button',{name:'Fit',exact:true}).click(); await page.evaluate(()=>window.scrollTo(0,0)); await page.screenshot({path:'artifacts/local/screenshots/report-analysis-desktop.png'})
+  await page.setViewportSize({width:390,height:844}); await page.screenshot({path:'artifacts/local/screenshots/report-analysis-narrow.png',fullPage:true})
+  await page.locator('body').evaluate(element=>{element.style.zoom='2'}); await page.screenshot({path:'artifacts/local/screenshots/report-analysis-200-percent.png',fullPage:true}); await page.locator('body').evaluate(element=>{element.style.zoom='1'}); await page.setViewportSize({width:1440,height:900})
   await page.locator('#journey-analysis > nav a').filter({hasText:'Share'}).click()
   const share = page.locator('#analysis-secondary .wb-share'); await share.locator(':scope > summary').click(); await share.locator('input[type=checkbox]').first().check()
   await share.getByText('Open image and draw masks',{exact:true}).click(); await expect(share.locator('.redaction-plane img')).toBeVisible()
@@ -114,18 +114,18 @@ test('reads real-size synthetic evidence, navigates failures, zooms and exports 
   await share.getByRole('button',{name:'Preview derived content',exact:true}).click(); await expect(share).toContainText('Preparing'); await expect(share.getByRole('button',{name:'Preview derived content',exact:true})).toBeDisabled()
   await page.locator('.journey-nav a[data-page=runs]').click(); await expect(page.locator('#report-list')).toBeVisible(); await page.goBack()
   await expect(share.locator('iframe')).toBeVisible(); await expect(share.frameLocator('iframe').locator('body')).toContainText('Not revalidated'); await expect(share.frameLocator('iframe').locator('body')).toHaveCSS('background-color','rgb(245, 247, 251)')
-  await share.locator('iframe').scrollIntoViewIfNeeded(); await expect(share.frameLocator('iframe').getByRole('heading',{level:1})).toBeVisible(); await expect.poll(async () => {const pixels = await sharp(await share.locator('iframe').screenshot()).stats(); return pixels.channels[0]!.stdev}, {timeout:10000}).toBeGreaterThan(10); await page.screenshot({path:'artifacts/screenshots/report-share-preview.png'})
+  await share.locator('iframe').scrollIntoViewIfNeeded(); await expect(share.frameLocator('iframe').getByRole('heading',{level:1})).toBeVisible(); await expect.poll(async () => {const pixels = await sharp(await share.locator('iframe').screenshot()).stats(); return pixels.channels[0]!.stdev}, {timeout:10000}).toBeGreaterThan(10); await page.screenshot({path:'artifacts/local/screenshots/report-share-preview.png'})
   await share.locator('input[type=checkbox]').last().check()
   const downloadPromise = page.waitForEvent('download'); await share.getByRole('button',{name:'Download reviewed report',exact:true}).click(); await expect(share).toContainText('Preparing'); await page.locator('.journey-nav a[data-page=runs]').click(); await expect(page.locator('#report-list')).toBeVisible(); await page.goBack(); const download = await downloadPromise
   const path = await download.path(); if (!path) throw new Error('No download path'); const html = await readFile(path,'utf8')
   expect(html).toBe(await share.locator('iframe').getAttribute('srcdoc')); expect(html).not.toContain('private-session'); expect(html).not.toContain('private-source')
-  await mkdir('artifacts/reports',{recursive:true}); await writeFile('artifacts/reports/reviewed-synthetic-report.html',html)
+  await mkdir('artifacts/local/reports',{recursive:true}); await writeFile('artifacts/local/reports/reviewed-synthetic-report.html',html)
   expect(await readFile(join(root,run.id,'step-1.png'))).toEqual(png); expect(errors).toEqual([])
   const recipientContext = await browser.newContext({offline:true,viewport:{width:1440,height:900}}), recipient=await recipientContext.newPage(), remote:string[]=[]
   try {
     recipient.on('request',request=>{if (/^https?:/.test(request.url())) remote.push(request.url())})
-    await recipient.goto(`file://${join(process.cwd(),'artifacts/reports/reviewed-synthetic-report.html')}`); await expect(recipient.getByRole('heading',{level:1})).toContainText('Reviewed derived report'); expect(remote).toEqual([])
-    await recipient.emulateMedia({media:'print'}); await recipient.screenshot({path:'artifacts/screenshots/report-offline-print.png',fullPage:true})
+    await recipient.goto(`file://${join(process.cwd(),'artifacts/local/reports/reviewed-synthetic-report.html')}`); await expect(recipient.getByRole('heading',{level:1})).toContainText('Reviewed derived report'); expect(remote).toEqual([])
+    await recipient.emulateMedia({media:'print'}); await recipient.screenshot({path:'artifacts/local/screenshots/report-offline-print.png',fullPage:true})
   } finally {await recipientContext.close()}
 
 })
@@ -137,5 +137,5 @@ test('1000-summary directory cold-page and warm-refresh performance, 30 samples 
   const cold:number[]=[],warm:number[]=[]
   for(let index=0;index<30;index++){const start=performance.now();await page.goto(`${viewer.url}/?report-bench=${index}#/runs`);await expect(page.locator('#report-list tbody tr')).toHaveCount(50);cold.push(performance.now()-start);const next=performance.now();await page.locator('#journey-run-refresh').click();await expect(page.locator('#journey-run-refresh')).toBeEnabled();warm.push(performance.now()-next)}
   const p95=(values:number[])=>[...values].sort((a,b)=>a-b)[Math.ceil(values.length*.95)-1]!
-  await mkdir('artifacts/reports',{recursive:true});await writeFile('artifacts/reports/report-performance.json',JSON.stringify({candidateBase:'REDACTED_REVISION',datasetRecords:1000,manifestBytes,stepsPerRecord:0,artifactsPerRecord:0,hardware:cpus()[0]?.model,os:`${platform()} ${release()}`,browser:browser.version(),coldDefinition:'Fresh page navigation; filesystem cache not evicted',cold,warm,coldP95:p95(cold),warmP95:p95(warm),targetMs:2000},null,2));expect(p95(cold)).toBeLessThanOrEqual(2000);expect(p95(warm)).toBeLessThanOrEqual(2000)
+  await mkdir('artifacts/local/reports',{recursive:true});await writeFile('artifacts/local/reports/report-performance.json',JSON.stringify({candidateBase:'REDACTED_REVISION',datasetRecords:1000,manifestBytes,stepsPerRecord:0,artifactsPerRecord:0,hardware:cpus()[0]?.model,os:`${platform()} ${release()}`,browser:browser.version(),coldDefinition:'Fresh page navigation; filesystem cache not evicted',cold,warm,coldP95:p95(cold),warmP95:p95(warm),targetMs:2000},null,2));expect(p95(cold)).toBeLessThanOrEqual(2000);expect(p95(warm)).toBeLessThanOrEqual(2000)
 })

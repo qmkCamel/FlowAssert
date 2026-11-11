@@ -34,7 +34,7 @@
 - [ ] 5.2 用上述真实报告完成预览→导入→附件回钻→验收关联，包含故意失败／跳过／缺附件，不把合成 XML 当真实兼容证据。
 
 2026-10-05 增量：实际 node:test 24.19.0 + Appium W3C HTTP 客户端 runner 在 Android Fixture 生成 JUnit（3 pass、1 故意 fail、1 skipped，多 suite/同名参数化/Unicode/缺附件），完成预览→确认→附件字节复验→验收修订；external-result 核验不变为 native pass。原报告、运行前 APK/build、命令/许可/SHA 私有冻结，摘要见 `docs/physical-validation-2026-10-05.md`。Maestro 真实报告和 error 方言仍缺，5.1/5.2 不勾选，不宣称全 Appium/Maestro 方言兼容。
-- [x] 5.3 串行执行 `pnpm check`、`pnpm build`、`pnpm test:e2e`、`pnpm pack:check`，记录完整输出和重试原因。（见 artifacts/external-assets/validation.md。）
+- [x] 5.3 串行执行 `pnpm check`、`pnpm build`、`pnpm test:e2e`、`pnpm pack:check`，记录完整输出和重试原因。（见 artifacts/curated/external-assets/validation.md。）
 - [x] 5.4 用同一包验证 CLI、MCP、DSH 0.1.5-rc.2 Native/PTC，以及不存在 Maestro/Appium 第二执行 owner。
 - [x] 5.5 更新格式支持表、ADR 补充与使用／验收文档，执行严格 OpenSpec 校验；仅提交本项明确路径并保留外部验收缺口。
 - [ ] 5.6 由一个持有既有测试资产的使用方独立接入，记录迁移步骤和缺口；满足全部任务后才进入归档流程。

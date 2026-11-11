@@ -2,7 +2,7 @@
 
 部分 iOS 页面可见文字不出现在可访问树中，单设备串行又限制跨平台变更验收效率。需要解决两个明确场景：在已声明区域核对文字，以及用本机两台设备执行可追溯的验收矩阵；不能由此宣称通用视觉理解或云设备平台。
 
-本变更对应路线图第六项，依赖第四项验收对象和第五项来源契约，内部先完成 OCR，再完成设备矩阵。状态（2026-10-03）：工程实现及门禁完成，任务 33/39；OCR 评测／批准机制、显式检查点断言与双槽矩阵已实现，真实图像评测、生产 profile 批准、双真机业务与独立判读尚未验收。前置工程提交为 `REDACTED_REVISION`、`REDACTED_REVISION`，本项工程为 `REDACTED_REVISION`、`REDACTED_REVISION`、`REDACTED_REVISION`；证据见[离线验证](../../../artifacts/local-device-matrix/validation.md)，剩余条件见[六项总览](../add-change-acceptance-records/roadmap.md)。默认生产 OCR 仍关闭，合成识别和双 Mock 不替代真实质量。中文正文保留 OpenSpec 所需英文结构标记与协议标识符。
+本变更对应路线图第六项，依赖第四项验收对象和第五项来源契约，内部先完成 OCR，再完成设备矩阵。状态（2026-10-03）：工程实现及门禁完成，任务 33/39；OCR 评测／批准机制、显式检查点断言与双槽矩阵已实现，真实图像评测、生产 profile 批准、双真机业务与独立判读尚未验收。前置工程提交为 `REDACTED_REVISION`、`REDACTED_REVISION`，本项工程为 `REDACTED_REVISION`、`REDACTED_REVISION`、`REDACTED_REVISION`；证据见[离线验证](../../../artifacts/curated/local-device-matrix/validation.md)，剩余条件见[六项总览](../add-change-acceptance-records/roadmap.md)。默认生产 OCR 仍关闭，合成识别和双 Mock 不替代真实质量。中文正文保留 OpenSpec 所需英文结构标记与协议标识符。
 
 ## What Changes
 

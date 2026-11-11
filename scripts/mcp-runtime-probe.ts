@@ -375,7 +375,7 @@ async function withTimeout<T>(promise: Promise<T>, milliseconds: number, message
 
 function parseArgs(values: string[]): ProbeArgs {
   let launcher = new URL('./mobile-mirror-mcp.mjs', import.meta.url).pathname
-  let screenshot = 'artifacts/screenshots/mobile-mirror-mcp-stdio-final.png'
+  let screenshot = 'artifacts/local/screenshots/mobile-mirror-mcp-stdio-final.png'
   let viewerLocalization = false
   for (let index = 0; index < values.length; index += 2) {
     const flag = values[index]

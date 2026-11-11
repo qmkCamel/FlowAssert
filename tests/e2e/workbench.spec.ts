@@ -27,7 +27,7 @@ test('labels the generic app template as requiring configuration', async ({ page
   await expect(page.locator('#wb-sample option:checked')).toHaveText('示例 App · 需配置')
   await expect(page.locator('#wb-yaml')).toHaveValue(/appId: com\.example\.sampleapp/)
   await expect(page.locator('#wb-history button')).toHaveCount(0)
-  await page.screenshot({ path: 'artifacts/screenshots/privacy-generic-sample.png', fullPage: true })
+  await page.screenshot({ path: 'artifacts/local/screenshots/privacy-generic-sample.png', fullPage: true })
 })
 
 test('runs YAML with live preview, opens evidence, and restores history after restart', async ({ page }) => {
@@ -51,7 +51,7 @@ test('runs YAML with live preview, opens evidence, and restores history after re
     window.scrollTo(0, 0)
   })
   await expect.poll(() => page.locator('#workbench-panel').evaluate((el) => el.scrollTop)).toBeGreaterThan(100)
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-workbench-evidence.png' })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-workbench-evidence.png' })
   const oldId = await page.locator('.wb-run-id').textContent()
   await viewer.close()
   viewer = new ViewerServer(Config({ viewerPort: 0, mockStartupDelayMs: 0 }), { workbenchRoot: root })
@@ -82,7 +82,7 @@ test('imports a sanitized failed run and opens its failure evidence without devi
   expect(await response.text()).toContain('sample-history-item-sanitized')
   await page.setViewportSize({ width: 1440, height: 1100 })
   await failed.scrollIntoViewIfNeeded()
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-workbench-imported-failure.png' })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-workbench-imported-failure.png' })
   const importedId = (await viewer.workbench.list())[0]!.id
   await page.goto(`${viewer.url}/#/runs/${importedId}?tab=evidence`)
   await expect(page.locator('#analysis-summary')).toContainText('失败')
@@ -111,7 +111,7 @@ test('previews a derived share while controls remain usable, then imports it as 
   await expect(section.locator('img')).toHaveCount(1)
   await page.setViewportSize({ width: 390, height: 844 })
   await section.scrollIntoViewIfNeeded()
-  await page.screenshot({ path: 'artifacts/physical-validation/safe-share-narrow.png' })
+  await page.screenshot({ path: 'artifacts/local/physical-validation/safe-share-narrow.png' })
   await expect(section.getByText('Cancel conversion')).toBeVisible()
   await page.setViewportSize({ width: 1440, height: 1100 })
   const failedPreview = async (route: import('@playwright/test').Route) => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: 'temporary conversion failure' }) })
@@ -121,7 +121,7 @@ test('previews a derived share while controls remain usable, then imports it as 
   await expect(section.locator('img')).toHaveCount(1)
   await page.unroute('**/api/workbench/share/jobs', failedPreview)
   await page.locator('#workbench-panel').evaluate(panel => { const target = panel.querySelector('.wb-share')!; panel.scrollTop += target.getBoundingClientRect().top - panel.getBoundingClientRect().top - 16 })
-  await page.screenshot({ path: 'artifacts/physical-validation/safe-share-desktop.png' })
+  await page.screenshot({ path: 'artifacts/local/physical-validation/safe-share-desktop.png' })
   await section.getByLabel('I reviewed every preview and the shared content').check()
   const downloadEvent = page.waitForEvent('download')
   await section.getByText('Confirm and download v2').click()
@@ -177,7 +177,7 @@ test('compares two archived runs without taking device control and retains the r
   await expect(compare.getByText('下载 JSON 报告')).toBeVisible()
   await page.setViewportSize({ width: 1440, height: 1200 })
   await compare.scrollIntoViewIfNeeded()
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-run-comparison.png' })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-run-comparison.png' })
   const targetId = await page.locator('.wb-run-id').textContent()
   const reportId = await compare.getByText('下载 JSON 报告').getAttribute('href')
   const comparisonId=reportId!.split('/').at(-2)!
@@ -194,7 +194,7 @@ test('compares two archived runs without taking device control and retains the r
   await expect(compare.getByRole('status')).toHaveCount(0)
   await expect(compare.getByText('下载 JSON 报告')).toHaveAttribute('href', reportId!)
   await expect(page.locator('#wb-error')).toContainText('comparison submission failed')
-  await page.screenshot({ path: 'artifacts/screenshots/lifecycle-comparison-retained.png' })
+  await page.screenshot({ path: 'artifacts/local/screenshots/lifecycle-comparison-retained.png' })
   await page.unroute('**/api/workbench/comparisons')
   // Control response timing to verify pending cancellation across poll/theme rerenders.
   // Actual Worker/lease shutdown is covered by comparison-lifecycle.test.ts.
@@ -212,7 +212,7 @@ test('compares two archived runs without taking device control and retains the r
     await expect(page.locator('body')).toHaveClass(/light-stage/)
     await expect(compare.getByRole('button', { name: '取消比较', exact: true })).toBeDisabled()
     await expect(compare.getByRole('button', { name: '开始比较', exact: true })).toBeDisabled()
-    await page.screenshot({ path: 'artifacts/screenshots/lifecycle-comparison-cancelling.png' })
+    await page.screenshot({ path: 'artifacts/local/screenshots/lifecycle-comparison-cancelling.png' })
   } finally { releaseCancel() }
   await expect(compare).toContainText('比较报告 · cancelled')
   await page.unroute('**/api/workbench/comparisons')
@@ -304,7 +304,7 @@ test('slow failing source retains the PNG, shows timing and keeps unrelated cont
       el.scrollTop += el.querySelector('.wb-step')!.getBoundingClientRect().top - el.getBoundingClientRect().top - 20
     })
     await expect(page.locator('.wb-step summary').first()).toBeInViewport()
-    await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-workbench-partial-evidence.png' })
+    await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-workbench-partial-evidence.png' })
   } finally { release?.() }
 })
 
@@ -317,7 +317,7 @@ test('long flow keeps theme and history interactive, and cancellation stops subs
   await expect(page.locator('body')).toHaveClass(/light-stage/)
   await page.locator('#wb-refresh').click()
   await expect(page.locator('#device-frame')).toBeVisible()
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-workbench-running.png', fullPage: true })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-workbench-running.png', fullPage: true })
   await page.locator('#wb-cancel').click()
   await expect(page.locator('#wb-detail .wb-verdict').first()).toHaveText('Cancelled', { timeout: 10000 })
   await expect(page.locator('.wb-step summary').filter({ hasText: 'tap' })).toHaveCount(0)
@@ -364,7 +364,7 @@ test('slow text input keeps progress and unrelated controls available', async ({
   await page.locator('#theme-button').click();await expect(page.locator('body')).toHaveClass(/light-stage/)
   await expect(page.locator('#wb-detail .wb-verdict').first()).toHaveText('通过',{timeout:20000})
   await page.setViewportSize({width:1440,height:1100})
-  await page.screenshot({path:'artifacts/screenshots/mobile-mirror-workbench-text-input.png'})
+  await page.screenshot({path:'artifacts/local/screenshots/mobile-mirror-workbench-text-input.png'})
 })
 
 
@@ -420,5 +420,5 @@ verify:
   await expect(page.locator('.wb-step').last().locator('img')).toBeVisible()
   await page.setViewportSize({width:1440,height:1200})
   await page.locator('#wb-detail').scrollIntoViewIfNeeded()
-  await page.screenshot({path:'artifacts/screenshots/mobile-mirror-orchestration-suite.png'})
+  await page.screenshot({path:'artifacts/local/screenshots/mobile-mirror-orchestration-suite.png'})
 })

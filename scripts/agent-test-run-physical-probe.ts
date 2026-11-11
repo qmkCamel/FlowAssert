@@ -19,7 +19,7 @@ const platform = platformName as 'android' | 'ios'
 if (!capabilities['appium:udid'] || capabilities['appium:app'] || capabilities['appium:fullReset']) throw new Error('Explicit device, preinstalled fixture and no reset are required')
 if ((platform === 'android' ? capabilities['appium:appPackage'] : capabilities['appium:bundleId']) !== 'dev.mobilemirror.fixture') throw new Error('Only the dedicated fixture app is allowed')
 
-const root = resolve('artifacts/physical-validation', `agent-control-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `agent-control-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 const runsRoot = resolve(root, 'runs')
 await mkdir(root, { recursive: true, mode: 0o700 })
 const server = await startFixtureServer({ database: resolve(root, 'orders.sqlite'), host: process.env.FIXTURE_HOST ?? '127.0.0.1', port: 47831 })

@@ -60,7 +60,7 @@ Android 真机 XML 的根与布局是 `FrameLayout/LinearLayout/ScrollView`；�
 
 ## 本机证据与复现
 
-最终证据目录：`artifacts/physical-validation/repair-android-2026-10-05T08-34-43.500Z/`，含 report、前后截图/结构以及原 run XML、解析回执和 tap fact。原始物理设备材料被 `.gitignore` 排除，不直接发布；仓库保存结构化结论和脚本。已检查普通导航通过和正确页面被拒绝的实际截图。
+最终证据目录：`artifacts/local/physical-validation/repair-android-2026-10-05T08-34-43.500Z/`，含 report、前后截图/结构以及原 run XML、解析回执和 tap fact。原始物理设备材料被 `.gitignore` 排除，不直接发布；仓库保存结构化结论和脚本。已检查普通导航通过和正确页面被拒绝的实际截图。
 
 此前首轮未进入 Fixture 前台而停止，随后显式 `MirrorService.manageApp(activate)` 修正探针初始化；另一次因探针把安全 `inconclusive` 一概当作未知副作用而停止。最终仅允许**已有持久 blocked/not-dispatched 事实且零写入**的拒绝继续，真正 unknown/dispatched 均立即停止，不重放。中间报告保留，不计入最终通过数量。
 

@@ -15,7 +15,7 @@ if(!isAbsolute(capsPath)||!isAbsolute(executable))throw new Error('Explicit abso
 const caps=JSON.parse(await readFile(capsPath,'utf8')) as Record<string,unknown>,platform=String(caps.platformName).toLowerCase()
 if(platform!=='android'&&platform!=='ios')throw new Error('Android or iOS required')
 if(!caps['appium:udid']||caps['appium:app']||caps['appium:fullReset']||(platform==='android'?caps['appium:appPackage']:caps['appium:bundleId'])!=='dev.mobilemirror.fixture')throw new Error('Only a preinstalled Fixture on an explicit device is allowed')
-const root=resolve('artifacts/physical-validation',`run-comparison-${platform}-${new Date().toISOString().replace(/[:.]/g,'-')}`);await mkdir(root,{recursive:true,mode:0o700})
+const root=resolve('artifacts/local/physical-validation',`run-comparison-${platform}-${new Date().toISOString().replace(/[:.]/g,'-')}`);await mkdir(root,{recursive:true,mode:0o700})
 const host=process.env.FIXTURE_HOST??'127.0.0.1',deviceBase=process.env.FIXTURE_DEVICE_URL??'http://127.0.0.1:47831'
 const server=await startFixtureServer({database:resolve(root,'orders.sqlite'),host,port:47831}),project=await createFixtureProject(resolve(root,'project'),platform,'http://127.0.0.1:47831',deviceBase)
 const config=resolveMirrorConfig({viewerPort:0,defaultProvider:'appium',appiumRuntimeMode:'managed',appiumExecutablePath:executable,appiumSessionStartupTimeoutMs:120_000,startupTimeoutMs:30_000,viewerMediaMode:'auto'})

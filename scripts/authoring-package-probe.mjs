@@ -29,7 +29,7 @@ try {
   assert.equal(await page.locator('.stage').isVisible(), false)
   const runs = await runtime.application.workbench.list(), run = await runtime.application.workbench.get(runs[0].id)
   assert.equal(run.verdict, 'pass'); assert(run.authoringOrigin?.revisionId)
-  await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: 'artifacts/screenshots/journey-packaged-candidate.png' })
+  await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: 'artifacts/local/screenshots/journey-packaged-candidate.png' })
   await page.goto(`${runtime.viewer.url}/#/cases`)
   assert.equal(await page.locator('.journey-case').waitFor().then(() => page.locator('.journey-case').count()), 1)
   await page.locator('.journey-case').getByRole('button', { name: 'Archive', exact: true }).click()

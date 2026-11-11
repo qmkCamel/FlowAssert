@@ -40,7 +40,7 @@ test('recovery progress remains interactive and the retained original failure su
     await expect(page.locator('.wb-step').first()).toContainText('target-not-found')
     await page.setViewportSize({width:1440,height:1200})
     await page.locator('#wb-detail').scrollIntoViewIfNeeded()
-    await page.screenshot({path:'artifacts/screenshots/mobile-mirror-ai-recovery.png'})
+    await page.screenshot({path:'artifacts/local/screenshots/mobile-mirror-ai-recovery.png'})
     const id=await page.locator('.wb-run-id').textContent()
     await viewer.close()
     viewer=new ViewerServer(config,{service,assistant:null,disposeServiceOnClose:false,workbenchRoot:join(root,'runs'),workbenchProjectPath:projectPath})

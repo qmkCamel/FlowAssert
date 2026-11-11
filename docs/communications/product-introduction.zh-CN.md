@@ -67,6 +67,6 @@ FlowAssert 目前仍是 **Developer Preview**。基础执行、步骤取证、�
 
 - 演示默认单文件 Mock，修正的是故意设置错误的期望值；真实失败需要先核查原因，不能机械地把期望改成实际。
 - “新运行”“历史”“报告下载”在宣传页内使用预设模拟数据，刷新即清空；真实产品持久化能力以[工作台指南](../test-workbench.md)和[报告指南](../report-reading-and-sharing.md)为准。
-- 当前[工作台主图](../../artifacts/screenshots/mobile-mirror-workbench-evidence.png)等 20 张图片已于 10 月 8 日刷新，来源见[截图记录](../screenshot-refresh-2026-10-08.md)。均为 Mock/合成材料，不当作新真机证据。
+- 当前[工作台主图](../../artifacts/curated/screenshots/mobile-mirror-workbench-evidence.png)等 20 张图片已于 10 月 8 日刷新，来源见[截图记录](../screenshot-refresh-2026-10-08.md)。均为 Mock/合成材料，不当作新真机证据。
 - 历史 Android 第三方 App原始回放仍可在本机显式加载。`local-case-assets/` 不随源码分发，原图未脱敏，不作为内测共享素材。原件导出方式仍为 `python3 scripts/export-promo-case.py`；历史素材与 9 月验证见 Git 历史，不改写原证据日期。
 - 内测使用 main 分支，记录本次提交 SHA，不声称 alpha.2 已公开发布。DSH 当前验证基线为 `0.2.0-rc.2`；实际模型图片、独立体验、广泛设备与真实业务验收分别跟踪。

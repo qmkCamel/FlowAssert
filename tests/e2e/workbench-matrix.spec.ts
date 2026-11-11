@@ -29,7 +29,7 @@ test('dual Mock matrix keeps history and other slot interactive, isolates late m
     await page.route('**/api/workbench/matrices', route => route.fulfill({ status: 503, body: '{}' }))
     await page.locator('#matrix-refresh').click(); await expect(page.locator('#matrix-status')).toContainText('操作失败'); await expect(page.locator('#matrix-results')).toHaveText(previous!)
     await page.setViewportSize({ width: 390, height: 844 }); await page.locator('#matrix-results').scrollIntoViewIfNeeded(); await page.screenshot({ path: info.outputPath('matrix-narrow.png') })
-    const artifacts = join(process.cwd(), 'artifacts/local-device-matrix'); await mkdir(artifacts, { recursive: true })
+    const artifacts = join(process.cwd(), 'artifacts/local/local-device-matrix'); await mkdir(artifacts, { recursive: true })
     for (const name of ['matrix-running-desktop.png', 'matrix-narrow.png']) await copyFile(info.outputPath(name), join(artifacts, name))
   } finally { await runtime.close(); await f.close() }
 })

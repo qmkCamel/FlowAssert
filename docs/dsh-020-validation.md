@@ -42,8 +42,8 @@
 
 完整 E2E 覆盖操作中局部进度、其他控件可交互、失败后保留材料与取消。另顺序重跑 `workbench.spec.ts` 的 slow failing source 和 long flow 场景，两项均通过。保留并人工查看当前截图：
 
-- `artifacts/dsh-020/workbench-progress.png`：运行/取消反馈、旧设备画面、主题和历史控件保持可用。
-- `artifacts/dsh-020/workbench-retained-failure.png`：取源失败后保留 PNG、显示阶段耗时和局部错误，其他设备控件可用。
+- `artifacts/curated/dsh-020/workbench-progress.png`：运行/取消反馈、旧设备画面、主题和历史控件保持可用。
+- `artifacts/curated/dsh-020/workbench-retained-failure.png`：取源失败后保留 PNG、显示阶段耗时和局部错误，其他设备控件可用。
 
 初次并行跑单元测试与 E2E 时，E2E 重写公共截图造成哈希检查失败；恢复既有基线后全量检查通过。补充截图与打包重建重叠时出现一次页面初始化超时，顺序重跑通过。历史截图像素和旧验收记录保留原状。
 

@@ -11,7 +11,7 @@ test('optional typed Web authoring preserves local case revisions and leaves dev
     await page.locator('#web-case-name').fill('Synthetic regression');await page.locator('#web-evidence-consent').check();await page.locator('#web-save').click()
     await expect(page.locator('#journey-edit')).toContainText(/修订已保存|Revision saved/)
     const cases=await viewer.application.cases.list();expect(cases.cases).toHaveLength(1);expect(cases.cases[0]).toMatchObject({platform:'web',name:'Synthetic regression'});expect(cases.cases[0]).not.toHaveProperty('appId')
-    const path='artifacts/screenshots/web-case-saved.png';await page.screenshot({path,fullPage:true});await test.info().attach('web-case-saved',{path,contentType:'image/png'})
+    const path='artifacts/local/screenshots/web-case-saved.png';await page.screenshot({path,fullPage:true});await test.info().attach('web-case-saved',{path,contentType:'image/png'})
     await page.locator('.journey-nav a[href="#/devices"]').click();await expect(page.locator('.control-panel')).toBeVisible()
     await page.goto(`${viewer.url}/#/cases/${cases.cases[0]!.caseId}/edit`);await expect(page.locator('#web-case-name')).toHaveValue('Synthetic regression')
   }finally{await viewer.close();await rm(root,{recursive:true,force:true})}

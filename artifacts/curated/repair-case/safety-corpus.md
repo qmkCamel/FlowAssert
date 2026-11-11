@@ -1,6 +1,6 @@
 # 修复安全语料 v1（合成契约层）
 
-冻结文件：[repair-safety-corpus.test.ts](../../tests/repair-safety-corpus.test.ts)。2026-10-04 使用 `pnpm exec vitest run tests/repair-safety-corpus.test.ts` 验证，1 个测试包含 60 个命名向量。
+冻结文件：[repair-safety-corpus.test.ts](../../../tests/repair-safety-corpus.test.ts)。2026-10-04 使用 `pnpm exec vitest run tests/repair-safety-corpus.test.ts` 验证，1 个测试包含 60 个命名向量。
 
 | 类别 | 样本 | 软件级成功 | 正确弃权／未修复 | 错误验证 |
 | --- | ---: | ---: | ---: | ---: |

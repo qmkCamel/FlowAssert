@@ -41,7 +41,7 @@ try {
   await page.locator('.wb-measurement').waitFor()
   assert((await page.locator('.wb-runtime-dimensions').textContent()).includes('Performance: Passed'))
   await page.locator('#workbench-panel').evaluate(panel => { panel.scrollTop += panel.querySelector('#wb-detail').getBoundingClientRect().top - panel.getBoundingClientRect().top - 20 })
-  await mkdir('artifacts/screenshots', { recursive: true }); await page.screenshot({ path: 'artifacts/screenshots/runtime-gates-packaged.png' })
+  await mkdir('artifacts/local/screenshots', { recursive: true }); await page.screenshot({ path: 'artifacts/local/screenshots/runtime-gates-packaged.png' })
   const sensitive = await workbench.start(header + '- assertEventually: { predicate: { assertVisible: { text: "Hello, harness." } }, withinMs: 2000, pollMs: 200, maxSampleGapMs: 1000 }')
   await workbench.wait(); assert.equal((await workbench.get(sensitive.id)).verdict, 'inconclusive')
   const legacy = await workbench.start(header + '- assertVisible: { text: "Hello, harness." }')

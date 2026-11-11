@@ -5,7 +5,7 @@ import { createFixture } from '../../tests/visual-acceptance/fixture.ts'
 import { Browser, preflight, hash } from './browser.mjs'
 
 // Opt-in real browser contract probe, not part of ordinary unit-test startup.
-const root = resolve('artifacts/visual-acceptance', `safety-${randomUUID()}`)
+const root = resolve('artifacts/local/visual-acceptance', `safety-${randomUUID()}`)
 await mkdir(root, { recursive: true })
 const environment = await preflight(root), fixture = await createFixture(`${root}/fixture`), results = []
 try {

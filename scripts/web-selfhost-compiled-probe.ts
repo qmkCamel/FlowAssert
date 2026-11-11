@@ -6,7 +6,7 @@ import { resolveMirrorConfig } from '../src/mcp-config.js'
 // Exercises the shipped adapter and child entry, not source imports of the runtime.
 const entry = new URL('../lib/application.js', import.meta.url).href
 const { LocalDeviceRuntime } = await import(entry)
-const root = resolve('artifacts/visual-acceptance', `compiled-${new Date().toISOString().replaceAll(':','-')}`)
+const root = resolve('artifacts/local/visual-acceptance', `compiled-${new Date().toISOString().replaceAll(':','-')}`)
 await mkdir(root,{recursive:true})
 const previous = process.env.MOBILE_MIRROR_WEB_TESTS
 process.env.MOBILE_MIRROR_WEB_TESTS = '1'

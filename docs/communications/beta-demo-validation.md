@@ -8,10 +8,10 @@
 
 另有 `tests/e2e/beta-onboarding.spec.ts` 一项通过：直接提取任务卡中的 YAML，在真实 Viewer/MirrorService 的 Mock provider 上保存用例并执行 pass→fail→pass 三个修订，刷新后读取旧失败，导出实际工作台 HTML 并核对预览字节。它证明作者自动化路径可走通，不替代非作者研究，也不是真机验收。
 
-已保留并目视检查五张 PNG：`artifacts/screenshots/beta-demo-failure.png`、`beta-demo-review.png`、`beta-demo-narrow.png`、`beta-workbench-failure.png`、`beta-workbench-share.png`。新截图分别标为宣传页模拟或实际工作台 Mock，均不含私人真机页面。预览取景先确认 iframe 已绘制，再截图，避免整页截图中出现空白预览。
+已保留并目视检查五张 PNG：`artifacts/curated/screenshots/beta-demo-failure.png`、`beta-demo-review.png`、`beta-demo-narrow.png`、`beta-workbench-failure.png`、`beta-workbench-share.png`。新截图分别标为宣传页模拟或实际工作台 Mock，均不含私人真机页面。预览取景先确认 iframe 已绘制，再截图，避免整页截图中出现空白预览。
 
 首轮缺素材测试错误地依赖 Playwright route 拦截 file URL，实际读到了本机既有材料，因而期望“缺失”失败。已保留首轮现场在忽略目录，不将其作为共享资产；改为物理隔离的单文件副本后验证通过。未删除或改动原始私人素材。
 
 本轮 Node 24.19.0、pnpm 11.7.0、Chrome 154.0.8037.98。定向三项最终通过，全量中的这三项也通过；完整门禁、既有失败与同包安装记录见源码 `openspec/changes/prepare-guided-beta-kit/implementation-validation.md`。
 
-浏览器录像保留于本机忽略路径 `artifacts/runtime/beta-demo/offline-demo.webm`。它是宣传页模拟流程的实际录屏，无音轨，不是真实产品操作或手机验收，不作为运行性能指标。90 秒配音提纲见[介绍稿](product-introduction.zh-CN.md)；没有伪造真人口播或非作者体验。
+浏览器录像保留于本机忽略路径 `artifacts/local/runtime/beta-demo/offline-demo.webm`。它是宣传页模拟流程的实际录屏，无音轨，不是真实产品操作或手机验收，不作为运行性能指标。90 秒配音提纲见[介绍稿](product-introduction.zh-CN.md)；没有伪造真人口播或非作者体验。

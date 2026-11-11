@@ -62,7 +62,7 @@
 
 ## 当前验收边界
 
-确定性测试覆盖 catalog 漂移、未登记目标、并发幂等、响应重试、三个受理落盘崩溃点、受理后取消、suite/case/attempt、跨 execution 拒绝、证据篡改降级、MCP image、DSH attachment、两个进程竞争和 nonce/PID 复用。Viewer 与 Agent 共用同一历史并显示执行来源，截图见 [`mobile-mirror-agent-run-source.png`](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-agent-run-source.png)。同 tarball 的 MCP、DSH Native/PTC 及 Android/iPhone Fixture 已通过；真实模型理解仍待补证，详见[验收报告](agent-test-run-control-validation.md)。
+确定性测试覆盖 catalog 漂移、未登记目标、并发幂等、响应重试、三个受理落盘崩溃点、受理后取消、suite/case/attempt、跨 execution 拒绝、证据篡改降级、MCP image、DSH attachment、两个进程竞争和 nonce/PID 复用。Viewer 与 Agent 共用同一历史并显示执行来源，截图见 [`mobile-mirror-agent-run-source.png`](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-agent-run-source.png)。同 tarball 的 MCP、DSH Native/PTC 及 Android/iPhone Fixture 已通过；真实模型理解仍待补证，详见[验收报告](agent-test-run-control-validation.md)。
 # 变更验收只读入口
 
 新增 `mobile_acceptance_get({ id, revision? })`；与现有运行授权共用项目、flow/suite、平台、App 和材料分享策略。当前默认集合共 20 个工具，另有 5 个 opt-in Preview 修复工具；本查询不改变既有工具参数。只读元数据，不授予发布权。使用和边界见 [变更验收](change-acceptance-records.md)。

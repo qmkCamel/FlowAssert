@@ -50,7 +50,7 @@
 
 - [x] 7.1 串行运行 `pnpm check`、`pnpm build`、`pnpm test:e2e`、`pnpm pack:check`，验证旧流程／恢复／业务 hook／视觉基线不回归。（91 文件／747 测试、62 E2E；含截图 decode 竞态修复及确定性回归。）
 - [x] 7.2 同一 tarball 验证实际 OCR helper、双 Mock 子进程、CLI、MCP 与 DSH 0.1.5-rc.2 Native/PTC；记录精确版本和新增工具清单。（SHA-256 `dd14e8a34200486e249d4a5de76c5e55cf794fc42a96ac6ab5f32e871edc893f`；20 工具、实际中英文合成识别、双 Mock Native/PTC 均通过。）
-- [x] 7.3 完成严格 OpenSpec 校验、架构／使用／评测／恢复文档和能力状态表，按 OCR／矩阵／集成分段双语提交明确路径。（OCR `REDACTED_REVISION`、矩阵 `REDACTED_REVISION`，集成门禁与本条更新一起提交；证据见 `artifacts/local-device-matrix/validation.md`。）
+- [x] 7.3 完成严格 OpenSpec 校验、架构／使用／评测／恢复文档和能力状态表，按 OCR／矩阵／集成分段双语提交明确路径。（OCR `REDACTED_REVISION`、矩阵 `REDACTED_REVISION`，集成门禁与本条更新一起提交；证据见 `artifacts/curated/local-device-matrix/validation.md`。）
 
 ## 8. 真实质量与设备验收
 

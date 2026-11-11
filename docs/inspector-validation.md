@@ -42,7 +42,7 @@ Viewer 点击“检查界面”，等待冻结 PNG 和结构整体就绪。点�
 - 场景：系统设置搜索页，输入公开测试标记 `MOBILE-MIRROR-PUBLIC-ACCEPTANCE`，避免以账户首页作为最终验收截图。截图和节点来自真实设备；浏览器使用本地源码 Viewer 与真实 Chrome。
 - 通过：冻结 PNG 与节点树、文本筛选、节点详情与 overlay、截图点击候选、重新获取、取消后保留冻结结果、返回实时、再次进入后 Stop 清除图片。未出现几何映射警告，测试文字在停止前清除。
 - 正常停止后另查：4723/8100/9100 无监听，devicectl 进程列表无 WDA runner。会话退出本身不作为清理证明。
-- 私有证据保留在 `artifacts/physical-validation/iphone-acceptance-2026-09-15/`：`inspector-physical.ts`、`inspector-iphone-report.json`、`inspector-iphone-final.png`、`inspector-processes-after.json`。截图已打开人工检查；原始运行材料保持 Git 忽略，避免公开设备标识。未将此结果扩展为 Android 或打包宿主验收。
+- 私有证据保留在 `artifacts/local/physical-validation/iphone-acceptance-2026-09-15/`：`inspector-physical.ts`、`inspector-iphone-report.json`、`inspector-iphone-final.png`、`inspector-processes-after.json`。截图已打开人工检查；原始运行材料保持 Git 忽略，避免公开设备标识。未将此结果扩展为 Android 或打包宿主验收。
 
 ## Android 独立真机验收
 
@@ -51,7 +51,7 @@ Viewer 点击“检查界面”，等待冻结 PNG 和结构整体就绪。点�
 - 通过：冻结截图和结构、文本“亮度”筛选（4 个匹配）、节点详情、节点与父节点 overlay、截图点击候选、重新获取、取消保留冻结结果、返回实时、再次进入检查后 Stop 清除图像。选中节点和高亮节点均为 n10，几何警告为空。
 - 首次探针遇到 USB 弹窗；第二次探针在 100ms 筛选防抖完成前选到无 bounds 的根节点。将探针改为等待实际含“亮度”的结果后通过，无需修改产品代码。
 - 实时画面实际为 PNG polling fallback；本轮不声明 scrcpy/H.264 路径新增验收。停止后独立查询：4723/8200 无 listener，设备无 UiAutomator2/scrcpy 进程，ADB 转发与测试前一致。
-- 已保留并人工查看 `artifacts/physical-validation/android-inspector-2026-09-15/inspector-android-final.png`；同目录含探针、结果 JSON、设备进程和转发前后记录、cleanup-report.json。原始设备材料保持 Git 忽略。
+- 已保留并人工查看 `artifacts/local/physical-validation/android-inspector-2026-09-15/inspector-android-final.png`；同目录含探针、结果 JSON、设备进程和转发前后记录、cleanup-report.json。原始设备材料保持 Git 忽略。
 
 当前 tasks 38/39；仅剩打包宿主干净安装验收（依赖阻塞）。本次按用户要求提交并推送源码与验收文档，不创建发布版本；原始真机材料保持本地留存。
 

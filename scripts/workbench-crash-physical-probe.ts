@@ -21,7 +21,7 @@ if (!['android', 'ios'].includes(platform) || appId !== 'dev.mobilemirror.fixtur
   typeof caps['appium:udid'] !== 'string' || !caps['appium:udid'] || caps['appium:app'] || caps['appium:fullReset']) {
   throw new Error('Only an explicit physical device with preinstalled Fixture is allowed')
 }
-const root = resolve('artifacts/physical-validation', `host-crash-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `host-crash-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const object = { type: 'object', properties: {}, required: [] }
 await writeFile(resolve(root, 'project.json'), JSON.stringify({ extensions: {

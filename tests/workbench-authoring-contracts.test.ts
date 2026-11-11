@@ -43,8 +43,11 @@ it('keeps frozen legacy authoring inputs, HTTP, tool schemas and result fixtures
   const security = JSON.parse(await readFile(new URL('./fixtures/flowassert-security-contract-baseline.json', import.meta.url), 'utf8')) as { updatedFiles: Record<string, string> }
   // Explicit record keys for Zod 4 only; no API or evidence fixture rebaselining.
   expect(Object.keys(security.updatedFiles)).toEqual(['src/viewer-workbench-runs-http.ts'])
+  const artifacts = JSON.parse(await readFile(new URL('./fixtures/artifact-storage-contract-baseline.json', import.meta.url), 'utf8')) as { updatedFiles: Record<string, string> }
+  // Only the probe's default screenshot output moves to local storage; no runtime contract changes.
+  expect(Object.keys(artifacts.updatedFiles)).toEqual(['scripts/mcp-runtime-probe.ts'])
   for (const [path, digest] of Object.entries(baseline.files)) {
-    const expected = security.updatedFiles[path] ?? branding.updatedFiles[path] ?? privacy.updatedFiles[path] ?? web.updatedFiles[path] ?? playback.updatedFiles[path] ?? harness.updatedFiles[path] ?? repair.updatedFiles[path] ?? runtime.updatedFiles[path] ?? integration.updatedFiles[path] ?? digest
+    const expected = artifacts.updatedFiles[path] ?? security.updatedFiles[path] ?? branding.updatedFiles[path] ?? privacy.updatedFiles[path] ?? web.updatedFiles[path] ?? playback.updatedFiles[path] ?? harness.updatedFiles[path] ?? repair.updatedFiles[path] ?? runtime.updatedFiles[path] ?? integration.updatedFiles[path] ?? digest
     expect(sha256(await readFile(new URL(`../${path}`, import.meta.url))), path).toBe(expected)
   }
 })

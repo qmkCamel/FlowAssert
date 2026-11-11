@@ -11,4 +11,4 @@
 
 ![Cordis 与 Harness 生命周期](cordis-harness-lifecycle.png)
 
-“自动清理”指通过生命周期登记的可逆 effect，不承诺任意插件资源或手机进程都会自动回收。实际支持边界见[能力总表](../../docs/capabilities.md)；宿主编排建议见 [PTC 调研](../../docs/research/ptc-architecture-and-codex-2026-09-17.md)。原始真机媒体仍按仓库规则仅保留本机。
+“自动清理”指通过生命周期登记的可逆 effect，不承诺任意插件资源或手机进程都会自动回收。实际支持边界见[能力总表](../../../docs/capabilities.md)；宿主编排建议见 [PTC 调研](../../../docs/research/ptc-architecture-and-codex-2026-09-17.md)。原始真机媒体仍按仓库规则仅保留本机。

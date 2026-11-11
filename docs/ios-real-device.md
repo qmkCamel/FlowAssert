@@ -99,7 +99,7 @@ pnpm tsx scripts/physical-observation-probe.ts
 
 探针保留最终 PNG，并只打印版本、尺寸、revision/epoch、结构节点数和 owned-session 清理状态。iPhone 离线、锁定、未信任或模型未实际收到图片时，都必须单独记录为未通过，不能用旧 Viewer 截图替代。
 
-当前感知、MCP 感知和媒体真机探针默认将**每次运行**的原图与指标写入 Git 忽略的 `artifacts/physical-validation/`；不再覆盖仓库已追踪的历史示例截图/指标。显式 `MOBILE_MIRROR_EVIDENCE_PATH` 或 `MOBILE_MIRROR_MEDIA_*_PATH` 也必须指向该私有目录内。运行后仍需目检图片并在分享前独立脱敏。
+当前感知、MCP 感知和媒体真机探针默认将**每次运行**的原图与指标写入 Git 忽略的 `artifacts/local/physical-validation/`；不再覆盖仓库已追踪的历史示例截图/指标。显式 `MOBILE_MIRROR_EVIDENCE_PATH` 或 `MOBILE_MIRROR_MEDIA_*_PATH` 也必须指向该私有目录内。运行后仍需目检图片并在分享前独立脱敏。
 
 ### 语义文本与应用生命周期验收
 
@@ -146,7 +146,7 @@ pnpm run test:media:physical
 
 探针不会开启自动 provisioning/device registration。它验证有效 MJPEG relay、Viewer 可见首帧、10 秒 fps、媒体期间 fresh observation/安全动作、固定故障回退和 owned stop，并把 Viewer 截图与指标 JSON 写入 `artifacts/`。Viewer 截图可能包含手机个人内容，发布前必须人工复核，原始真机截图不要提交仓库。
 
-2026-10-05 在 iPhone 16 Plus / iOS 26.2.1、Xcode 26.5、Appium 3.2.0、XCUITest 10.19.1 上重新执行：浏览器首显 134 ms，relay 在 10 秒内接收 144 帧（约 14.16 fps），安全动作后 fresh PNG 与 231 个结构节点可用，主动断流后 285 ms 回退，owned session 正常清理。测试画面静止，浏览器 `paintedFrames=1` 不用于声称动态内容 8 fps；上述 fps 是服务端持续接收帧的指标。运行时截图已人工检查；本轮原始图片/指标移至 Git 忽略的私有 `artifacts/physical-validation/ios-acceptance-2026-10-05/`，仓库追踪的示例截图与指标文件保持原样。完整对账见 [2026-10-05 真机验收记录](physical-validation-2026-10-05.md)。
+2026-10-05 在 iPhone 16 Plus / iOS 26.2.1、Xcode 26.5、Appium 3.2.0、XCUITest 10.19.1 上重新执行：浏览器首显 134 ms，relay 在 10 秒内接收 144 帧（约 14.16 fps），安全动作后 fresh PNG 与 231 个结构节点可用，主动断流后 285 ms 回退，owned session 正常清理。测试画面静止，浏览器 `paintedFrames=1` 不用于声称动态内容 8 fps；上述 fps 是服务端持续接收帧的指标。运行时截图已人工检查；本轮原始图片/指标移至 Git 忽略的私有 `artifacts/local/physical-validation/ios-acceptance-2026-10-05/`，仓库追踪的示例截图与指标文件保持原样。完整对账见 [2026-10-05 真机验收记录](physical-validation-2026-10-05.md)。
 
 ## 三种运行方式
 

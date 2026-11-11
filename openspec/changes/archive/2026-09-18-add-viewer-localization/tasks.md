@@ -22,7 +22,7 @@
 - [x] 4.1 保持现有英文 Playwright 场景与选择器兼容，并新增中文浏览器首次访问、手动切换、刷新恢复、无效偏好和存储不可用覆盖。
 - [x] 4.2 在 Mock streaming、慢连接检查和已有助手 report/未提交输入三种状态切换语言，验证零切换请求、运行态/画面/控件/report/token/字段值不变且完成结果使用新语言。
 - [x] 4.3 扫描中英文 DOM、ARIA、console、response、localStorage 和截图，确认无内部 key、`undefined`、意外混排或私有 canary。
-- [x] 4.4 保留 `artifacts/screenshots/mobile-mirror-zh-cn.png`，人工检查中文桌面与窄屏布局、进度/策略/连接边界和敏感信息。
+- [x] 4.4 保留 `artifacts/curated/screenshots/mobile-mirror-zh-cn.png`，人工检查中文桌面与窄屏布局、进度/策略/连接边界和敏感信息。
 
 ## 5. 文档与交付门禁
 

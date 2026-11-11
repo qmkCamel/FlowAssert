@@ -66,7 +66,7 @@ TODO：可信项目登记绑定 App 前台身份、平台适配的唯一可见�
 
 ## 本机证据与复现
 
-最终目录：`artifacts/physical-validation/repair-ios-2026-10-06T08-06-14.640Z/`，含 report、前后 PNG／结构、原 run XML／解析回执／tap fact、隔离 Products 和有界私有日志。原始设备材料已被 `.gitignore` 排除；根 0700、私有日志 0600，不发布设备 ID、Team、capabilities 或原始日志，仓库只保留脚本和脱敏结论。
+最终目录：`artifacts/local/physical-validation/repair-ios-2026-10-06T08-06-14.640Z/`，含 report、前后 PNG／结构、原 run XML／解析回执／tap fact、隔离 Products 和有界私有日志。原始设备材料已被 `.gitignore` 排除；根 0700、私有日志 0600，不发布设备 ID、Team、capabilities 或原始日志，仓库只保留脚本和脱敏结论。
 
 ```sh
 MOBILE_MIRROR_CAPABILITIES_PATH=<授权的本机iOS配置绝对路径> \

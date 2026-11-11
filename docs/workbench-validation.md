@@ -16,10 +16,10 @@ Android 和 iPhone + 第三方 App的最小完整闭环均已在真机通过：�
 构建后运行 ID：`9e3dedfa-fc4e-415f-8d15-2fefd6d09c8f`。会话始终为 `mock-iphone-15`，运行后 `session-retained`。
 
 保留材料：
-- [构建后运行摘要](https://github.com/qmkCamel/flowassert/blob/main/artifacts/metrics/mobile-mirror-workbench-compiled.json)
-- [工作台运行截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-running.png)
-- [证据与诊断截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-evidence.png)
-- [构建后工作台截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/screenshots/mobile-mirror-workbench-compiled.png)
+- [构建后运行摘要](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/metrics/mobile-mirror-workbench-compiled.json)
+- [工作台运行截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-running.png)
+- [证据与诊断截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-evidence.png)
+- [构建后工作台截图](https://raw.githubusercontent.com/qmkCamel/flowassert/main/artifacts/curated/screenshots/mobile-mirror-workbench-compiled.png)
 
 负向验证包括：原生断言返回 false；引擎绿色但检查点内容改变；声明 blocker 命中；截图落盘失败；证据篡改与路径穿越；取消时等待已派发动作收敛；通信错误后封锁后续控制，直到断开重连；中断/损坏记录恢复；运行准备失败不遗留虚假的 running 记录；跨源调用及未明确同意本地留证被拒绝。
 
@@ -43,7 +43,7 @@ Android 和 iPhone + 第三方 App的最小完整闭环均已在真机通过：�
 | 回溯 | 停止设备会话并重启 Viewer 后，manifest 与原记录完全一致；全部 26 个文件通过 HTTP 读取和长度/SHA-256 校验，历史原图成功显示 |
 | 清理 | 此轮正常 Stop 返回 idle，无需强制停止 helper |
 
-已人工检查运行结果与重启历史截图，以及首页/精选检查点原图。原始材料在本机 `artifacts/physical-validation/workbench-2026-09-14T07-00-53-294Z/`，不进入发布包。后台设置改变后同一软件栈完成了流程，支持其为先前卡顿的主要影响因素；Toast listener 仍关闭，不能宣称该 ROM 的 Toast 反射问题已修复。用例不验证 Toast。
+已人工检查运行结果与重启历史截图，以及首页/精选检查点原图。原始材料在本机 `artifacts/local/physical-validation/workbench-2026-09-14T07-00-53-294Z/`，不进入发布包。后台设置改变后同一软件栈完成了流程，支持其为先前卡顿的主要影响因素；Toast listener 仍关闭，不能宣称该 ROM 的 Toast 反射问题已修复。用例不验证 Toast。
 
 54.5 秒包含每步全尺寸 PNG 与源树采集，部分采集达到 7–8 秒；这是可回溯的闭环基线，尚未达到快速回归的性能目标。帧率是该内容与该设备观测窗口的实测值，不是恒定帧率承诺。
 
@@ -51,7 +51,7 @@ Android 和 iPhone + 第三方 App的最小完整闭环均已在真机通过：�
 
 随后以新的 owned session 执行 `b95488c1-f0e0-42d7-88c1-ae1b13e64864`：第三方 App仍在精选页时，故意声明 `assertNotVisible: { accessibilityId: SAMPLE_FEATURED_PAGE }`。工作台按预期输出 `fail`，在第 3 步中止，后续 done 没有执行；失败步骤的原图、源树及断言诊断已保留。全程 37,290 ms、3 PNG + 3 XML，与 YAML/日志合计 8 个文件均在 Viewer 重启后通过 HTTP 与 SHA-256 校验。同会话媒体增加 916 帧，浏览器约 24.38 fps、receive-to-paint p95 6 ms；运行时本地控件响应正常，Stop 正常返回 idle。
 
-本机材料：`artifacts/physical-validation/workbench-2026-09-14T07-02-34-306Z/`。这是一条验证失败判定的负向用例，预期结果就是 fail；它不撤销前一条完整流程的通过结果。
+本机材料：`artifacts/local/physical-validation/workbench-2026-09-14T07-02-34-306Z/`。这是一条验证失败判定的负向用例，预期结果就是 fail；它不撤销前一条完整流程的通过结果。
 
 ### 设置前的失败记录（保留）
 
@@ -65,7 +65,7 @@ Android 和 iPhone + 第三方 App的最小完整闭环均已在真机通过：�
 | 设备诊断 | OPlus 在 UiAutomator2 启动约 11 秒后接管 `UiAut` 唤醒锁并代理该 UID 的 alarm；随后出现 HANS 对该进程的 accessibility RPC 记录。后台限制是需排除的主要阻塞，不能据此断言它解释了所有 Toast 反射异常 |
 | 清理 | 首轮正常删除会话；第二轮删除也卡住，按明确 ownership 停止本次 UiAutomator2 helper 后完成退出；最终 Appium listener、UiAutomator2、ADB forward 与 scrcpy 均无本次残留 |
 
-[脱敏指标](https://github.com/qmkCamel/flowassert/blob/main/artifacts/metrics/mobile-mirror-workbench-android-physical.json)包含失败与成功尝试。原始截图、源树、日志和运行目录位于本机 `artifacts/physical-validation/`，被 Git 与发布包排除。
+[脱敏指标](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/metrics/mobile-mirror-workbench-android-physical.json)包含失败与成功尝试。原始截图、源树、日志和运行目录位于本机 `artifacts/local/physical-validation/`，被 Git 与发布包排除。
 
 探针现在会检查运行期间主题和历史控件响应、完成状态、重启历史、逐文件完整性，并保留失败摘要。正常操作超时与 Appium 建会话超时分开设置，避免把建会话等待时间用于每个步骤；没有截图的失败记录不会再被探针的截图等待错误覆盖。
 
@@ -84,9 +84,9 @@ Android 和 iPhone + 第三方 App的最小完整闭环均已在真机通过：�
 | 步骤证据 | 12 张 1290 × 2796 原图、12 份源树，另有 YAML 与执行日志；已人工检查精选原图、完成状态与重启历史截图 |
 | 历史回溯 | Stop 返回 idle，重启 Viewer 后 manifest 完全一致；26 个文件经 HTTP 读取及长度/SHA-256 校验，历史原图可加载 |
 
-[iPhone 脱敏指标](https://github.com/qmkCamel/flowassert/blob/main/artifacts/metrics/mobile-mirror-workbench-ios-physical.json)。原始材料仅在本机 `artifacts/physical-validation/workbench-2026-09-14T08-05-26-654Z/`，被 Git 与发布包排除。
+[iPhone 脱敏指标](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/metrics/mobile-mirror-workbench-ios-physical.json)。原始材料仅在本机 `artifacts/local/physical-validation/workbench-2026-09-14T08-05-26-654Z/`，被 Git 与发布包排除。
 
-负向运行 `1cab087a-9738-4f44-a967-0e65f0e994c7` 故意断言可见的“首页”应不可见，31,468 ms 后按预期在第 3 步得到 `fail`，没有执行后续 done。失败步骤包含一份真实可见节点的诊断、原图和源树；3 PNG + 3 XML 与 YAML/日志合计 8 个文件，在重启后全部通过校验。该轮 MJPEG relay 增加 466 帧，约 14.47 fps；本地控件响应、同会话与历史检查通过。材料位于本机 `artifacts/physical-validation/workbench-2026-09-14T08-06-57-586Z/`。
+负向运行 `1cab087a-9738-4f44-a967-0e65f0e994c7` 故意断言可见的“首页”应不可见，31,468 ms 后按预期在第 3 步得到 `fail`，没有执行后续 done。失败步骤包含一份真实可见节点的诊断、原图和源树；3 PNG + 3 XML 与 YAML/日志合计 8 个文件，在重启后全部通过校验。该轮 MJPEG relay 增加 466 帧，约 14.47 fps；本地控件响应、同会话与历史检查通过。材料位于本机 `artifacts/local/physical-validation/workbench-2026-09-14T08-06-57-586Z/`。
 
 清理审计发现：正常 Stop 删除 Appium session 并释放 8100/9100 转发，Appium 退出后本次启动的 WDA xcodebuild 仍存活。已按启动时记录的精确 PID 发出 SIGINT，随后确认 host xcodebuild、设备上的 WebDriverAgentRunner 进程与 4723/8100/9100 listener 均消失；已安装的签名 runner App 保留。由此可以确认本次最终清理完成，但**不能报告为 WDA 自动生命周期回收已实现**，该行为仍需独立改进。
 

@@ -47,7 +47,7 @@ Viewer 是由 `viewer/index.html`、`viewer/app.js` 和 `viewer/styles.css` 组�
 
 ### 5. 浏览器验收同时验证语言和状态不变量
 
-Playwright 保持默认英文测试不变，新增中文首次选择/手动切换/刷新持久化测试，并在 Mock streaming 与连接助手 report 存在时切换语言，核对 lifecycle、画面、输入值、report、按钮状态和请求计数不变。截图固定使用受控 Mock/assistant 数据，保存 `artifacts/screenshots/mobile-mirror-zh-cn.png` 并人工检查桌面布局、窄屏换行和敏感信息。
+Playwright 保持默认英文测试不变，新增中文首次选择/手动切换/刷新持久化测试，并在 Mock streaming 与连接助手 report 存在时切换语言，核对 lifecycle、画面、输入值、report、按钮状态和请求计数不变。截图固定使用受控 Mock/assistant 数据，保存 `artifacts/curated/screenshots/mobile-mirror-zh-cn.png` 并人工检查桌面布局、窄屏换行和敏感信息。
 
 ## Risks / Trade-offs
 

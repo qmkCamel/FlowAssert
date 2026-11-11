@@ -36,7 +36,7 @@ Inspector→失败→新修订复验、provenance、readiness／助手／业务 
 
 首次验收引导、创作维护、失败诊断复验、变更验收对象、外部测试资产、本机 OCR＋双槽矩阵均有工程实现。四个 change 为 14/16、21/24、21/24、33/39，合计 89/103；余下 14 项分别依赖真机、授权真实材料、独立使用者及前置验收，不全依赖手机。`feat/change-acceptance-roadmap@REDACTED_REVISION` 已合入 `dev`，保留 `dev@REDACTED_REVISION` 的治理能力；合入不等于完成归档或正式发布。
 
-工程证据包括 747 项检查、62 E2E、同包 20 工具 MCP／DSH 0.1.5-rc.2 Native/PTC、实际 Vision 中英文合成识别和双 Mock。完整边界见[六项状态](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md)及[验证记录](https://github.com/qmkCamel/flowassert/blob/main/artifacts/local-device-matrix/validation.md)。下文保留各日期的历史里程碑，不将当时“未实现”改写为历史已通过。
+工程证据包括 747 项检查、62 E2E、同包 20 工具 MCP／DSH 0.1.5-rc.2 Native/PTC、实际 Vision 中英文合成识别和双 Mock。完整边界见[六项状态](https://github.com/qmkCamel/flowassert/blob/main/openspec/changes/add-change-acceptance-records/roadmap.md)及[验证记录](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/local-device-matrix/validation.md)。下文保留各日期的历史里程碑，不将当时“未实现”改写为历史已通过。
 
 ## 2026-09-17 有限 AI 恢复：双端 Fixture 真实模型矩阵通过
 

@@ -8,7 +8,7 @@ import { boundedProposal, planRecovery, type RecoveryObservation, type RecoveryP
 // Only synthetic images leave this probe. Credentials remain in the environment.
 const model = { endpoint: 'https://api.deepseek.com/chat/completions', model: 'deepseek-flash', apiKeyEnv: 'MIRROR_DEEPSEEK_KEY', thinking: 'disabled' as const }
 if (!process.env[model.apiKeyEnv]) throw new Error('Set MIRROR_DEEPSEEK_KEY in the process environment')
-const root = resolve('artifacts/fixture/recovery-deepseek', new Date().toISOString().replaceAll(':', '-'))
+const root = resolve('artifacts/local/fixture/recovery-deepseek', new Date().toISOString().replaceAll(':', '-'))
 await mkdir(root, { recursive: true })
 const browser = await chromium.launch({ headless: true, ...(!existsSync(chromium.executablePath()) ? { executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' } : {}) })
 const results: unknown[] = []

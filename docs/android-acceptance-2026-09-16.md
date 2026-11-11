@@ -27,9 +27,9 @@
 
 **环境限制**：本轮多次发生“ADB 能列出设备、shell/getprop 超时”，重新插拔/定向重连后仍复发；人工重启本机 ADB 服务后，连续读取及修正后的输入/录像流程通过。最终进程审计也需要恢复 ADB。该结果证明功能样本及最终无残留，不证明停止瞬间即可通过设备审计，也不代表已经解决 ADB 连接稳定性。产品没有增加自动重启 ADB 的行为，后续应单独定位 transport/媒体退出关联。
 
-本机忽略目录：`artifacts/physical-validation/android-acceptance-2026-09-16/`。包含 guided-report.json、首轮与快连 PNG/XML/WebM、语义输入失败基线、Appium 日志、连接参数及 host-cleanup.json。未经筛查的原始材料不进入公开仓库或安装包。
+本机忽略目录：`artifacts/local/physical-validation/android-acceptance-2026-09-16/`。包含 guided-report.json、首轮与快连 PNG/XML/WebM、语义输入失败基线、Appium 日志、连接参数及 host-cleanup.json。未经筛查的原始材料不进入公开仓库或安装包。
 
 
-录像原始材料位于 `artifacts/physical-validation/workbench-video-2026-09-16T06-34-35-772Z/`，含 probe.json、每步证据、recording.webm、ffprobe.json、frames.md5 和 restored.png；已打开检查重启回放画面，原始截图不公开。
+录像原始材料位于 `artifacts/local/physical-validation/workbench-video-2026-09-16T06-34-35-772Z/`，含 probe.json、每步证据、recording.webm、ffprobe.json、frames.md5 和 restored.png；已打开检查重启回放画面，原始截图不公开。
 
 工程门禁：309 项单测、41 项 E2E、类型/契约、build、pack:check 通过。OpenSpec 1.9.0 全库 strict 24/24 和公开内容检查通过。真实 Android 结果仅覆盖上述设备与场景，不扩展为任意应用或业务持久化证明。

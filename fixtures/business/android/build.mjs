@@ -7,7 +7,7 @@ const sdk = process.env.ANDROID_HOME
 if (!sdk) throw new Error('Set ANDROID_HOME explicitly')
 const buildTools = resolve(sdk, 'build-tools', process.env.ANDROID_BUILD_TOOLS ?? '33.0.2')
 const android = resolve(sdk, 'platforms', process.env.ANDROID_PLATFORM ?? 'android-33', 'android.jar')
-const out = resolve(root, '../../../artifacts/fixture/android')
+const out = resolve(root, '../../../artifacts/local/fixture/android')
 mkdirSync(resolve(out, 'classes'), { recursive: true }); mkdirSync(resolve(out, 'dex'), { recursive: true })
 const run = (file, args) => execFileSync(file, args, { stdio: 'inherit', cwd: out })
 run('javac', ['-source','8','-target','8','-classpath',android,'-d',resolve(out,'classes'),resolve(root,'MainActivity.java')])

@@ -106,9 +106,9 @@ test('serves MP4 with range support and plays, seeks and loads English subtitles
 
 test('keeps both languages, media and playground usable at desktop and narrow widths', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.screenshot({ path: 'artifacts/runtime/pages-2026-10-28/site-en-desktop.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/local/runtime/pages-2026-10-28/site-en-desktop.png', fullPage: true });
   await page.locator('#language').click();
-  await page.screenshot({ path: 'artifacts/runtime/pages-2026-10-28/site-zh-desktop.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/local/runtime/pages-2026-10-28/site-zh-desktop.png', fullPage: true });
   for (const width of [390, 320]) {
     await page.setViewportSize({ width, height: 844 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -116,11 +116,11 @@ test('keeps both languages, media and playground usable at desktop and narrow wi
     await page.locator('#run-flow').click();
     await expect(page.locator('#run-status')).toHaveText('通过');
   }
-  await page.screenshot({ path: 'artifacts/runtime/pages-2026-10-28/site-zh-narrow.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/local/runtime/pages-2026-10-28/site-zh-narrow.png', fullPage: true });
   await page.locator('#language').click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.screenshot({ path: 'artifacts/runtime/pages-2026-10-28/site-en-narrow.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/local/runtime/pages-2026-10-28/site-en-narrow.png', fullPage: true });
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('#history-list button')).toHaveCount(0);

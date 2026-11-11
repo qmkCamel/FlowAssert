@@ -31,7 +31,7 @@
 | 待评审方向 | [架构治理草稿](https://github.com/qmkCamel/flowassert/blob/main/docs/design/architecture-governance-draft.md) · [产品化路线图](https://github.com/qmkCamel/flowassert/blob/main/docs/roadmaps/workbench-productization.md) |
 | 框架选择与历史调研 | [决策演变](https://github.com/qmkCamel/flowassert/blob/main/docs/research/framework-decisions.md) · [Maestro / Appium](https://github.com/qmkCamel/flowassert/blob/main/docs/research/maestro-vs-appium.md) · [竞品全景](https://github.com/qmkCamel/flowassert/blob/main/docs/research/product-landscape.md) · [ViewInspectKit](https://github.com/qmkCamel/flowassert/blob/main/docs/research/viewinspectkit-comparison.md) · [AppClaw](https://github.com/qmkCamel/flowassert/blob/main/docs/design/appclaw-evaluation.md) |
 | 执行扩展与宿主编排 | [代码扩展 / AI 恢复](https://github.com/qmkCamel/flowassert/blob/main/docs/research/code-extensions-and-ai-recovery.md) · [PTC / Codex](https://github.com/qmkCamel/flowassert/blob/main/docs/research/ptc-architecture-and-codex-2026-09-17.md) |
-| 历史目标设计与素材 | [原始设计](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench.md) · [架构源图](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-architecture.mmd) · [渲染图](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-architecture.svg) · [目标时序](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-sequence.mmd) · [Cordis / Harness 分享素材](https://github.com/qmkCamel/flowassert/blob/main/artifacts/share/README.md) |
+| 历史目标设计与素材 | [原始设计](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench.md) · [架构源图](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-architecture.mmd) · [渲染图](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-architecture.svg) · [目标时序](https://github.com/qmkCamel/flowassert/blob/main/docs/design/mobile-test-workbench-sequence.mmd) · [Cordis / Harness 分享素材](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/share/README.md) |
 
 调研按原日期阅读，不代表最新上游支持范围；目标设计与草稿不替代已接受的 ADR。原 Maestro-first 方向已由 ADR 0006 调整。
 
@@ -75,4 +75,4 @@
 | 进度与规范 | [PRODUCT_TODO](https://github.com/qmkCamel/flowassert/blob/main/PRODUCT_TODO.md) · [里程碑](milestones.md) · [主规格](https://github.com/qmkCamel/flowassert/tree/main/openspec/specs/) · [活动变更](https://github.com/qmkCamel/flowassert/tree/main/openspec/changes/) · [归档](https://github.com/qmkCamel/flowassert/tree/main/openspec/changes/archive/) |
 | 历史文档核对 | [10 月 7 日整体核对](https://github.com/qmkCamel/flowassert/blob/main/docs/dev-documentation-audit-2026-10-07.md) · [同日较早记录](https://github.com/qmkCamel/flowassert/blob/main/docs/documentation-review-2026-10-07.md) |
 
-脱敏汇总指标位于 `artifacts/metrics/`；原始真机材料保留在被忽略的本机目录，全新克隆不包含这些原件。版本说明、任务勾选和历史报告均不能单独证明当前安装、平台访问或真机验收。
+脱敏汇总指标位于 `artifacts/curated/metrics/`；原始真机材料保留在被忽略的本机目录，全新克隆不包含这些原件。版本说明、任务勾选和历史报告均不能单独证明当前安装、平台访问或真机验收。

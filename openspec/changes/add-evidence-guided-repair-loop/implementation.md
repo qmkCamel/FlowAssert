@@ -137,7 +137,7 @@ Android 最新 10/10、93 份证据重启复读、重复 owner 拒绝与自有�
 
 已按四份 delta spec 的 55 个 Scenario 建立[场景级证据矩阵](acceptance-audit.md)，分别记录软件证据与尚缺的宿主、真机或独立验收。该预审不满足任务 11.4 的“全部前置验收完成”条件，因此不提前同步主规格或归档。
 
-最终离线门禁：串行执行 `pnpm check --maxWorkers=2`（111 文件、931 测试）、`pnpm test:e2e`（66/66）、`pnpm build`、`pnpm pack:check`、`pnpm test:application:probe`、`pnpm test:mcp:probe`（默认 20 工具）均通过；`pnpm dlx @fission-ai/openspec@1.9.0 validate --all --strict --no-interactive` 为 41/41。`tests/e2e/workbench-repair.spec.ts` 新增构建中历史/证据/语言交互和确切制品安装中交互；已人工检查 `artifacts/repair-case/repair-build-running-desktop.png`、`repair-install-running-desktop.png`、`repair-install-blocked-narrow.png`。在同时运行单测和 E2E 的首次门禁中，既有 workbench 等待用例与 matrix 临时目录清理各出现一次时序失败；两项单跑通过，随后全套串行通过，故不把首次并行结果算作通过证据。上述仍只是软件/Mock 与本机打包证据。
+最终离线门禁：串行执行 `pnpm check --maxWorkers=2`（111 文件、931 测试）、`pnpm test:e2e`（66/66）、`pnpm build`、`pnpm pack:check`、`pnpm test:application:probe`、`pnpm test:mcp:probe`（默认 20 工具）均通过；`pnpm dlx @fission-ai/openspec@1.9.0 validate --all --strict --no-interactive` 为 41/41。`tests/e2e/workbench-repair.spec.ts` 新增构建中历史/证据/语言交互和确切制品安装中交互；已人工检查 `artifacts/curated/repair-case/repair-build-running-desktop.png`、`repair-install-running-desktop.png`、`repair-install-blocked-narrow.png`。在同时运行单测和 E2E 的首次门禁中，既有 workbench 等待用例与 matrix 临时目录清理各出现一次时序失败；两项单跑通过，随后全套串行通过，故不把首次并行结果算作通过证据。上述仍只是软件/Mock 与本机打包证据。
 
 ## iPhone 真机补证（2026-10-06）
 

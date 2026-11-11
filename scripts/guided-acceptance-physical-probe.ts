@@ -19,7 +19,7 @@ const caps = JSON.parse(await readFile(capsPath, 'utf8')) as Record<string, unkn
 const platform = String(caps.platformName).toLowerCase()
 if (!['android', 'ios'].includes(platform) || !caps['appium:udid'] || caps['appium:app'] || caps['appium:fullReset'] ||
   (platform === 'android' ? caps['appium:appPackage'] : caps['appium:bundleId']) !== 'dev.mobilemirror.fixture') throw new Error('Explicit preinstalled Fixture without reset required')
-const root = resolve('artifacts/physical-validation', `guided-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+const root = resolve('artifacts/local/physical-validation', `guided-${platform}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
 await mkdir(root, { recursive: true, mode: 0o700 })
 const database = resolve(root, 'orders.sqlite')
 // A physical iPhone needs an explicitly authorized LAN address. Never widen the

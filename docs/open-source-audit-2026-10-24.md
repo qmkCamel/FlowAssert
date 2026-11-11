@@ -73,7 +73,7 @@
 
 运行中交互检查覆盖：长流程/慢取源树/慢文字输入/慢准备期间可见进度，主题、历史及刷新保持可用，取消阻止后续动作，失败保留前次成功记录或已取得的 PNG。它们均来自本次通过的浏览器回归，不依靠静态代码推断。
 
-新截图 [`flowassert-workbench.png`](../artifacts/screenshots/flowassert-workbench.png) 来自本次 Mock 运行，已原尺寸查看；工作台、Mock 设备内容、运行结果和本地演示标识可见，未见账号或凭证。哈希固定在 `public-readiness.config.json`。本轮生成的 123 个历史 artifact 变动保存在本地审计目录，已逐路径恢复，避免覆盖旧取证材料。
+新截图 [`flowassert-workbench.png`](../artifacts/curated/screenshots/flowassert-workbench.png) 来自本次 Mock 运行，已原尺寸查看；工作台、Mock 设备内容、运行结果和本地演示标识可见，未见账号或凭证。哈希固定在 `public-readiness.config.json`。本轮生成的 123 个历史 artifact 变动保存在本地审计目录，已逐路径恢复，避免覆盖旧取证材料。
 
 隐私门禁补充环境文件变体（如 `.env.production`）、二进制签名材料（p12/pfx/jks/keystore/mobileprovision）以及新品牌本机配置文件的准入拦截；当前与历史扫描都有测试。没有依据内容可读性或字符串长度放行这些文件。
 

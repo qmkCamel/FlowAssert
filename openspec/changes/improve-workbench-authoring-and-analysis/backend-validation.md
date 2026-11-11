@@ -37,7 +37,7 @@ application/MCP/旧版本探针使用**候选 tarball 解包内容 + 干净旧�
 
 ### 界面回归证据
 
-本轮重新生成并目检旧 Viewer 桌面 `artifacts/screenshots/mobile-mirror-workbench-evidence.png` 和窄屏 `artifacts/screenshots/mobile-mirror-inspector-narrow.png`，桌面旧结果面板与设备区域可读，窄屏控件顺序保持；这仍是旧侧栏布局，不是新分析页交付。其他 E2E 重生成截图留在隔离工作树，原用户 dev 工作区未修改。
+本轮重新生成并目检旧 Viewer 桌面 `artifacts/curated/screenshots/mobile-mirror-workbench-evidence.png` 和窄屏 `artifacts/curated/screenshots/mobile-mirror-inspector-narrow.png`，桌面旧结果面板与设备区域可读，窄屏控件顺序保持；这仍是旧侧栏布局，不是新分析页交付。其他 E2E 重生成截图留在隔离工作树，原用户 dev 工作区未修改。
 
 ## 未交付项
 

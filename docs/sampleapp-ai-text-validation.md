@@ -24,12 +24,12 @@
 
 正例覆盖公开文本替换、清空、追加后的完整内容、发送、用户消息、非空回复正文、消息底部操作栏、历史列表以及选中最新同名会话后的消息与回复。反例不发送消息，断言不存在的回复文本，确认不会误判通过。运行时主题切换、历史刷新保持可操作；工作台重启后记录恢复且逐文件通过 HTTP 下载复验字节数及 SHA-256。正常停止后独立检查 4723/8200 无监听、设备无 UiAutomator2/scrcpy 进程、ADB 转发为空。
 
-真机材料分别位于 `artifacts/physical-validation/workbench-2026-09-15T07-13-51-917Z`、`workbench-2026-09-15T07-16-26-968Z`、`workbench-2026-09-15T07-17-45-604Z`。每个目录有 probe.json、运行中/结果/恢复历史截图及 runs 中逐步 PNG/XML。最终输入内容、回复/历史截图和失败结果截图均已打开检查。材料保持 Git 忽略，未公开账号与设备原始数据。探针使用 PNG polling，未将本轮结果算作 scrcpy/H.264 新增验收。
+真机材料分别位于 `artifacts/local/physical-validation/workbench-2026-09-15T07-13-51-917Z`、`workbench-2026-09-15T07-16-26-968Z`、`workbench-2026-09-15T07-17-45-604Z`。每个目录有 probe.json、运行中/结果/恢复历史截图及 runs 中逐步 PNG/XML。最终输入内容、回复/历史截图和失败结果截图均已打开检查。材料保持 Git 忽略，未公开账号与设备原始数据。探针使用 PNG polling，未将本轮结果算作 scrcpy/H.264 新增验收。
 
 ## 工程验证
 
 - `pnpm check`：39 文件、284 项通过；包括 9 项输入专项测试。
-- `pnpm test:e2e`：36/36 通过，新增 1.5 秒慢输入期间进度/取消按钮和主题操作的浏览器回归。运行截图 `artifacts/screenshots/mobile-mirror-workbench-text-input.png` 已保留并检查。
+- `pnpm test:e2e`：36/36 通过，新增 1.5 秒慢输入期间进度/取消按钮和主题操作的浏览器回归。运行截图 `artifacts/curated/screenshots/mobile-mirror-workbench-text-input.png` 已保留并检查。
 - `pnpm build`、`pnpm pack:check`、OpenSpec strict、公开内容扫描与差异检查通过。示例按仓库既有契约保留在 examples，不进入运行时安装包。
 - 调试中修复了用例 type selector 应用短类名 TextView 的问题，以及新浏览器 fixture 缺少显式 assistant。一次公开截图哈希检查与 E2E 重写旧截图并发导致失败，恢复测试生成的旧截图后复跑 check 通过；未放宽检查。
 - 本轮未提交、推送、发布或修复 Inspector 遗留的干净安装依赖阻塞。

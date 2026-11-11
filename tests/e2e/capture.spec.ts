@@ -44,7 +44,7 @@ test('exports a real PNG and playable changing video while controls and screensh
   await expect(page.locator('#capture-record')).toHaveText('Stop recording')
   await page.waitForTimeout(500)
   expect((await page.locator('.capture-results').boundingBox())!.height).toBeLessThan(80)
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-capture-recording.png' })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-capture-recording.png' })
   const videoEvent = page.waitForEvent('download'); await page.locator('#capture-record').click()
   const download = await videoEvent, video = await bytes(download)
   expect(download.suggestedFilename()).toMatch(/\.webm$/)
@@ -56,7 +56,7 @@ test('exports a real PNG and playable changing video while controls and screensh
   for (const id of ['#capture-screenshot', '#capture-record', '#capture-video']) {
     const box = await page.locator(id).boundingBox(); expect(box!.x).toBeGreaterThanOrEqual(0); expect(box!.x + box!.width).toBeLessThanOrEqual(390)
   }
-  await page.screenshot({ path: 'artifacts/screenshots/mobile-mirror-capture-narrow.png', fullPage: true })
+  await page.screenshot({ path: 'artifacts/local/screenshots/mobile-mirror-capture-narrow.png', fullPage: true })
 })
 
 test('a screenshot click during image decode stays locally busy while encoding and unrelated controls stay usable', async ({ page }) => {

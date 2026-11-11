@@ -1,6 +1,6 @@
 # 2026-10-05 双端真机验收增量与未完成边界
 
-本轮以本地缓存的 `origin/dev@REDACTED_REVISION` 为候选基线，另有本次探针/文档改动；USB 续验包含下述 iOS readiness 最小修正。验收执行时远端刷新因 GitHub 连接/认证失败未成功；用户授权提交推送后重新 fetch 成功，确认远端 dev 仍与此基线一致，不改变验收候选及证据范围。按 active OpenSpec checklist 核对，记录**新增真机证据**，不把单端通过改写成双端、外部试点或发布完成。原始截图、XML、capabilities、设备/签名标识、APK 与运行报告仅保存在本机 Git 忽略的 `artifacts/physical-validation/`；本文不公开这些材料。测试使用预装 `dev.mobilemirror.fixture` 1.0，不安装或重置被测 App；业务写入仅针对隔离的合成夹具/订单。Viewer 运行时关键截图已目检。
+本轮以本地缓存的 `origin/dev@REDACTED_REVISION` 为候选基线，另有本次探针/文档改动；USB 续验包含下述 iOS readiness 最小修正。验收执行时远端刷新因 GitHub 连接/认证失败未成功；用户授权提交推送后重新 fetch 成功，确认远端 dev 仍与此基线一致，不改变验收候选及证据范围。按 active OpenSpec checklist 核对，记录**新增真机证据**，不把单端通过改写成双端、外部试点或发布完成。原始截图、XML、capabilities、设备/签名标识、APK 与运行报告仅保存在本机 Git 忽略的 `artifacts/local/physical-validation/`；本文不公开这些材料。测试使用预装 `dev.mobilemirror.fixture` 1.0，不安装或重置被测 App；业务写入仅针对隔离的合成夹具/订单。Viewer 运行时关键截图已目检。
 
 续验修正：下列初始真机片段基于 `REDACTED_REVISION`。USB 重接后的 guided 验证发现 readiness 丢弃了 provider 独立核验的 iOS focus；本轮增加最小修正，使其优先消费 `source.structure`，保留原 XML 作为取证。正反焦点回归 24/24 通过，后续 guided 真机闭环基于此修正，不能把旧候选描述成已通过该输入路径。修正未改变 provider、owner、verdict 或 DSH agent loop。
 

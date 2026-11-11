@@ -2,7 +2,7 @@
 
 已有 Appium、Maestro 或其他框架资产的团队，不应为了查看同一份变更验收摘要而重写全部用例。先接入外部结果和明确选取的附件，同时保留来源与验证缺口，比直接接管每个框架的设备会话更符合当前架构和安全边界。
 
-本变更对应路线图第五项，依赖 `add-change-acceptance-records`（工程提交 `REDACTED_REVISION`）。状态（2026-10-03）：工程实现及门禁完成，任务 21/24；真实 Maestro／Appium runner 报告兼容与外部使用方接入尚未验收。工程提交 `REDACTED_REVISION`，证据见 [验证记录](../../../artifacts/external-assets/validation.md)，整体状态见[六项总览](../add-change-acceptance-records/roadmap.md)。已实施逐资产显式授权给当前项目，默认仅 Viewer/CLI 本机可见；报告接入不是外部执行器。正文使用中文，英文仅用于 OpenSpec 结构标记、协议字段及产品名。
+本变更对应路线图第五项，依赖 `add-change-acceptance-records`（工程提交 `REDACTED_REVISION`）。状态（2026-10-03）：工程实现及门禁完成，任务 21/24；真实 Maestro／Appium runner 报告兼容与外部使用方接入尚未验收。工程提交 `REDACTED_REVISION`，证据见 [验证记录](../../../artifacts/curated/external-assets/validation.md)，整体状态见[六项总览](../add-change-acceptance-records/roadmap.md)。已实施逐资产显式授权给当前项目，默认仅 Viewer/CLI 本机可见；报告接入不是外部执行器。正文使用中文，英文仅用于 OpenSpec 结构标记、协议字段及产品名。
 
 ## What Changes
 

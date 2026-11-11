@@ -41,9 +41,9 @@ SHA256：`352415907a8a518dd7c82645a1ec5fb3836e4df089e0626f8b8b3bb6b3863308`。
 
 保留并查看：
 
-- `artifacts/dsh-020/workbench-progress.png`：慢运行期间局部进度、取消、主题/历史可交互。
-- `artifacts/dsh-020/workbench-retained-failure.png`：取源失败保留 PNG、阶段耗时及局部错误，设备控件仍可用。
-- `artifacts/dsh-020/packaged-mcp-observation.png`：独立 pnpm 前缀中同包 MCP 返回的 390×844 Mock 图像，非 Viewer 页截图。
+- `artifacts/curated/dsh-020/workbench-progress.png`：慢运行期间局部进度、取消、主题/历史可交互。
+- `artifacts/curated/dsh-020/workbench-retained-failure.png`：取源失败保留 PNG、阶段耗时及局部错误，设备控件仍可用。
+- `artifacts/curated/dsh-020/packaged-mcp-observation.png`：独立 pnpm 前缀中同包 MCP 返回的 390×844 Mock 图像，非 Viewer 页截图。
 
 首轮并行单测/E2E 的截图哈希冲突、过期版本断言及 named integration hash 已修正；短超时单测重跑通过，最终全量检查通过。补充截图遇到与打包重建重叠的页面初始化超时，顺序重跑通过。E2E 改写的其他既有截图已恢复，避免更新历史验收像素。
 

@@ -81,7 +81,7 @@ export async function startFixtureServer(options: { database: string; host?: str
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const service = await startFixtureServer({
-    database: process.env.FIXTURE_DATABASE ?? 'artifacts/fixture/orders.sqlite',
+    database: process.env.FIXTURE_DATABASE ?? 'artifacts/local/fixture/orders.sqlite',
     host: process.env.FIXTURE_HOST ?? '127.0.0.1',
     port: Number(process.env.FIXTURE_PORT ?? 47831),
   })

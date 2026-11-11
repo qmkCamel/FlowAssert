@@ -29,7 +29,7 @@
 - 浏览器：延迟提交时局部状态与禁用按钮跨主题重绘保留；提交失败保留旧 JSON 报告；延迟取消时进度与禁用按钮保留，主题继续可用。取消 UI 时序使用受控响应，真实 Worker 关闭由后端测试和安装包探针分别验证。
 - 浏览器模块回归：取消前已发出的轮询在取消完成后才返回 running，不得覆盖 cancelled 终态；操作 epoch 隔离旧响应。
 
-运行截图：[取消等待中](../artifacts/screenshots/lifecycle-comparison-cancelling.png)、[失败保留原报告](../artifacts/screenshots/lifecycle-comparison-retained.png)。
+运行截图：[取消等待中](../artifacts/curated/screenshots/lifecycle-comparison-cancelling.png)、[失败保留原报告](../artifacts/curated/screenshots/lifecycle-comparison-retained.png)。
 
 ## 最终门禁
 

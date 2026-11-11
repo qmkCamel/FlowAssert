@@ -2,7 +2,7 @@
 
 See `proposal.md` for motivation. The repository already publishes a versioned alpha.1 GitHub prerelease, while the integrated source is an alpha.2 candidate with detailed installation/security documents. The README information hierarchy was optimized for maintainers and the repository lacked GitHub community-health files. Current `main` history contains a personal maintainer email, the release package intentionally remains `private: true`, and tracked runtime evidence includes both Mock and physical-device screenshots.
 
-This change must preserve product behavior and the existing release artifact. It must also preserve `artifacts/screenshots/mobile-mirror-ios-physical-final.png` exactly as requested, including its “微信” return entry. Repository visibility, historical workflow logs and GitHub security settings are external state; tracked files can make their review mandatory but cannot prove those settings changed.
+This change must preserve product behavior and the existing release artifact. It must also preserve `artifacts/curated/screenshots/mobile-mirror-ios-physical-final.png` exactly as requested, including its “微信” return entry. Repository visibility, historical workflow logs and GitHub security settings are external state; tracked files can make their review mandatory but cannot prove those settings changed.
 
 ## Goals / Non-Goals
 
@@ -31,7 +31,7 @@ Alternative: publish a public npm package now. Rejected because it adds registry
 
 ### 2. Put a progressive quickstart before architecture details
 
-Both READMEs receive the same top-level information architecture: status and distribution notice, supported-version matrix, a five-minute Mock quickstart, four audience routes, sanitized Mock Viewer screenshot, limitations, then the existing detailed architecture/install sections. The screenshot will reuse `artifacts/screenshots/mobile-mirror-streaming.png`; no physical-device screenshot is changed.
+Both READMEs receive the same top-level information architecture: status and distribution notice, supported-version matrix, a five-minute Mock quickstart, four audience routes, sanitized Mock Viewer screenshot, limitations, then the existing detailed architecture/install sections. The screenshot will reuse `artifacts/curated/screenshots/mobile-mirror-streaming.png`; no physical-device screenshot is changed.
 
 Alternative: create a new documentation site. Rejected because GitHub users need a complete landing page and the current document set is still small enough for repository-native Markdown.
 

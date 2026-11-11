@@ -155,7 +155,8 @@
   "scripts": {
     "triage:eval": "tsx scripts/triage-evaluate.ts",
     "build": "node -e \"require('node:fs').rmSync('lib',{recursive:true,force:true})\" && tsdown",
-    "check": "pnpm run typecheck && pnpm run lint:contracts && pnpm run docs:check && pnpm run test",
+    "check": "pnpm run artifacts:check && pnpm run typecheck && pnpm run lint:contracts && pnpm run docs:check && pnpm run test",
+    "artifacts:check": "node scripts/check-artifacts.mjs",
     "dev": "tsx scripts/dev.ts",
     "start": "tsx scripts/dev.ts",
     "lint:contracts": "tsx scripts/check-contracts.ts",

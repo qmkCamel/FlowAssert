@@ -10,7 +10,7 @@ import { ViewerServer } from '../src/viewer-server.js'
 import { resolveMirrorConfig } from '../src/mcp-config.js'
 import { isWebRun } from '../src/workbench-web-contracts.js'
 const content={name:'Web lifecycle probe',tags:['web-selftest'],platform:'web',executionKind:'web',target:'synthetic-viewer',scenarioVersion:1,scenarios:['VA-01','VA-04','VA-05'],calibration:'none'}
-const root=process.argv[2]==='--crash-child'?process.argv[3]!:resolve('artifacts/visual-acceptance',`lifecycle-${new Date().toISOString().replaceAll(':','-')}`)
+const root=process.argv[2]==='--crash-child'?process.argv[3]!:resolve('artifacts/local/visual-acceptance',`lifecycle-${new Date().toISOString().replaceAll(':','-')}`)
 await mkdir(root,{recursive:true})
 const options={workbenchRoot:join(root,'a-runs'),webTests:true}
 let viewer=new ViewerServer(resolveMirrorConfig({viewerPort:0,mockStartupDelayMs:0}),options)

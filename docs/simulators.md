@@ -18,4 +18,4 @@ XCUITest 的运行选项见 [Appium 官方能力文档](https://appium.github.io
 
 - iPhone 17 Pro / iOS 26.5 Simulator、Pixel 6 / Android 13 Emulator：当前屏幕与系统设置两种连接均实测通过，保存了设备 PNG、结构 JSON、Viewer 连接中和完成截图；两次停止均释放自有 Appium。
 - 使用 `scripts/simulator-connection-probe.ts` 经真实 Viewer 检查和连接入口验证，无需提供 raw capabilities。探针要求显式平台和绝对 Appium 路径，且只允许一台已启动模拟器，避免自动选错设备。
-- 本轮未新增模拟器内业务 App 的 YAML、录屏或低延迟媒体验收，仍以各能力自己的验证记录为准。原始实测材料保存在忽略的 `artifacts/simulator-validation/`，不进入打包文件。
+- 本轮未新增模拟器内业务 App 的 YAML、录屏或低延迟媒体验收，仍以各能力自己的验证记录为准。原始实测材料保存在忽略的 `artifacts/local/simulator-validation/`，不进入打包文件。

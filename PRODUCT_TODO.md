@@ -58,7 +58,7 @@
 - 可离线但需独立参与者：语料标注、摘要判读、外部资产迁移；首次验收／维护实操仍按外部项目准备设备与环境。
 - 归档依赖全部前置验收；状态文档同步不需要真机，不勾选尚未执行的验收。
 
-10 月 5 日验收候选工程证据为 848 项测试、73 项 E2E、构建／打包及 strict OpenSpec 43/43，合并门禁另见[本次记录](docs/physical-validation-2026-10-05.md)。原同包 MCP／DSH Native/PTC 与 Vision 合成识别是[历史证据](artifacts/local-device-matrix/validation.md)，本次不冒充重跑。第五项是报告／附件接入，不是外部执行器；第六项的生产 OCR 仍须真实评测与逐 profile 批准。
+10 月 5 日验收候选工程证据为 848 项测试、73 项 E2E、构建／打包及 strict OpenSpec 43/43，合并门禁另见[本次记录](docs/physical-validation-2026-10-05.md)。原同包 MCP／DSH Native/PTC 与 Vision 合成识别是[历史证据](artifacts/curated/local-device-matrix/validation.md)，本次不冒充重跑。第五项是报告／附件接入，不是外部执行器；第六项的生产 OCR 仍须真实评测与逐 profile 批准。
 
 ## 四项诉求的交付状态
 
@@ -131,6 +131,7 @@
 
 | Change | 完成/总数 | 当前边界 |
 | --- | --- | --- |
+| [separate-curated-and-local-artifacts](openspec/changes/separate-curated-and-local-artifacts/tasks.md) | 5/5 | curated/local 分流完成，目录门禁、1225 项测试、118 项 E2E、构建与打包检查通过；保留 2 项 E2E 跳过边界 |
 | [sanitize-published-history](openspec/changes/sanitize-published-history/tasks.md) | 5/5 | 远端全引用清洗、新克隆复查和本地切换完成；平台缓存删除仍待支持中心处理 |
 | [add-context-aware-environment-preflight](openspec/changes/add-context-aware-environment-preflight/tasks.md) | 28/29 | 已有入口预检实现；真实环境验收按原任务保留 |
 | [add-guided-simulator-support](openspec/changes/add-guided-simulator-support/tasks.md) | 5/6 | 保留本地模拟器实现与证据，不代表真机验收 |

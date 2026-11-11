@@ -22,7 +22,7 @@ async function open(page: Page) {
 }
 async function capture(page: Page, name: string) {
   await page.locator('#screenshot-playback').scrollIntoViewIfNeeded()
-  const path = `artifacts/screenshots/${name}.png`
+  const path = `artifacts/local/screenshots/${name}.png`
   await page.screenshot({ path, fullPage: true }); await test.info().attach(name, { path, contentType: 'image/png' })
 }
 test('plays a screenshot-only archive with stable focus and URL, speed and explicit replay', async ({ page }) => {

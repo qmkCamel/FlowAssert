@@ -16,7 +16,7 @@ iPhone 16 Plus、iOS 26.2.1 真机。本次安装的是第三方 App REDACTED_AP
 
 这证明一次真实图片传输、模型识图决策、设备操作及结果核对。不是视觉准确率基准，不是 DSH 图片链路通过，也未证明模型具备整段自主业务测试能力。图片通过本地 SDK MCP 客户端落盘后交给当前 Codex 读取，并非修改全局 MCP 配置后直接注入的原生工具 image block。
 
-本地证据：`artifacts/physical-validation/ios-business-2026-09-16/` 的 `mcp-4.json/png`、`mcp-5.json`、`mcp-7.json/png`、`mcp-9.json/png`、`vision-assessment.json`。原始手机画面与设备标识仅保留在忽略目录，不作为公开仓库素材。
+本地证据：`artifacts/local/physical-validation/ios-business-2026-09-16/` 的 `mcp-4.json/png`、`mcp-5.json`、`mcp-7.json/png`、`mcp-9.json/png`、`vision-assessment.json`。原始手机画面与设备标识仅保留在忽略目录，不作为公开仓库素材。
 
 ## YAML 业务验收
 

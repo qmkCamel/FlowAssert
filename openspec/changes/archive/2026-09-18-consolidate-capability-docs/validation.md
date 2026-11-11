@@ -15,7 +15,7 @@
 - `pnpm test:e2e`：41/41，通过。
 - `pnpm build`、`pnpm pack:check`：通过。
 - OpenSpec 1.9.0 全库严格校验：25/25，通过；`git diff --check` 通过。
-- 本轮不更改 Viewer，未重复操作真机；引用既有独立验收。E2E 生成的 33 张截图保留在本地忽略目录 `artifacts/physical-validation/docs-consolidation-2026-09-16/`，仓库原图已恢复。
+- 本轮不更改 Viewer，未重复操作真机；引用既有独立验收。E2E 生成的 33 张截图保留在本地忽略目录 `artifacts/local/physical-validation/docs-consolidation-2026-09-16/`，仓库原图已恢复。
 
 ## 仍保留的产品边界
 

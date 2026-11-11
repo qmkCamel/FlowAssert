@@ -93,4 +93,4 @@ Viewer「本机设备矩阵」可以读取登记计划、检查资源、勾选�
 
 ## 验证层次
 
-工程记录见 [离线工程验证](https://github.com/qmkCamel/flowassert/blob/main/artifacts/local-device-matrix/validation.md)，所有 Mock、伪 Appium、合成 OCR 证据明确标注。授权真实 OCR 冻结集、具体 profile 的人工生产批准、双真机业务与非作者评审尚未完成。
+工程记录见 [离线工程验证](https://github.com/qmkCamel/flowassert/blob/main/artifacts/curated/local-device-matrix/validation.md)，所有 Mock、伪 Appium、合成 OCR 证据明确标注。授权真实 OCR 冻结集、具体 profile 的人工生产批准、双真机业务与非作者评审尚未完成。
